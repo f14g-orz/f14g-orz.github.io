@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>SageMath |  f14g</title>
+      <title>RSA |  f14g</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,7 +56,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-SageMath"
+  id="post-RSA"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  SageMath
+  RSA
 </h1>
  
 
@@ -75,11 +75,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/01/14/SageMath/" class="article-date">
-  <time datetime="2023-01-14T11:02:03.000Z" itemprop="datePublished">2023-01-14</time>
+      <a href="/2023/01/14/RSA/" class="article-date">
+  <time datetime="2023-01-14T11:16:32.000Z" itemprop="datePublished">2023-01-14</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/crypto/">crypto</a>
+    <a class="article-category-link" href="/categories/crypto/">crypto</a> / <a class="article-category-link" href="/categories/crypto/RSA/">RSA</a>
   </div>
   
 <div class="word_count">
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">210</span>
+            <span class="post-count">322</span>
         </span>
     </span>
 
@@ -111,28 +111,22 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="SageMath代码"><a href="#SageMath代码" class="headerlink" title="SageMath代码"></a>SageMath代码</h1><h2 id="1-同余运算"><a href="#1-同余运算" class="headerlink" title="1.同余运算"></a>1.同余运算</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R.&lt;x&gt; = Zmod(module)[]</span><br></pre></td></tr></table></figure>
+  <h2 id="基于分解N的RSA题目"><a href="#基于分解N的RSA题目" class="headerlink" title="基于分解N的RSA题目"></a>基于分解N的RSA题目</h2><h3 id="1-在线查询分解网站"><a href="#1-在线查询分解网站" class="headerlink" title="1.在线查询分解网站"></a>1.在线查询分解网站</h3><p><a target="_blank" rel="noopener" href="http://www.factordb.com/index.php">http://www.factordb.com/index.php</a> </p>
+<h3 id="2-使用yafu工具分解"><a href="#2-使用yafu工具分解" class="headerlink" title="2.使用yafu工具分解"></a>2.使用yafu工具分解</h3><p>下载地址：<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/yafu/">https://sourceforge.net/projects/yafu/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#以分解49为例</span><br><span class="line">yafu-x64.exe factor(49)</span><br><span class="line"></span><br><span class="line">#导入文件进行分解，主要注意文本结尾要换行！！！不然要报错</span><br><span class="line">yafu-x64.exe &quot;factor(@)&quot; -batchfile 1.txt </span><br></pre></td></tr></table></figure>
 
-<p>相当于将 x 作为需要求得的未知数     Zmod()内填入同余运算的模数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = x^<span class="number">3</span> + ...</span><br></pre></td></tr></table></figure>
+<h3 id="3-使用费马分解（适用条件-p-q相近时）"><a href="#3-使用费马分解（适用条件-p-q相近时）" class="headerlink" title="3.使用费马分解（适用条件:p,q相近时）"></a>3.使用费马分解（适用条件:p,q相近时）</h3><p>脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line">p = gmpy2.next_prime(gmpy2.iroot(n,<span class="number">2</span>)[<span class="number">0</span>])</span><br><span class="line">q = n // p</span><br></pre></td></tr></table></figure>
 
-<p>将同余运算的所有项移到同一边，赋值给函数  f  来表示</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f.roots()</span><br></pre></td></tr></table></figure>
 
-<p>运行之后就求解出来；以列表形式返回所有解    列表内部是元组类型</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f.smallroots(upper)</span><br><span class="line">以upper作为求解的上限</span><br></pre></td></tr></table></figure>
 
-<p>eg</p>
-<p>需要求解</p>
-<p>$ n^2\equiv p^3+a<em>p^2+b</em>p\pmod{moudle} $</p>
-<p>把同余式移到一边</p>
-<p>$ 0\equiv p^3+a<em>p^2+b</em>p-n^2\pmod{moudle} $</p>
-<p>已知 a,b,n,moudle   要求p</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">R.&lt;p&gt; = Zmod(moudle)[]</span><br><span class="line">f = p^<span class="number">3</span> + a*p^<span class="number">2</span> + b*p - n^<span class="number">2</span> </span><br><span class="line">f = f.monic()</span><br><span class="line">roots = f.small_roots()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">isqrt</span>(<span class="params">n</span>):</span><br><span class="line">  x = n</span><br><span class="line">  y = (x + n // x) // <span class="number">2</span></span><br><span class="line">  <span class="keyword">while</span> y &lt; x:</span><br><span class="line">    x = y</span><br><span class="line">    y = (x + n // x) // <span class="number">2</span></span><br><span class="line">  <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fermat</span>(<span class="params">n, verbose=<span class="literal">True</span></span>):</span><br><span class="line">    a = isqrt(n) <span class="comment"># int(ceil(n**0.5))</span></span><br><span class="line">    b2 = a*a - n</span><br><span class="line">    b = isqrt(n) <span class="comment"># int(b2**0.5)</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> b*b != b2:</span><br><span class="line">        <span class="comment"># if verbose:</span></span><br><span class="line">        <span class="comment">#     print(&#x27;Trying: a=%s b2=%s b=%s&#x27; % (a, b2, b))</span></span><br><span class="line">        a = a + <span class="number">1</span></span><br><span class="line">        b2 = a*a - n</span><br><span class="line">        b = isqrt(b2) <span class="comment"># int(b2**0.5)</span></span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">    p=a+b</span><br><span class="line">    q=a-b</span><br><span class="line">    <span class="keyword">assert</span> n == p * q</span><br><span class="line">    <span class="comment"># print(&#x27;a=&#x27;,a)</span></span><br><span class="line">    <span class="comment"># print(&#x27;b=&#x27;,b)</span></span><br><span class="line">    <span class="comment"># print(&#x27;p=&#x27;,p)</span></span><br><span class="line">    <span class="comment"># print(&#x27;q=&#x27;,q)</span></span><br><span class="line">    <span class="comment"># print(&#x27;pq=&#x27;,p*q)</span></span><br><span class="line">    <span class="keyword">return</span> p, q</span><br><span class="line">fermat(n) </span><br><span class="line"><span class="comment">#分解出p,q之后利用利用脚本求解</span></span><br></pre></td></tr></table></figure>
 
-<p>那么 p 的所有满足该同余式的解就会返回出来</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">f = (M + x*r)**e - c</span><br><span class="line">f = f.monic()</span><br><span class="line">roots = f.small_roots()</span><br></pre></td></tr></table></figure>
+<h3 id="出题脚本："><a href="#出题脚本：" class="headerlink" title="出题脚本："></a>出题脚本：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">p=libnum.generate_prime(<span class="number">1024</span>)</span><br><span class="line"><span class="comment">#下一个素数</span></span><br><span class="line">q=gmpy2.next_prime(p)</span><br><span class="line"><span class="built_in">print</span>(p)</span><br><span class="line"><span class="built_in">print</span>(q)</span><br><span class="line"><span class="built_in">print</span>(gmpy2.is_prime(q))</span><br><span class="line">e=<span class="number">65537</span></span><br><span class="line">m=<span class="string">&quot;flag&#123;20d6e2da95dcc1fa5f5432a436c4be18&#125;&quot;</span></span><br><span class="line">m=libnum.s2n(m)</span><br><span class="line">n=p*q</span><br><span class="line">phi_n=(p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d=libnum.invmod(e,phi_n)</span><br><span class="line">c=<span class="built_in">pow</span>(m,e,n)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n=&quot;</span>,n)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;e=&quot;</span>,e)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;c=&quot;</span>,c)</span><br></pre></td></tr></table></figure>
 
+
+
+<p><img src="/RSA.assets%5Cimage-20230114191918535.png" alt="image-20230114191918535"></p>
  
       <!-- reward -->
       
@@ -203,12 +197,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/01/14/SageMath/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/01/14/RSA/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sagemath/" rel="tag">sagemath</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RSA/" rel="tag">RSA</a></li></ul>
 
     </footer>
   </div>
@@ -216,19 +210,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/01/14/RSA/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            RSA
-          
-        </div>
-      </a>
     
-    
-      <a href="/2023/01/14/Crypto/" class="article-nav-link">
+      <a href="/2023/01/14/SageMath/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">数论定理</div>
+        <div class="article-nav-title">SageMath</div>
       </a>
     
   </nav>
