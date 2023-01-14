@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>SageMath |  f14g</title>
+      <title>dp泄露 |  f14g</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,7 +56,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-SageMath"
+  id="post-dp泄露"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  SageMath
+  dp泄露
 </h1>
  
 
@@ -75,11 +75,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/01/14/SageMath/" class="article-date">
-  <time datetime="2023-01-14T11:02:03.000Z" itemprop="datePublished">2023-01-14</time>
+      <a href="/2023/01/14/dp%E6%B3%84%E9%9C%B2/" class="article-date">
+  <time datetime="2023-01-14T12:29:10.000Z" itemprop="datePublished">2023-01-14</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/crypto/">crypto</a>
+    <a class="article-category-link" href="/categories/crypto/">crypto</a> / <a class="article-category-link" href="/categories/crypto/RSA/">RSA</a>
   </div>
   
 <div class="word_count">
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">210</span>
+            <span class="post-count">373</span>
         </span>
     </span>
 
@@ -96,7 +96,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
@@ -111,27 +111,13 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="SageMath代码"><a href="#SageMath代码" class="headerlink" title="SageMath代码"></a>SageMath代码</h1><h2 id="1-同余运算"><a href="#1-同余运算" class="headerlink" title="1.同余运算"></a>1.同余运算</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R.&lt;x&gt; = Zmod(module)[]</span><br></pre></td></tr></table></figure>
+  <h2 id="dp泄露"><a href="#dp泄露" class="headerlink" title="dp泄露"></a>dp泄露</h2><h3 id="出题脚本"><a href="#出题脚本" class="headerlink" title="出题脚本"></a>出题脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">put_flag</span>():</span><br><span class="line">    <span class="comment"># 字符串列表</span></span><br><span class="line">    a = string.printable</span><br><span class="line">    flag = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">        flag += a[random.randint(<span class="number">0</span>, <span class="number">99</span>)]</span><br><span class="line">    flag = <span class="string">r&quot;flag&#123;%s&#125;&quot;</span>%(hashlib.md5(flag.encode()).hexdigest())</span><br><span class="line">    <span class="built_in">print</span>(flag)</span><br><span class="line">    <span class="keyword">return</span> flag</span><br><span class="line"></span><br><span class="line"><span class="comment">#生成素数</span></span><br><span class="line">p=libnum.generate_prime(<span class="number">1024</span>)</span><br><span class="line">q=libnum.generate_prime(<span class="number">1024</span>)</span><br><span class="line">e=<span class="number">65537</span></span><br><span class="line">n=p*q</span><br><span class="line">phi_n=(p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d=libnum.invmod(e,phi_n)</span><br><span class="line">dp=d%(p-<span class="number">1</span>)</span><br><span class="line">m=put_flag()</span><br><span class="line">m=libnum.s2n(m)</span><br><span class="line">n=p*q</span><br><span class="line">c=<span class="built_in">pow</span>(m,e,n)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n=&quot;</span>,n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;e=&quot;</span>,e)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;dp=&quot;</span>,dp)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;c=&quot;</span>,c)</span><br></pre></td></tr></table></figure>
 
-<p>相当于将 x 作为需要求得的未知数     Zmod()内填入同余运算的模数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = x^<span class="number">3</span> + ...</span><br></pre></td></tr></table></figure>
+<p><img src="D:\MyBlog\source_posts\dp泄露.assets\1665236983955.png" alt="1665236983955"></p>
+<h3 id="解密脚本"><a href="#解密脚本" class="headerlink" title="解密脚本"></a>解密脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">n= <span class="number">15490329974794812647207350945845678224681604428642220566423366180973839697096441619340018253695472604335938643849069014103520861300713053955205392905536446156153192076633656788424185734898016745641378430506574498111680248029123341493733599302123100131134215957579162168779228208387783035893621162016993340603475960735061572761512755519616410410615413820180757126318567325096339342686253738778178380191340135516056457473854126752188188261914055391966730674861017432904735293451031131827880629989269835970170038295168392442835892108945315382078025510997711116410638765048886317360842562784200384045644008789130370444983</span></span><br><span class="line">e= <span class="number">65537</span></span><br><span class="line">dp= <span class="number">92421914522602787051376990773545034723755500322946639408033747477366773088952064561196722681757327451210117825346237003629597066505402384880737033044776720946764227004188812078355462119361676746112866393394866072449432108301690846327127554699521545673830710939287951837844749172755258073462248214264511338895</span></span><br><span class="line">c= <span class="number">11917967705200196530423914441613144297148147672566202863977167024519218321836386637302409557947445841293888462405994683655441879000427977086221906497225533946193332303182079068462781262341197088906792898634398410298474823088739257515556595214077227746604247505450334512424047100626106474291190033258919062850451435841454816600402372026810570127115167968899329724894556092798669018218440148846597174016217159034241427361756697433952800424383010684502324285145303400856470193420837017178412747680690628590204528459258189973779463979907863227915782407651254796209362605706066438960631045833533860845111845422613428738602</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">65535</span>):</span><br><span class="line">    p=(dp*e-<span class="number">1</span>)//i+<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> n%p==<span class="number">0</span>:</span><br><span class="line">        q=n//p</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="built_in">print</span>(p)</span><br><span class="line"><span class="built_in">print</span>(q)</span><br><span class="line">phi_n= (p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d=gmpy2.invert(e,phi_n)</span><br><span class="line">m=<span class="built_in">pow</span>(c,d,n)</span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line">flag=libnum.n2s(<span class="built_in">int</span>(m)).decode()</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
 
-<p>将同余运算的所有项移到同一边，赋值给函数  f  来表示</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f.roots()</span><br></pre></td></tr></table></figure>
-
-<p>运行之后就求解出来；以列表形式返回所有解    列表内部是元组类型</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f.smallroots(upper)</span><br><span class="line">以upper作为求解的上限</span><br></pre></td></tr></table></figure>
-
-<p>eg</p>
-<p>需要求解</p>
-<p>$ n^2\equiv p^3+a<em>p^2+b</em>p\pmod{moudle} $</p>
-<p>把同余式移到一边</p>
-<p>$ 0\equiv p^3+a<em>p^2+b</em>p-n^2\pmod{moudle} $</p>
-<p>已知 a,b,n,moudle   要求p</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">R.&lt;p&gt; = Zmod(moudle)[]</span><br><span class="line">f = p^<span class="number">3</span> + a*p^<span class="number">2</span> + b*p - n^<span class="number">2</span> </span><br><span class="line">f = f.monic()</span><br><span class="line">roots = f.small_roots()</span><br></pre></td></tr></table></figure>
-
-<p>那么 p 的所有满足该同余式的解就会返回出来</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">f = (M + x*r)**e - c</span><br><span class="line">f = f.monic()</span><br><span class="line">roots = f.small_roots()</span><br></pre></td></tr></table></figure>
+<p><img src="D:\MyBlog\source_posts\dp泄露.assets\1665237014708.png" alt="1665237014708"></p>
+<h3 id="题目解析"><a href="#题目解析" class="headerlink" title="题目解析"></a>题目解析</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">已知：</span><br><span class="line"></span><br><span class="line">c = m^e mod n</span><br><span class="line">m = c^d mod n</span><br><span class="line">ϕ(n)=(p−1)*(q−1)</span><br><span class="line">d∗e ≡ 1 mod ϕ(n)</span><br><span class="line">dp = d mod (p−1)</span><br><span class="line">由上式可以得到</span><br><span class="line"></span><br><span class="line">dp*e≡d*e mod (p−1)</span><br><span class="line">因此可以得到</span><br><span class="line"></span><br><span class="line">式1：d∗e=k∗(p−1)+dp∗e</span><br><span class="line">式2：d∗e≡1 mod ϕ(n)</span><br><span class="line">式1带入式2</span><br><span class="line"></span><br><span class="line">=&gt; k∗(p−1)+dp∗e ≡1 mod ϕ(n)</span><br><span class="line"></span><br><span class="line">=&gt; k∗(p−1)+dp∗e ≡1 mod (p−1)∗(q−1)</span><br><span class="line"></span><br><span class="line">=&gt; k1∗(p−1)+dp∗e = k2*(p−1)∗(q−1)+1</span><br><span class="line"></span><br><span class="line">=&gt; dp*e =  k2*(p−1)∗(q−1)+1-k1∗(p−1)+dp∗e</span><br><span class="line"></span><br><span class="line">=&gt; dp*e = (p-1)*[k2*(p-1)-k1]+1</span><br><span class="line">因dp&lt;p−1（dp是d//（p-1）的余数，dp&lt;p−1）</span><br><span class="line"></span><br><span class="line">所以e &gt; k2∗(q−1)−k1</span><br><span class="line"></span><br><span class="line">假设 x=k2∗(q−1)−k1</span><br><span class="line"></span><br><span class="line">x的范围为 (0,e)</span><br><span class="line"></span><br><span class="line">x∗(p−1)+1=dp∗e</span><br><span class="line"></span><br><span class="line">求出p-1方法，遍历(0,e)的范围，其中肯定有一个p可以被n整除，那么求出p和q </span><br></pre></td></tr></table></figure>
 
  
       <!-- reward -->
@@ -203,12 +189,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/01/14/SageMath/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/01/14/dp%E6%B3%84%E9%9C%B2/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sagemath/" rel="tag">sagemath</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RSA/" rel="tag">RSA</a></li></ul>
 
     </footer>
   </div>
@@ -216,19 +202,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/01/14/RSA/" class="article-nav-link">
+      <a href="/2023/01/14/dp-dq/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            基于分解N的RSA题目
+            dp,dq
           
         </div>
       </a>
     
     
-      <a href="/2023/01/14/Crypto/" class="article-nav-link">
+      <a href="/2023/01/14/N%E4%B8%8D%E4%BA%92%E7%B4%A0/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">数论定理</div>
+        <div class="article-nav-title">N不互素</div>
       </a>
     
   </nav>
