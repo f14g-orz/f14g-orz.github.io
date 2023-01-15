@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>p高位攻击 |  f14g</title>
+      <title>ECC椭圆曲线 |  f14g</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,7 +56,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-p高位攻击"
+  id="post-ECC椭圆曲线"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  p高位攻击
+  ECC椭圆曲线
 </h1>
  
 
@@ -75,11 +75,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/01/14/p%E9%AB%98%E4%BD%8D%E6%94%BB%E5%87%BB/" class="article-date">
-  <time datetime="2023-01-14T12:44:28.000Z" itemprop="datePublished">2023-01-14</time>
+      <a href="/2023/01/15/ECC%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF/" class="article-date">
+  <time datetime="2023-01-15T03:18:12.000Z" itemprop="datePublished">2023-01-15</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/crypto/">crypto</a> / <a class="article-category-link" href="/categories/crypto/RSA/">RSA</a>
+    <a class="article-category-link" href="/categories/crypto/">crypto</a> / <a class="article-category-link" href="/categories/crypto/ECC/">ECC</a>
   </div>
   
 <div class="word_count">
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">137</span>
+            <span class="post-count">577</span>
         </span>
     </span>
 
@@ -96,7 +96,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
@@ -111,12 +111,23 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="脚本1"><a href="#脚本1" class="headerlink" title="脚本1"></a>脚本1</h3><p>根据题目，注意 2^60  60需要修改相应的位数  a &#x3D; (p &gt;&gt; 60) &lt;&lt; 60 </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">phase3</span>(<span class="params">high_p, n</span>):</span><br><span class="line">    R.&lt;x&gt; = PolynomialRing(Zmod(n), implementation=<span class="string">&#x27;NTL&#x27;</span>)</span><br><span class="line">    p = high_p + x</span><br><span class="line">    x0 = p.small_roots(X = <span class="number">2</span>^<span class="number">60</span>, beta = <span class="number">0.1</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    P = <span class="built_in">int</span>(p(x0))</span><br><span class="line">    Q = n // P</span><br><span class="line">    <span class="built_in">print</span>(P)</span><br><span class="line">    <span class="built_in">print</span>(Q)</span><br><span class="line">    <span class="keyword">assert</span> n == P*Q</span><br><span class="line"></span><br><span class="line">n=<span class="number">0x558477ce1d081f831cfa159290ee4fd14888422c216a16ad86e2b2d4335e3cb18ed0120a955f970b17b229a8e7d0ae1b6f0c40213ad0e127eba99ae0d8a82397</span></span><br><span class="line">p4=<span class="number">0x8fbcbb7d1e9f393ee21b537d6e0bd2cf8629e315f4e356c1e000000000000000</span></span><br><span class="line">e=<span class="number">0xf7278179324b11fd83d08aa6f</span></span><br><span class="line">c=<span class="number">0x36e1c09ccad45cd63a0f07e704d3811c39d70cdfdad999d2df90255a76c58cf6fe99ac1ab1d5d99a4ce1a2ebdbfbc49ce72df2a0b90766ff84ab0ef62068d46b</span></span><br><span class="line"></span><br><span class="line">phase3(p4, n) </span><br></pre></td></tr></table></figure>
+  <p>参考la佬博客   Lazzaro @ <a target="_blank" rel="noopener" href="https://lazzzaro.github.io/">https://lazzzaro.github.io</a></p>
+<p>椭圆曲线的定义式：y2+axy+by&#x3D;x3+cx2+dx+e</p>
+<p>一般方程：y2+a1xy+a3y&#x3D;x3+a2x2+a4x+a6</p>
+<p>最常用方程（维尔斯特拉斯标准形式）</p>
+<p>y2&#x3D;x3+ax+b</p>
+<h2 id="Smart’s-attack"><a href="#Smart’s-attack" class="headerlink" title="Smart’s attack"></a>Smart’s attack</h2><p>适用情况：E.order()&#x3D;pE.order()&#x3D;p。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">p = </span><br><span class="line">A = </span><br><span class="line">B = </span><br><span class="line">E = EllipticCurve(GF(p),[A,B])</span><br><span class="line">P = E(,)</span><br><span class="line">Q = E(,)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">SmartAttack</span>(<span class="params">P,Q,p</span>):</span><br><span class="line">    E = P.curve()</span><br><span class="line">    Eqp = EllipticCurve(Qp(p, <span class="number">2</span>), [ ZZ(t) + randint(<span class="number">0</span>,p)*p <span class="keyword">for</span> t <span class="keyword">in</span> E.a_invariants() ])</span><br><span class="line"></span><br><span class="line">    P_Qps = Eqp.lift_x(ZZ(P.xy()[<span class="number">0</span>]), <span class="built_in">all</span>=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">for</span> P_Qp <span class="keyword">in</span> P_Qps:</span><br><span class="line">        <span class="keyword">if</span> GF(p)(P_Qp.xy()[<span class="number">1</span>]) == P.xy()[<span class="number">1</span>]:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    Q_Qps = Eqp.lift_x(ZZ(Q.xy()[<span class="number">0</span>]), <span class="built_in">all</span>=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">for</span> Q_Qp <span class="keyword">in</span> Q_Qps:</span><br><span class="line">        <span class="keyword">if</span> GF(p)(Q_Qp.xy()[<span class="number">1</span>]) == Q.xy()[<span class="number">1</span>]:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    p_times_P = p*P_Qp</span><br><span class="line">    p_times_Q = p*Q_Qp</span><br><span class="line"></span><br><span class="line">    x_P,y_P = p_times_P.xy()</span><br><span class="line">    x_Q,y_Q = p_times_Q.xy()</span><br><span class="line"></span><br><span class="line">    phi_P = -(x_P/y_P)</span><br><span class="line">    phi_Q = -(x_Q/y_Q)</span><br><span class="line">    k = phi_Q/phi_P</span><br><span class="line">    <span class="keyword">return</span> ZZ(k)</span><br><span class="line"></span><br><span class="line">r = SmartAttack(P, Q, p)</span><br><span class="line"><span class="built_in">print</span>(r)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="脚本2"><a href="#脚本2" class="headerlink" title="脚本2"></a>脚本2</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">22127806011633861727954101002390179580447625543207045612671617864341845851658260004006826435219665722338399712799144283442305160095371386129132285556214330279867129279885732638085139970894386809975772641941102438472230541606849251235636928502018782288977994793382547376630461074356449893196487276906629063423071245785206275636191377977712166746567658967286739276282635616277590864547265366547379387583014365390660407286148179073747800137068237371705680826025177248889969809158386539617738762070772471531610084135064141878988874470291949704156926711239213996266350299670204058121040684469621186909795304289942430452869</span></span><br><span class="line">p4=<span class="number">0xd8bf1376aaae63b3c4d693ca7f3d8a76270b7310bb8bd4608a98c9fdd85fc1ccc7c246b364e2779034057f0ec7a101bad64269d9dcca69f9b5c3462b058b94db0987aa09426c5e7634b3e19f56872693206790c6feef0c9ae662d73f1b12c3cd</span></span><br><span class="line">e = <span class="number">0x10001</span></span><br><span class="line">pbits = <span class="number">1024</span></span><br><span class="line">kbits = pbits - p4.nbits()</span><br><span class="line"><span class="built_in">print</span>(p4.nbits())</span><br><span class="line">p4 = p4 &lt;&lt; kbits</span><br><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">f = x + p4</span><br><span class="line">roots = f.small_roots(X=<span class="number">2</span>^kbits, beta=<span class="number">0.4</span>)</span><br><span class="line"><span class="keyword">if</span> roots:</span><br><span class="line">    p = p4+<span class="built_in">int</span>(roots[<span class="number">0</span>])</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;n: &quot;</span>, n)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;p: &quot;</span>, p)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;q: &quot;</span>, n/p) </span><br></pre></td></tr></table></figure>
+<h2 id="ECDLP"><a href="#ECDLP" class="headerlink" title="ECDLP"></a>ECDLP</h2><p>CDLP即椭圆曲线上的离散对数问题（The Elliptic Curve Discrete Logarithm Problem）。</p>
+<p>椭圆曲线上离散对数问题ECDLP定义如下：给定素数 pp 和椭圆曲线 EE，对 Q&#x3D;kPQ&#x3D;kP，在已知 P,QP,Q 的情况下求出小于 pp 的正整数 kk。可以证明由 kk 和 PP 计算 QQ 比较容易，而由 QQ 和 PP 计算 kk 则比较困难。将椭圆曲线中的加法运算与离散对数中的模乘运算相对应，将椭圆曲线中的乘法运算与离散对数中的模幂运算相对应，我们就可以建立基于椭圆曲线的对应的密码体制。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Sage Code 1</span></span><br><span class="line">p = </span><br><span class="line">a = </span><br><span class="line">b = </span><br><span class="line">E = EllipticCurve(GF(p),[a,b])</span><br><span class="line">P = E(, ) </span><br><span class="line">Q = E(, ) </span><br><span class="line">k = discrete_log(Q, P, operation=<span class="string">&#x27;+&#x27;</span>) </span><br><span class="line"><span class="built_in">print</span>(k)</span><br><span class="line"></span><br><span class="line"><span class="comment">#Sage Code 2</span></span><br><span class="line">p = </span><br><span class="line">a = </span><br><span class="line">b = </span><br><span class="line">E = EllipticCurve(GF(p),[a,b])</span><br><span class="line">P = E(, ) </span><br><span class="line">Q = E(, ) </span><br><span class="line">k = P.discrete_log(Q)</span><br><span class="line"><span class="built_in">print</span>(k)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Pohlig-Hellman算法"><a href="#Pohlig-Hellman算法" class="headerlink" title="Pohlig-Hellman算法"></a>Pohlig-Hellman算法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Sage Code 1</span></span><br><span class="line">p = </span><br><span class="line">a = </span><br><span class="line">b = </span><br><span class="line">gx = </span><br><span class="line">gy = </span><br><span class="line">px = </span><br><span class="line">py = </span><br><span class="line"></span><br><span class="line">E = EllipticCurve(GF(p), [a, b])</span><br><span class="line">G = E(gx, gy)</span><br><span class="line">n = E.order()</span><br><span class="line">QA = E(px, py)</span><br><span class="line"></span><br><span class="line">factors = <span class="built_in">list</span>(factor(n))</span><br><span class="line">m = <span class="number">1</span></span><br><span class="line">moduli = []</span><br><span class="line">remainders = []</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;[+] Running Pohlig Hellman&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(factors)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, j <span class="keyword">in</span> factors:</span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">10</span>**<span class="number">9</span>:</span><br><span class="line">        <span class="built_in">print</span>(i)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    mod = i**j</span><br><span class="line">    g2 = G*(n//mod)</span><br><span class="line">    q2 = QA*(n//mod)</span><br><span class="line">    r = discrete_log(q2, g2, operation=<span class="string">&#x27;+&#x27;</span>)</span><br><span class="line">    remainders.append(r)</span><br><span class="line">    moduli.append(mod)</span><br><span class="line">    m *= mod</span><br><span class="line"></span><br><span class="line">r = crt(remainders, moduli)</span><br><span class="line"><span class="built_in">print</span>(r)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Sage Code 2</span></span><br><span class="line">E = EllipticCurve(GF(p), [a, b])</span><br><span class="line">P = E()</span><br><span class="line">Q = E()</span><br><span class="line"></span><br><span class="line">factors, exponents = <span class="built_in">zip</span>(*factor(E.order()))</span><br><span class="line">primes = [factors[i] ^ exponents[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(factors))][:-<span class="number">2</span>]</span><br><span class="line"><span class="built_in">print</span>(primes)</span><br><span class="line">dlogs = []</span><br><span class="line"><span class="keyword">for</span> fac <span class="keyword">in</span> primes:</span><br><span class="line">	t = <span class="built_in">int</span>(<span class="built_in">int</span>(P.order()) // <span class="built_in">int</span>(fac))</span><br><span class="line">	dlog = discrete_log(t*Q,t*P,operation=<span class="string">&quot;+&quot;</span>)</span><br><span class="line">	dlogs += [dlog]</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;factor: &quot;</span>+<span class="built_in">str</span>(fac)+<span class="string">&quot;, Discrete Log: &quot;</span>+<span class="built_in">str</span>(dlog)) <span class="comment">#calculates discrete logarithm for each prime order</span></span><br><span class="line"></span><br><span class="line">l = crt(dlogs,primes)</span><br><span class="line"><span class="built_in">print</span>(l)</span><br></pre></td></tr></table></figure>
 
  
       <!-- reward -->
@@ -188,12 +199,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/01/14/p%E9%AB%98%E4%BD%8D%E6%94%BB%E5%87%BB/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/01/15/ECC%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RSA/" rel="tag">RSA</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECC/" rel="tag">ECC</a></li></ul>
 
     </footer>
   </div>
@@ -201,19 +212,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/01/14/m%E9%AB%98%E4%BD%8D%E6%94%BB%E5%87%BB/" class="article-nav-link">
+      <a href="/2023/01/15/AES/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            m高位攻击
+            AES
           
         </div>
       </a>
     
     
-      <a href="/2023/01/14/rabin%E8%A7%A3%E5%AF%86/" class="article-nav-link">
+      <a href="/2023/01/15/%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AD%98%E5%82%A8%E5%BD%A2%E5%BC%8F/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">rabin解密</div>
+        <div class="article-nav-title">数据在内存中的存储形式</div>
       </a>
     
   </nav>

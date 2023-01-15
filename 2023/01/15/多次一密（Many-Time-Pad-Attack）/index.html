@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>p高位攻击 |  f14g</title>
+      <title>多次一密（Many Time Pad Attack） |  f14g</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,7 +56,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-p高位攻击"
+  id="post-多次一密（Many-Time-Pad-Attack）"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  p高位攻击
+  多次一密（Many Time Pad Attack）
 </h1>
  
 
@@ -75,8 +75,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/01/14/p%E9%AB%98%E4%BD%8D%E6%94%BB%E5%87%BB/" class="article-date">
-  <time datetime="2023-01-14T12:44:28.000Z" itemprop="datePublished">2023-01-14</time>
+      <a href="/2023/01/15/%E5%A4%9A%E6%AC%A1%E4%B8%80%E5%AF%86%EF%BC%88Many-Time-Pad-Attack%EF%BC%89/" class="article-date">
+  <time datetime="2023-01-15T03:07:06.000Z" itemprop="datePublished">2023-01-15</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/crypto/">crypto</a> / <a class="article-category-link" href="/categories/crypto/RSA/">RSA</a>
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">137</span>
+            <span class="post-count">680</span>
         </span>
     </span>
 
@@ -96,27 +96,22 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">4 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
-    <div class="tocbot"></div>
-
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="脚本1"><a href="#脚本1" class="headerlink" title="脚本1"></a>脚本1</h3><p>根据题目，注意 2^60  60需要修改相应的位数  a &#x3D; (p &gt;&gt; 60) &lt;&lt; 60 </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">phase3</span>(<span class="params">high_p, n</span>):</span><br><span class="line">    R.&lt;x&gt; = PolynomialRing(Zmod(n), implementation=<span class="string">&#x27;NTL&#x27;</span>)</span><br><span class="line">    p = high_p + x</span><br><span class="line">    x0 = p.small_roots(X = <span class="number">2</span>^<span class="number">60</span>, beta = <span class="number">0.1</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    P = <span class="built_in">int</span>(p(x0))</span><br><span class="line">    Q = n // P</span><br><span class="line">    <span class="built_in">print</span>(P)</span><br><span class="line">    <span class="built_in">print</span>(Q)</span><br><span class="line">    <span class="keyword">assert</span> n == P*Q</span><br><span class="line"></span><br><span class="line">n=<span class="number">0x558477ce1d081f831cfa159290ee4fd14888422c216a16ad86e2b2d4335e3cb18ed0120a955f970b17b229a8e7d0ae1b6f0c40213ad0e127eba99ae0d8a82397</span></span><br><span class="line">p4=<span class="number">0x8fbcbb7d1e9f393ee21b537d6e0bd2cf8629e315f4e356c1e000000000000000</span></span><br><span class="line">e=<span class="number">0xf7278179324b11fd83d08aa6f</span></span><br><span class="line">c=<span class="number">0x36e1c09ccad45cd63a0f07e704d3811c39d70cdfdad999d2df90255a76c58cf6fe99ac1ab1d5d99a4ce1a2ebdbfbc49ce72df2a0b90766ff84ab0ef62068d46b</span></span><br><span class="line"></span><br><span class="line">phase3(p4, n) </span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="脚本2"><a href="#脚本2" class="headerlink" title="脚本2"></a>脚本2</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">22127806011633861727954101002390179580447625543207045612671617864341845851658260004006826435219665722338399712799144283442305160095371386129132285556214330279867129279885732638085139970894386809975772641941102438472230541606849251235636928502018782288977994793382547376630461074356449893196487276906629063423071245785206275636191377977712166746567658967286739276282635616277590864547265366547379387583014365390660407286148179073747800137068237371705680826025177248889969809158386539617738762070772471531610084135064141878988874470291949704156926711239213996266350299670204058121040684469621186909795304289942430452869</span></span><br><span class="line">p4=<span class="number">0xd8bf1376aaae63b3c4d693ca7f3d8a76270b7310bb8bd4608a98c9fdd85fc1ccc7c246b364e2779034057f0ec7a101bad64269d9dcca69f9b5c3462b058b94db0987aa09426c5e7634b3e19f56872693206790c6feef0c9ae662d73f1b12c3cd</span></span><br><span class="line">e = <span class="number">0x10001</span></span><br><span class="line">pbits = <span class="number">1024</span></span><br><span class="line">kbits = pbits - p4.nbits()</span><br><span class="line"><span class="built_in">print</span>(p4.nbits())</span><br><span class="line">p4 = p4 &lt;&lt; kbits</span><br><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">f = x + p4</span><br><span class="line">roots = f.small_roots(X=<span class="number">2</span>^kbits, beta=<span class="number">0.4</span>)</span><br><span class="line"><span class="keyword">if</span> roots:</span><br><span class="line">    p = p4+<span class="built_in">int</span>(roots[<span class="number">0</span>])</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;n: &quot;</span>, n)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;p: &quot;</span>, p)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;q: &quot;</span>, n/p) </span><br></pre></td></tr></table></figure>
+  <p>用同一个密钥去加密多条明文，当密文条数较多时就很容易被攻击，例如Many Time Pad。</p>
+<p>这个攻击的原理是 c1⊕c2&#x3D;m1⊕m2c1⊕c2&#x3D;m1⊕m2，而通过 m1⊕m2m1⊕m2 可以分析出 m1⊕m2m1⊕m2，因此 m1⊕m2m1⊕m2 不再安全。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">## OTP - Recovering the private key from a set of messages that were encrypted w/ the same private key (Many time pad attack) - crypto100-many_time_secret @ alexctf 2017</span></span><br><span class="line"><span class="comment"># Original code by jwomers: https://github.com/Jwomers/many-time-pad-attack/blob/master/attack.py)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"><span class="keyword">import</span> sets, sys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 11 unknown ciphertexts (in hex format), all encrpyted with the same key</span></span><br><span class="line">c1=<span class="string">&#x27;daaa4b4e8c996dc786889cd63bc4df4d1e7dc6f3f0b7a0b61ad48811f6f7c9bfabd7083c53ba54&#x27;</span></span><br><span class="line">c2=<span class="string">&#x27;c5a342468c8c7a88999a9dd623c0cc4b0f7c829acaf8f3ac13c78300b3b1c7a3ef8e193840bb&#x27;</span></span><br><span class="line">c3=<span class="string">&#x27;dda342458c897a8285df879e3285ce511e7c8d9afff9b7ff15de8a16b394c7bdab920e7946a05e9941d8308e&#x27;</span></span><br><span class="line">c4=<span class="string">&#x27;d9b05b4cd5ce7c8f938bd39e24d0df191d7694dfeaf8bfbb56e28900e1b8dff1bb985c2d5aa154&#x27;</span></span><br><span class="line">c5=<span class="string">&#x27;d9aa4b00c88b7fc79d99d38223c08d54146b88d3f0f0f38c03df8d52f0bfc1bda3d7133712a55e9948c32c8a&#x27;</span></span><br><span class="line">c6=<span class="string">&#x27;c4b60e46c9827cc79e9698936bd1c55c5b6e87c8f0febdb856fe8052e4bfc9a5efbe5c3f57ad4b9944de34&#x27;</span></span><br><span class="line">c7=<span class="string">&#x27;d9aa5700da817f94d29e81936bc4c1555b7b94d5f5f2bdff37df8252ffbecfb9bbd7152a12bc4fc00ad7229090&#x27;</span></span><br><span class="line">c8=<span class="string">&#x27;c4e24645cd9c28939a86d3982ac8c819086989d1fbf9f39e18d5c601fbb6dab4ef9e12795bbc549959d9229090&#x27;</span></span><br><span class="line">c9=<span class="string">&#x27;d9aa4b598c80698a97df879e2ec08d5b1e7f89c8fbb7beba56f0c619fdb2c4bdef8313795fa149dc0ad4228f&#x27;</span></span><br><span class="line">c10=<span class="string">&#x27;cce25d48d98a6c8280df909926c0de19143983c8befab6ff21d99f52e4b2daa5ef83143647e854d60ad5269c87&#x27;</span></span><br><span class="line">c11=<span class="string">&#x27;d9aa4b598c85668885df9d993f85e419107783cdbee3bbba1391b11afcf7c3bfaa805c2d5aad42995ede2cdd82977244&#x27;</span></span><br><span class="line">ciphers = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11]</span><br><span class="line"><span class="comment"># The target ciphertext we want to crack</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># XORs two string</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">strxor</span>(<span class="params">a, b</span>):     <span class="comment"># xor two strings (trims the longer input)</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join([<span class="built_in">chr</span>(<span class="built_in">ord</span>(x) ^ <span class="built_in">ord</span>(y)) <span class="keyword">for</span> (x, y) <span class="keyword">in</span> <span class="built_in">zip</span>(a, b)])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">target_fix</span>(<span class="params">target_cipher</span>):</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;-------begin-------&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># To store the final key</span></span><br><span class="line">    final_key = [<span class="literal">None</span>]*<span class="number">150</span></span><br><span class="line">    <span class="comment"># To store the positions we know are broken</span></span><br><span class="line">    known_key_positions = <span class="built_in">set</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># For each ciphertext</span></span><br><span class="line">    <span class="keyword">for</span> current_index, ciphertext <span class="keyword">in</span> <span class="built_in">enumerate</span>(ciphers):</span><br><span class="line">        counter = collections.Counter()</span><br><span class="line">        <span class="comment"># for each other ciphertext</span></span><br><span class="line">        <span class="keyword">for</span> index, ciphertext2 <span class="keyword">in</span> <span class="built_in">enumerate</span>(ciphers):</span><br><span class="line">            <span class="keyword">if</span> current_index != index: <span class="comment"># don&#x27;t xor a ciphertext with itself</span></span><br><span class="line">                <span class="keyword">for</span> indexOfChar, char <span class="keyword">in</span> <span class="built_in">enumerate</span>(strxor(ciphertext.decode(<span class="string">&#x27;hex&#x27;</span>), ciphertext2.decode(<span class="string">&#x27;hex&#x27;</span>))): <span class="comment"># Xor the two ciphertexts</span></span><br><span class="line">                    <span class="comment"># If a character in the xored result is a alphanumeric character, it means there was probably a space character in one of the plaintexts (we don&#x27;t know which one)</span></span><br><span class="line">                    <span class="keyword">if</span> char <span class="keyword">in</span> string.printable <span class="keyword">and</span> char.isalpha(): counter[indexOfChar] += <span class="number">1</span> <span class="comment"># Increment the counter at this index</span></span><br><span class="line">        knownSpaceIndexes = []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Loop through all positions where a space character was possible in the current_index cipher</span></span><br><span class="line">        <span class="keyword">for</span> ind, val <span class="keyword">in</span> counter.items():</span><br><span class="line">            <span class="comment"># If a space was found at least 7 times at this index out of the 9 possible XORS, then the space character was likely from the current_index cipher!</span></span><br><span class="line">            <span class="keyword">if</span> val &gt;= <span class="number">7</span>: knownSpaceIndexes.append(ind)</span><br><span class="line">        <span class="comment">#print knownSpaceIndexes # Shows all the positions where we now know the key!</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Now Xor the current_index with spaces, and at the knownSpaceIndexes positions we get the key back!</span></span><br><span class="line">        xor_with_spaces = strxor(ciphertext.decode(<span class="string">&#x27;hex&#x27;</span>),<span class="string">&#x27; &#x27;</span>*<span class="number">150</span>)</span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> knownSpaceIndexes:</span><br><span class="line">            <span class="comment"># Store the key&#x27;s value at the correct position</span></span><br><span class="line">            final_key[index] = xor_with_spaces[index].encode(<span class="string">&#x27;hex&#x27;</span>)</span><br><span class="line">            <span class="comment"># Record that we known the key at this position</span></span><br><span class="line">            known_key_positions.add(index)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Construct a hex key from the currently known key, adding in &#x27;00&#x27; hex chars where we do not know (to make a complete hex string)</span></span><br><span class="line">    final_key_hex = <span class="string">&#x27;&#x27;</span>.join([val <span class="keyword">if</span> val <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">else</span> <span class="string">&#x27;00&#x27;</span> <span class="keyword">for</span> val <span class="keyword">in</span> final_key])</span><br><span class="line">    <span class="comment"># Xor the currently known key with the target cipher</span></span><br><span class="line">    output = strxor(target_cipher.decode(<span class="string">&#x27;hex&#x27;</span>),final_key_hex.decode(<span class="string">&#x27;hex&#x27;</span>))</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Fix this sentence:&quot;</span></span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;&#x27;</span>.join([char <span class="keyword">if</span> index <span class="keyword">in</span> known_key_positions <span class="keyword">else</span> <span class="string">&#x27;*&#x27;</span> <span class="keyword">for</span> index, char <span class="keyword">in</span> <span class="built_in">enumerate</span>(output)])+<span class="string">&quot;\n&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># WAIT.. MANUAL STEP HERE </span></span><br><span class="line">    <span class="comment"># This output are printing a * if that character is not known yet</span></span><br><span class="line">    <span class="comment"># fix the missing characters like this: &quot;Let*M**k*ow if *o&#123;*a&quot; = &quot;cure, Let Me know if you a&quot;</span></span><br><span class="line">    <span class="comment"># if is too hard, change the target_cipher to another one and try again</span></span><br><span class="line">    <span class="comment"># and we have our key to fix the entire text!</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#sys.exit(0) #comment and continue if u got a good key</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;------end------&#x27;</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> ciphers:</span><br><span class="line">    target_fix(i)</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* 复制并使用代码请注明引用出处哦~</span><br><span class="line">* Lazzaro @ https://lazzzaro.github.io</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
 
  
       <!-- reward -->
@@ -188,7 +183,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/01/14/p%E9%AB%98%E4%BD%8D%E6%94%BB%E5%87%BB/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/01/15/%E5%A4%9A%E6%AC%A1%E4%B8%80%E5%AF%86%EF%BC%88Many-Time-Pad-Attack%EF%BC%89/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -201,19 +196,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/01/14/m%E9%AB%98%E4%BD%8D%E6%94%BB%E5%87%BB/" class="article-nav-link">
+      <a href="/2023/01/15/p-q%E5%BD%93%E5%81%9Ae1-e2%E5%85%B1%E6%A8%A1/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            m高位攻击
+            p,q当做e1,e2共模
           
         </div>
       </a>
     
     
-      <a href="/2023/01/14/rabin%E8%A7%A3%E5%AF%86/" class="article-nav-link">
+      <a href="/2023/01/15/Coppersmith%E6%94%BB%E5%87%BB/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">rabin解密</div>
+        <div class="article-nav-title">Coppersmith攻击</div>
       </a>
     
   </nav>
