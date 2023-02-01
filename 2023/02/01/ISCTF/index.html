@@ -253,12 +253,12 @@
 <p>然后用字频降序求</p>
 <p>ISCTF{so_cLut73r}</p>
 <h1 id="Re"><a href="#Re" class="headerlink" title="Re"></a>Re</h1><h2 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h2><p>把base64拖进IDA得</p>
-<p><img src="/2023/02/01/ISCTF/ISCTF%5C1667397304287.png" alt="1667397304287"></p>
+<p><img src="/2023/02/01/ISCTF/1667397304287.png" alt="1667397304287"></p>
 <p>得到一串base64编码</p>
 <p>MTU5ZTMOMjIOYzAwZWFkMmQzYTAz0WQzMjA4NGV1NTA&#x3D;</p>
 <p>但是用普通字母表解码得到乱码</p>
 <p>然后根据主函数里面的函数找到</p>
-<p><img src="/2023/02/01/ISCTF/ISCTF%5C1667397429357.png" alt="1667397429357"></p>
+<p><img src="/2023/02/01/ISCTF/1667397429357.png" alt="1667397429357"></p>
 <p>把这个作为base64表解码</p>
 <p>ABCDEFGHIJKLMN0PQRSTUVWXYZabcdofghijk1mnepqrstuvwxyzOl23456789+&#x2F;</p>
 <p>脚本</p>
@@ -266,7 +266,7 @@
 
 <p>ISCTF{159e34224c00ead2d3a039d32084ee50}</p>
 <h1 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h1><h2 id="nc-pwn"><a href="#nc-pwn" class="headerlink" title="nc_pwn"></a>nc_pwn</h2><p>把flag重定向到sh,通过报错输出</p>
-<p><img src="/2023/02/01/ISCTF/ISCTF%5C1667477178587.png" alt="1667477178587"></p>
+<p><img src="/2023/02/01/ISCTF/1667477178587.png" alt="1667477178587"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">把flag重定向到sh,通过报错输出</span><br></pre></td></tr></table></figure>
 
  
