@@ -275,7 +275,7 @@
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c9089fd5b1ba">https://www.jianshu.com/p/c9089fd5b1ba</a></p>
 <h1 id="2-绕过intval"><a href="#2-绕过intval" class="headerlink" title="2.绕过intval()"></a>2.绕过intval()</h1><p>需要绕过 intval()，由于 intval() 可以处理的不仅仅是十进制，还有八进制、十六进制、 </p>
 <p>科学计数法等。写个测试脚本 </p>
-<?php $a = $_GET['a']; **echo** intval($a) . " "; **echo** intval($a+1) ;
+<?php $a = $_GET['a']; echo intval($a) . " "; **echo** intval($a+1) ;
 
 传入 1e5，输出：1 100001，绕过成功
 
@@ -283,9 +283,9 @@
 
 首先 $a 是字符串所以 intval() 返回了字母前的数字，也就是 e 前面的 1 
 
-echo **intval**(1e10); *// 1410065408* 
+echo intval(1e10); *// 1410065408* 
 
-echo **intval**('1e10'); *// 1* 
+echo intval('1e10'); *// 1* 
 
 然后 $a+1 进行了字符串与数字相加的运算，在 php 中，这种结果取决于这个字符串长什么样，就 $a+1 来讲： 
 
