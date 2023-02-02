@@ -275,7 +275,13 @@
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c9089fd5b1ba">https://www.jianshu.com/p/c9089fd5b1ba</a></p>
 <h1 id="2-绕过intval"><a href="#2-绕过intval" class="headerlink" title="2.绕过intval()"></a>2.绕过intval()</h1><p>需要绕过 intval()，由于 intval() 可以处理的不仅仅是十进制，还有八进制、十六进制、 </p>
 <p>科学计数法等。写个测试脚本 </p>
-<?php $a = $_GET['a']; echo intval($a) . " "; **echo** intval($a+1) ;
+<?php 
+
+​	$a=_GET['a']; 
+
+​	echo intval($a);
+
+​	echo intval($a+1) ;
 
 传入 1e5，输出：1 100001，绕过成功
 
@@ -283,7 +289,7 @@
 
 首先 $a 是字符串所以 intval() 返回了字母前的数字，也就是 e 前面的 1 
 
-echo intval(1e10); *// 1410065408* 
+echo intval(1e10); // 1410065408
 
 echo intval('1e10'); *// 1* 
 
@@ -302,6 +308,8 @@ $a 是 1e5 这种科学计数法形式，先转成 1×10^5 也就是 10000，再
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$md5</span> <span class="title function_ invoke__">md5</span>(<span class="variable">$md5</span>)</span><br><span class="line"><span class="number">0e215962017</span> <span class="number">0e291242476940776845150308577824</span></span><br><span class="line"><span class="number">0e00275209979</span> <span class="number">0e551387587965716321018342879905</span></span><br><span class="line"><span class="number">0e00506035745</span> <span class="number">0e224441551631909369101555335043</span></span><br><span class="line"><span class="number">0e00540451811</span> <span class="number">0e057099852684304412663796608095</span></span><br><span class="line"><span class="number">0e00678205148</span> <span class="number">0e934049274119262631743072394111</span></span><br><span class="line"><span class="number">0e00741250258</span> <span class="number">0e899567782965109269932883593603</span></span><br><span class="line"><span class="number">0e00928251504</span> <span class="number">0e148856674729228041723861799600</span></span><br><span class="line"><span class="number">0e01350016114</span> <span class="number">0e769018222125751782256460324867</span></span><br><span class="line"><span class="number">0e01352028862</span> <span class="number">0e388419153010508575572061606161</span></span><br><span class="line"><span class="number">0e01392313004</span> <span class="number">0e793314107039222217518920037885</span></span><br><span class="line"><span class="number">0e01875552079</span> <span class="number">0e780449305367629893512581736357</span></span><br><span class="line"><span class="number">0e01975903983</span> <span class="number">0e317084484960342086618161584202</span></span><br><span class="line"><span class="number">0e02042356163</span> <span class="number">0e335912055437180460060141819624</span></span><br><span class="line"><span class="number">0e02218562930</span> <span class="number">0e151492820470888772364059321579</span></span><br><span class="line"><span class="number">0e02451355147</span> <span class="number">0e866503534356013079241759641492</span></span><br><span class="line"><span class="number">0e02739970294</span> <span class="number">0e894318228115677783240047043017</span></span><br><span class="line"><span class="number">0e02760920150</span> <span class="number">0e413159393756646578537635311046</span></span><br><span class="line"><span class="number">0e02784726287</span> <span class="number">0e433955189140949269100965859496</span></span><br><span class="line"><span class="number">0e03298616350</span> <span class="number">0e851613188370453906408258609284</span></span><br><span class="line"><span class="number">0e03393034171</span> <span class="number">0e077847024281996293485700020358</span></span><br></pre></td></tr></table>
 
 # 4.经过两次md5加密后的值等于原变量
+
+
 
 0e1138100474
 
