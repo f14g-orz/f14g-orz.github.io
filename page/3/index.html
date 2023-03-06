@@ -152,6 +152,63 @@
     
     
     <article
+  id="post-多次一密（Many-Time-Pad-Attack）"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/01/15/%E5%A4%9A%E6%AC%A1%E4%B8%80%E5%AF%86%EF%BC%88Many-Time-Pad-Attack%EF%BC%89/"
+    >多次一密（Many Time Pad Attack）</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/01/15/%E5%A4%9A%E6%AC%A1%E4%B8%80%E5%AF%86%EF%BC%88Many-Time-Pad-Attack%EF%BC%89/" class="article-date">
+  <time datetime="2023-01-15T03:07:06.000Z" itemprop="datePublished">2023-01-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/crypto/">crypto</a> / <a class="article-category-link" href="/categories/crypto/RSA/">RSA</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>用同一个密钥去加密多条明文，当密文条数较多时就很容易被攻击，例如Many Time Pad。</p>
+<p>这个攻击的原理是 c1⊕c2&#x3D;m1⊕m2c1⊕c2&#x3D;m1⊕m2，而通过 m1⊕m2m1⊕m2 可以分析出 m1⊕m2m1⊕m2，因此 m1⊕m2m1⊕m2 不再安全。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">## OTP - Recovering the private key from a set of messages that were encrypted w/ the same private key (Many time pad attack) - crypto100-many_time_secret @ alexctf 2017</span></span><br><span class="line"><span class="comment"># Original code by jwomers: https://github.com/Jwomers/many-time-pad-attack/blob/master/attack.py)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"><span class="keyword">import</span> sets, sys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 11 unknown ciphertexts (in hex format), all encrpyted with the same key</span></span><br><span class="line">c1=<span class="string">&#x27;daaa4b4e8c996dc786889cd63bc4df4d1e7dc6f3f0b7a0b61ad48811f6f7c9bfabd7083c53ba54&#x27;</span></span><br><span class="line">c2=<span class="string">&#x27;c5a342468c8c7a88999a9dd623c0cc4b0f7c829acaf8f3ac13c78300b3b1c7a3ef8e193840bb&#x27;</span></span><br><span class="line">c3=<span class="string">&#x27;dda342458c897a8285df879e3285ce511e7c8d9afff9b7ff15de8a16b394c7bdab920e7946a05e9941d8308e&#x27;</span></span><br><span class="line">c4=<span class="string">&#x27;d9b05b4cd5ce7c8f938bd39e24d0df191d7694dfeaf8bfbb56e28900e1b8dff1bb985c2d5aa154&#x27;</span></span><br><span class="line">c5=<span class="string">&#x27;d9aa4b00c88b7fc79d99d38223c08d54146b88d3f0f0f38c03df8d52f0bfc1bda3d7133712a55e9948c32c8a&#x27;</span></span><br><span class="line">c6=<span class="string">&#x27;c4b60e46c9827cc79e9698936bd1c55c5b6e87c8f0febdb856fe8052e4bfc9a5efbe5c3f57ad4b9944de34&#x27;</span></span><br><span class="line">c7=<span class="string">&#x27;d9aa5700da817f94d29e81936bc4c1555b7b94d5f5f2bdff37df8252ffbecfb9bbd7152a12bc4fc00ad7229090&#x27;</span></span><br><span class="line">c8=<span class="string">&#x27;c4e24645cd9c28939a86d3982ac8c819086989d1fbf9f39e18d5c601fbb6dab4ef9e12795bbc549959d9229090&#x27;</span></span><br><span class="line">c9=<span class="string">&#x27;d9aa4b598c80698a97df879e2ec08d5b1e7f89c8fbb7beba56f0c619fdb2c4bdef8313795fa149dc0ad4228f&#x27;</span></span><br><span class="line">c10=<span class="string">&#x27;cce25d48d98a6c8280df909926c0de19143983c8befab6ff21d99f52e4b2daa5ef83143647e854d60ad5269c87&#x27;</span></span><br><span class="line">c11=<span class="string">&#x27;d9aa4b598c85668885df9d993f85e419107783cdbee3bbba1391b11afcf7c3bfaa805c2d5aad42995ede2cdd82977244&#x27;</span></span><br><span class="line">ciphers = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11]</span><br><span class="line"><span class="comment"># The target ciphertext we want to crack</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># XORs two string</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">strxor</span>(<span class="params">a, b</span>):     <span class="comment"># xor two strings (trims the longer input)</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join([<span class="built_in">chr</span>(<span class="built_in">ord</span>(x) ^ <span class="built_in">ord</span>(y)) <span class="keyword">for</span> (x, y) <span class="keyword">in</span> <span class="built_in">zip</span>(a, b)])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">target_fix</span>(<span class="params">target_cipher</span>):</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;-------begin-------&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># To store the final key</span></span><br><span class="line">    final_key = [<span class="literal">None</span>]*<span class="number">150</span></span><br><span class="line">    <span class="comment"># To store the positions we know are broken</span></span><br><span class="line">    known_key_positions = <span class="built_in">set</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># For each ciphertext</span></span><br><span class="line">    <span class="keyword">for</span> current_index, ciphertext <span class="keyword">in</span> <span class="built_in">enumerate</span>(ciphers):</span><br><span class="line">        counter = collections.Counter()</span><br><span class="line">        <span class="comment"># for each other ciphertext</span></span><br><span class="line">        <span class="keyword">for</span> index, ciphertext2 <span class="keyword">in</span> <span class="built_in">enumerate</span>(ciphers):</span><br><span class="line">            <span class="keyword">if</span> current_index != index: <span class="comment"># don&#x27;t xor a ciphertext with itself</span></span><br><span class="line">                <span class="keyword">for</span> indexOfChar, char <span class="keyword">in</span> <span class="built_in">enumerate</span>(strxor(ciphertext.decode(<span class="string">&#x27;hex&#x27;</span>), ciphertext2.decode(<span class="string">&#x27;hex&#x27;</span>))): <span class="comment"># Xor the two ciphertexts</span></span><br><span class="line">                    <span class="comment"># If a character in the xored result is a alphanumeric character, it means there was probably a space character in one of the plaintexts (we don&#x27;t know which one)</span></span><br><span class="line">                    <span class="keyword">if</span> char <span class="keyword">in</span> string.printable <span class="keyword">and</span> char.isalpha(): counter[indexOfChar] += <span class="number">1</span> <span class="comment"># Increment the counter at this index</span></span><br><span class="line">        knownSpaceIndexes = []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Loop through all positions where a space character was possible in the current_index cipher</span></span><br><span class="line">        <span class="keyword">for</span> ind, val <span class="keyword">in</span> counter.items():</span><br><span class="line">            <span class="comment"># If a space was found at least 7 times at this index out of the 9 possible XORS, then the space character was likely from the current_index cipher!</span></span><br><span class="line">            <span class="keyword">if</span> val &gt;= <span class="number">7</span>: knownSpaceIndexes.append(ind)</span><br><span class="line">        <span class="comment">#print knownSpaceIndexes # Shows all the positions where we now know the key!</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Now Xor the current_index with spaces, and at the knownSpaceIndexes positions we get the key back!</span></span><br><span class="line">        xor_with_spaces = strxor(ciphertext.decode(<span class="string">&#x27;hex&#x27;</span>),<span class="string">&#x27; &#x27;</span>*<span class="number">150</span>)</span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> knownSpaceIndexes:</span><br><span class="line">            <span class="comment"># Store the key&#x27;s value at the correct position</span></span><br><span class="line">            final_key[index] = xor_with_spaces[index].encode(<span class="string">&#x27;hex&#x27;</span>)</span><br><span class="line">            <span class="comment"># Record that we known the key at this position</span></span><br><span class="line">            known_key_positions.add(index)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Construct a hex key from the currently known key, adding in &#x27;00&#x27; hex chars where we do not know (to make a complete hex string)</span></span><br><span class="line">    final_key_hex = <span class="string">&#x27;&#x27;</span>.join([val <span class="keyword">if</span> val <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">else</span> <span class="string">&#x27;00&#x27;</span> <span class="keyword">for</span> val <span class="keyword">in</span> final_key])</span><br><span class="line">    <span class="comment"># Xor the currently known key with the target cipher</span></span><br><span class="line">    output = strxor(target_cipher.decode(<span class="string">&#x27;hex&#x27;</span>),final_key_hex.decode(<span class="string">&#x27;hex&#x27;</span>))</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Fix this sentence:&quot;</span></span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;&#x27;</span>.join([char <span class="keyword">if</span> index <span class="keyword">in</span> known_key_positions <span class="keyword">else</span> <span class="string">&#x27;*&#x27;</span> <span class="keyword">for</span> index, char <span class="keyword">in</span> <span class="built_in">enumerate</span>(output)])+<span class="string">&quot;\n&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># WAIT.. MANUAL STEP HERE </span></span><br><span class="line">    <span class="comment"># This output are printing a * if that character is not known yet</span></span><br><span class="line">    <span class="comment"># fix the missing characters like this: &quot;Let*M**k*ow if *o&#123;*a&quot; = &quot;cure, Let Me know if you a&quot;</span></span><br><span class="line">    <span class="comment"># if is too hard, change the target_cipher to another one and try again</span></span><br><span class="line">    <span class="comment"># and we have our key to fix the entire text!</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#sys.exit(0) #comment and continue if u got a good key</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;------end------&#x27;</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> ciphers:</span><br><span class="line">    target_fix(i)</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* 复制并使用代码请注明引用出处哦~</span><br><span class="line">* Lazzaro @ https://lazzzaro.github.io</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RSA/" rel="tag">RSA</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-Coppersmith攻击"
   class="article article-type-post"
   itemscope
@@ -733,65 +790,6 @@
 
 
 <h3 id="解题脚本"><a href="#解题脚本" class="headerlink" title="解题脚本"></a>解题脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n= <span class="number">145019079329431335397614962361328380657791588724922798973663969211116220115770245475920263239995612730754707053842643157419631306217775476295468921323722072358718740419891343</span></span><br><span class="line">e= <span class="number">65537</span></span><br><span class="line">c= <span class="number">140685916068372840188594810951725120856549500572531415145851334100894172238220723655155392437389265779142744297662199397338128573434156637005620163707528325151303620546345193</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#分解n</span></span><br><span class="line"><span class="comment">#yafu-x64.exe  factor()</span></span><br><span class="line">p=<span class="number">3744386671</span></span><br><span class="line">q =<span class="number">3635915567</span></span><br><span class="line">r =<span class="number">10651987877533772188440205268385723681224651777384121120926977791191426755882566107618206306815183484369276527316840499421776849406225472400639701281788399</span></span><br><span class="line"></span><br><span class="line">phi_n=(p-<span class="number">1</span>)*(q-<span class="number">1</span>)*(r-<span class="number">1</span>)</span><br><span class="line">d=gmpy2.invert(e,phi_n)</span><br><span class="line">m=<span class="built_in">pow</span>(c,d,n)</span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"><span class="built_in">print</span>(libnum.n2s(<span class="built_in">int</span>(m))) </span><br></pre></td></tr></table></figure>
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RSA/" rel="tag">RSA</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-n是p的r次方"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/01/14/n%E6%98%AFp%E7%9A%84r%E6%AC%A1%E6%96%B9/"
-    >n是p的r次方</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/01/14/n%E6%98%AFp%E7%9A%84r%E6%AC%A1%E6%96%B9/" class="article-date">
-  <time datetime="2023-01-14T12:32:55.000Z" itemprop="datePublished">2023-01-14</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/crypto/">crypto</a> / <a class="article-category-link" href="/categories/crypto/RSA/">RSA</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h3 id="出题脚本"><a href="#出题脚本" class="headerlink" title="出题脚本"></a>出题脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"></span><br><span class="line"><span class="comment">#生成随机素数</span></span><br><span class="line">p=libnum.generate_prime(<span class="number">256</span>)</span><br><span class="line">e=<span class="number">65537</span></span><br><span class="line">m=<span class="string">&quot;flag&#123;de8c3ea714f7f780185924d473997bcb&#125;&quot;</span></span><br><span class="line"><span class="comment">#字符串转数字</span></span><br><span class="line">m=libnum.s2n(m)</span><br><span class="line">n=p**<span class="number">4</span></span><br><span class="line">phi_n=p**<span class="number">4</span>-p**<span class="number">3</span></span><br><span class="line"><span class="comment">#求逆元</span></span><br><span class="line">d=libnum.invmod(e,phi_n)</span><br><span class="line">c=<span class="built_in">pow</span>(m,e,n)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;n=&quot;</span>,n)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;e=&quot;</span>,e)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;c=&quot;</span>,c) </span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="解密脚本"><a href="#解密脚本" class="headerlink" title="解密脚本"></a>解密脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum </span><br><span class="line"><span class="keyword">import</span> gmpy2 </span><br><span class="line">n= <span class="number">23219089633250510580388184338893261190159425274266091829251069678345101374315005119889075848991325948461687799542168350589180122396501651434531030343667226410506241902501479054317717625217008857112114881864252928341340770771920275461651508679148124345837511394681152499950625703121385320234450147885925563601</span> e= <span class="number">65537</span> </span><br><span class="line">c= <span class="number">4777659110099869449331032200405354033599223023041765916601886190091487314989244505694085724093454432510462782520998688417537643026221506529296297782026160739262075190691284018675189858368054339063575534858807322887095235742287437139426799368719305846674897884286541494038433345483824310623372192122891409065</span> <span class="comment">#分解n #yafu-x64.exe factor() p=69416273731307471601239913553838998413594935515871627319658832112504691596643 phi_n=p**4-p**3 </span></span><br><span class="line"><span class="comment">#求逆元 </span></span><br><span class="line">d=libnum.invmod(e,phi_n) </span><br><span class="line">m=<span class="built_in">pow</span>(c,d,n) <span class="built_in">print</span>(m) </span><br><span class="line"><span class="comment">#数字转字节，转字符串 </span></span><br><span class="line"><span class="built_in">print</span>(libnum.n2s(<span class="built_in">int</span>(m)).decode()) </span><br></pre></td></tr></table></figure>
 
  
       <!-- reward -->
