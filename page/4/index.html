@@ -781,6 +781,73 @@
 <p>那么 p 的所有满足该同余式的解就会返回出来</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">f = (M + x*r)**e - c</span><br><span class="line">f = f.monic()</span><br><span class="line">roots = f.small_roots()</span><br></pre></td></tr></table></figure>
 
+<h2 id="2-基本运算"><a href="#2-基本运算" class="headerlink" title="2.基本运算"></a>2.基本运算</h2><p>sage的大部分基本运算和python都一样、</p>
+<p>比较运算符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">== &lt;=  &gt;= &lt; &gt; </span><br></pre></td></tr></table></figure>
+
+<p>数学运算符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>**<span class="number">3</span> 代表幂运算  ^ 和 **的作用一样</span><br><span class="line">%  对于整型参数  %代表mod运算</span><br><span class="line">/</span><br><span class="line">//</span><br></pre></td></tr></table></figure>
+
+<p>常见的数学函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sqrt(<span class="number">4</span>)  <span class="comment">#2</span></span><br><span class="line">sin()</span><br><span class="line">cos()</span><br><span class="line"><span class="comment">#有些数学表达式返回的是精确的值而不是近似值，要想得到近似值使用函数n或者方法n（均有一个长名称，numerical_approx,并且函数N和n相同），它们都有可选参数prec，即所需的比特位精度以及digits，即所需的十进制位精度</span></span><br><span class="line">exp(<span class="number">2</span>)  e^<span class="number">2</span></span><br><span class="line">n(exp(<span class="number">2</span>))    <span class="comment">#7.38905609893065</span></span><br><span class="line">sin(<span class="number">10</span>).n(digits=<span class="number">5</span>)  <span class="comment">#-0.54402</span></span><br><span class="line">numerical_approx(pi,prec=<span class="number">200</span>)  <span class="comment">#3.1415926535897932384626433832795028841971693993751058209749</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-基础代数和微积分"><a href="#3-基础代数和微积分" class="headerlink" title="3.基础代数和微积分"></a>3.基础代数和微积分</h2><p>solve函数用来求解方程</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x=var(<span class="string">&#x27;x&#x27;</span>)</span><br><span class="line">solve(x^<span class="number">2</span>+<span class="number">3</span>*x+<span class="number">2</span>,x)</span><br></pre></td></tr></table></figure>
+
+<p>也可以求解用其他变量表示另一个变量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x,b,c=var(<span class="string">&#x27;x b c&#x27;</span>)</span><br><span class="line">solve([x^<span class="number">2</span>+b**x+c==<span class="number">0</span>],x)</span><br><span class="line"><span class="comment">#[x == -sqrt(-b^x - c), x == sqrt(-b^x - c)]</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以求解多个变量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x,y=var(<span class="string">&#x27;x y&#x27;</span>)</span><br><span class="line">solve([x+y==<span class="number">6</span>,x-y==<span class="number">4</span>],x,y)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>微分函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">u=var(<span class="string">&#x27;u&#x27;</span>)</span><br><span class="line">diff(sin(u),u)</span><br><span class="line"><span class="comment">#cos(u)</span></span><br></pre></td></tr></table></figure>
+
+<p>求四阶导数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff(sin(x^<span class="number">2</span>),x,<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<p>求偏导数</p>
+<p>求x^2 + 17*y^2</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x,y=var(<span class="string">&#x27;x,y&#x27;</span>)</span><br><span class="line">f=x^<span class="number">2</span>+<span class="number">17</span>*y^<span class="number">2</span></span><br><span class="line">f.diff(x)</span><br><span class="line">f.diff(y)</span><br></pre></td></tr></table></figure>
+
+<p>积分函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">integral(x*sin(x^<span class="number">2</span>),x)</span><br><span class="line">-<span class="number">1</span>/<span class="number">2</span>*cos(x^<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-基础的环"><a href="#4-基础的环" class="headerlink" title="4.基础的环"></a>4.基础的环</h2><p>整数环  ZZ</p>
+<p>有理数环 QQ</p>
+<p>实数环  RR</p>
+<p>复数环   CC</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ratpoly.&lt;t&gt;=PolynomialRing(QQ)   <span class="comment">#这里的ratpoly和realpoly没什么很大区别无关紧要</span></span><br><span class="line">realpoly.&lt;z&gt;=PolynomiaRing(RR)</span><br><span class="line">factor(t^<span class="number">2</span> - <span class="number">2</span>)  <span class="comment">#无结果</span></span><br><span class="line">factor(z^<span class="number">2</span> -<span class="number">2</span>)  <span class="comment">#(z - 1.41421356237310) * (z + 1.41421356237310)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-线性代数"><a href="#5-线性代数" class="headerlink" title="5.线性代数"></a>5.线性代数</h2><p>创建矩阵和实现矩阵运算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">A = Matrix([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]])</span><br><span class="line">w = vector([<span class="number">1</span>,<span class="number">1</span>,-<span class="number">4</span>])</span><br><span class="line">w*A</span><br><span class="line">(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">A*w</span><br><span class="line">(-<span class="number">9</span>, <span class="number">1</span>, -<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<p>求解矩阵方程是容易的，使用solve_right方法求解A.solve_right(Y)返回使得AX&#x3D;Y成立的矩阵或向量X:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A = Matrix([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]])</span><br><span class="line">Y = vector([<span class="number">0</span>,-<span class="number">4</span>,-<span class="number">1</span>])</span><br><span class="line">X = A.solve_right(Y)</span><br><span class="line"><span class="comment">#(-2, 1, 0)</span></span><br></pre></td></tr></table></figure>
+
+<p>反斜杠  \  可以用来代替solve_right  A\Y</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A\Y</span><br><span class="line"></span><br><span class="line"><span class="comment">#(-2, 1, 0)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-多项式"><a href="#6-多项式" class="headerlink" title="6.多项式"></a>6.多项式</h2><p>一元多项式</p>
+<p>第一种方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R = PolynomialRing(QQ, &#x27;t&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>这将创建一个多项式环，并告诉Sage在向屏幕打印时使用（字符串）“t”作为未定元。然而，这并未定义供Sage使用的符号t，因此您不能使用它输入属于R的多项式（例如t^2+1).</p>
+<p>第二种方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">S = QQ[&#x27;t&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>第三种方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">R.&lt;t&gt; = PolynomialRing(QQ)</span><br><span class="line">R.&lt;t&gt; = QQ[&#x27;t&#x27;]</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-数论函数"><a href="#7-数论函数" class="headerlink" title="7.数论函数"></a>7.数论函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">gcd(<span class="number">10</span>,<span class="number">25</span>)   <span class="comment">#5</span></span><br><span class="line"></span><br><span class="line">factor(<span class="number">35</span>)   <span class="comment">#5*7</span></span><br><span class="line"></span><br><span class="line">next_prime(<span class="number">2005</span>) <span class="comment">#2011</span></span><br><span class="line"></span><br><span class="line">previous_prime(<span class="number">2005</span>) <span class="comment">#2003</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#扩展欧几里得算法</span></span><br><span class="line">d,u,v = xgcd(<span class="number">12</span>,<span class="number">15</span>)</span><br><span class="line">d == u*<span class="number">12</span> + v*<span class="number">15</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"></span><br><span class="line">phi=eular_phi(n)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>中国剩余定理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = crt(2, 1, 3, 5)</span><br></pre></td></tr></table></figure>
+
  
       <!-- reward -->
       
