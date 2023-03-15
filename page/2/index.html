@@ -152,6 +152,61 @@
     
     
     <article
+  id="post-数据库基本知识"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/02/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/"
+    >数据库基本知识</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/02/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/" class="article-date">
+  <time datetime="2023-02-02T08:48:02.000Z" itemprop="datePublished">2023-02-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Web/">Web</a> / <a class="article-category-link" href="/categories/Web/Sql/">Sql</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">01、显示数据库 show databases；</span><br><span class="line">02、打开数据库 use db_name;</span><br><span class="line">03、显示数据表 show tables;</span><br><span class="line">04、显示表结构 describe table_name;</span><br><span class="line">05、显示表中各字段信息，即表结构 show columns from table_name;</span><br><span class="line">06、显示表创建过程 show create table 表名;</span><br><span class="line">07、列出当前mysql的相关状态信息 status;</span><br><span class="line">08、删除数据库 drop database 数据库名;</span><br><span class="line">09、清空数据表 delete from table_name; truncate table table_name;</span><br><span class="line">10、删除数据表 drop table table_name</span><br><span class="line">11、数据库连接 mysql –uroot -proot</span><br><span class="line">12、数据库退出 exit</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-变量覆盖"
   class="article article-type-post"
   itemscope
@@ -1164,61 +1219,6 @@
 <h2 id="解题脚本"><a href="#解题脚本" class="headerlink" title="解题脚本"></a>解题脚本</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> libnum <span class="keyword">import</span>*</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"></span><br><span class="line">s = [<span class="number">72065910510177138000000000000000.000000</span>,<span class="number">71863209670811371000000.000000</span>,<span class="number">18489682625412760000000000000000.000000</span>,<span class="number">72723257588050687000000.000000</span>,<span class="number">4674659167469766200000000.000000</span>,<span class="number">19061698837499292000000000000000000000.000000</span>]</span><br><span class="line">a = <span class="string">&#x27;&#x27;</span></span><br><span class="line">b = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">    i = <span class="built_in">float</span>(i)</span><br><span class="line">    a += struct.pack(<span class="string">&#x27;&lt;f&#x27;</span>,i).<span class="built_in">hex</span>()        <span class="comment">#小端</span></span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> s:</span><br><span class="line">    i = <span class="built_in">float</span>(i)</span><br><span class="line">    b += struct.pack(<span class="string">&#x27;&gt;f&#x27;</span>,i).<span class="built_in">hex</span>()        <span class="comment">#大端</span></span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line">a = <span class="number">0x61666374667b7365635f69735f657665727977686572657d</span></span><br><span class="line">b = <span class="number">0x7d6572657d6572657d6572657d6572657d6572657d657265</span></span><br><span class="line"><span class="built_in">print</span>(n2s(a))</span><br><span class="line"><span class="built_in">print</span>(n2s(b))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RSA/" rel="tag">RSA</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-公钥解析"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/01/15/%E5%85%AC%E9%92%A5%E8%A7%A3%E6%9E%90/"
-    >公钥解析</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/01/15/%E5%85%AC%E9%92%A5%E8%A7%A3%E6%9E%90/" class="article-date">
-  <time datetime="2023-01-15T03:15:31.000Z" itemprop="datePublished">2023-01-15</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/crypto/">crypto</a> / <a class="article-category-link" href="/categories/crypto/RSA/">RSA</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="公钥解析（flag-enc是base64）"><a href="#公钥解析（flag-enc是base64）" class="headerlink" title="公钥解析（flag.enc是base64）"></a>公钥解析（flag.enc是base64）</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_OAEP</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64decode</span><br><span class="line"></span><br><span class="line">c0 = <span class="string">&#x27;GVd1d3viIXFfcHapEYuo5fAvIiUS83adrtMW/MgPwxVBSl46joFCQ1plcnlDGfL19K/3PvChV6n5QGohzfVyz2Z5GdTlaknxvHDUGf5HCukokyPwK/1EYU7NzrhGE7J5jPdi0Aj7xi/Odxy0hGMgpaBLd/nL3N8O6i9pc4Gg3O8soOlciBG/6/xdfN3SzSStMYIN8nfZZMSq3xDDvz4YB7TcTBh4ik4wYhuC77gmT+HWOv5gLTNQ3EkZs5N3EAopy11zHNYU80yv1jtFGcluNPyXYttU5qU33jcp0Wuznac+t+AZHeSQy5vk8DyWorSGMiS+J4KNqSVlDs12EqXEqqJ0uA==&#x27;</span></span><br><span class="line">n = <span class="number">79832181757332818552764610761349592984614744432279135328398999801627880283610900361281249973175805069916210179560506497075132524902086881120372213626641879468491936860976686933630869673826972619938321951599146744807653301076026577949579618331502776303983485566046485431039541708467141408260220098592761245010678592347501894176269580510459729633673468068467144199744563731826362102608811033400887813754780282628099443490170016087838606998017490456601315802448567772411623826281747245660954245413781519794295336197555688543537992197142258053220453757666537840276416475602759374950715283890232230741542737319569819793988431443</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">d=<span class="number">406853230956379689450620815713768871010712825839536410687962650677800895818003893712259622281477453292088146173840036827322518131453630576229976208523593618949818777897059256426591560532784635697190752924923710375949616954069804342573867253630978123632384795587951365482103468722384133084798614863870775897915929475258974188300927376911833763105616386167881813301748585233563049693794370642976326692672223638908164822104832415788577945314264232531947860576966629150456995512932232264881080618006698700677529111454508900582785420549466798020451488168615035256292977390692401388790460066327347700109341639992159475755036449</span></span><br><span class="line">p = <span class="number">3133337</span></span><br><span class="line">q = <span class="number">25478326064937419292200172136399497719081842914528228316455906211693118321971399936004729134841162974144246271486439695786036588117424611881955950996219646807378822278285638261582099108339438949573034101215141156156408742843820048066830863814362379885720395082318462850002901605689761876319151147352730090957556940842144299887394678743607766937828094478336401159449035878306853716216548374273462386508307367713112073004011383418967894930554067582453248981022011922883374442736848045920676341361871231787163441467533076890081721882179369168787287724769642665399992556052144845878600126283968890273067575342061776244939</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">key_info = RSA.construct((n, e, d, p, q))</span><br><span class="line">key = RSA.importKey(key_info.exportKey())</span><br><span class="line">key = PKCS1_OAEP.new(key)</span><br><span class="line">c = b64decode(c0)</span><br><span class="line">flag = key.decrypt(c)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
 
  
       <!-- reward -->
