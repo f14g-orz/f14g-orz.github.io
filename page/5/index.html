@@ -152,6 +152,68 @@
     
     
     <article
+  id="post-低指加密攻击"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/01/14/%E4%BD%8E%E6%8C%87%E5%8A%A0%E5%AF%86%E6%94%BB%E5%87%BB/"
+    >低指加密攻击</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/01/14/%E4%BD%8E%E6%8C%87%E5%8A%A0%E5%AF%86%E6%94%BB%E5%87%BB/" class="article-date">
+  <time datetime="2023-01-14T12:14:10.000Z" itemprop="datePublished">2023-01-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/crypto/">crypto</a> / <a class="article-category-link" href="/categories/crypto/RSA/">RSA</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>加密指数指的是e，e一般选取65535，当e很小，可直接破解。</p>
+<h3 id="出题脚本"><a href="#出题脚本" class="headerlink" title="出题脚本"></a>出题脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"><span class="comment">#生成随机素数</span></span><br><span class="line">p=libnum.generate_prime(<span class="number">1024</span>)</span><br><span class="line">q=libnum.generate_prime(<span class="number">1024</span>)</span><br><span class="line">e=<span class="number">3</span></span><br><span class="line">m=<span class="string">&quot;flag&#123;20d6e2da95dcc1fa5f5432a436c4be18&#125;&quot;</span></span><br><span class="line"><span class="comment">#字符串转数字</span></span><br><span class="line">m=libnum.s2n(m)</span><br><span class="line">n=p*q</span><br><span class="line">phi_n=(p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line"><span class="comment">#求逆元</span></span><br><span class="line">d=gmpy2.invert(e,phi_n)</span><br><span class="line">c=<span class="built_in">pow</span>(m,e,n)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;n=&quot;</span>,n)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;e=&quot;</span>,e)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;c=&quot;</span>,c) </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="解题脚本"><a href="#解题脚本" class="headerlink" title="解题脚本"></a>解题脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">de</span>(<span class="params">c, e, n</span>):</span><br><span class="line">    k = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        mm = c + n*k</span><br><span class="line">        result, flag = gmpy2.iroot(mm, e)</span><br><span class="line">        <span class="keyword">if</span> <span class="literal">True</span> == flag:</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">        k += <span class="number">1</span></span><br><span class="line">n= <span class="number">14067473525623615859223663589118945198091192669401088734569589535726733244095067264729942915265175903139441309376381225701454902095234966599914234681888481774607095853830772571665038109641511499155604914228117882196188074964226780922239011682486198651997912713999544628177959592818928976240251790858062449396082494272361535640237914373270152455829541596341184902017633404494979208958080467979235974182507427501682492000572071306960595992848840147393057648929439822116261337091431441205378542080755128597543738922210525692259529009107645032171097155449558362749512243918901171631681472217935131865121871798425854707759</span></span><br><span class="line">e= <span class="number">3</span></span><br><span class="line">c= <span class="number">2217344750798294937344050117513831761010547351781457575945714176628679412650463329423466955026804439931765627111856888102133234836914006818023839994342283023142702993182665344445325734299047409223354338948863171846780674244925724334091153701697864918695050507247415283070309</span></span><br><span class="line"></span><br><span class="line">m=de(c,e,n)</span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"><span class="built_in">print</span>(libnum.n2s(<span class="built_in">int</span>(m)).decode()) </span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RSA/" rel="tag">RSA</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-wiener-维纳-攻击脚本（e的指数很大）"
   class="article article-type-post"
   itemscope
