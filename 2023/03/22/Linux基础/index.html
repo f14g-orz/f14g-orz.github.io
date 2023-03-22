@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Linux基础 |  CTF</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Linux基础"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Linux基础
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/03/22/Linux%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time datetime="2023-03-22T13:48:28.000Z" itemprop="datePublished">2023-03-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">3.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">13 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="Linux命令初体验"><a href="#Linux命令初体验" class="headerlink" title="Linux命令初体验"></a>Linux命令初体验</h1><h2 id="Linux命令终端介绍"><a href="#Linux命令终端介绍" class="headerlink" title="Linux命令终端介绍"></a>Linux命令终端介绍</h2><p>退出命令终端输入exit或者ctrl+d快捷方式退出命令终端</p>
+<h3 id="设置命令终端窗口字体大小"><a href="#设置命令终端窗口字体大小" class="headerlink" title="设置命令终端窗口字体大小"></a>设置命令终端窗口字体大小</h3><p>设置命令终端窗口字体大小： </p>
+<p>临时设置字体大小 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctrl + - :缩小字体 </span><br><span class="line">ctrl + shift + + :增大字体 </span><br></pre></td></tr></table></figure>
+
+<p>持久设置字体大小 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在命令终端界面点击右键--&gt;配置文件首选项--&gt;文本--&gt;自定义字体</span><br></pre></td></tr></table></figure>
+
+<h3 id="命令提示符"><a href="#命令提示符" class="headerlink" title="命令提示符"></a>命令提示符</h3><p>(root㉿kali)-[&#x2F;opt]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root:用户名</span><br><span class="line">kali:表示主机名</span><br><span class="line">opt ：表示当前目录名</span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux命令体验"><a href="#Linux命令体验" class="headerlink" title="Linux命令体验"></a>Linux命令体验</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">who ：显示当前登录用户</span><br><span class="line">pwd（<span class="built_in">print</span> work directory）：显示当前目录</span><br><span class="line">cd (change directory): 切换目录</span><br><span class="line">cd ~ : 切换到用户工作目录</span><br><span class="line">tree :查看文件列表</span><br><span class="line">ls ：查看文件列表</span><br><span class="line">	ls -l</span><br><span class="line">ifconfig（interface config）查看网卡配置信息</span><br><span class="line">linux查看ip ： ifconfig</span><br><span class="line">window查看ip： ipconfig</span><br><span class="line">ip地址有ipv4和ipv6两个版本， 目前主要使用ipv4</span><br><span class="line">ping ：测试主机间的连接情况</span><br><span class="line">主机可以用ip地址或者域名来描述</span><br><span class="line"> 比如: ping <span class="number">192.168</span><span class="number">.1</span><span class="number">.6</span></span><br><span class="line">       ping www.baidu.com</span><br><span class="line">clear： 清除命令终端内容</span><br><span class="line">ctrl+L :快捷方式清除命令终端内容</span><br><span class="line">uname ：显示操作系统信息 </span><br><span class="line">	uname -r</span><br><span class="line">    uname -a</span><br><span class="line">uname -r ：查看linux内核版本发行号 </span><br><span class="line">exit： 退出或注销用户</span><br><span class="line"></span><br><span class="line">shutdown ：关闭系统</span><br><span class="line">	shutdown –r now :重启系统</span><br><span class="line">	shutdown –h now :关机</span><br><span class="line">	shutdown –h +<span class="number">5</span> :<span class="number">5</span>分钟之后关机</span><br><span class="line">	shutdown –c :取消预定的关机</span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux命令格式"><a href="#Linux命令格式" class="headerlink" title="Linux命令格式"></a>Linux命令格式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">command[-options][parameter]</span><br><span class="line"></span><br><span class="line">command:命令名，比如：who,pwd</span><br><span class="line">[-options]:选项，可以有零个、一个或者多个选项，多个选项可以合并，比如使用的 -r 就是选项</span><br><span class="line">[parameter]:参数，可以有零个、一个或者多个参数，比如：ping 192.168.1.6， cd ~  这些都是参数</span><br><span class="line">[]代表可选</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用Linux命令的小技巧"><a href="#使用Linux命令的小技巧" class="headerlink" title="使用Linux命令的小技巧"></a>使用Linux命令的小技巧</h2><h3 id="命令补全"><a href="#命令补全" class="headerlink" title="命令补全"></a>命令补全</h3><p>当输入的字符足以确定某个命令或者某个文件时，只需按Tab键就可以自动补全该命令或者剩下的命令</p>
+<h3 id="查看历史命令"><a href="#查看历史命令" class="headerlink" title="查看历史命令"></a>查看历史命令</h3><p>使用上下箭头查看已经使用过的历史命令</p>
+<p>使用history命令查看已经使用过的命令</p>
+<p>​		！+序列号可以执行对应的命令   注意！和序列号之间没有空格</p>
+<h3 id="终止命令的执行"><a href="#终止命令的执行" class="headerlink" title="终止命令的执行"></a>终止命令的执行</h3><p>ctrl+c：终止命令的执行</p>
+<p>测试top命令查看系统执行效果:[lijun@192~]$top</p>
+<h3 id="查看命令帮助方式"><a href="#查看命令帮助方式" class="headerlink" title="查看命令帮助方式"></a>查看命令帮助方式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--<span class="built_in">help</span></span><br><span class="line">   eg:uname --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">man命令</span><br><span class="line">man命令是manual的简写，表示查看指定命令的使用说明书</span><br><span class="line">使用格式：man命令名</span><br><span class="line">例如：</span><br><span class="line">man uname</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>操作键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空格</td>
+<td>显示下一屏的信息</td>
+</tr>
+<tr>
+<td>回车</td>
+<td>显示下一行信息</td>
+</tr>
+<tr>
+<td>q</td>
+<td>退出</td>
+</tr>
+</tbody></table>
+<h1 id="Linux常用命令1"><a href="#Linux常用命令1" class="headerlink" title="Linux常用命令1"></a>Linux常用命令1</h1><h3 id="Linux目录结构"><a href="#Linux目录结构" class="headerlink" title="Linux目录结构"></a>Linux目录结构</h3><p><img src="/2023/03/22/Linux%E5%9F%BA%E7%A1%80/image-20230321223051622.png" alt="image-20230321223051622"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">主要目录说明:</span><br><span class="line">/：Linux文件系统根目录，所有文件都是在该目录下面</span><br><span class="line">/boot</span><br><span class="line">	启动Linux时使用的一些核心文件</span><br><span class="line">/root</span><br><span class="line">	该目录为系统管理员（超级用户root）的主目录。</span><br><span class="line">/<span class="built_in">bin</span></span><br><span class="line">	binary的缩写，用来存放用户命令文件。</span><br><span class="line">/sbin</span><br><span class="line">	s就是Super User的意思。这里存放的是系统管理员使用的系统管理命令文件。</span><br><span class="line">/etc/</span><br><span class="line">	存放系统管理所需要的配置文件。</span><br><span class="line">/dev/</span><br><span class="line">	dev是Device(设备)的缩写。该目录下存放的是设备文件，在</span><br><span class="line">Linux中访问外部设备的方式和访问文件的方式是相同的。</span><br><span class="line"></span><br><span class="line">/home</span><br><span class="line">	用以存放普通用户的主目录。在Linux中，每个用户都有一个自己的目录，一般以用户的账号命名</span><br><span class="line">/home/用户名</span><br><span class="line">	某普通用户的主目录，假如用户名是pz，则/home/pz则为该用户的主目录，可简写为~</span><br><span class="line">/opt</span><br><span class="line">	可选文件和程序的存储目录。该目录主要被第三方开发者用来简易地安装和卸装他们的软件包。</span><br><span class="line">/mnt</span><br><span class="line">	该目录中通常包括系统引导后被挂载的文件系统的挂载点。</span><br><span class="line">/usr/ ...包括与系统用户直接有关的文件和目录</span><br><span class="line"> /usr/X11R6：X Window的目录；</span><br><span class="line">/usr/<span class="built_in">bin</span>：存放着许多应用程序；</span><br><span class="line">/usr/sbin：存放root超级用户使用的管理程序；</span><br><span class="line">/usr/lib：存放一些常用的动态链接共享库和静态档案库；</span><br><span class="line">/usr/src：存放源代码，Linux源代码就存在这个目录中。</span><br><span class="line">/usr/local：这是提供给一般用户的</span><br><span class="line">/usr目录，在这里安装一般的应用软件；</span><br></pre></td></tr></table></figure>
+
+<h3 id="目录切换"><a href="#目录切换" class="headerlink" title="目录切换"></a>目录切换</h3><h4 id="相对路径与绝对路径"><a href="#相对路径与绝对路径" class="headerlink" title="相对路径与绝对路径"></a>相对路径与绝对路径</h4><p>绝对路径：是指从根目录&#x2F;开始的路径</p>
+<p>相对路径：是指从当前目录开始的路径</p>
+<h4 id="使用cd命令切换目录"><a href="#使用cd命令切换目录" class="headerlink" title="使用cd命令切换目录"></a>使用cd命令切换目录</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>使用cd命令切换目录</td>
+<td>切换到指定目录</td>
+</tr>
+<tr>
+<td>cd ~ (波浪线)</td>
+<td>切换到当前用户的主目录</td>
+</tr>
+<tr>
+<td>cd ..</td>
+<td>切换到上一级目录</td>
+</tr>
+<tr>
+<td>cd .</td>
+<td>切换到当前目录</td>
+</tr>
+<tr>
+<td>cd -</td>
+<td>切换到上一次目录</td>
+</tr>
+</tbody></table>
+<h3 id="查看目录的文件列表信息"><a href="#查看目录的文件列表信息" class="headerlink" title="查看目录的文件列表信息"></a>查看目录的文件列表信息</h3><p>文件信息:</p>
+<p>当创建一个文件的时候，系统保存了有关该文件的全部信息包括：文件的名称、文件的位置、文件类型、文件长度、文件的拥有者、i节点、文件的修改时间、文件的权限等</p>
+<p>命令：ls</p>
+<table>
+<thead>
+<tr>
+<th>命令选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-l</td>
+<td>以列表方式显示use a long listing format</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>以大小单位显示，默认是字节with -l and&#x2F;or -s, print human readable sizes (e.g., 1K 234M 2G)</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>以大小单位显示，默认是字节with -l and&#x2F;or -s, print human readable sizes (e.g., 1K 234M 2G)</td>
+</tr>
+</tbody></table>
+<p><img src="/2023/03/22/Linux%E5%9F%BA%E7%A1%80/image-20230321224221903.png" alt="image-20230321224221903"></p>
+<p>文件类型</p>
+<p><img src="/2023/03/22/Linux%E5%9F%BA%E7%A1%80/image-20230321224302825.png" alt="image-20230321224302825"></p>
+<p>文件权限</p>
+<p><img src="/2023/03/22/Linux%E5%9F%BA%E7%A1%80/image-20230321224321300.png" alt="image-20230321224321300"></p>
+<p>提示：</p>
+<p>1.选项之间可以组合一起使用</p>
+<p>2.-h选项一般结合-l一起使用</p>
+<p>3.文件与目录名前添加   .  ，用于隐藏文件</p>
+<p>练习</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(当前目录是rh用户的主目录)</span><br><span class="line">1.以相对路径与绝对路径切换(cd)到用户主目录( /home/rh)</span><br><span class="line">cd /home/rh</span><br><span class="line">2.以相对路径与绝对路径切换(cd)到根目录下的opt子目录(/opt)</span><br><span class="line">cd ../../opt</span><br><span class="line">cd /opt</span><br><span class="line">3.使用ls -l命令查看用户主目录的内容</span><br><span class="line">ls -l /home/rh</span><br><span class="line">ls -l ~</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建、删除文件及目录命令"><a href="#创建、删除文件及目录命令" class="headerlink" title="创建、删除文件及目录命令"></a>创建、删除文件及目录命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">touch  文件路径/文件名:创建指定文件</span><br><span class="line">mkdir   目录名:创建目录(文件夹)</span><br><span class="line">	选项：p级联创建目录</span><br><span class="line">rm     文件\文件夹:删除指定文件</span><br><span class="line">  选项：r：递归删除目录及其内容</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">当前目录是kali用户主目录</span><br><span class="line"><span class="number">1.</span>在当前目录创建info.txt文件</span><br><span class="line">	touch info.txt</span><br><span class="line"><span class="number">2.</span>在当前目录创建CTF文件夹</span><br><span class="line">	mkdir CTF</span><br><span class="line"><span class="number">3.</span>在CTF文件夹下创建a.txt文件</span><br><span class="line">	touch ./CTF/a.txt</span><br><span class="line"><span class="number">4.</span>删除用户主目录info.txt文件</span><br><span class="line">	rm ~/info.txt</span><br><span class="line"><span class="number">5.</span>删除CTF文件夹</span><br><span class="line">	rm -r ~/CTF</span><br></pre></td></tr></table></figure>
+
+<h3 id="复制、移动文件及目录命令"><a href="#复制、移动文件及目录命令" class="headerlink" title="复制、移动文件及目录命令"></a>复制、移动文件及目录命令</h3><p>cp : 拷贝文件、拷贝目录</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#拷贝文件</span></span><br><span class="line">cp  源文件 目标路径/目标文件名</span><br><span class="line">	<span class="number">1.</span>如果不指定目标文件名，使用源文件名</span><br><span class="line">	<span class="number">2.</span>如果目标文件存在，覆盖原来文件</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">拷贝目录</span><br><span class="line">cp -r 源目录 目标目录</span><br></pre></td></tr></table></figure>
+
+<p>mv:移动文件、移动目录、重命名，move</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#移动文件</span></span><br><span class="line">mv 源文件 目标路径/目标文件名</span><br><span class="line">	<span class="number">1.</span>如果不指定目标文件名，使用源文件名</span><br><span class="line">	<span class="number">2.</span>如果目标文件存在，覆盖原来文件</span><br><span class="line"><span class="comment">#移动目录</span></span><br><span class="line">mv 源目录 目标目录</span><br><span class="line"><span class="comment">#重命名：</span></span><br><span class="line">mv 源文件名 目标文件名(在同一级目录下)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">当前目录为用户主目录</span><br><span class="line">1.在当前目录创建info.txt文件</span><br><span class="line">	touch info.txt</span><br><span class="line">2.在当前目录创建CTF文件夹</span><br><span class="line">	mkdir CTF</span><br><span class="line">3.在CTF文件夹下创建a.txt文件</span><br><span class="line">	touch ./CTF/a.txt</span><br><span class="line">4.拷贝info.txt到CTF目录下</span><br><span class="line">	cp info.txt ./CTF</span><br><span class="line">5.对a.txt文件移动到用户主目录下，且重命名为b.txt</span><br><span class="line">	mv CTF/a.txt /home/kali/b.txt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="重定向与管道命令"><a href="#重定向与管道命令" class="headerlink" title="重定向与管道命令"></a>重定向与管道命令</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">重定向</span><br><span class="line">把原本输出到屏幕上的内容，输出到文件中(文件不存在，则新建)，这就是重定向重定向命令：</span><br><span class="line">&gt;:覆盖模式重定向、</span><br><span class="line">&gt;&gt;:追加模式重定向</span><br><span class="line">管道命令</span><br><span class="line">|：管道的功能是将前一个程序的输出作为后一个程序的输入</span><br><span class="line">wc：word count：单词统计</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat:查看文件内容</span><br><span class="line">more：分屏查看文件内容，按空格切换到下一屏</span><br></pre></td></tr></table></figure>
+
+<p>练习</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>把历史命令history输出的内容写入到用户主目录的myfile.txt文件中</span><br><span class="line">history &gt; myfile.txt</span><br><span class="line"><span class="number">2.</span>把/根目录下的文件列表追加到用户主目录的myfile.txt文件中</span><br><span class="line">ls / &gt;&gt; myfile.txt</span><br><span class="line"><span class="number">3.</span>用ls显示/目录的目录和文件，并且分屏显示</span><br><span class="line">ls / | more</span><br><span class="line">ls / | wc</span><br><span class="line"><span class="number">4.</span>分别用cat和more命令查看 /etc/passwd的内容</span><br><span class="line">cat /etc/passwd</span><br><span class="line">more /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<h1 id="Linux常用命令2"><a href="#Linux常用命令2" class="headerlink" title="Linux常用命令2"></a>Linux常用命令2</h1><h3 id="文件打包压缩命令tar"><a href="#文件打包压缩命令tar" class="headerlink" title="文件打包压缩命令tar"></a>文件打包压缩命令tar</h3><p>tar命令可用于压缩解压文件，好比windows的winRAR</p>
+<p>语法格式：</p>
+<p>tar[选项]文件或者目录</p>
+<p>tar选项</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td>创建新的打包文件</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示打包或者解包的文件的详情</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>使用打包文件或者设备,这个选项是必选项，一般放到所有选项后面</td>
+</tr>
+<tr>
+<td>-z</td>
+<td>用gzip格式来压缩或解压缩文件(.gz)</td>
+</tr>
+<tr>
+<td>-j</td>
+<td>用bzip2格式来压缩或解压缩文件(.bz2)</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>解包</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>解压到指定目录</td>
+</tr>
+</tbody></table>
+<p>gz格式压缩和解压:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zcvf 压缩后的名字 .tar.gz 要压缩的文件和目录</span><br><span class="line">tar -zxvf 压缩包的名字 .tar.gz -C 要解压到的目录</span><br></pre></td></tr></table></figure>
+
+<p>.bz2的压缩和解压缩格式:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -jcvf 压缩后的名字 .tar.bz2 要压缩的文件</span><br><span class="line">tar -jxvf 压缩包的名字.tar.bz2 -C 要解压到的目录(目录需要存在)</span><br></pre></td></tr></table></figure>
+
+<h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><h4 id="用户分类"><a href="#用户分类" class="headerlink" title="用户分类"></a>用户分类</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">超级用户(管理员)</span><br><span class="line">	该用户具有所有管理权限，UID=<span class="number">0</span></span><br><span class="line">系统用户</span><br><span class="line">针对特定的系统服务而开设的用户，系统用户不能用于登录，UID范围<span class="number">1</span>-<span class="number">999</span></span><br><span class="line">普通用户</span><br><span class="line">为了让使用者使用Linux系统资源而建立的户，UID范围<span class="number">1000</span>--<span class="number">65535</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查看用户<span class="built_in">id</span>命令:<span class="built_in">id</span>[用户名]</span><br><span class="line">选项： -u(查看用户uid) -g(查看用户gid) -G(查看用户所在所有组的<span class="built_in">id</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="用户、组相关的配置文件"><a href="#用户、组相关的配置文件" class="headerlink" title="用户、组相关的配置文件"></a>用户、组相关的配置文件</h4><p>配置文件</p>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;etc&#x2F;passwd&#x2F;</td>
+<td>用户信息库</td>
+</tr>
+<tr>
+<td>&#x2F;etc&#x2F;group</td>
+<td>用户组信息库</td>
+</tr>
+<tr>
+<td>&#x2F;etc&#x2F;shadow</td>
+<td>用户认证信息</td>
+</tr>
+<tr>
+<td>&#x2F;etc&#x2F;gshadow</td>
+<td>用户组认证信息</td>
+</tr>
+</tbody></table>
+<h4 id="用户管理-1"><a href="#用户管理-1" class="headerlink" title="用户管理"></a>用户管理</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">添加用户</span><br><span class="line">useradd [选项 参数] 用户名</span><br><span class="line">选项：</span><br><span class="line">-d ： 指定用户主目录默认的主目录</span><br><span class="line">/home/kali</span><br><span class="line">-M ：不创建用户主目录</span><br><span class="line">useradd CTF</span><br><span class="line">-s ： 指定新用户登录后使用的shell，默认是/<span class="built_in">bin</span>/bash</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">设置用户密码</span><br><span class="line">passwd 用户名</span><br><span class="line">修改用户属性</span><br><span class="line">usermod [选项 参数] 用户名</span><br><span class="line">删除用户</span><br><span class="line">userdel 用户名</span><br><span class="line">选项</span><br><span class="line">-r:同时删除用户主目录</span><br></pre></td></tr></table></figure>
+
+<h3 id="sudo命令-super-user-do"><a href="#sudo命令-super-user-do" class="headerlink" title="sudo命令 super user do"></a>sudo命令 super user do</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo 以超级用户身份执行某条文件命令</span><br><span class="line">格式：sudo 当前用户要执行某条命令</span><br></pre></td></tr></table></figure>
+
+<h3 id="chmod命令"><a href="#chmod命令" class="headerlink" title="chmod命令"></a>chmod命令</h3><p>用于修改文件权限</p>
+<h4 id="文件列表中权限查看"><a href="#文件列表中权限查看" class="headerlink" title="文件列表中权限查看"></a>文件列表中权限查看</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-rw-rw-r-- 1 rh rh 6 7月 1908:43 b.txt</span><br><span class="line">文件的权限分为3组，</span><br><span class="line">每一组由三个字母组成（rwx-）</span><br><span class="line">1.rw-</span><br><span class="line">文件属主用户对文件的权限</span><br><span class="line">2.rw-</span><br><span class="line">文件属主用户的同组用户具有的权限</span><br><span class="line">3.r--</span><br><span class="line">其他用户具有的权限</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/03/22/Linux%E5%9F%BA%E7%A1%80/image-20230322204030351.png" alt="image-20230322204030351"></p>
+<h4 id="字母法"><a href="#字母法" class="headerlink" title="字母法"></a>字母法</h4><p>命令格式：chmod MODE[,MODE]…FILE…</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chmod u+r a.txt</span><br><span class="line">针对a.txt文件，属主用户增加读权限</span><br><span class="line">chmod u=rW,g=r,o=- b.txt</span><br><span class="line">针对b.txt文件，属主用户设置读和写权限，同组的用户设置读和写的权限,其他用户增加读权限</span><br></pre></td></tr></table></figure>
+
+<p>角色说明</p>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>u</td>
+<td>user,表示该文件的所有者</td>
+</tr>
+<tr>
+<td>g</td>
+<td>group,表示用户组</td>
+</tr>
+<tr>
+<td>o</td>
+<td>other,表示其他用户</td>
+</tr>
+<tr>
+<td>a</td>
+<td>all,表示所有用户</td>
+</tr>
+</tbody></table>
+<p>权限设置说明</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>增加权限</td>
+</tr>
+<tr>
+<td>-</td>
+<td>撤销权限</td>
+</tr>
+<tr>
+<td>&#x3D;</td>
+<td>设置权限</td>
+</tr>
+</tbody></table>
+<p>权限说明</p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>可读</td>
+</tr>
+<tr>
+<td>w</td>
+<td>可写</td>
+</tr>
+<tr>
+<td>x</td>
+<td>可执行，假如是目录，表示可打开目录</td>
+</tr>
+<tr>
+<td>-</td>
+<td>无任何权限</td>
+</tr>
+</tbody></table>
+<h4 id="数字化"><a href="#数字化" class="headerlink" title="数字化"></a>数字化</h4><p>就是rwx用数字代替</p>
+<p><img src="/2023/03/22/Linux%E5%9F%BA%E7%A1%80/image-20230322211901985.png" alt="image-20230322211901985"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">使用数字法对/etc/sudoers文件的属主用户设置读写权限，同组用户为读写权限，其他用户为无权限</span><br><span class="line">rw-rw----</span><br><span class="line">chmod <span class="number">660</span> /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+<h1 id="Vim编辑器"><a href="#Vim编辑器" class="headerlink" title="Vim编辑器"></a>Vim编辑器</h1><h4 id="认识Vim"><a href="#认识Vim" class="headerlink" title="认识Vim"></a>认识Vim</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VI是Unix家族中极为普遍的文本编辑器，Vim则是它的改进版本Vi IMproved的简称，它的最大特色就是使用命令进行编辑，且完全脱离了鼠标的操作</span><br></pre></td></tr></table></figure>
+
+<h4 id="Vim的三种工作模式"><a href="#Vim的三种工作模式" class="headerlink" title="Vim的三种工作模式"></a>Vim的三种工作模式</h4><p>命令模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">启动Vim，默认进入命令模式。在该模式下，此时从键盘上输入的任何字符都被当做编辑命令来解释</span><br><span class="line">常用于对文档进行复制、粘贴、删除、移动光标等操作。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>编辑模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在命令模式下输入插入命令i、附加命令a、打开命令o都可以进入编辑模式，一次Insert键:插入字符、两次Insert键:替换字符(REPLACE)在该模式下，主要用于录入文本。</span><br><span class="line">按ESC键回退到命令模式</span><br></pre></td></tr></table></figure>
+
+<p>末行模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在命令模式按shift+；即按:进入末行模式，多数文件管理命令(保存、退出、定位、查找、替换、设置行标等)都是在此模式下执行的</span><br><span class="line"></span><br><span class="line">回车执行完命令或按ESC键回退到命令模式</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/03/22/Linux%E5%9F%BA%E7%A1%80/image-20230322212409215.png" alt="image-20230322212409215"></p>
+<h4 id="使用Vim编辑文件，文档配置"><a href="#使用Vim编辑文件，文档配置" class="headerlink" title="使用Vim编辑文件，文档配置"></a>使用Vim编辑文件，文档配置</h4><p>示例:使用Vim修改主机名</p>
+<p>主机名配置文件：&#x2F;etc&#x2F;hostname</p>
+<p>切换到root账号:suroot</p>
+<p>使用Vim打开配置文件：vim&#x2F;etc&#x2F;hostname</p>
+<p>按i进入编辑模式</p>
+<p>修改为新的主机名(不要输入中文)</p>
+<p>按ESC键由编辑模式进入命令模式</p>
+<p>按shift+;由命令模式进入末行模式</p>
+<p>输入wq保存退出Vim</p>
+<p>注销用户或者重启系统后查看效果</p>
+<h4 id="Vim常用的命令"><a href="#Vim常用的命令" class="headerlink" title="Vim常用的命令"></a>Vim常用的命令</h4><h5 id="命令模式下的Vim操作"><a href="#命令模式下的Vim操作" class="headerlink" title="命令模式下的Vim操作"></a>命令模式下的Vim操作</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">准备操作素材vim temp.txt</span><br><span class="line">从命令模式按i或者a进入编辑模式</span><br><span class="line">录入如下图所示文本</span><br><span class="line">在编辑模式按esc回退到命令模式，再按shift+;进入末行模式</span><br><span class="line">在末行模式中输入wq保存退出</span><br><span class="line">素材准备完毕</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>移动光标操作</span><br><span class="line">方向箭头(上下左右)</span><br><span class="line">^移至行首,$移至行尾</span><br><span class="line">G和gg(G移到文档最后一行，gg移到文档首行)</span><br><span class="line"><span class="number">2.</span>删除命令操作</span><br><span class="line">x删除光标所在字符</span><br><span class="line">dd剪切删除光标所在的一行</span><br><span class="line"><span class="number">3.</span>复制与粘贴命令</span><br><span class="line">yy与nyy：yy复制当前光标所在行，n yy复制光标行及光标下n-<span class="number">1</span>行</span><br><span class="line">p与np：p粘贴一次,n p粘贴n次</span><br></pre></td></tr></table></figure>
+
+<h5 id="末行模式下的vim操作"><a href="#末行模式下的vim操作" class="headerlink" title="末行模式下的vim操作"></a>末行模式下的vim操作</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>文件保存退出</span><br><span class="line">w保存文档</span><br><span class="line">q退出文档</span><br><span class="line">wq保存且退出文档</span><br><span class="line">q!不保存退出文档</span><br><span class="line"><span class="number">2.</span>显示或隐藏行号</span><br><span class="line">setnu显示行号</span><br><span class="line">setnonu隐藏行号</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/03/22/Linux%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/03/16/SSTI/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">SSTI</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2023
+        <i class="ri-heart-fill heart_icon"></i> f14g
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/favicon.ico" alt="CTF"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/me">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
