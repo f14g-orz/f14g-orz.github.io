@@ -152,6 +152,61 @@
     
     
     <article
+  id="post-公钥解析"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/01/15/%E5%85%AC%E9%92%A5%E8%A7%A3%E6%9E%90/"
+    >公钥解析</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/01/15/%E5%85%AC%E9%92%A5%E8%A7%A3%E6%9E%90/" class="article-date">
+  <time datetime="2023-01-15T03:15:31.000Z" itemprop="datePublished">2023-01-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/crypto/">crypto</a> / <a class="article-category-link" href="/categories/crypto/RSA/">RSA</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="公钥解析（flag-enc是base64）"><a href="#公钥解析（flag-enc是base64）" class="headerlink" title="公钥解析（flag.enc是base64）"></a>公钥解析（flag.enc是base64）</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_OAEP</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64decode</span><br><span class="line"></span><br><span class="line">c0 = <span class="string">&#x27;GVd1d3viIXFfcHapEYuo5fAvIiUS83adrtMW/MgPwxVBSl46joFCQ1plcnlDGfL19K/3PvChV6n5QGohzfVyz2Z5GdTlaknxvHDUGf5HCukokyPwK/1EYU7NzrhGE7J5jPdi0Aj7xi/Odxy0hGMgpaBLd/nL3N8O6i9pc4Gg3O8soOlciBG/6/xdfN3SzSStMYIN8nfZZMSq3xDDvz4YB7TcTBh4ik4wYhuC77gmT+HWOv5gLTNQ3EkZs5N3EAopy11zHNYU80yv1jtFGcluNPyXYttU5qU33jcp0Wuznac+t+AZHeSQy5vk8DyWorSGMiS+J4KNqSVlDs12EqXEqqJ0uA==&#x27;</span></span><br><span class="line">n = <span class="number">79832181757332818552764610761349592984614744432279135328398999801627880283610900361281249973175805069916210179560506497075132524902086881120372213626641879468491936860976686933630869673826972619938321951599146744807653301076026577949579618331502776303983485566046485431039541708467141408260220098592761245010678592347501894176269580510459729633673468068467144199744563731826362102608811033400887813754780282628099443490170016087838606998017490456601315802448567772411623826281747245660954245413781519794295336197555688543537992197142258053220453757666537840276416475602759374950715283890232230741542737319569819793988431443</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">d=<span class="number">406853230956379689450620815713768871010712825839536410687962650677800895818003893712259622281477453292088146173840036827322518131453630576229976208523593618949818777897059256426591560532784635697190752924923710375949616954069804342573867253630978123632384795587951365482103468722384133084798614863870775897915929475258974188300927376911833763105616386167881813301748585233563049693794370642976326692672223638908164822104832415788577945314264232531947860576966629150456995512932232264881080618006698700677529111454508900582785420549466798020451488168615035256292977390692401388790460066327347700109341639992159475755036449</span></span><br><span class="line">p = <span class="number">3133337</span></span><br><span class="line">q = <span class="number">25478326064937419292200172136399497719081842914528228316455906211693118321971399936004729134841162974144246271486439695786036588117424611881955950996219646807378822278285638261582099108339438949573034101215141156156408742843820048066830863814362379885720395082318462850002901605689761876319151147352730090957556940842144299887394678743607766937828094478336401159449035878306853716216548374273462386508307367713112073004011383418967894930554067582453248981022011922883374442736848045920676341361871231787163441467533076890081721882179369168787287724769642665399992556052144845878600126283968890273067575342061776244939</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">key_info = RSA.construct((n, e, d, p, q))</span><br><span class="line">key = RSA.importKey(key_info.exportKey())</span><br><span class="line">key = PKCS1_OAEP.new(key)</span><br><span class="line">c = b64decode(c0)</span><br><span class="line">flag = key.decrypt(c)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RSA/" rel="tag">RSA</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-数只当作字符串连在一起"
   class="article article-type-post"
   itemscope
@@ -730,65 +785,6 @@
 
 
 <h3 id="脚本2"><a href="#脚本2" class="headerlink" title="脚本2"></a>脚本2</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">22127806011633861727954101002390179580447625543207045612671617864341845851658260004006826435219665722338399712799144283442305160095371386129132285556214330279867129279885732638085139970894386809975772641941102438472230541606849251235636928502018782288977994793382547376630461074356449893196487276906629063423071245785206275636191377977712166746567658967286739276282635616277590864547265366547379387583014365390660407286148179073747800137068237371705680826025177248889969809158386539617738762070772471531610084135064141878988874470291949704156926711239213996266350299670204058121040684469621186909795304289942430452869</span></span><br><span class="line">p4=<span class="number">0xd8bf1376aaae63b3c4d693ca7f3d8a76270b7310bb8bd4608a98c9fdd85fc1ccc7c246b364e2779034057f0ec7a101bad64269d9dcca69f9b5c3462b058b94db0987aa09426c5e7634b3e19f56872693206790c6feef0c9ae662d73f1b12c3cd</span></span><br><span class="line">e = <span class="number">0x10001</span></span><br><span class="line">pbits = <span class="number">1024</span></span><br><span class="line">kbits = pbits - p4.nbits()</span><br><span class="line"><span class="built_in">print</span>(p4.nbits())</span><br><span class="line">p4 = p4 &lt;&lt; kbits</span><br><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">f = x + p4</span><br><span class="line">roots = f.small_roots(X=<span class="number">2</span>^kbits, beta=<span class="number">0.4</span>)</span><br><span class="line"><span class="keyword">if</span> roots:</span><br><span class="line">    p = p4+<span class="built_in">int</span>(roots[<span class="number">0</span>])</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;n: &quot;</span>, n)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;p: &quot;</span>, p)</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;q: &quot;</span>, n/p) </span><br></pre></td></tr></table></figure>
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RSA/" rel="tag">RSA</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-rabin解密"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/01/14/rabin%E8%A7%A3%E5%AF%86/"
-    >rabin解密</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/01/14/rabin%E8%A7%A3%E5%AF%86/" class="article-date">
-  <time datetime="2023-01-14T12:42:26.000Z" itemprop="datePublished">2023-01-14</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/crypto/">crypto</a> / <a class="article-category-link" href="/categories/crypto/RSA/">RSA</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h3 id="出题脚本"><a href="#出题脚本" class="headerlink" title="出题脚本"></a>出题脚本</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">密文flag</span><br><span class="line"></span><br><span class="line">ZNpjDckEhgOPDHBmMhKYQ+tMzVV/EMe4W+oLoWKWqvQ</span><br><span class="line">公钥pubkey.pem</span><br><span class="line"></span><br><span class="line">-----BEGIN PUBLIC KEY-----</span><br><span class="line">MDowDQYJKoZIhvcNAQEBBQADKQAwJgIhAMJjauXD2OQ/+5erCQKPGqxsC/bNPXDr</span><br><span class="line">yigb/+l/vjDdAgEC</span><br><span class="line">-----END PUBLIC KEY----- </span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="解密脚本"><a href="#解密脚本" class="headerlink" title="解密脚本"></a>解密脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="comment">#导入公钥</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;pubkey.pem&quot;</span>,<span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    key = RSA.import_key(f.read())</span><br><span class="line">    n =key.n</span><br><span class="line">    e =key.e</span><br><span class="line"><span class="comment">#导入密文</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;flag&quot;</span>,<span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    c=libnum.s2n(f.read())</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line"><span class="built_in">print</span>(e)</span><br><span class="line"><span class="comment">#n 在线分解</span></span><br><span class="line">p=<span class="number">275127860351348928173285174381581152299</span></span><br><span class="line">q=<span class="number">319576316814478949870590164193048041239</span></span><br><span class="line">inv_p = gmpy2.invert(p, q)</span><br><span class="line">inv_q = gmpy2.invert(q, p)</span><br><span class="line">mp = <span class="built_in">pow</span>(c, (p + <span class="number">1</span>) // <span class="number">4</span>, p)</span><br><span class="line">mq = <span class="built_in">pow</span>(c, (q + <span class="number">1</span>) // <span class="number">4</span>, q)</span><br><span class="line">a = (inv_p * p * mq + inv_q * q * mp) % n</span><br><span class="line">b = n - <span class="built_in">int</span>(a)</span><br><span class="line">c = (inv_p * p * mq - inv_q * q * mp) % n</span><br><span class="line">d = n - <span class="built_in">int</span>(c)</span><br><span class="line"><span class="comment">#因为rabin 加密有四种结果，全部列出。</span></span><br><span class="line">aa=[a,b,c,d]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> aa:</span><br><span class="line">    <span class="comment"># print(i)</span></span><br><span class="line">    <span class="built_in">print</span>(libnum.n2s(<span class="built_in">int</span>(i))) </span><br></pre></td></tr></table></figure>
 
  
       <!-- reward -->
