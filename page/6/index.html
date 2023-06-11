@@ -152,6 +152,65 @@
     
     
     <article
+  id="post-dp-dq"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/01/14/dp-dq/"
+    >dp,dq</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/01/14/dp-dq/" class="article-date">
+  <time datetime="2023-01-14T12:30:44.000Z" itemprop="datePublished">2023-01-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/crypto/">crypto</a> / <a class="article-category-link" href="/categories/crypto/RSA/">RSA</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="出题脚本"><a href="#出题脚本" class="headerlink" title="出题脚本"></a>出题脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">put_flag</span>():</span><br><span class="line">    <span class="comment"># 字符串列表</span></span><br><span class="line">    a = string.printable</span><br><span class="line">    flag = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">        flag += a[random.randint(<span class="number">0</span>, <span class="number">99</span>)]</span><br><span class="line">    flag = <span class="string">r&quot;flag&#123;%s&#125;&quot;</span>%(hashlib.md5(flag.encode()).hexdigest())</span><br><span class="line">    <span class="built_in">print</span>(flag)</span><br><span class="line">    <span class="keyword">return</span> flag</span><br><span class="line"><span class="comment">#生成素数</span></span><br><span class="line">p=libnum.generate_prime(<span class="number">1024</span>)</span><br><span class="line">q=libnum.generate_prime(<span class="number">1024</span>)</span><br><span class="line">e=<span class="number">65537</span></span><br><span class="line">n=p*q</span><br><span class="line">phi_n=(p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d=libnum.invmod(e,phi_n)</span><br><span class="line">dp=d%(p-<span class="number">1</span>)</span><br><span class="line">dq=d%(q-<span class="number">1</span>)</span><br><span class="line">m=put_flag()</span><br><span class="line">m=libnum.s2n(m)</span><br><span class="line">n=p*q</span><br><span class="line">c=<span class="built_in">pow</span>(m,e,n)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;p=&quot;</span>,p)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;q=&quot;</span>,q)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;dq=&quot;</span>,dq)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;dp=&quot;</span>,dp)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;c=&quot;</span>,c) </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="解题脚本"><a href="#解题脚本" class="headerlink" title="解题脚本"></a>解题脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt</span>(<span class="params">dp,dq,p,q,c</span>):</span><br><span class="line">    InvQ = gmpy2.invert(q, p)</span><br><span class="line">    mp = <span class="built_in">pow</span>(c, dp, p)</span><br><span class="line">    mq = <span class="built_in">pow</span>(c, dq, q)</span><br><span class="line">    m = (((mp-mq)*InvQ) % p)*q+mq</span><br><span class="line">    <span class="built_in">print</span>(libnum.n2s(<span class="built_in">int</span>(m)).decode())</span><br><span class="line"></span><br><span class="line">p= <span class="number">160332148422085773419118366054725936852233416334843123745197905865814122767542980683547268180832158164485150298039693727719040683372172258525148659296087240380682418673910965969383538696724039000114078510939033236731476700182949760779821042982194738324421029616780752077145649691266297077244661585947836997447</span></span><br><span class="line">q= <span class="number">148424511925430832355285085986622242653116164650119278601839811809456838348201308360579207172541711367335049779204390510911294031319604192881139002646252381246691575112024047502962776542023275076827456857946499013733968522162634588753330857821421229306405469212854327011240808908334404955299250060931240865821</span></span><br><span class="line">dq= <span class="number">46499718919891753512042256824043332562579628188599554881257534157373206051013462063558177543473555667701042801266834703603013397791386747764400964376350060145521940586234916815399419075649204020285050341140996959732454059493770135591854817473937175643058380668604376797759987312600851466228301604453060674993</span></span><br><span class="line">dp= <span class="number">142333710655003285129381975633061553108365353347897720974344479656881847851071160049571693284111493690735707224010091720382284617217647771503015838348510851051285580945849520119912938971503190396671148935203517916795662212439446680229030750273953490024181996476865040448118374338738013091140796970725623029913</span></span><br><span class="line">c= <span class="number">19717919131356145411002342007533511479254120775597684622452661875292805564648015749422307039514664862428413419529876049533096947970606477676695854787457286807502628964582922773374784879459806551819337741730331777937597915727889640104583136339578788518904647309084873362461758500783634423921343109980901514994298280728150961559886893338458119937441920391275957965781890308011172861718172757876950159723089326843019779174406022143147201642738466470809603008292152193968160973116769118512212438656127645018486302418482079051867180606083540035964208124143457540388206274742292869004756069240519187723267661857029470809099</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">decrypt(dp,dq,p,q,c) </span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RSA/" rel="tag">RSA</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-dp泄露"
   class="article article-type-post"
   itemscope
@@ -811,81 +870,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sagemath/" rel="tag">sagemath</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-Crypto"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/01/14/Crypto/"
-    >数论定理</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/01/14/Crypto/" class="article-date">
-  <time datetime="2023-01-14T07:43:34.000Z" itemprop="datePublished">2023-01-14</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/crypto/">crypto</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h2><p>注：由于hexo默认渲染引擎是marked但是marked不支持mathjax,所以这些LaTex公式在网页上表示不出来，可以复制LaTex代码在Typora上进行显示，后续我在进行设置。</p>
-<p>a*x $\equiv$ 1(mod b)</p>
-<p>x &#x3D; gmpy2.invert(a,b)</p>
-<h2 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h2><p>第一种形式：若p是素数，a是正整数且不能被p整除，则：<br>a**(p-1) $\equiv$  1 mod  p </p>
-<p>a**(p-1) % p &#x3D; 1 % p</p>
-<p>第二种形式若p是素数且a是任意的整数。则；</p>
-<p>a^p $\equiv$ a mod p<br>a^p % p &#x3D; a % p</p>
-<h2 id="威尔逊定理"><a href="#威尔逊定理" class="headerlink" title="威尔逊定理"></a>威尔逊定理</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>当且仅当p是素数时</p>
-<p>（p-1）！ $\equiv$  -1(mod p)</p>
-<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sympy</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">myGetPrime</span>():</span><br><span class="line">    A= getPrime(<span class="number">513</span>)</span><br><span class="line">    <span class="built_in">print</span>(A)</span><br><span class="line">    B=A-random.randint(<span class="number">1e3</span>,<span class="number">1e5</span>)</span><br><span class="line">    <span class="built_in">print</span>(B)</span><br><span class="line">    <span class="keyword">return</span> sympy.nextPrime((B!)%A)</span><br><span class="line">p=myGetPrime()</span><br><span class="line">A1=<span class="number">21856963452461630437348278434191434000066076750419027493852463513469865262064340836613831066602300959772632397773487317560339056658299954464169264467234407</span></span><br><span class="line">B1=<span class="number">21856963452461630437348278434191434000066076750419027493852463513469865262064340836613831066602300959772632397773487317560339056658299954464169264467140596</span></span><br><span class="line"></span><br><span class="line">q=myGetPrime()</span><br><span class="line">A2=<span class="number">16466113115839228119767887899308820025749260933863446888224167169857612178664139545726340867406790754560227516013796269941438076818194617030304851858418927</span></span><br><span class="line">B2=<span class="number">16466113115839228119767887899308820025749260933863446888224167169857612178664139545726340867406790754560227516013796269941438076818194617030304851858351026</span></span><br><span class="line"></span><br><span class="line">r=myGetPrime()</span><br><span class="line"></span><br><span class="line">n=p*q*r</span><br><span class="line">n=<span class="number">85492663786275292159831603391083876175149354309327673008716627650718160585639723100793347534649628330416631255660901307533909900431413447524262332232659153047067908693481947121069070451562822417357656432171870951184673132554213690123308042697361969986360375060954702920656364144154145812838558365334172935931441424096270206140691814662318562696925767991937369782627908408239087358033165410020690152067715711112732252038588432896758405898709010342467882264362733</span></span><br><span class="line">c=<span class="built_in">pow</span>(flag,e,n)</span><br><span class="line">e=<span class="number">0x1001</span></span><br><span class="line">c=<span class="number">75700883021669577739329316795450706204502635802310731477156998834710820770245219468703245302009998932067080383977560299708060476222089630209972629755965140317526034680452483360917378812244365884527186056341888615564335560765053550155758362271622330017433403027261127561225585912484777829588501213961110690451987625502701331485141639684356427316905122995759825241133872734362716041819819948645662803292418802204430874521342108413623635150475963121220095236776428</span></span><br><span class="line">so,what <span class="keyword">is</span> the flag?</span><br></pre></td></tr></table></figure>
-
-<h4 id="python脚本"><a href="#python脚本" class="headerlink" title="python脚本"></a>python脚本</h4><p>最终是求出B! %A    想起威尔逊定理   </p>
-<p>补全为</p>
-<p>（A-1)<em>(A-2)</em>…. (B!)  $\equiv$  -1 (mod A)</p>
-<p>(A-2)*(A-3)……(B!)  $\equiv$  1 (mod A)    </p>
-<p>(A-2)*(A-3)……(B!) %A  &#x3D;  1</p>
-<p>(((((A-2)%A)<em>(A-3))%A……)</em>(B!))%A &#x3D;1</p>
-<p>(((((A-2)%A)<em>(A-3))%A……)</em>(B!) $\equiv$ 1 （mod  A)    &#x2F;&#x2F;利用逆元求B！</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"></span><br><span class="line">A1=<span class="number">21856963452461630437348278434191434000066076750419027493852463513469865262064340836613831066602300959772632397773487317560339056658299954464169264467234407</span></span><br><span class="line">B1=<span class="number">21856963452461630437348278434191434000066076750419027493852463513469865262064340836613831066602300959772632397773487317560339056658299954464169264467140596</span></span><br><span class="line">A2=<span class="number">16466113115839228119767887899308820025749260933863446888224167169857612178664139545726340867406790754560227516013796269941438076818194617030304851858418927</span></span><br><span class="line">B2=<span class="number">16466113115839228119767887899308820025749260933863446888224167169857612178664139545726340867406790754560227516013796269941438076818194617030304851858351026</span></span><br><span class="line">n=<span class="number">85492663786275292159831603391083876175149354309327673008716627650718160585639723100793347534649628330416631255660901307533909900431413447524262332232659153047067908693481947121069070451562822417357656432171870951184673132554213690123308042697361969986360375060954702920656364144154145812838558365334172935931441424096270206140691814662318562696925767991937369782627908408239087358033165410020690152067715711112732252038588432896758405898709010342467882264362733</span></span><br><span class="line">e=<span class="number">0x1001</span></span><br><span class="line">c=<span class="number">75700883021669577739329316795450706204502635802310731477156998834710820770245219468703245302009998932067080383977560299708060476222089630209972629755965140317526034680452483360917378812244365884527186056341888615564335560765053550155758362271622330017433403027261127561225585912484777829588501213961110690451987625502701331485141639684356427316905122995759825241133872734362716041819819948645662803292418802204430874521342108413623635150475963121220095236776428</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encrypt</span>(<span class="params">A,B</span>):</span><br><span class="line">    tmp = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(B + <span class="number">1</span>, A - <span class="number">1</span>):</span><br><span class="line">        tmp *= i</span><br><span class="line">        tmp %= A</span><br><span class="line">    tmp_inv = gmpy2.invert(tmp, A)</span><br><span class="line">    result = gmpy2.next_prime(tmp_inv%A)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">p = encrypt(A1,B1)</span><br><span class="line">q = encrypt(A2,B2)</span><br><span class="line">r = n//p//q</span><br><span class="line">phi = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)*(r-<span class="number">1</span>)</span><br><span class="line">d = gmpy2.invert(e,phi)</span><br><span class="line">m = <span class="built_in">pow</span>(c,d,n)</span><br><span class="line"><span class="built_in">print</span>(libnum.n2s(<span class="built_in">int</span>(m)))</span><br></pre></td></tr></table></figure>
-
-
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li></ul>
 
     </footer>
   </div>
