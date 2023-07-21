@@ -426,19 +426,10 @@
                 </a>
                 
                 
-                <a href="/categories/crypto/RSA/" title="RSA: 25">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #E8F8F5;">RSA
-                        <span class="tag-length">25</span>
-                    </span>
-                </a>
-                
-                
                 <a href="/categories/crypto/AES/" title="AES: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #FEF9E7;">AES
+                            style="background-color: #E8F8F5;">AES
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -447,7 +438,7 @@
                 <a href="/categories/crypto/ECC/" title="ECC: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F8F9F9;">ECC
+                            style="background-color: #FEF9E7;">ECC
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -456,8 +447,17 @@
                 <a href="/categories/Linux/" title="Linux: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #82E0AA;">Linux
+                            style="background-color: #F8F9F9;">Linux
                         <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/crypto/RSA/" title="RSA: 25">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #82E0AA;">RSA
+                        <span class="tag-length">25</span>
                     </span>
                 </a>
                 
@@ -480,10 +480,28 @@
                 </a>
                 
                 
+                <a href="/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" title="漏洞挖掘: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #85C1E9;">漏洞挖掘
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
                 <a href="/categories/Web/RCE/" title="RCE: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #85C1E9;">RCE
+                            style="background-color: #F8C471;">RCE
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/Web/md5%E7%BB%95%E8%BF%87/" title="md5绕过: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F9E79F;">md5绕过
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -492,25 +510,7 @@
                 <a href="/categories/Web/SSTI/" title="SSTI: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F8C471;">SSTI
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" title="漏洞挖掘: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9E79F;">漏洞挖掘
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Web/md5%E7%BB%95%E8%BF%87/" title="md5绕过: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #E8F8F5;">md5绕过
+                            style="background-color: #A3E4D7;">SSTI
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -547,7 +547,7 @@
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/01/15/Coppersmith%E6%94%BB%E5%87%BB/">
+                    <a href="/2023/01/15/coppersmith-gong-ji/">
                         <div class="card-image tag-image">
                             
                             
@@ -559,13 +559,9 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                相关网址1https://blog.csdn.net/q851579181q/article/details/90645041
+                                相关网址https:&#x2F;&#x2F;blog.csdn.net&#x2F;q851579181q&#x2F;article&#x2F;details&#x2F;90645041
 
-1https://www.jianshu.com/p/d8d2ce53041b
-
-
-
-1.已知m的高位题目12
+https:&#x2F;&#x2F;www.jian
                             
                         </div>
                         <div class="publish-info">
@@ -603,7 +599,7 @@
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/01/14/%E5%85%AC%E5%9B%A0%E6%95%B0%E6%94%BB%E5%87%BB/">
+                    <a href="/2023/01/14/gong-yin-shu-gong-ji/">
                         <div class="card-image tag-image">
                             
                             
@@ -616,7 +612,10 @@
                         <div class="summary block-with-text">
                             
                                 由题目得一组m,e对应不同组的n,c则可以尝试公因数攻击，对所有n进行两两对比看看有没有公因数 然后求出m
-123456789101112131415161718192021222324252627282930313233343536373
+import gmpy2
+from Crypto.Util.number import long_to_bytes
+
+n1 = 20
                             
                         </div>
                         <div class="publish-info">
@@ -654,7 +653,7 @@
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/01/14/m%E9%AB%98%E4%BD%8D%E6%94%BB%E5%87%BB/">
+                    <a href="/2023/01/14/m-gao-wei-gong-ji/">
                         <div class="card-image tag-image">
                             
                             
@@ -666,9 +665,11 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                sage脚本_m高位攻击123456sage下载地址：https://www.sagemath.org/download-windows.htmlsage在线计算：https://sagecell.sagemath.org/
+                                sage脚本_m高位攻击sage下载地址：
+https:&#x2F;&#x2F;www.sagemath.org&#x2F;download-windows.html
 
-出题脚本12
+sage在线计算：
+https:&#x2F;&#x2F;sagecel
                             
                         </div>
                         <div class="publish-info">
@@ -706,7 +707,7 @@
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/01/14/p%E9%AB%98%E4%BD%8D%E6%94%BB%E5%87%BB/">
+                    <a href="/2023/01/14/p-gao-wei-gong-ji/">
                         <div class="card-image tag-image">
                             
                             
@@ -719,7 +720,8 @@
                         <div class="summary block-with-text">
                             
                                 脚本1根据题目，注意 2^60  60需要修改相应的位数  a &#x3D; (p &gt;&gt; 60) &lt;&lt; 60 
-1234567891011121314151617def phase3(high_p, n):    R
+def phase3(high_p, n):
+    R.&lt;x> = PolynomialRing
                             
                         </div>
                         <div class="publish-info">
@@ -757,7 +759,7 @@
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/01/14/rabin%E8%A7%A3%E5%AF%86/">
+                    <a href="/2023/01/14/rabin-jie-mi/">
                         <div class="card-image tag-image">
                             
                             
@@ -769,7 +771,13 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                出题脚本123456789密文flagZNpjDckEhgOPDHBmMhKYQ+tMzVV/EMe4W+oLoWKWqvQ公钥pubkey.pem-----BEGIN PUBLIC KEY-----MDowDQYJKoZIhvcNAQEB
+                                出题脚本密文flag
+
+ZNpjDckEhgOPDHBmMhKYQ+tMzVV&#x2F;EMe4W+oLoWKWqvQ
+公钥pubkey.pem
+
+-----BEGIN PUBLIC KEY-----
+MDowDQYJKoZIhvcNAQ
                             
                         </div>
                         <div class="publish-info">
@@ -807,7 +815,7 @@
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/01/14/RSA-NC%E4%B8%8D%E4%BA%92%E7%B4%A0/">
+                    <a href="/2023/01/14/rsa-nc-bu-hu-su/">
                         <div class="card-image tag-image">
                             
                             
@@ -819,7 +827,12 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                出题脚本1234567891011121314151617from Crypto.Util.number import *import gmpy2from flag import flagassert flag[:5]==b&#x27;fl
+                                出题脚本from Crypto.Util.number import *
+import gmpy2
+from flag import flag
+assert flag[:5]==b'flag&#123;'
+
+m = bytes_to_lon
                             
                         </div>
                         <div class="publish-info">
@@ -857,7 +870,7 @@
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/01/14/e%E5%92%8Cphi-n%E4%B8%8D%E4%BA%92%E7%B4%A0/">
+                    <a href="/2023/01/14/e-he-phi-n-bu-hu-su/">
                         <div class="card-image tag-image">
                             
                             
@@ -870,9 +883,13 @@
                         <div class="summary block-with-text">
                             
                                 e和phi_n不互素是指它俩的公约数不为1
-1令t = gmpy2.gcd(e,phi)
+令t &#x3D; gmpy2.gcd(e,phi)
 
-1.m**t &lt; n出题脚本123456789101112131415161718192021import gmpy2import libnu
+1.m**t &lt; n出题脚本import gmpy2
+import libnum
+import random
+import uuid
+
                             
                         </div>
                         <div class="publish-info">
@@ -910,7 +927,7 @@
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/01/14/N%E5%88%86%E8%A7%A3%E4%B8%89%E4%B8%AA%E7%B4%A0%E6%95%B0/">
+                    <a href="/2023/01/14/n-fen-jie-san-ge-su-shu/">
                         <div class="card-image tag-image">
                             
                             
@@ -922,7 +939,12 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                出题脚本123456789101112131415161718import libnumimport gmpy2#生成随机素数p=libnum.generate_prime(32)q=libnum.generate_prime(32)r=l
+                                出题脚本import libnum
+import gmpy2
+#生成随机素数
+p=libnum.generate_prime(32)
+q=libnum.generate_prime(32)
+r=libnum.generate_prime(5
                             
                         </div>
                         <div class="publish-info">
@@ -960,7 +982,7 @@
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/01/14/n%E6%98%AFp%E7%9A%84r%E6%AC%A1%E6%96%B9/">
+                    <a href="/2023/01/14/n-shi-p-de-r-ci-fang/">
                         <div class="card-image tag-image">
                             
                             
@@ -972,7 +994,13 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                出题脚本1234567891011121314151617import libnum#生成随机素数p=libnum.generate_prime(256)e=65537m=&quot;flag&#123;de8c3ea714f7f78018
+                                出题脚本import libnum
+
+#生成随机素数
+p=libnum.generate_prime(256)
+e=65537
+m="flag&#123;de8c3ea714f7f780185924d473997bcb&#125;"
+#字符
                             
                         </div>
                         <div class="publish-info">
@@ -1022,7 +1050,15 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                出题脚本12345678910111213141516171819202122232425262728293031323334import randomimport base64import hashlibimport stringimpo
+                                出题脚本import random
+import base64
+import hashlib
+import string
+import libnum
+
+def put_flag():
+    # 字符串列表
+    a = string.p
                             
                         </div>
                         <div class="publish-info">
@@ -1161,7 +1197,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">61.1k</span>
+                        class="white-color">59.8k</span>
             
             
             

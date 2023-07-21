@@ -5,7 +5,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="dp,dq, f14g">
-    <meta name="description" content="出题脚本12345678910111213141516171819202122232425262728293031323334import randomimport base64import hashlibimport stringimpo">
+    <meta name="description" content="出题脚本import random
+import base64
+import hashlib
+import string
+import libnum
+
+def put_flag():
+    # 字符串列表
+    a = string.p">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -406,7 +414,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    173
+                    174
                 </div>
                 
 
@@ -428,16 +436,69 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="出题脚本"><a href="#出题脚本" class="headerlink" title="出题脚本"></a>出题脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">put_flag</span>():</span><br><span class="line">    <span class="comment"># 字符串列表</span></span><br><span class="line">    a = string.printable</span><br><span class="line">    flag = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">        flag += a[random.randint(<span class="number">0</span>, <span class="number">99</span>)]</span><br><span class="line">    flag = <span class="string">r&quot;flag&#123;%s&#125;&quot;</span>%(hashlib.md5(flag.encode()).hexdigest())</span><br><span class="line">    <span class="built_in">print</span>(flag)</span><br><span class="line">    <span class="keyword">return</span> flag</span><br><span class="line"><span class="comment">#生成素数</span></span><br><span class="line">p=libnum.generate_prime(<span class="number">1024</span>)</span><br><span class="line">q=libnum.generate_prime(<span class="number">1024</span>)</span><br><span class="line">e=<span class="number">65537</span></span><br><span class="line">n=p*q</span><br><span class="line">phi_n=(p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d=libnum.invmod(e,phi_n)</span><br><span class="line">dp=d%(p-<span class="number">1</span>)</span><br><span class="line">dq=d%(q-<span class="number">1</span>)</span><br><span class="line">m=put_flag()</span><br><span class="line">m=libnum.s2n(m)</span><br><span class="line">n=p*q</span><br><span class="line">c=<span class="built_in">pow</span>(m,e,n)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;p=&quot;</span>,p)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;q=&quot;</span>,q)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;dq=&quot;</span>,dq)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;dp=&quot;</span>,dp)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;c=&quot;</span>,c) </span><br></pre></td></tr></table></figure>
+                <h3 id="出题脚本"><a href="#出题脚本" class="headerlink" title="出题脚本"></a>出题脚本</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> random
+<span class="token keyword">import</span> base64
+<span class="token keyword">import</span> hashlib
+<span class="token keyword">import</span> string
+<span class="token keyword">import</span> libnum
+
+<span class="token keyword">def</span> <span class="token function">put_flag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 字符串列表</span>
+    a <span class="token operator">=</span> string<span class="token punctuation">.</span>printable
+    flag <span class="token operator">=</span> <span class="token string">""</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        flag <span class="token operator">+=</span> a<span class="token punctuation">[</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    flag <span class="token operator">=</span> <span class="token string">r"flag&#123;%s&#125;"</span><span class="token operator">%</span><span class="token punctuation">(</span>hashlib<span class="token punctuation">.</span>md5<span class="token punctuation">(</span>flag<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>flag<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> flag
+<span class="token comment">#生成素数</span>
+p<span class="token operator">=</span>libnum<span class="token punctuation">.</span>generate_prime<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+q<span class="token operator">=</span>libnum<span class="token punctuation">.</span>generate_prime<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+e<span class="token operator">=</span><span class="token number">65537</span>
+n<span class="token operator">=</span>p<span class="token operator">*</span>q
+phi_n<span class="token operator">=</span><span class="token punctuation">(</span>p<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span>q<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+d<span class="token operator">=</span>libnum<span class="token punctuation">.</span>invmod<span class="token punctuation">(</span>e<span class="token punctuation">,</span>phi_n<span class="token punctuation">)</span>
+dp<span class="token operator">=</span>d<span class="token operator">%</span><span class="token punctuation">(</span>p<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+dq<span class="token operator">=</span>d<span class="token operator">%</span><span class="token punctuation">(</span>q<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+m<span class="token operator">=</span>put_flag<span class="token punctuation">(</span><span class="token punctuation">)</span>
+m<span class="token operator">=</span>libnum<span class="token punctuation">.</span>s2n<span class="token punctuation">(</span>m<span class="token punctuation">)</span>
+n<span class="token operator">=</span>p<span class="token operator">*</span>q
+c<span class="token operator">=</span><span class="token builtin">pow</span><span class="token punctuation">(</span>m<span class="token punctuation">,</span>e<span class="token punctuation">,</span>n<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"p="</span><span class="token punctuation">,</span>p<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"q="</span><span class="token punctuation">,</span>q<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"dq="</span><span class="token punctuation">,</span>dq<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"dp="</span><span class="token punctuation">,</span>dp<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"c="</span><span class="token punctuation">,</span>c<span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
-<h3 id="解题脚本"><a href="#解题脚本" class="headerlink" title="解题脚本"></a>解题脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt</span>(<span class="params">dp,dq,p,q,c</span>):</span><br><span class="line">    InvQ = gmpy2.invert(q, p)</span><br><span class="line">    mp = <span class="built_in">pow</span>(c, dp, p)</span><br><span class="line">    mq = <span class="built_in">pow</span>(c, dq, q)</span><br><span class="line">    m = (((mp-mq)*InvQ) % p)*q+mq</span><br><span class="line">    <span class="built_in">print</span>(libnum.n2s(<span class="built_in">int</span>(m)).decode())</span><br><span class="line"></span><br><span class="line">p= <span class="number">160332148422085773419118366054725936852233416334843123745197905865814122767542980683547268180832158164485150298039693727719040683372172258525148659296087240380682418673910965969383538696724039000114078510939033236731476700182949760779821042982194738324421029616780752077145649691266297077244661585947836997447</span></span><br><span class="line">q= <span class="number">148424511925430832355285085986622242653116164650119278601839811809456838348201308360579207172541711367335049779204390510911294031319604192881139002646252381246691575112024047502962776542023275076827456857946499013733968522162634588753330857821421229306405469212854327011240808908334404955299250060931240865821</span></span><br><span class="line">dq= <span class="number">46499718919891753512042256824043332562579628188599554881257534157373206051013462063558177543473555667701042801266834703603013397791386747764400964376350060145521940586234916815399419075649204020285050341140996959732454059493770135591854817473937175643058380668604376797759987312600851466228301604453060674993</span></span><br><span class="line">dp= <span class="number">142333710655003285129381975633061553108365353347897720974344479656881847851071160049571693284111493690735707224010091720382284617217647771503015838348510851051285580945849520119912938971503190396671148935203517916795662212439446680229030750273953490024181996476865040448118374338738013091140796970725623029913</span></span><br><span class="line">c= <span class="number">19717919131356145411002342007533511479254120775597684622452661875292805564648015749422307039514664862428413419529876049533096947970606477676695854787457286807502628964582922773374784879459806551819337741730331777937597915727889640104583136339578788518904647309084873362461758500783634423921343109980901514994298280728150961559886893338458119937441920391275957965781890308011172861718172757876950159723089326843019779174406022143147201642738466470809603008292152193968160973116769118512212438656127645018486302418482079051867180606083540035964208124143457540388206274742292869004756069240519187723267661857029470809099</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">decrypt(dp,dq,p,q,c) </span><br></pre></td></tr></table></figure>
+<h3 id="解题脚本"><a href="#解题脚本" class="headerlink" title="解题脚本"></a>解题脚本</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> gmpy2
+<span class="token keyword">import</span> libnum
+
+<span class="token keyword">def</span> <span class="token function">decrypt</span><span class="token punctuation">(</span>dp<span class="token punctuation">,</span>dq<span class="token punctuation">,</span>p<span class="token punctuation">,</span>q<span class="token punctuation">,</span>c<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    InvQ <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>q<span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+    mp <span class="token operator">=</span> <span class="token builtin">pow</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> dp<span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+    mq <span class="token operator">=</span> <span class="token builtin">pow</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> dq<span class="token punctuation">,</span> q<span class="token punctuation">)</span>
+    m <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>mp<span class="token operator">-</span>mq<span class="token punctuation">)</span><span class="token operator">*</span>InvQ<span class="token punctuation">)</span> <span class="token operator">%</span> p<span class="token punctuation">)</span><span class="token operator">*</span>q<span class="token operator">+</span>mq
+    <span class="token keyword">print</span><span class="token punctuation">(</span>libnum<span class="token punctuation">.</span>n2s<span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+p<span class="token operator">=</span> <span class="token number">160332148422085773419118366054725936852233416334843123745197905865814122767542980683547268180832158164485150298039693727719040683372172258525148659296087240380682418673910965969383538696724039000114078510939033236731476700182949760779821042982194738324421029616780752077145649691266297077244661585947836997447</span>
+q<span class="token operator">=</span> <span class="token number">148424511925430832355285085986622242653116164650119278601839811809456838348201308360579207172541711367335049779204390510911294031319604192881139002646252381246691575112024047502962776542023275076827456857946499013733968522162634588753330857821421229306405469212854327011240808908334404955299250060931240865821</span>
+dq<span class="token operator">=</span> <span class="token number">46499718919891753512042256824043332562579628188599554881257534157373206051013462063558177543473555667701042801266834703603013397791386747764400964376350060145521940586234916815399419075649204020285050341140996959732454059493770135591854817473937175643058380668604376797759987312600851466228301604453060674993</span>
+dp<span class="token operator">=</span> <span class="token number">142333710655003285129381975633061553108365353347897720974344479656881847851071160049571693284111493690735707224010091720382284617217647771503015838348510851051285580945849520119912938971503190396671148935203517916795662212439446680229030750273953490024181996476865040448118374338738013091140796970725623029913</span>
+c<span class="token operator">=</span> <span class="token number">19717919131356145411002342007533511479254120775597684622452661875292805564648015749422307039514664862428413419529876049533096947970606477676695854787457286807502628964582922773374784879459806551819337741730331777937597915727889640104583136339578788518904647309084873362461758500783634423921343109980901514994298280728150961559886893338458119937441920391275957965781890308011172861718172757876950159723089326843019779174406022143147201642738466470809603008292152193968160973116769118512212438656127645018486302418482079051867180606083540035964208124143457540388206274742292869004756069240519187723267661857029470809099</span>
+
+
+decrypt<span class="token punctuation">(</span>dp<span class="token punctuation">,</span>dq<span class="token punctuation">,</span>p<span class="token punctuation">,</span>q<span class="token punctuation">,</span>c<span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
                 
@@ -587,7 +648,7 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/01/14/n%E6%98%AFp%E7%9A%84r%E6%AC%A1%E6%96%B9/">
+                <a href="/2023/01/14/n-shi-p-de-r-ci-fang/">
                     <div class="card-image">
                         
                         
@@ -640,7 +701,7 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/01/14/dp%E6%B3%84%E9%9C%B2/">
+                <a href="/2023/01/14/dp-xie-lu/">
                     <div class="card-image">
                         
                         
@@ -734,6 +795,9 @@
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -911,7 +975,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">61.1k</span>
+                        class="white-color">59.8k</span>
             
             
             

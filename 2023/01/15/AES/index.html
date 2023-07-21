@@ -6,7 +6,10 @@
     <meta charset="utf-8">
     <meta name="keywords" content="AES, f14g">
     <meta name="description" content="直接通过题目来学习
-123456789101112131415161718192021222324from Crypto.Cipher import AES import binascii from Crypto.Util.number i">
+from Crypto.Cipher import AES
+ import binascii
+ from Crypto.Util.number import bytes_to_long
+ from aes_flag im">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -407,7 +410,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    272
+                    258
                 </div>
                 
 
@@ -429,22 +432,79 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>直接通过题目来学习</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"> <span class="keyword">import</span> binascii</span><br><span class="line"> <span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> bytes_to_long</span><br><span class="line"> <span class="keyword">from</span> aes_flag <span class="keyword">import</span> flag,key</span><br><span class="line"> <span class="keyword">import</span> os</span><br><span class="line"> <span class="comment">#maybe flag is fake</span></span><br><span class="line"> iv = flag</span><br><span class="line"> l = <span class="built_in">len</span>(key)</span><br><span class="line"> <span class="keyword">if</span> l==<span class="number">16</span>:</span><br><span class="line"></span><br><span class="line">     hint = os.urandom(<span class="number">4</span>) * <span class="number">16</span></span><br><span class="line">     <span class="built_in">print</span>(bytes_to_long(hint)^bytes_to_long(key))</span><br><span class="line"></span><br><span class="line">     msg = <span class="string">b&#x27;Welcome! Good luck have fun! diyicichutiqiuqingpen xiexiele.....&#x27;</span></span><br><span class="line">     <span class="keyword">def</span> <span class="title function_">encrypto</span>(<span class="params">message</span>):</span><br><span class="line">         aes = AES.new(key,AES.MODE_CBC,iv)</span><br><span class="line">         <span class="keyword">return</span> aes.encrypt(message)</span><br><span class="line"></span><br><span class="line">     <span class="built_in">print</span>(binascii.hexlify(encrypto(msg))[-<span class="number">32</span>:])</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">10814139970454569101142970101299943513649261825483864773663646850498898172963892837254881797558641977330505910327448279013601791760702391621769017335029566</span></span><br><span class="line"><span class="string">b&#x27;a99b50f2320e2768e94535cac2888a96&#x27;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Cipher <span class="token keyword">import</span> AES
+ <span class="token keyword">import</span> binascii
+ <span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>number <span class="token keyword">import</span> bytes_to_long
+ <span class="token keyword">from</span> aes_flag <span class="token keyword">import</span> flag<span class="token punctuation">,</span>key
+ <span class="token keyword">import</span> os
+ <span class="token comment">#maybe flag is fake</span>
+ iv <span class="token operator">=</span> flag
+ l <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+ <span class="token keyword">if</span> l<span class="token operator">==</span><span class="token number">16</span><span class="token punctuation">:</span>
+
+     hint <span class="token operator">=</span> os<span class="token punctuation">.</span>urandom<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">16</span>
+     <span class="token keyword">print</span><span class="token punctuation">(</span>bytes_to_long<span class="token punctuation">(</span>hint<span class="token punctuation">)</span><span class="token operator">^</span>bytes_to_long<span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+     msg <span class="token operator">=</span> <span class="token string">b'Welcome! Good luck have fun! diyicichutiqiuqingpen xiexiele.....'</span>
+     <span class="token keyword">def</span> <span class="token function">encrypto</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">:</span>
+         aes <span class="token operator">=</span> AES<span class="token punctuation">.</span>new<span class="token punctuation">(</span>key<span class="token punctuation">,</span>AES<span class="token punctuation">.</span>MODE_CBC<span class="token punctuation">,</span>iv<span class="token punctuation">)</span>
+         <span class="token keyword">return</span> aes<span class="token punctuation">.</span>encrypt<span class="token punctuation">(</span>message<span class="token punctuation">)</span>
+
+     <span class="token keyword">print</span><span class="token punctuation">(</span>binascii<span class="token punctuation">.</span>hexlify<span class="token punctuation">(</span>encrypto<span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">32</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token triple-quoted-string string">'''
+10814139970454569101142970101299943513649261825483864773663646850498898172963892837254881797558641977330505910327448279013601791760702391621769017335029566
+b'a99b50f2320e2768e94535cac2888a96'
+'''</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>分析</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> l = <span class="built_in">len</span>(key)</span><br><span class="line"> <span class="keyword">if</span> l==<span class="number">16</span>:</span><br><span class="line">     hint = os.urandom(<span class="number">4</span>) * <span class="number">16</span></span><br><span class="line">     <span class="built_in">print</span>(bytes_to_long(hint)^bytes_to_long(key))</span><br><span class="line"><span class="comment">#key是16个字节 而hint是16个重复的4个字节</span></span><br><span class="line"><span class="comment">#所以hint 可以通过异或之后前面的字节求出</span></span><br><span class="line"><span class="comment">#key通过异或求出</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"> l <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+ <span class="token keyword">if</span> l<span class="token operator">==</span><span class="token number">16</span><span class="token punctuation">:</span>
+     hint <span class="token operator">=</span> os<span class="token punctuation">.</span>urandom<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">16</span>
+     <span class="token keyword">print</span><span class="token punctuation">(</span>bytes_to_long<span class="token punctuation">(</span>hint<span class="token punctuation">)</span><span class="token operator">^</span>bytes_to_long<span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">#key是16个字节 而hint是16个重复的4个字节</span>
+<span class="token comment">#所以hint 可以通过异或之后前面的字节求出</span>
+<span class="token comment">#key通过异或求出</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -----------get key---------</span></span><br><span class="line">tmp = <span class="number">10814139970454569101142970101299943513649261825483864773663646850498898172963892837254881797558641977330505910327448279013601791760702391621769017335029566</span></span><br><span class="line">hint = <span class="built_in">int</span>(<span class="built_in">str</span>(<span class="built_in">hex</span>(tmp))[<span class="number">2</span>:<span class="number">10</span>] * <span class="number">16</span>,<span class="number">16</span>)</span><br><span class="line">key = long_to_bytes(tmp ^ hint)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># -----------get key---------</span>
+tmp <span class="token operator">=</span> <span class="token number">10814139970454569101142970101299943513649261825483864773663646850498898172963892837254881797558641977330505910327448279013601791760702391621769017335029566</span>
+hint <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span><span class="token builtin">hex</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">16</span><span class="token punctuation">,</span><span class="token number">16</span><span class="token punctuation">)</span>
+key <span class="token operator">=</span> long_to_bytes<span class="token punctuation">(</span>tmp <span class="token operator">^</span> hint<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"><span class="keyword">import</span> binascii, sys</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.strxor <span class="keyword">import</span> strxor</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line"><span class="comment"># -----------get key---------</span></span><br><span class="line">tmp = <span class="number">10814139970454569101142970101299943513649261825483864773663646850498898172963892837254881797558641977330505910327448279013601791760702391621769017335029566</span></span><br><span class="line">hint = <span class="built_in">int</span>(<span class="built_in">str</span>(<span class="built_in">hex</span>(tmp))[<span class="number">2</span>:<span class="number">10</span>] * <span class="number">16</span>,<span class="number">16</span>)</span><br><span class="line">key = long_to_bytes(tmp ^ hint)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ----------get iv-----------</span></span><br><span class="line">msg = <span class="string">b&#x27;Welcome! Good luck have fun! diyicichutiqiuqingpen xiexiele.....&#x27;</span></span><br><span class="line">msgs = [msg[ii:(ii+<span class="number">16</span>)] <span class="keyword">for</span> ii <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(msg),<span class="number">16</span>)]</span><br><span class="line">msgs.reverse()</span><br><span class="line">IV = binascii.unhexlify(<span class="string">&#x27;a99b50f2320e2768e94535cac2888a96&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decry</span>(<span class="params">key,IV,ms</span>):</span><br><span class="line">    aes=AES.new(key,AES.MODE_ECB)</span><br><span class="line">    <span class="keyword">return</span> strxor(aes.decrypt(IV),ms)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ms <span class="keyword">in</span> msgs:</span><br><span class="line">    IV=decry(key,IV,ms)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">b&#x27;flag&#123;&#x27;</span> + IV+ <span class="string">b&#x27;&#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>number <span class="token keyword">import</span> long_to_bytes
+<span class="token keyword">import</span> binascii<span class="token punctuation">,</span> sys
+<span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>strxor <span class="token keyword">import</span> strxor
+<span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Cipher <span class="token keyword">import</span> AES
+
+<span class="token comment"># -----------get key---------</span>
+tmp <span class="token operator">=</span> <span class="token number">10814139970454569101142970101299943513649261825483864773663646850498898172963892837254881797558641977330505910327448279013601791760702391621769017335029566</span>
+hint <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span><span class="token builtin">hex</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">16</span><span class="token punctuation">,</span><span class="token number">16</span><span class="token punctuation">)</span>
+key <span class="token operator">=</span> long_to_bytes<span class="token punctuation">(</span>tmp <span class="token operator">^</span> hint<span class="token punctuation">)</span>
+
+<span class="token comment"># ----------get iv-----------</span>
+msg <span class="token operator">=</span> <span class="token string">b'Welcome! Good luck have fun! diyicichutiqiuqingpen xiexiele.....'</span>
+msgs <span class="token operator">=</span> <span class="token punctuation">[</span>msg<span class="token punctuation">[</span>ii<span class="token punctuation">:</span><span class="token punctuation">(</span>ii<span class="token operator">+</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token keyword">for</span> ii <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+msgs<span class="token punctuation">.</span>reverse<span class="token punctuation">(</span><span class="token punctuation">)</span>
+IV <span class="token operator">=</span> binascii<span class="token punctuation">.</span>unhexlify<span class="token punctuation">(</span><span class="token string">'a99b50f2320e2768e94535cac2888a96'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">decry</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span>IV<span class="token punctuation">,</span>ms<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    aes<span class="token operator">=</span>AES<span class="token punctuation">.</span>new<span class="token punctuation">(</span>key<span class="token punctuation">,</span>AES<span class="token punctuation">.</span>MODE_ECB<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> strxor<span class="token punctuation">(</span>aes<span class="token punctuation">.</span>decrypt<span class="token punctuation">(</span>IV<span class="token punctuation">)</span><span class="token punctuation">,</span>ms<span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> ms <span class="token keyword">in</span> msgs<span class="token punctuation">:</span>
+    IV<span class="token operator">=</span>decry<span class="token punctuation">(</span>key<span class="token punctuation">,</span>IV<span class="token punctuation">,</span>ms<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">b'flag&#123;'</span> <span class="token operator">+</span> IV<span class="token operator">+</span> <span class="token string">b'&#125;'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
                 
@@ -472,7 +532,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/01/15/AES/">http://example.com/2023/01/15/AES/</a>
+                    <a href="http://example.com/2023/01/15/aes/">http://example.com/2023/01/15/aes/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -594,7 +654,7 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/01/15/%E6%AF%94%E8%B5%9B%E4%B8%AD%E9%81%87%E8%A7%81%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AF%86%E7%A0%81/">
+                <a href="/2023/01/15/bi-sai-zhong-yu-jian-de-yi-xie-mi-ma/">
                     <div class="card-image">
                         
                         
@@ -643,7 +703,7 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/01/15/ECC%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF/">
+                <a href="/2023/01/15/ecc-tuo-yuan-qu-xian/">
                     <div class="card-image">
                         
                         
@@ -737,6 +797,9 @@
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -914,7 +977,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">61.1k</span>
+                        class="white-color">59.8k</span>
             
             
             

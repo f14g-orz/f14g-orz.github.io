@@ -404,7 +404,7 @@ x">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    356
+                    377
                 </div>
                 
 
@@ -426,6 +426,9 @@ x">
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -440,7 +443,31 @@ x">
 <p>a^p $\equiv$ a mod p<br>a^p % p &#x3D; a % p</p>
 <h2 id="威尔逊定理"><a href="#威尔逊定理" class="headerlink" title="威尔逊定理"></a>威尔逊定理</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>当且仅当p是素数时</p>
 <p>（p-1）！ $\equiv$  -1(mod p)</p>
-<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sympy</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">myGetPrime</span>():</span><br><span class="line">    A= getPrime(<span class="number">513</span>)</span><br><span class="line">    <span class="built_in">print</span>(A)</span><br><span class="line">    B=A-random.randint(<span class="number">1e3</span>,<span class="number">1e5</span>)</span><br><span class="line">    <span class="built_in">print</span>(B)</span><br><span class="line">    <span class="keyword">return</span> sympy.nextPrime((B!)%A)</span><br><span class="line">p=myGetPrime()</span><br><span class="line">A1=<span class="number">21856963452461630437348278434191434000066076750419027493852463513469865262064340836613831066602300959772632397773487317560339056658299954464169264467234407</span></span><br><span class="line">B1=<span class="number">21856963452461630437348278434191434000066076750419027493852463513469865262064340836613831066602300959772632397773487317560339056658299954464169264467140596</span></span><br><span class="line"></span><br><span class="line">q=myGetPrime()</span><br><span class="line">A2=<span class="number">16466113115839228119767887899308820025749260933863446888224167169857612178664139545726340867406790754560227516013796269941438076818194617030304851858418927</span></span><br><span class="line">B2=<span class="number">16466113115839228119767887899308820025749260933863446888224167169857612178664139545726340867406790754560227516013796269941438076818194617030304851858351026</span></span><br><span class="line"></span><br><span class="line">r=myGetPrime()</span><br><span class="line"></span><br><span class="line">n=p*q*r</span><br><span class="line">n=<span class="number">85492663786275292159831603391083876175149354309327673008716627650718160585639723100793347534649628330416631255660901307533909900431413447524262332232659153047067908693481947121069070451562822417357656432171870951184673132554213690123308042697361969986360375060954702920656364144154145812838558365334172935931441424096270206140691814662318562696925767991937369782627908408239087358033165410020690152067715711112732252038588432896758405898709010342467882264362733</span></span><br><span class="line">c=<span class="built_in">pow</span>(flag,e,n)</span><br><span class="line">e=<span class="number">0x1001</span></span><br><span class="line">c=<span class="number">75700883021669577739329316795450706204502635802310731477156998834710820770245219468703245302009998932067080383977560299708060476222089630209972629755965140317526034680452483360917378812244365884527186056341888615564335560765053550155758362271622330017433403027261127561225585912484777829588501213961110690451987625502701331485141639684356427316905122995759825241133872734362716041819819948645662803292418802204430874521342108413623635150475963121220095236776428</span></span><br><span class="line">so,what <span class="keyword">is</span> the flag?</span><br></pre></td></tr></table></figure>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> sympy
+<span class="token keyword">import</span> random
+
+<span class="token keyword">def</span> <span class="token function">myGetPrime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    A<span class="token operator">=</span> getPrime<span class="token punctuation">(</span><span class="token number">513</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span>
+    B<span class="token operator">=</span>A<span class="token operator">-</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">1e3</span><span class="token punctuation">,</span><span class="token number">1e5</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>B<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> sympy<span class="token punctuation">.</span>nextPrime<span class="token punctuation">(</span><span class="token punctuation">(</span>B!<span class="token punctuation">)</span><span class="token operator">%</span>A<span class="token punctuation">)</span>
+p<span class="token operator">=</span>myGetPrime<span class="token punctuation">(</span><span class="token punctuation">)</span>
+A1<span class="token operator">=</span><span class="token number">21856963452461630437348278434191434000066076750419027493852463513469865262064340836613831066602300959772632397773487317560339056658299954464169264467234407</span>
+B1<span class="token operator">=</span><span class="token number">21856963452461630437348278434191434000066076750419027493852463513469865262064340836613831066602300959772632397773487317560339056658299954464169264467140596</span>
+
+q<span class="token operator">=</span>myGetPrime<span class="token punctuation">(</span><span class="token punctuation">)</span>
+A2<span class="token operator">=</span><span class="token number">16466113115839228119767887899308820025749260933863446888224167169857612178664139545726340867406790754560227516013796269941438076818194617030304851858418927</span>
+B2<span class="token operator">=</span><span class="token number">16466113115839228119767887899308820025749260933863446888224167169857612178664139545726340867406790754560227516013796269941438076818194617030304851858351026</span>
+
+r<span class="token operator">=</span>myGetPrime<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+n<span class="token operator">=</span>p<span class="token operator">*</span>q<span class="token operator">*</span>r
+n<span class="token operator">=</span><span class="token number">85492663786275292159831603391083876175149354309327673008716627650718160585639723100793347534649628330416631255660901307533909900431413447524262332232659153047067908693481947121069070451562822417357656432171870951184673132554213690123308042697361969986360375060954702920656364144154145812838558365334172935931441424096270206140691814662318562696925767991937369782627908408239087358033165410020690152067715711112732252038588432896758405898709010342467882264362733</span>
+c<span class="token operator">=</span><span class="token builtin">pow</span><span class="token punctuation">(</span>flag<span class="token punctuation">,</span>e<span class="token punctuation">,</span>n<span class="token punctuation">)</span>
+e<span class="token operator">=</span><span class="token number">0x1001</span>
+c<span class="token operator">=</span><span class="token number">75700883021669577739329316795450706204502635802310731477156998834710820770245219468703245302009998932067080383977560299708060476222089630209972629755965140317526034680452483360917378812244365884527186056341888615564335560765053550155758362271622330017433403027261127561225585912484777829588501213961110690451987625502701331485141639684356427316905122995759825241133872734362716041819819948645662803292418802204430874521342108413623635150475963121220095236776428</span>
+so<span class="token punctuation">,</span>what <span class="token keyword">is</span> the flag?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="python脚本"><a href="#python脚本" class="headerlink" title="python脚本"></a>python脚本</h4><p>最终是求出B! %A    想起威尔逊定理   </p>
 <p>补全为</p>
@@ -449,7 +476,31 @@ x">
 <p>(A-2)*(A-3)……(B!) %A  &#x3D;  1</p>
 <p>(((((A-2)%A)<em>(A-3))%A……)</em>(B!))%A &#x3D;1</p>
 <p>(((((A-2)%A)<em>(A-3))%A……)</em>(B!) $\equiv$ 1 （mod  A)    &#x2F;&#x2F;利用逆元求B！</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"></span><br><span class="line">A1=<span class="number">21856963452461630437348278434191434000066076750419027493852463513469865262064340836613831066602300959772632397773487317560339056658299954464169264467234407</span></span><br><span class="line">B1=<span class="number">21856963452461630437348278434191434000066076750419027493852463513469865262064340836613831066602300959772632397773487317560339056658299954464169264467140596</span></span><br><span class="line">A2=<span class="number">16466113115839228119767887899308820025749260933863446888224167169857612178664139545726340867406790754560227516013796269941438076818194617030304851858418927</span></span><br><span class="line">B2=<span class="number">16466113115839228119767887899308820025749260933863446888224167169857612178664139545726340867406790754560227516013796269941438076818194617030304851858351026</span></span><br><span class="line">n=<span class="number">85492663786275292159831603391083876175149354309327673008716627650718160585639723100793347534649628330416631255660901307533909900431413447524262332232659153047067908693481947121069070451562822417357656432171870951184673132554213690123308042697361969986360375060954702920656364144154145812838558365334172935931441424096270206140691814662318562696925767991937369782627908408239087358033165410020690152067715711112732252038588432896758405898709010342467882264362733</span></span><br><span class="line">e=<span class="number">0x1001</span></span><br><span class="line">c=<span class="number">75700883021669577739329316795450706204502635802310731477156998834710820770245219468703245302009998932067080383977560299708060476222089630209972629755965140317526034680452483360917378812244365884527186056341888615564335560765053550155758362271622330017433403027261127561225585912484777829588501213961110690451987625502701331485141639684356427316905122995759825241133872734362716041819819948645662803292418802204430874521342108413623635150475963121220095236776428</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encrypt</span>(<span class="params">A,B</span>):</span><br><span class="line">    tmp = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(B + <span class="number">1</span>, A - <span class="number">1</span>):</span><br><span class="line">        tmp *= i</span><br><span class="line">        tmp %= A</span><br><span class="line">    tmp_inv = gmpy2.invert(tmp, A)</span><br><span class="line">    result = gmpy2.next_prime(tmp_inv%A)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">p = encrypt(A1,B1)</span><br><span class="line">q = encrypt(A2,B2)</span><br><span class="line">r = n//p//q</span><br><span class="line">phi = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)*(r-<span class="number">1</span>)</span><br><span class="line">d = gmpy2.invert(e,phi)</span><br><span class="line">m = <span class="built_in">pow</span>(c,d,n)</span><br><span class="line"><span class="built_in">print</span>(libnum.n2s(<span class="built_in">int</span>(m)))</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> gmpy2
+<span class="token keyword">import</span> libnum
+
+A1<span class="token operator">=</span><span class="token number">21856963452461630437348278434191434000066076750419027493852463513469865262064340836613831066602300959772632397773487317560339056658299954464169264467234407</span>
+B1<span class="token operator">=</span><span class="token number">21856963452461630437348278434191434000066076750419027493852463513469865262064340836613831066602300959772632397773487317560339056658299954464169264467140596</span>
+A2<span class="token operator">=</span><span class="token number">16466113115839228119767887899308820025749260933863446888224167169857612178664139545726340867406790754560227516013796269941438076818194617030304851858418927</span>
+B2<span class="token operator">=</span><span class="token number">16466113115839228119767887899308820025749260933863446888224167169857612178664139545726340867406790754560227516013796269941438076818194617030304851858351026</span>
+n<span class="token operator">=</span><span class="token number">85492663786275292159831603391083876175149354309327673008716627650718160585639723100793347534649628330416631255660901307533909900431413447524262332232659153047067908693481947121069070451562822417357656432171870951184673132554213690123308042697361969986360375060954702920656364144154145812838558365334172935931441424096270206140691814662318562696925767991937369782627908408239087358033165410020690152067715711112732252038588432896758405898709010342467882264362733</span>
+e<span class="token operator">=</span><span class="token number">0x1001</span>
+c<span class="token operator">=</span><span class="token number">75700883021669577739329316795450706204502635802310731477156998834710820770245219468703245302009998932067080383977560299708060476222089630209972629755965140317526034680452483360917378812244365884527186056341888615564335560765053550155758362271622330017433403027261127561225585912484777829588501213961110690451987625502701331485141639684356427316905122995759825241133872734362716041819819948645662803292418802204430874521342108413623635150475963121220095236776428</span>
+<span class="token keyword">def</span> <span class="token function">encrypt</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span>B<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    tmp <span class="token operator">=</span> <span class="token number">1</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>B <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> A <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        tmp <span class="token operator">*=</span> i
+        tmp <span class="token operator">%=</span> A
+    tmp_inv <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>tmp<span class="token punctuation">,</span> A<span class="token punctuation">)</span>
+    result <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>next_prime<span class="token punctuation">(</span>tmp_inv<span class="token operator">%</span>A<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> result
+p <span class="token operator">=</span> encrypt<span class="token punctuation">(</span>A1<span class="token punctuation">,</span>B1<span class="token punctuation">)</span>
+q <span class="token operator">=</span> encrypt<span class="token punctuation">(</span>A2<span class="token punctuation">,</span>B2<span class="token punctuation">)</span>
+r <span class="token operator">=</span> n<span class="token operator">//</span>p<span class="token operator">//</span>q
+phi <span class="token operator">=</span> <span class="token punctuation">(</span>p<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span>q<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span>r<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+d <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>e<span class="token punctuation">,</span>phi<span class="token punctuation">)</span>
+m <span class="token operator">=</span> <span class="token builtin">pow</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span>d<span class="token punctuation">,</span>n<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>libnum<span class="token punctuation">.</span>n2s<span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
@@ -479,7 +530,7 @@ x">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/01/14/Crypto/">http://example.com/2023/01/14/Crypto/</a>
+                    <a href="http://example.com/2023/01/14/crypto/">http://example.com/2023/01/14/crypto/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -601,7 +652,7 @@ x">
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/01/14/SageMath/">
+                <a href="/2023/01/14/sagemath/">
                     <div class="card-image">
                         
                         
@@ -728,6 +779,9 @@ x">
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -905,7 +959,7 @@ x">
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">61.1k</span>
+                        class="white-color">59.8k</span>
             
             
             

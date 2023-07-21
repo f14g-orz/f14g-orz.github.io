@@ -502,7 +502,7 @@
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2023/01/15/%E6%AF%94%E8%B5%9B%E4%B8%AD%E9%81%87%E8%A7%81%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AF%86%E7%A0%81/">
+                        <a href="/2023/01/15/bi-sai-zhong-yu-jian-de-yi-xie-mi-ma/">
                             <div class="card-image">
                                 
                                 
@@ -514,7 +514,14 @@
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    1、曲路密码脚本12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152# 曲路密码import rede
+                                    1、曲路密码脚本# 曲路密码
+import re
+
+
+def encrypt_bend(string, col, row=10):
+    ciphertext = ""
+    temp = []
+    for i in range(c
                                 
                             </div>
                             <div class="publish-info">
@@ -561,7 +568,7 @@
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2023/01/15/AES/">
+                        <a href="/2023/01/15/aes/">
                             <div class="card-image">
                                 
                                 
@@ -574,7 +581,10 @@
                             <div class="summary block-with-text">
                                 
                                     直接通过题目来学习
-123456789101112131415161718192021222324from Crypto.Cipher import AES import binascii from Crypto.Util.number i
+from Crypto.Cipher import AES
+ import binascii
+ from Crypto.Util.number import bytes_to_long
+ from aes_flag im
                                 
                             </div>
                             <div class="publish-info">
@@ -625,7 +635,7 @@
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2023/01/15/ECC%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF/">
+                        <a href="/2023/01/15/ecc-tuo-yuan-qu-xian/">
                             <div class="card-image">
                                 
                                 
@@ -691,7 +701,7 @@
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2023/01/15/%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AD%98%E5%82%A8%E5%BD%A2%E5%BC%8F/">
+                        <a href="/2023/01/15/shu-ju-zai-nei-cun-zhong-de-cun-chu-xing-shi/">
                             <div class="card-image">
                                 
                                 
@@ -703,7 +713,13 @@
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    出题脚本123456789101112#C语言#include &lt;stdio.h&gt;char flag[]=&quot;afctf&#123;sec_is_everywhere&#125;&quot;;int main()&#12
+                                    出题脚本#C语言
+#include &lt;stdio.h>
+char flag[]="afctf&#123;sec_is_everywhere&#125;";
+
+int main()
+&#123;
+	for(int i=0;i&lt;6;
                                 
                             </div>
                             <div class="publish-info">
@@ -754,7 +770,7 @@
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2023/01/15/%E5%85%AC%E9%92%A5%E8%A7%A3%E6%9E%90/">
+                        <a href="/2023/01/15/gong-yao-jie-xi/">
                             <div class="card-image">
                                 
                                 
@@ -766,7 +782,10 @@
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    公钥解析（flag.enc是base64）123456789101112131415161718from Crypto.PublicKey import RSAfrom Crypto.Cipher import PKCS1_OAEPfrom
+                                    公钥解析（flag.enc是base64）from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP
+from base64 import b64decode
+
                                 
                             </div>
                             <div class="publish-info">
@@ -817,7 +836,7 @@
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2023/01/15/%E6%95%B0%E5%8F%AA%E5%BD%93%E4%BD%9C%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9E%E5%9C%A8%E4%B8%80%E8%B5%B7/">
+                        <a href="/2023/01/15/shu-zhi-dang-zuo-zi-fu-chuan-lian-zai-yi-qi/">
                             <div class="card-image">
                                 
                                 
@@ -830,7 +849,12 @@
                             <div class="summary block-with-text">
                                 
                                     例题[MTCTF 2021]hamburgerRSA参考文档
-题目1234567891011121314151617181920from Crypto.Util.number import *flag = open(&#x27;flag.t
+题目from Crypto.Util.number import *
+
+flag = open('flag.txt').read()
+nbit = 64
+
+while True:
                                 
                             </div>
                             <div class="publish-info">
@@ -881,7 +905,7 @@
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2023/01/15/%E5%85%89%E6%BB%91%E6%95%B0/">
+                        <a href="/2023/01/15/guang-hua-shu/">
                             <div class="card-image">
                                 
                                 
@@ -893,7 +917,11 @@
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    p-1光滑（Pollard）1234567如果一个整数的所有素因子都不大于 B，我们称这个数为 B-Smooth 数。设 p−1 是 B-Smooth 的，可设 p−1=p1p2⋯pn(∀1≤i≤n,pi≤B)，若 p1,p2,⋯,pn 两
+                                    p-1光滑（Pollard）如果一个整数的所有素因子都不大于 B，我们称这个数为 B-Smooth 数。
+
+设 p−1 是 B-Smooth 的，可设 p−1&#x3D;p1p2⋯pn(∀1≤i≤n,pi≤B)，
+
+若 p1,p2,⋯,pn
                                 
                             </div>
                             <div class="publish-info">
@@ -944,7 +972,7 @@
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2023/01/15/p-q%E5%BD%93%E5%81%9Ae1-e2%E5%85%B1%E6%A8%A1/">
+                        <a href="/2023/01/15/p-q-dang-zuo-e1-e2-gong-mo/">
                             <div class="card-image">
                                 
                                 
@@ -956,7 +984,12 @@
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    题目1234567891011121314151617from gmpy2 import *from Crypto.Util.number import *flag  = &#x27;******************&#x27;p = 
+                                    题目from gmpy2 import *
+from Crypto.Util.number import *
+flag  = '******************'
+p = getPrime(512)
+q = getPrime(512)
+
                                 
                             </div>
                             <div class="publish-info">
@@ -1007,7 +1040,7 @@
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2023/01/15/%E5%A4%9A%E6%AC%A1%E4%B8%80%E5%AF%86%EF%BC%88Many-Time-Pad-Attack%EF%BC%89/">
+                        <a href="/2023/01/15/duo-ci-yi-mi-many-time-pad-attack/">
                             <div class="card-image">
                                 
                                 
@@ -1071,7 +1104,7 @@
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2023/01/15/Coppersmith%E6%94%BB%E5%87%BB/">
+                        <a href="/2023/01/15/coppersmith-gong-ji/">
                             <div class="card-image">
                                 
                                 
@@ -1083,13 +1116,9 @@
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    相关网址1https://blog.csdn.net/q851579181q/article/details/90645041
+                                    相关网址https:&#x2F;&#x2F;blog.csdn.net&#x2F;q851579181q&#x2F;article&#x2F;details&#x2F;90645041
 
-1https://www.jianshu.com/p/d8d2ce53041b
-
-
-
-1.已知m的高位题目12
+https:&#x2F;&#x2F;www.jian
                                 
                             </div>
                             <div class="publish-info">
@@ -1227,7 +1256,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">61.1k</span>
+                        class="white-color">59.8k</span>
             
             
             

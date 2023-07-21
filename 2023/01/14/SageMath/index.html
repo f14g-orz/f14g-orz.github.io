@@ -5,12 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="SageMath, f14g">
-    <meta name="description" content="SageMath代码1.同余运算1R.&amp;lt;x&amp;gt; = Zmod(module)[]
+    <meta name="description" content="SageMath代码1.同余运算R.&amp;lt;x&gt; = Zmod(module)[]
 
 相当于将 x 作为需要求得的未知数     Zmod()内填入同余运算的模数
-1f = x^3 + ...
+f = x^3 + ...
 
-将同余运算的所有项移到同一边，赋值给">
+将同余运算的所有项移到同一边，赋值给函数  f">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -407,7 +407,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    897
+                    901
                 </div>
                 
 
@@ -429,21 +429,25 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="SageMath代码"><a href="#SageMath代码" class="headerlink" title="SageMath代码"></a>SageMath代码</h1><h2 id="1-同余运算"><a href="#1-同余运算" class="headerlink" title="1.同余运算"></a>1.同余运算</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R.&lt;x&gt; = Zmod(module)[]</span><br></pre></td></tr></table></figure>
+                <h1 id="SageMath代码"><a href="#SageMath代码" class="headerlink" title="SageMath代码"></a>SageMath代码</h1><h2 id="1-同余运算"><a href="#1-同余运算" class="headerlink" title="1.同余运算"></a>1.同余运算</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python">R<span class="token punctuation">.</span><span class="token operator">&lt;</span>x<span class="token operator">></span> <span class="token operator">=</span> Zmod<span class="token punctuation">(</span>module<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>相当于将 x 作为需要求得的未知数     Zmod()内填入同余运算的模数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = x^<span class="number">3</span> + ...</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">f <span class="token operator">=</span> x<span class="token operator">^</span><span class="token number">3</span> <span class="token operator">+</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>将同余运算的所有项移到同一边，赋值给函数  f  来表示</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f.roots()</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">f<span class="token punctuation">.</span>roots<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>运行之后就求解出来；以列表形式返回所有解    列表内部是元组类型</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f.smallroots(upper)</span><br><span class="line">以upper作为求解的上限</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">f<span class="token punctuation">.</span>smallroots<span class="token punctuation">(</span>upper<span class="token punctuation">)</span>
+以upper作为求解的上限<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>eg</p>
 <p>需要求解</p>
@@ -451,77 +455,132 @@
 <p>把同余式移到一边</p>
 <p>$ 0\equiv p^3+a<em>p^2+b</em>p-n^2\pmod{moudle} $</p>
 <p>已知 a,b,n,moudle   要求p</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">R.&lt;p&gt; = Zmod(moudle)[]</span><br><span class="line">f = p^<span class="number">3</span> + a*p^<span class="number">2</span> + b*p - n^<span class="number">2</span> </span><br><span class="line">f = f.monic()</span><br><span class="line">roots = f.small_roots()</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">R<span class="token punctuation">.</span><span class="token operator">&lt;</span>p<span class="token operator">></span> <span class="token operator">=</span> Zmod<span class="token punctuation">(</span>moudle<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+f <span class="token operator">=</span> p<span class="token operator">^</span><span class="token number">3</span> <span class="token operator">+</span> a<span class="token operator">*</span>p<span class="token operator">^</span><span class="token number">2</span> <span class="token operator">+</span> b<span class="token operator">*</span>p <span class="token operator">-</span> n<span class="token operator">^</span><span class="token number">2</span> 
+f <span class="token operator">=</span> f<span class="token punctuation">.</span>monic<span class="token punctuation">(</span><span class="token punctuation">)</span>
+roots <span class="token operator">=</span> f<span class="token punctuation">.</span>small_roots<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>那么 p 的所有满足该同余式的解就会返回出来</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">f = (M + x*r)**e - c</span><br><span class="line">f = f.monic()</span><br><span class="line">roots = f.small_roots()</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">PR<span class="token punctuation">.</span><span class="token operator">&lt;</span>x<span class="token operator">></span> <span class="token operator">=</span> PolynomialRing<span class="token punctuation">(</span>Zmod<span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span>
+f <span class="token operator">=</span> <span class="token punctuation">(</span>M <span class="token operator">+</span> x<span class="token operator">*</span>r<span class="token punctuation">)</span><span class="token operator">**</span>e <span class="token operator">-</span> c
+f <span class="token operator">=</span> f<span class="token punctuation">.</span>monic<span class="token punctuation">(</span><span class="token punctuation">)</span>
+roots <span class="token operator">=</span> f<span class="token punctuation">.</span>small_roots<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="2-基本运算"><a href="#2-基本运算" class="headerlink" title="2.基本运算"></a>2.基本运算</h2><p>sage的大部分基本运算和python都一样、</p>
 <p>比较运算符</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">== &lt;=  &gt;= &lt; &gt; </span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">==</span> <span class="token operator">&lt;=</span>  <span class="token operator">>=</span> <span class="token operator">&lt;</span> <span class="token operator">></span> <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>数学运算符</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>**<span class="number">3</span> 代表幂运算  ^ 和 **的作用一样</span><br><span class="line">%  对于整型参数  %代表mod运算</span><br><span class="line">/</span><br><span class="line">//</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token number">2</span><span class="token operator">**</span><span class="token number">3</span> 代表幂运算  <span class="token operator">^</span> 和 <span class="token operator">**</span>的作用一样
+<span class="token operator">%</span>  对于整型参数  <span class="token operator">%</span>代表mod运算
+<span class="token operator">/</span>
+<span class="token operator">//</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>常见的数学函数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sqrt(<span class="number">4</span>)  <span class="comment">#2</span></span><br><span class="line">sin()</span><br><span class="line">cos()</span><br><span class="line"><span class="comment">#有些数学表达式返回的是精确的值而不是近似值，要想得到近似值使用函数n或者方法n（均有一个长名称，numerical_approx,并且函数N和n相同），它们都有可选参数prec，即所需的比特位精度以及digits，即所需的十进制位精度</span></span><br><span class="line">exp(<span class="number">2</span>)  e^<span class="number">2</span></span><br><span class="line">n(exp(<span class="number">2</span>))    <span class="comment">#7.38905609893065</span></span><br><span class="line">sin(<span class="number">10</span>).n(digits=<span class="number">5</span>)  <span class="comment">#-0.54402</span></span><br><span class="line">numerical_approx(pi,prec=<span class="number">200</span>)  <span class="comment">#3.1415926535897932384626433832795028841971693993751058209749</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">sqrt<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>  <span class="token comment">#2</span>
+sin<span class="token punctuation">(</span><span class="token punctuation">)</span>
+cos<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">#有些数学表达式返回的是精确的值而不是近似值，要想得到近似值使用函数n或者方法n（均有一个长名称，numerical_approx,并且函数N和n相同），它们都有可选参数prec，即所需的比特位精度以及digits，即所需的十进制位精度</span>
+exp<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>  e<span class="token operator">^</span><span class="token number">2</span>
+n<span class="token punctuation">(</span>exp<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>    <span class="token comment">#7.38905609893065</span>
+sin<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span>n<span class="token punctuation">(</span>digits<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span>  <span class="token comment">#-0.54402</span>
+numerical_approx<span class="token punctuation">(</span>pi<span class="token punctuation">,</span>prec<span class="token operator">=</span><span class="token number">200</span><span class="token punctuation">)</span>  <span class="token comment">#3.1415926535897932384626433832795028841971693993751058209749</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="3-基础代数和微积分"><a href="#3-基础代数和微积分" class="headerlink" title="3.基础代数和微积分"></a>3.基础代数和微积分</h2><p>solve函数用来求解方程</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x=var(<span class="string">&#x27;x&#x27;</span>)</span><br><span class="line">solve(x^<span class="number">2</span>+<span class="number">3</span>*x+<span class="number">2</span>,x)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x<span class="token operator">=</span>var<span class="token punctuation">(</span><span class="token string">'x'</span><span class="token punctuation">)</span>
+solve<span class="token punctuation">(</span>x<span class="token operator">^</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">3</span><span class="token operator">*</span>x<span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">,</span>x<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>也可以求解用其他变量表示另一个变量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x,b,c=var(<span class="string">&#x27;x b c&#x27;</span>)</span><br><span class="line">solve([x^<span class="number">2</span>+b**x+c==<span class="number">0</span>],x)</span><br><span class="line"><span class="comment">#[x == -sqrt(-b^x - c), x == sqrt(-b^x - c)]</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x<span class="token punctuation">,</span>b<span class="token punctuation">,</span>c<span class="token operator">=</span>var<span class="token punctuation">(</span><span class="token string">'x b c'</span><span class="token punctuation">)</span>
+solve<span class="token punctuation">(</span><span class="token punctuation">[</span>x<span class="token operator">^</span><span class="token number">2</span><span class="token operator">+</span>b<span class="token operator">**</span>x<span class="token operator">+</span>c<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>x<span class="token punctuation">)</span>
+<span class="token comment">#[x == -sqrt(-b^x - c), x == sqrt(-b^x - c)]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>也可以求解多个变量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x,y=var(<span class="string">&#x27;x y&#x27;</span>)</span><br><span class="line">solve([x+y==<span class="number">6</span>,x-y==<span class="number">4</span>],x,y)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x<span class="token punctuation">,</span>y<span class="token operator">=</span>var<span class="token punctuation">(</span><span class="token string">'x y'</span><span class="token punctuation">)</span>
+solve<span class="token punctuation">(</span><span class="token punctuation">[</span>x<span class="token operator">+</span>y<span class="token operator">==</span><span class="token number">6</span><span class="token punctuation">,</span>x<span class="token operator">-</span>y<span class="token operator">==</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 
 
 <p>微分函数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">u=var(<span class="string">&#x27;u&#x27;</span>)</span><br><span class="line">diff(sin(u),u)</span><br><span class="line"><span class="comment">#cos(u)</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">u<span class="token operator">=</span>var<span class="token punctuation">(</span><span class="token string">'u'</span><span class="token punctuation">)</span>
+diff<span class="token punctuation">(</span>sin<span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">,</span>u<span class="token punctuation">)</span>
+<span class="token comment">#cos(u)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>求四阶导数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff(sin(x^<span class="number">2</span>),x,<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">diff<span class="token punctuation">(</span>sin<span class="token punctuation">(</span>x<span class="token operator">^</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>x<span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>求偏导数</p>
 <p>求x^2 + 17*y^2</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x,y=var(<span class="string">&#x27;x,y&#x27;</span>)</span><br><span class="line">f=x^<span class="number">2</span>+<span class="number">17</span>*y^<span class="number">2</span></span><br><span class="line">f.diff(x)</span><br><span class="line">f.diff(y)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x<span class="token punctuation">,</span>y<span class="token operator">=</span>var<span class="token punctuation">(</span><span class="token string">'x,y'</span><span class="token punctuation">)</span>
+f<span class="token operator">=</span>x<span class="token operator">^</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">17</span><span class="token operator">*</span>y<span class="token operator">^</span><span class="token number">2</span>
+f<span class="token punctuation">.</span>diff<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+f<span class="token punctuation">.</span>diff<span class="token punctuation">(</span>y<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>积分函数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">integral(x*sin(x^<span class="number">2</span>),x)</span><br><span class="line">-<span class="number">1</span>/<span class="number">2</span>*cos(x^<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">integral<span class="token punctuation">(</span>x<span class="token operator">*</span>sin<span class="token punctuation">(</span>x<span class="token operator">^</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>x<span class="token punctuation">)</span>
+<span class="token operator">-</span><span class="token number">1</span><span class="token operator">/</span><span class="token number">2</span><span class="token operator">*</span>cos<span class="token punctuation">(</span>x<span class="token operator">^</span><span class="token number">2</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="4-基础的环"><a href="#4-基础的环" class="headerlink" title="4.基础的环"></a>4.基础的环</h2><p>整数环  ZZ</p>
 <p>有理数环 QQ</p>
 <p>实数环  RR</p>
 <p>复数环   CC</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ratpoly.&lt;t&gt;=PolynomialRing(QQ)   <span class="comment">#这里的ratpoly和realpoly没什么很大区别无关紧要</span></span><br><span class="line">realpoly.&lt;z&gt;=PolynomiaRing(RR)</span><br><span class="line">factor(t^<span class="number">2</span> - <span class="number">2</span>)  <span class="comment">#无结果</span></span><br><span class="line">factor(z^<span class="number">2</span> -<span class="number">2</span>)  <span class="comment">#(z - 1.41421356237310) * (z + 1.41421356237310)</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">ratpoly<span class="token punctuation">.</span><span class="token operator">&lt;</span>t<span class="token operator">>=</span>PolynomialRing<span class="token punctuation">(</span>QQ<span class="token punctuation">)</span>   <span class="token comment">#这里的ratpoly和realpoly没什么很大区别无关紧要</span>
+realpoly<span class="token punctuation">.</span><span class="token operator">&lt;</span>z<span class="token operator">>=</span>PolynomiaRing<span class="token punctuation">(</span>RR<span class="token punctuation">)</span>
+factor<span class="token punctuation">(</span>t<span class="token operator">^</span><span class="token number">2</span> <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span>  <span class="token comment">#无结果</span>
+factor<span class="token punctuation">(</span>z<span class="token operator">^</span><span class="token number">2</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span>  <span class="token comment">#(z - 1.41421356237310) * (z + 1.41421356237310)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="5-线性代数"><a href="#5-线性代数" class="headerlink" title="5.线性代数"></a>5.线性代数</h2><p>创建矩阵和实现矩阵运算</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">A = Matrix([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]])</span><br><span class="line">w = vector([<span class="number">1</span>,<span class="number">1</span>,-<span class="number">4</span>])</span><br><span class="line">w*A</span><br><span class="line">(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">A*w</span><br><span class="line">(-<span class="number">9</span>, <span class="number">1</span>, -<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-PYTHON" data-language="PYTHON"><code class="language-PYTHON">A &#x3D; Matrix([[1,2,3],[3,2,1],[1,1,1]])
+w &#x3D; vector([1,1,-4])
+w*A
+(0, 0, 0)
+A*w
+(-9, 1, -2)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>求解矩阵方程是容易的，使用solve_right方法求解A.solve_right(Y)返回使得AX&#x3D;Y成立的矩阵或向量X:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A = Matrix([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]])</span><br><span class="line">Y = vector([<span class="number">0</span>,-<span class="number">4</span>,-<span class="number">1</span>])</span><br><span class="line">X = A.solve_right(Y)</span><br><span class="line"><span class="comment">#(-2, 1, 0)</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-PYTHON" data-language="PYTHON"><code class="language-PYTHON">A &#x3D; Matrix([[1,2,3],[3,2,1],[1,1,1]])
+Y &#x3D; vector([0,-4,-1])
+X &#x3D; A.solve_right(Y)
+#(-2, 1, 0)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>反斜杠  \  可以用来代替solve_right  A\Y</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A\Y</span><br><span class="line"></span><br><span class="line"><span class="comment">#(-2, 1, 0)</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-PYTHON" data-language="PYTHON"><code class="language-PYTHON">A\Y
+
+#(-2, 1, 0)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 
 
 <h2 id="6-多项式"><a href="#6-多项式" class="headerlink" title="6.多项式"></a>6.多项式</h2><p>一元多项式</p>
 <p>第一种方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R = PolynomialRing(QQ, &#x27;t&#x27;)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">R &#x3D; PolynomialRing(QQ, &#39;t&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>这将创建一个多项式环，并告诉Sage在向屏幕打印时使用（字符串）“t”作为未定元。然而，这并未定义供Sage使用的符号t，因此您不能使用它输入属于R的多项式（例如t^2+1).</p>
 <p>第二种方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">S = QQ[&#x27;t&#x27;]</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">S &#x3D; QQ[&#39;t&#39;]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>第三种方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">R.&lt;t&gt; = PolynomialRing(QQ)</span><br><span class="line">R.&lt;t&gt; = QQ[&#x27;t&#x27;]</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">R.&lt;t&gt; &#x3D; PolynomialRing(QQ)
+R.&lt;t&gt; &#x3D; QQ[&#39;t&#39;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h2 id="7-数论函数"><a href="#7-数论函数" class="headerlink" title="7.数论函数"></a>7.数论函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">gcd(<span class="number">10</span>,<span class="number">25</span>)   <span class="comment">#5</span></span><br><span class="line"></span><br><span class="line">factor(<span class="number">35</span>)   <span class="comment">#5*7</span></span><br><span class="line"></span><br><span class="line">next_prime(<span class="number">2005</span>) <span class="comment">#2011</span></span><br><span class="line"></span><br><span class="line">previous_prime(<span class="number">2005</span>) <span class="comment">#2003</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#扩展欧几里得算法</span></span><br><span class="line">d,u,v = xgcd(<span class="number">12</span>,<span class="number">15</span>)</span><br><span class="line">d == u*<span class="number">12</span> + v*<span class="number">15</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"></span><br><span class="line">phi=euler_phi(n)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="7-数论函数"><a href="#7-数论函数" class="headerlink" title="7.数论函数"></a>7.数论函数</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python">gcd<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">25</span><span class="token punctuation">)</span>   <span class="token comment">#5</span>
+
+factor<span class="token punctuation">(</span><span class="token number">35</span><span class="token punctuation">)</span>   <span class="token comment">#5*7</span>
+
+next_prime<span class="token punctuation">(</span><span class="token number">2005</span><span class="token punctuation">)</span> <span class="token comment">#2011</span>
+
+previous_prime<span class="token punctuation">(</span><span class="token number">2005</span><span class="token punctuation">)</span> <span class="token comment">#2003</span>
+
+<span class="token comment">#扩展欧几里得算法</span>
+d<span class="token punctuation">,</span>u<span class="token punctuation">,</span>v <span class="token operator">=</span> xgcd<span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">)</span>
+d <span class="token operator">==</span> u<span class="token operator">*</span><span class="token number">12</span> <span class="token operator">+</span> v<span class="token operator">*</span><span class="token number">15</span>
+<span class="token boolean">True</span>
+
+phi<span class="token operator">=</span>euler_phi<span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>中国剩余定理</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = crt(2, 1, 3, 5)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">x &#x3D; crt(2, 1, 3, 5)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
                 
@@ -549,7 +608,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/01/14/SageMath/">http://example.com/2023/01/14/SageMath/</a>
+                    <a href="http://example.com/2023/01/14/sagemath/">http://example.com/2023/01/14/sagemath/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -671,7 +730,7 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/01/14/RSA/">
+                <a href="/2023/01/14/rsa/">
                     <div class="card-image">
                         
                         
@@ -724,7 +783,7 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/01/14/Crypto/">
+                <a href="/2023/01/14/crypto/">
                     <div class="card-image">
                         
                         
@@ -814,6 +873,9 @@
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -991,7 +1053,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">61.1k</span>
+                        class="white-color">59.8k</span>
             
             
             
