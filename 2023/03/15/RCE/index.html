@@ -486,7 +486,7 @@
 
 <h2 id="命令执行相关函数"><a href="#命令执行相关函数" class="headerlink" title="命令执行相关函数"></a>命令执行相关函数</h2><p>[PHP执行系统外部命令:exec()、passthru()、system()、shell_exec()</p>
 <p><a target="_blank" rel="noopener" href="http://hi.baidu.com/cszhi/item/d71d61f22feefe16ce9f32d1"><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/ref.exec.php">官方文档</a></a></p>
-<p><img src="/2023/03/15/rce/image-20221215114124054.png"></p>
+<p><img src="/2023/03/15/RCE/image-20221215114124054.png"></p>
 <pre class="line-numbers language-none"><code class="language-none">exec()函数无回显
 因为exec没有回显，所以可以存入文件中，或借助print_r进行输出 
 使用姿势：echo exec(&quot;ls&quot;,$file); 
@@ -566,7 +566,7 @@ cat（英文全拼：concatenate）：用于连接文件并打印到标准输出
 
 
 
-<h2 id="无数字和字母RCE、"><a href="#无数字和字母RCE、" class="headerlink" title="无数字和字母RCE、"></a>无数字和字母RCE、</h2><h3 id="1-异或绕过"><a href="#1-异或绕过" class="headerlink" title="1.异或绕过"></a>1.异或绕过</h3><p><img src="/2023/03/15/rce/image-20221215225144269.png" alt="image-20221215225144269"></p>
+<h2 id="无数字和字母RCE、"><a href="#无数字和字母RCE、" class="headerlink" title="无数字和字母RCE、"></a>无数字和字母RCE、</h2><h3 id="1-异或绕过"><a href="#1-异或绕过" class="headerlink" title="1.异或绕过"></a>1.异或绕过</h3><p><img src="/2023/03/15/RCE/image-20221215225144269.png" alt="image-20221215225144269"></p>
 <pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
 	<span class="token variable">$code</span> <span class="token operator">=</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'code'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'/[a-zA-Z0-9]+/'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
@@ -1019,7 +1019,7 @@ flag &#x3D; &#39;&amp;@^&lt;&#39;^&#39;@,?[&#39;<span aria-hidden="true" class="
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/03/15/rce/">http://example.com/2023/03/15/rce/</a>
+                    <a href="http://example.com/2023/03/15/RCE/">http://example.com/2023/03/15/RCE/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1141,7 +1141,7 @@ flag &#x3D; &#39;&amp;@^&lt;&#39;^&#39;@,?[&#39;<span aria-hidden="true" class="
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/03/16/ssti/">
+                <a href="/2023/03/16/SSTI/">
                     <div class="card-image">
                         
                         
@@ -1194,7 +1194,7 @@ flag &#x3D; &#39;&amp;@^&lt;&#39;^&#39;@,?[&#39;<span aria-hidden="true" class="
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/03/14/2022nctf/">
+                <a href="/2023/03/14/2022NCTF/">
                     <div class="card-image">
                         
                         

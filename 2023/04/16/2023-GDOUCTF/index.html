@@ -436,17 +436,17 @@ alert(_0x324fcb(0x2d9,0x2c3,0x2db,0x2f3)+&#39;k3r_h0pe_t&#39;+_0xe4a674(0x5a">
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h2 id="hate-eat-snake"><a href="#hate-eat-snake" class="headerlink" title="hate eat snake"></a>hate eat snake</h2><p>查看源码，点开JS代码</p>
-<p><img src="/2023/04/16/2023-gdouctf/image-20230416171204097.png" alt="image-20230416171204097"></p>
+<p><img src="/2023/04/16/2023-GDOUCTF/image-20230416171204097.png" alt="image-20230416171204097"></p>
 <p>找到这个语句，这应该就是弹出flag的语句</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token function">_0x324fcb</span><span class="token punctuation">(</span><span class="token number">0x2d9</span><span class="token punctuation">,</span><span class="token number">0x2c3</span><span class="token punctuation">,</span><span class="token number">0x2db</span><span class="token punctuation">,</span><span class="token number">0x2f3</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">'k3r_h0pe_t'</span><span class="token operator">+</span><span class="token function">_0xe4a674</span><span class="token punctuation">(</span><span class="token number">0x5a1</span><span class="token punctuation">,</span><span class="token number">0x595</span><span class="token punctuation">,</span><span class="token number">0x59e</span><span class="token punctuation">,</span><span class="token number">0x57c</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">'irlfriend&#125;'</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>发现里面包含两个函数，但是源码太长看不懂干脆就直接把这一堆都放控制台</p>
-<p><img src="/2023/04/16/2023-gdouctf/image-20230416171858555.png" alt="image-20230416171858555"></p>
+<p><img src="/2023/04/16/2023-GDOUCTF/image-20230416171858555.png" alt="image-20230416171858555"></p>
 <p>然后执行</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token function">_0x324fcb</span><span class="token punctuation">(</span><span class="token number">0x2d9</span><span class="token punctuation">,</span><span class="token number">0x2c3</span><span class="token punctuation">,</span><span class="token number">0x2db</span><span class="token punctuation">,</span><span class="token number">0x2f3</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">'k3r_h0pe_t'</span><span class="token operator">+</span><span class="token function">_0xe4a674</span><span class="token punctuation">(</span><span class="token number">0x5a1</span><span class="token punctuation">,</span><span class="token number">0x595</span><span class="token punctuation">,</span><span class="token number">0x59e</span><span class="token punctuation">,</span><span class="token number">0x57c</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">'irlfriend&#125;'</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>就得到flag了</p>
-<p><img src="/2023/04/16/2023-gdouctf/image-20230416171836729.png" alt="image-20230416171836729"></p>
+<p><img src="/2023/04/16/2023-GDOUCTF/image-20230416171836729.png" alt="image-20230416171836729"></p>
 <pre class="line-numbers language-none"><code class="language-none">NSSCTF&#123;J_0k3r_h0pe_to_have_@_girlfriend&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
@@ -454,7 +454,7 @@ alert(_0x324fcb(0x2d9,0x2c3,0x2db,0x2f3)+&#39;k3r_h0pe_t&#39;+_0xe4a674(0x5a">
 
 
 <h2 id="EZ-WEB"><a href="#EZ-WEB" class="headerlink" title="EZ WEB"></a>EZ WEB</h2><p>首先扫描目录，找到了   &#x2F;src</p>
-<p><img src="/2023/04/16/2023-gdouctf/image-20230416172225142.png" alt="image-20230416172225142"></p>
+<p><img src="/2023/04/16/2023-GDOUCTF/image-20230416172225142.png" alt="image-20230416172225142"></p>
 <p>访问得到源码</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> flask
 
@@ -474,7 +474,7 @@ app <span class="token operator">=</span> flask<span class="token punctuation">.
 
 <p>只要在&#x2F;super-secret-route-nobody-will-guess 这个路径下  使用PUT方法就可以得到flag</p>
 <p>BURP抓包</p>
-<p><img src="/2023/04/16/2023-gdouctf/image-20230416172603991.png" alt="image-20230416172603991"></p>
+<p><img src="/2023/04/16/2023-GDOUCTF/image-20230416172603991.png" alt="image-20230416172603991"></p>
 <pre class="line-numbers language-none"><code class="language-none">NSSCTF&#123;f2db3bbb-abbc-40c5-be8e-01c1f32ab51b&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
@@ -534,11 +534,11 @@ aaa&#x3D;114514&amp;bbb&#x3D;114514a
 
 
 
-<p><img src="/2023/04/16/2023-gdouctf/image-20230416211448230.png" alt="image-20230416211448230"></p>
+<p><img src="/2023/04/16/2023-GDOUCTF/image-20230416211448230.png" alt="image-20230416211448230"></p>
 <pre class="line-numbers language-none"><code class="language-none">NSSCTF&#123;72d7f2f6-3937-4655-9273-8e3a2cbeac57&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id><a href="#" class="headerlink" title></a><ez_ze></ez_ze></h2><p>首先试了一些东西没试出来，那就抓个包看看，</p>
-<p><img src="/2023/04/16/2023-gdouctf/image-20230416211943666.png" alt="image-20230416211943666"></p>
+<p><img src="/2023/04/16/2023-GDOUCTF/image-20230416211943666.png" alt="image-20230416211943666"></p>
 <p>可以联想到SSTI  </p>
 <pre class="line-numbers language-none"><code class="language-none">传入&#123;&#123;&#125;&#125;发现被过滤了，然后又试一下其他的发现过滤了下面这几个
 &#123;&#123;&#125;&#125;
@@ -558,7 +558,7 @@ os<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><
 
 <pre class="line-numbers language-none"><code class="language-none">&#123;%print 7*7%&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="/2023/04/16/2023-gdouctf/image-20230416212359474.png" alt="image-20230416212359474"></p>
+<p><img src="/2023/04/16/2023-GDOUCTF/image-20230416212359474.png" alt="image-20230416212359474"></p>
 <p>刚开始就一直按照的常规思路构造payload,但是发现过滤的东西太多了，非常难搞</p>
 <p>然后就通过搜索发现了几篇文章SSTI十分详细</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/miuzzx/article/details/110220425">https://blog.csdn.net/miuzzx/article/details/110220425</a></p>
@@ -739,7 +739,7 @@ sl<span class="token punctuation">(</span>asm<span class="token punctuation">(</
 
 ia<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="/2023/04/16/2023-gdouctf/image-20230416222248511.png" alt="image-20230416222248511"></p>
+<p><img src="/2023/04/16/2023-GDOUCTF/image-20230416222248511.png" alt="image-20230416222248511"></p>
 <h1 id="RE"><a href="#RE" class="headerlink" title="RE"></a>RE</h1><h2 id="Check-Your-Luck"><a href="#Check-Your-Luck" class="headerlink" title="Check_Your_Luck"></a>Check_Your_Luck</h2><pre class="line-numbers language-C" data-language="C"><code class="language-C">#include &lt;iostream&gt;
 using namespace std;
 void flag_checker(int v, int w,int x,int y,int z); 
@@ -790,7 +790,7 @@ r<span class="token operator">=</span>sympy<span class="token punctuation">.</sp
 
 <span class="token comment">#&#123;v: 4544, w: 123, x: 677, y: 1754, z: 777&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="/2023/04/16/2023-gdouctf/image-20230416220846361.png" alt="image-20230416220846361"></p>
+<p><img src="/2023/04/16/2023-GDOUCTF/image-20230416220846361.png" alt="image-20230416220846361"></p>
 <pre class="line-numbers language-none"><code class="language-none">flag&#123;4544_123_677_1754_777&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h1 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h1><h2 id="Absolute-Baby-Encrytpion"><a href="#Absolute-Baby-Encrytpion" class="headerlink" title="Absolute_Baby_Encrytpion"></a>Absolute_Baby_Encrytpion</h2><p>简单的替换加密，逆着回去就可以了。</p>
@@ -1264,7 +1264,7 @@ flag <span class="token operator">=</span> decrypt_flag<span class="token punctu
 
 <h2 id="Magic-of-Encoding"><a href="#Magic-of-Encoding" class="headerlink" title="Magic of Encoding"></a>Magic of Encoding</h2><p>依次删除里面的干扰flag，，，，，建议下次仍杂项</p>
 <p>得到一个压缩包</p>
-<p><img src="/2023/04/16/2023-gdouctf/55503bdb8d8f6005db3dce12baebdb0.png" alt="55503bdb8d8f6005db3dce12baebdb0"></p>
+<p><img src="/2023/04/16/2023-GDOUCTF/55503bdb8d8f6005db3dce12baebdb0.png" alt="55503bdb8d8f6005db3dce12baebdb0"></p>
 <pre class="line-numbers language-none"><code class="language-none">flag&#123;h0p3_y0u_lik3d_the_M4gic_7rick&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="Math-Problem"><a href="#Math-Problem" class="headerlink" title="Math Problem"></a>Math Problem</h2><p>coppersmith解出x，再f和n求gcd即是p</p>
@@ -1324,7 +1324,7 @@ b&#39;flag&#123;c4edd6d0-d1b3-cbda-95e3-a323edc35be5&#125;&#39;<span aria-hidden
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/04/16/2023-gdouctf/">http://example.com/2023/04/16/2023-gdouctf/</a>
+                    <a href="http://example.com/2023/04/16/2023-GDOUCTF/">http://example.com/2023/04/16/2023-GDOUCTF/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1446,7 +1446,7 @@ b&#39;flag&#123;c4edd6d0-d1b3-cbda-95e3-a323edc35be5&#125;&#39;<span aria-hidden
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/04/22/2023-hdctf/">
+                <a href="/2023/04/22/2023-HDCTF/">
                     <div class="card-image">
                         
                         
@@ -1495,7 +1495,7 @@ b&#39;flag&#123;c4edd6d0-d1b3-cbda-95e3-a323edc35be5&#125;&#39;<span aria-hidden
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/04/09/nssctf-round-11/">
+                <a href="/2023/04/09/NSSCTF-Round-11/">
                     <div class="card-image">
                         
                         

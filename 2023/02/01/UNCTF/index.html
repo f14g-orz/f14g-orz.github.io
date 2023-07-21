@@ -748,7 +748,7 @@ phase2<span class="token punctuation">(</span>high_m<span class="token punctuati
 <span class="token comment">#UNCTF&#123;27a0aac7-76cb-427d-9129-1476360d5d1b&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="超级加倍"><a href="#超级加倍" class="headerlink" title="超级加倍"></a>超级加倍</h2><p>拿到一段数字刚开始没什么思路 然后就试了一下扔进分解网站上分解  得到一个数得四次方</p>
-<p><img src="/2023/02/01/unctf/MyBlog\source_posts\UNCTF.assets\1668735177334.png" alt="1668735177334"></p>
+<p><img src="/2023/02/01/UNCTF/MyBlog\source_posts\UNCTF.assets\1668735177334.png" alt="1668735177334"></p>
 <p>然后尝试了直接利用在线网站转为文本但是出不来   就试着转为字节流试了一下</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> libnum
 <span class="token keyword">print</span><span class="token punctuation">(</span>libnum<span class="token punctuation">.</span>n2s<span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span><span class="token number">777244835068351678348953354168377613564714552731792102125659619461244461053654492541</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -757,7 +757,7 @@ phase2<span class="token punctuation">(</span>high_m<span class="token punctuati
 <h2 id="今晚吃什么"><a href="#今晚吃什么" class="headerlink" title="今晚吃什么"></a>今晚吃什么</h2><p>刚开始以为是摩丝  但是每个之间都有空格  然后又试了一下  二进制都不对</p>
 <p>然后又看了下题目  今晚吃什么  可以想到培根密码</p>
 <p>然后把1000换成A 00000换成B然后在在线网站解密</p>
-<p><img src="/2023/02/01/unctf/MyBlog\source_posts\UNCTF.assets\1668740686177.png" alt="1668740686177"></p>
+<p><img src="/2023/02/01/UNCTF/MyBlog\source_posts\UNCTF.assets\1668740686177.png" alt="1668740686177"></p>
 <p>得到UNCTF{CRYPROISFUN}</p>
 <h2 id="Fermat"><a href="#Fermat" class="headerlink" title="Fermat"></a>Fermat</h2><p>费马小定理</p>
 <p>如果a,p两个数互为质数则    a**(p-1)  &#x3D;  1  mod p</p>
@@ -783,19 +783,19 @@ m <span class="token operator">=</span> <span class="token builtin">pow</span><s
 
 <p>UNCTF{DO_y0u_Fermat_1ittle_theOrem}</p>
 <h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="magic-word"><a href="#magic-word" class="headerlink" title="magic_word"></a>magic_word</h2><p>直接在网站上解码</p>
-<p><img src="/2023/02/01/unctf/1668692896809.png" alt="1668692896809"></p>
+<p><img src="/2023/02/01/UNCTF/1668692896809.png" alt="1668692896809"></p>
 <p>unctf{We1come_new_ctfer}</p>
 <h2 id="找得到我吗"><a href="#找得到我吗" class="headerlink" title="找得到我吗"></a>找得到我吗</h2><p>把docx文件改为zip文件  然后解压得</p>
 <p>然后以记事本打开</p>
-<p><img src="/2023/02/01/unctf/1668693152120.png" alt="1668693152120">  </p>
+<p><img src="/2023/02/01/UNCTF/1668693152120.png" alt="1668693152120">  </p>
 <p>直接搜索flag得</p>
-<p><img src="/2023/02/01/unctf/1668693203672.png" alt="1668693203672">UNCTF{You_find_me!}</p>
+<p><img src="/2023/02/01/UNCTF/1668693203672.png" alt="1668693203672">UNCTF{You_find_me!}</p>
 <h2 id="syslog"><a href="#syslog" class="headerlink" title="syslog"></a>syslog</h2><p>在syslog里面找到password    cGFzc3dvcmQgaXMgVTZudTJfaTNfYjNTdA&#x3D;&#x3D;  解码得   U6nu2_i3_b3St</p>
 <p>然后输入压缩包密码  在flag.txt里面  找到flag</p>
-<p><img src="/2023/02/01/unctf/1668693426170.png" alt="1668693426170"></p>
+<p><img src="/2023/02/01/UNCTF/1668693426170.png" alt="1668693426170"></p>
 <p>unctf{N1_sH3_D0n9_L0g_dE!}</p>
 <h1 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h1><h2 id="welcomeUNCTF2022"><a href="#welcomeUNCTF2022" class="headerlink" title="welcomeUNCTF2022"></a>welcomeUNCTF2022</h2><p>经过分析得输入  UNCTF&amp;2022</p>
-<p><img src="/2023/02/01/unctf/1668698214475.png" alt="1668698214475"></p>
+<p><img src="/2023/02/01/UNCTF/1668698214475.png" alt="1668698214475"></p>
 <h1 id="Re"><a href="#Re" class="headerlink" title="Re"></a>Re</h1><h2 id="whereisyourkey"><a href="#whereisyourkey" class="headerlink" title="whereisyourkey"></a>whereisyourkey</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python">a<span class="token operator">=</span><span class="token string">'vgpkcmhnci'</span>
 flag<span class="token operator">=</span><span class="token string">''</span>
 <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -827,11 +827,11 @@ flag<span class="token operator">=</span><span class="token string">''</span>
 
 <p>发现如果通过GET方式传入一个文件 如果不出现被过滤得词就会include包含</p>
 <p>然后就上传一个png文件 发现POST好像被过滤  那我们就用GET构造shell</p>
-<p><img src="/2023/02/01/unctf/1668607591804.png" alt="1668607591804"></p>
-<p><img src="/2023/02/01/unctf/1668607675461.png" alt="1668607675461"></p>
+<p><img src="/2023/02/01/UNCTF/1668607591804.png" alt="1668607591804"></p>
+<p><img src="/2023/02/01/UNCTF/1668607675461.png" alt="1668607675461"></p>
 <p>然后在tmp下找到了flag.sh</p>
 <p>然后cat查看内容</p>
-<p><img src="/2023/02/01/unctf/1668607760805.png" alt="1668607760805"></p>
+<p><img src="/2023/02/01/UNCTF/1668607760805.png" alt="1668607760805"></p>
 <p>flag目录应该在&#x2F;home&#x2F;ctf&#x2F;flag目录下</p>
 <p>然后cat得到   UNCTF{165e39e0-cae3-4935-80cd-e7ef9242edee}</p>
 <h2 id="我太喜欢bilibili大学啦修复版"><a href="#我太喜欢bilibili大学啦修复版" class="headerlink" title="我太喜欢bilibili大学啦修复版"></a>我太喜欢bilibili大学啦修复版</h2><p>先是找到了hint_1    YWRtaW5fdW5jdGYucGhw</p>
@@ -856,12 +856,12 @@ if(!isset($_POST[&#39;username&#39;]) &amp;&amp; !isset($_POST[&#39;password&#39
 
 
 <p>在cookie里加入cmd命令</p>
-<p><img src="/2023/02/01/unctf/1668609960920.png" alt="1668609960920"></p>
+<p><img src="/2023/02/01/UNCTF/1668609960920.png" alt="1668609960920"></p>
 <p>base64解密到</p>
 <p><a target="_blank" rel="noopener" href="https://space.bilibili.com/673907356">https://space.bilibili.com/673907356</a></p>
 <p>访问得到flag</p>
 <p>UNCTF{this_is_so_easy}</p>
-<h1 id="签到"><a href="#签到" class="headerlink" title="签到"></a>签到</h1><p><img src="/2023/02/01/unctf/1668610926120.png" alt="1668610926120"></p>
+<h1 id="签到"><a href="#签到" class="headerlink" title="签到"></a>签到</h1><p><img src="/2023/02/01/UNCTF/1668610926120.png" alt="1668610926120"></p>
 <p>在源码里找到  20200101  20200101</p>
 <p>然后后面是   20200102   20200102</p>
 <p>一直到          20200131  20200131  </p>
@@ -911,24 +911,24 @@ if(isset($_POST[&quot;a&quot;]))&#123;
 <p>过滤了  flag|system|txt|cat|tac|sort|shell|.| |&#39;   还过滤了空格  %20  %27</p>
 <p>可以利用passthru绕过system  利用双引号绕过单引号   利用  %09绕过空格</p>
 <p>利用  ?code&#x3D;passthru(“ls%09&#x2F;“);得到</p>
-<p><img src="/2023/02/01/unctf/1668656852081.png" alt="1668656852081"></p>
+<p><img src="/2023/02/01/UNCTF/1668656852081.png" alt="1668656852081"></p>
 <p>可以发现有flag.txt  但是   cat   flag  txt   .  都被过滤</p>
 <p>利用more 绕过  cat  利用  * 绕过   flag  txt .</p>
 <p>payload</p>
 <p>?code&#x3D;passthru(“more%09&#x2F;fl*”);</p>
-<p><img src="/2023/02/01/unctf/1668657007376.png" alt="1668657007376"></p>
+<p><img src="/2023/02/01/UNCTF/1668657007376.png" alt="1668657007376"></p>
 <p>UNCTF{99hanDis_pHP_Ba_True_flag}</p>
 <h1 id="ezgame"><a href="#ezgame" class="headerlink" title="ezgame"></a>ezgame</h1><p>通过查找页面源代码  发现main.js 然后打开js代码   搜索unctf得到</p>
-<p><img src="/2023/02/01/unctf/1668659315693.png" alt="1668659315693"></p>
+<p><img src="/2023/02/01/UNCTF/1668659315693.png" alt="1668659315693"></p>
 <p>把它们连接经过尝试得到flag</p>
 <p>UNCTF{c5f9a27d-6f88-49fb-a510-fe7b163f8dd3}</p>
-<h1 id="给你一刀"><a href="#给你一刀" class="headerlink" title="给你一刀"></a>给你一刀</h1><p><img src="/2023/02/01/unctf/1668660124391.png" alt="1668660124391"></p>
+<h1 id="给你一刀"><a href="#给你一刀" class="headerlink" title="给你一刀"></a>给你一刀</h1><p><img src="/2023/02/01/UNCTF/1668660124391.png" alt="1668660124391"></p>
 <p>打开题目是这样一个页面 应该是thinphp漏洞  然后随便通过一个GET传参发现是thinkphp5.0.20漏洞</p>
 <p>payload</p>
 <pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;d1021445-6982-4789-b0d2-b6ba3ffe304e.node.yuzhian.com.cn&#x2F;index.php?s&#x3D;&#x2F;Index&#x2F;\think\app&#x2F;invokefunction&amp;function&#x3D;call_user_func_array&amp;vars[0]&#x3D;phpinfo&amp;vars[1][]&#x3D;-1&#96;%20and%20it%27ll%20execute%20the%20phpinfo%EF%BC%9A<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>得到phpinfo页面  然后直接搜索  unctf</p>
-<p><img src="/2023/02/01/unctf/1668660310042.png" alt="1668660310042"></p>
+<p><img src="/2023/02/01/UNCTF/1668660310042.png" alt="1668660310042"></p>
 <p>UNCTF{Y0u_A3r_so_G9eaD_hacker} </p>
 
                 
@@ -956,7 +956,7 @@ if(isset($_POST[&quot;a&quot;]))&#123;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/02/01/unctf/">http://example.com/2023/02/01/unctf/</a>
+                    <a href="http://example.com/2023/02/01/UNCTF/">http://example.com/2023/02/01/UNCTF/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1078,7 +1078,7 @@ if(isset($_POST[&quot;a&quot;]))&#123;
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/02/01/uuctf/">
+                <a href="/2023/02/01/UUCTF/">
                     <div class="card-image">
                         
                         
@@ -1127,7 +1127,7 @@ if(isset($_POST[&quot;a&quot;]))&#123;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/02/01/isctf/">
+                <a href="/2023/02/01/ISCTF/">
                     <div class="card-image">
                         
                         

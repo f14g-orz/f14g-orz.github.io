@@ -436,7 +436,7 @@ from PIL import Image, ">
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="2022NCTF"><a href="#2022NCTF" class="headerlink" title="2022NCTF"></a>2022NCTF</h1><p>这次Crypto题目对于我来说过于困难，还好战队的佬写了wp</p>
-<h2 id="Coloratura"><a href="#Coloratura" class="headerlink" title="Coloratura"></a>Coloratura</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p><img src="/2023/03/14/2022nctf/attach.png" alt="attach"></p>
+<h2 id="Coloratura"><a href="#Coloratura" class="headerlink" title="Coloratura"></a>Coloratura</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p><img src="/2023/03/14/2022NCTF/attach.png" alt="attach"></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>number <span class="token keyword">import</span> long_to_bytes
 <span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image<span class="token punctuation">,</span> ImageDraw
 <span class="token keyword">from</span> random <span class="token keyword">import</span> getrandbits
@@ -561,7 +561,7 @@ flag <span class="token operator">=</span> Image<span class="token punctuation">
         x <span class="token operator">+=</span> <span class="token number">3</span>
 flag<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="/2023/03/14/2022nctf/MyBlog\source_posts\2022NCTF.assets\image-20230314213110239.png" alt="image-20230314213110239"></p>
+<p><img src="/2023/03/14/2022NCTF/MyBlog\source_posts\2022NCTF.assets\image-20230314213110239.png" alt="image-20230314213110239"></p>
 <h2 id="dp-promax"><a href="#dp-promax" class="headerlink" title="dp_promax"></a>dp_promax</h2><h3 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>number <span class="token keyword">import</span> <span class="token operator">*</span>
 <span class="token keyword">from</span> random <span class="token keyword">import</span> <span class="token operator">*</span>
 
@@ -647,11 +647,11 @@ S <span class="token operator">=</span> ecc<span class="token punctuation">.</sp
 
 <h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>考查的是Twisted Edward Curve</p>
 <p>题⽬定义了⼀个循环群上的点加法，搜索可以发现是Twisted Edward Curve</p>
-<p><img src="/2023/03/14/2022nctf/WAGZ2AYAFU.png" alt="img"></p>
+<p><img src="/2023/03/14/2022NCTF/WAGZ2AYAFU.png" alt="img"></p>
 <p>经过适当的变化可以将c消除掉，得到标准形式</p>
-<p><img src="/2023/03/14/2022nctf/SIGZ2AYAXQ.png" alt="img"></p>
+<p><img src="/2023/03/14/2022NCTF/SIGZ2AYAXQ.png" alt="img"></p>
 <p>对于Twisted Edward Curve，可以转化为等价的Montgomery Curve</p>
-<p><img src="/2023/03/14/2022nctf/UMGZ2AYB44.png" alt="img"></p>
+<p><img src="/2023/03/14/2022NCTF/UMGZ2AYB44.png" alt="img"></p>
 <p>Montgomery Curve的形式已经是Weierstrass形式的椭圆曲线，可以使⽤sage求解其阶，即求得了Twisted Edward Curve的阶寻找阶中的⼩素数因⼦，使⽤Pohlig Hellman + BSGS求解离散对数问题，得到flag的值</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/env sage</span>
 <span class="token keyword">class</span> <span class="token class-name">super_ecc</span><span class="token punctuation">:</span>
@@ -760,7 +760,7 @@ sk <span class="token operator">=</span> Pohlig_Hellman<span class="token punctu
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/03/14/2022nctf/">http://example.com/2023/03/14/2022nctf/</a>
+                    <a href="http://example.com/2023/03/14/2022NCTF/">http://example.com/2023/03/14/2022NCTF/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -882,7 +882,7 @@ sk <span class="token operator">=</span> Pohlig_Hellman<span class="token punctu
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/03/15/rce/">
+                <a href="/2023/03/15/RCE/">
                     <div class="card-image">
                         
                         
@@ -935,7 +935,7 @@ sk <span class="token operator">=</span> Pohlig_Hellman<span class="token punctu
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/03/14/hectf/">
+                <a href="/2023/03/14/HECTF/">
                     <div class="card-image">
                         
                         
