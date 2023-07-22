@@ -1,0 +1,1931 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Linux基础, f14g">
+    <meta name="description" content="Linux命令初体验Linux命令终端介绍退出命令终端输入exit或者ctrl+d快捷方式退出命令终端
+设置命令终端窗口字体大小设置命令终端窗口字体大小： 
+临时设置字体大小 
+ctrl + - :缩小字体 
+ctrl + shift + ">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Linux基础 | f14g</title>
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">f14g</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">f14g</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Linux基础</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Linux/" class="post-category">
+                                Linux
+                            </a>
+                        
+                            <a href="/categories/Linux/Linux%E5%9F%BA%E7%A1%80/" class="post-category">
+                                Linux基础
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-03-22
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-05-05
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    14 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Linux命令初体验"><a href="#Linux命令初体验" class="headerlink" title="Linux命令初体验"></a>Linux命令初体验</h1><h2 id="Linux命令终端介绍"><a href="#Linux命令终端介绍" class="headerlink" title="Linux命令终端介绍"></a>Linux命令终端介绍</h2><p>退出命令终端输入exit或者ctrl+d快捷方式退出命令终端</p>
+<h3 id="设置命令终端窗口字体大小"><a href="#设置命令终端窗口字体大小" class="headerlink" title="设置命令终端窗口字体大小"></a>设置命令终端窗口字体大小</h3><p>设置命令终端窗口字体大小： </p>
+<p>临时设置字体大小 </p>
+<pre class="line-numbers language-none"><code class="language-none">ctrl + - :缩小字体 
+ctrl + shift + + :增大字体 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>持久设置字体大小 </p>
+<pre class="line-numbers language-none"><code class="language-none">在命令终端界面点击右键--&gt;配置文件首选项--&gt;文本--&gt;自定义字体<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="命令提示符"><a href="#命令提示符" class="headerlink" title="命令提示符"></a>命令提示符</h3><p>(root㉿kali)-[&#x2F;opt]</p>
+<pre class="line-numbers language-none"><code class="language-none">root:用户名
+kali:表示主机名
+opt ：表示当前目录名<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Linux命令体验"><a href="#Linux命令体验" class="headerlink" title="Linux命令体验"></a>Linux命令体验</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python">who ：显示当前登录用户
+pwd（<span class="token keyword">print</span> work directory）：显示当前目录
+cd <span class="token punctuation">(</span>change directory<span class="token punctuation">)</span><span class="token punctuation">:</span> 切换目录
+cd <span class="token operator">~</span> <span class="token punctuation">:</span> 切换到用户工作目录
+tree <span class="token punctuation">:</span>查看文件列表
+ls ：查看文件列表
+	ls <span class="token operator">-</span>l
+ifconfig（interface config）查看网卡配置信息
+linux查看ip ： ifconfig
+window查看ip： ipconfig
+ip地址有ipv4和ipv6两个版本， 目前主要使用ipv4
+ping ：测试主机间的连接情况
+主机可以用ip地址或者域名来描述
+ 比如<span class="token punctuation">:</span> ping <span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.6</span>
+       ping www<span class="token punctuation">.</span>baidu<span class="token punctuation">.</span>com
+clear： 清除命令终端内容
+ctrl<span class="token operator">+</span>L <span class="token punctuation">:</span>快捷方式清除命令终端内容
+uname ：显示操作系统信息 
+	uname <span class="token operator">-</span>r
+    uname <span class="token operator">-</span>a
+uname <span class="token operator">-</span>r ：查看linux内核版本发行号 
+exit： 退出或注销用户
+
+shutdown ：关闭系统
+	shutdown –r now <span class="token punctuation">:</span>重启系统
+	shutdown –h now <span class="token punctuation">:</span>关机
+	shutdown –h <span class="token operator">+</span><span class="token number">5</span> <span class="token punctuation">:</span><span class="token number">5</span>分钟之后关机
+	shutdown –c <span class="token punctuation">:</span>取消预定的关机<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Linux命令格式"><a href="#Linux命令格式" class="headerlink" title="Linux命令格式"></a>Linux命令格式</h2><pre class="line-numbers language-none"><code class="language-none">command[-options][parameter]
+
+command:命令名，比如：who,pwd
+[-options]:选项，可以有零个、一个或者多个选项，多个选项可以合并，比如使用的 -r 就是选项
+[parameter]:参数，可以有零个、一个或者多个参数，比如：ping 192.168.1.6， cd ~  这些都是参数
+[]代表可选<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="使用Linux命令的小技巧"><a href="#使用Linux命令的小技巧" class="headerlink" title="使用Linux命令的小技巧"></a>使用Linux命令的小技巧</h2><h3 id="命令补全"><a href="#命令补全" class="headerlink" title="命令补全"></a>命令补全</h3><p>当输入的字符足以确定某个命令或者某个文件时，只需按Tab键就可以自动补全该命令或者剩下的命令</p>
+<h3 id="查看历史命令"><a href="#查看历史命令" class="headerlink" title="查看历史命令"></a>查看历史命令</h3><p>使用上下箭头查看已经使用过的历史命令</p>
+<p>使用history命令查看已经使用过的命令</p>
+<p>​		！+序列号可以执行对应的命令   注意！和序列号之间没有空格</p>
+<h3 id="终止命令的执行"><a href="#终止命令的执行" class="headerlink" title="终止命令的执行"></a>终止命令的执行</h3><p>ctrl+c：终止命令的执行</p>
+<p>测试top命令查看系统执行效果:[lijun@192~]$top</p>
+<h3 id="查看命令帮助方式"><a href="#查看命令帮助方式" class="headerlink" title="查看命令帮助方式"></a>查看命令帮助方式</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">-</span><span class="token operator">-</span><span class="token builtin">help</span>
+   eg<span class="token punctuation">:</span>uname <span class="token operator">-</span><span class="token operator">-</span><span class="token builtin">help</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">man命令
+man命令是manual的简写，表示查看指定命令的使用说明书
+使用格式：man命令名
+例如：
+man uname<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>操作键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空格</td>
+<td>显示下一屏的信息</td>
+</tr>
+<tr>
+<td>回车</td>
+<td>显示下一行信息</td>
+</tr>
+<tr>
+<td>q</td>
+<td>退出</td>
+</tr>
+</tbody></table>
+<h1 id="Linux常用命令1"><a href="#Linux常用命令1" class="headerlink" title="Linux常用命令1"></a>Linux常用命令1</h1><h3 id="Linux目录结构"><a href="#Linux目录结构" class="headerlink" title="Linux目录结构"></a>Linux目录结构</h3><p><img src="/2023/03/22/Linux%E5%9F%BA%E7%A1%80/image-20230321223051622.png" alt="image-20230321223051622"></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">主要目录说明<span class="token punctuation">:</span>
+<span class="token operator">/</span>：Linux文件系统根目录，所有文件都是在该目录下面
+<span class="token operator">/</span>boot
+	启动Linux时使用的一些核心文件
+<span class="token operator">/</span>root
+	该目录为系统管理员（超级用户root）的主目录。
+<span class="token operator">/</span><span class="token builtin">bin</span>
+	binary的缩写，用来存放用户命令文件。
+<span class="token operator">/</span>sbin
+	s就是Super User的意思。这里存放的是系统管理员使用的系统管理命令文件。
+<span class="token operator">/</span>etc<span class="token operator">/</span>
+	存放系统管理所需要的配置文件。
+<span class="token operator">/</span>dev<span class="token operator">/</span>
+	dev是Device<span class="token punctuation">(</span>设备<span class="token punctuation">)</span>的缩写。该目录下存放的是设备文件，在
+Linux中访问外部设备的方式和访问文件的方式是相同的。
+
+<span class="token operator">/</span>home
+	用以存放普通用户的主目录。在Linux中，每个用户都有一个自己的目录，一般以用户的账号命名
+<span class="token operator">/</span>home<span class="token operator">/</span>用户名
+	某普通用户的主目录，假如用户名是pz，则<span class="token operator">/</span>home<span class="token operator">/</span>pz则为该用户的主目录，可简写为<span class="token operator">~</span>
+<span class="token operator">/</span>opt
+	可选文件和程序的存储目录。该目录主要被第三方开发者用来简易地安装和卸装他们的软件包。
+<span class="token operator">/</span>mnt
+	该目录中通常包括系统引导后被挂载的文件系统的挂载点。
+<span class="token operator">/</span>usr<span class="token operator">/</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>包括与系统用户直接有关的文件和目录
+ <span class="token operator">/</span>usr<span class="token operator">/</span>X11R6：X Window的目录；
+<span class="token operator">/</span>usr<span class="token operator">/</span><span class="token builtin">bin</span>：存放着许多应用程序；
+<span class="token operator">/</span>usr<span class="token operator">/</span>sbin：存放root超级用户使用的管理程序；
+<span class="token operator">/</span>usr<span class="token operator">/</span>lib：存放一些常用的动态链接共享库和静态档案库；
+<span class="token operator">/</span>usr<span class="token operator">/</span>src：存放源代码，Linux源代码就存在这个目录中。
+<span class="token operator">/</span>usr<span class="token operator">/</span>local：这是提供给一般用户的
+<span class="token operator">/</span>usr目录，在这里安装一般的应用软件；<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="目录切换"><a href="#目录切换" class="headerlink" title="目录切换"></a>目录切换</h3><h4 id="相对路径与绝对路径"><a href="#相对路径与绝对路径" class="headerlink" title="相对路径与绝对路径"></a>相对路径与绝对路径</h4><p>绝对路径：是指从根目录&#x2F;开始的路径</p>
+<p>相对路径：是指从当前目录开始的路径</p>
+<h4 id="使用cd命令切换目录"><a href="#使用cd命令切换目录" class="headerlink" title="使用cd命令切换目录"></a>使用cd命令切换目录</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>使用cd命令切换目录</td>
+<td>切换到指定目录</td>
+</tr>
+<tr>
+<td>cd ~ (波浪线)</td>
+<td>切换到当前用户的主目录</td>
+</tr>
+<tr>
+<td>cd ..</td>
+<td>切换到上一级目录</td>
+</tr>
+<tr>
+<td>cd .</td>
+<td>切换到当前目录</td>
+</tr>
+<tr>
+<td>cd -</td>
+<td>切换到上一次目录</td>
+</tr>
+</tbody></table>
+<h3 id="查看目录的文件列表信息"><a href="#查看目录的文件列表信息" class="headerlink" title="查看目录的文件列表信息"></a>查看目录的文件列表信息</h3><p>文件信息:</p>
+<p>当创建一个文件的时候，系统保存了有关该文件的全部信息包括：文件的名称、文件的位置、文件类型、文件长度、文件的拥有者、i节点、文件的修改时间、文件的权限等</p>
+<p>命令：ls</p>
+<table>
+<thead>
+<tr>
+<th>命令选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-l</td>
+<td>以列表方式显示use a long listing format</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>以大小单位显示，默认是字节with -l and&#x2F;or -s, print human readable sizes (e.g., 1K 234M 2G)</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>以大小单位显示，默认是字节with -l and&#x2F;or -s, print human readable sizes (e.g., 1K 234M 2G)</td>
+</tr>
+</tbody></table>
+<p><img src="/2023/03/22/Linux%E5%9F%BA%E7%A1%80/image-20230321224221903.png" alt="image-20230321224221903"></p>
+<p>文件类型</p>
+<p><img src="/2023/03/22/Linux%E5%9F%BA%E7%A1%80/image-20230321224302825.png" alt="image-20230321224302825"></p>
+<p>文件权限</p>
+<p><img src="/2023/03/22/Linux%E5%9F%BA%E7%A1%80/image-20230321224321300.png" alt="image-20230321224321300"></p>
+<p>提示：</p>
+<p>1.选项之间可以组合一起使用</p>
+<p>2.-h选项一般结合-l一起使用</p>
+<p>3.文件与目录名前添加   .  ，用于隐藏文件</p>
+<p>练习</p>
+<pre class="line-numbers language-none"><code class="language-none">(当前目录是rh用户的主目录)
+1.以相对路径与绝对路径切换(cd)到用户主目录( &#x2F;home&#x2F;rh)
+cd &#x2F;home&#x2F;rh
+2.以相对路径与绝对路径切换(cd)到根目录下的opt子目录(&#x2F;opt)
+cd ..&#x2F;..&#x2F;opt
+cd &#x2F;opt
+3.使用ls -l命令查看用户主目录的内容
+ls -l &#x2F;home&#x2F;rh
+ls -l ~<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="创建、删除文件及目录命令"><a href="#创建、删除文件及目录命令" class="headerlink" title="创建、删除文件及目录命令"></a>创建、删除文件及目录命令</h3><pre class="line-numbers language-none"><code class="language-none">touch  文件路径&#x2F;文件名:创建指定文件
+mkdir   目录名:创建目录(文件夹)
+	选项：p级联创建目录
+rm     文件\文件夹:删除指定文件
+  选项：r：递归删除目录及其内容<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">当前目录是kali用户主目录
+<span class="token number">1.</span>在当前目录创建info<span class="token punctuation">.</span>txt文件
+	touch info<span class="token punctuation">.</span>txt
+<span class="token number">2.</span>在当前目录创建CTF文件夹
+	mkdir CTF
+<span class="token number">3.</span>在CTF文件夹下创建a<span class="token punctuation">.</span>txt文件
+	touch <span class="token punctuation">.</span><span class="token operator">/</span>CTF<span class="token operator">/</span>a<span class="token punctuation">.</span>txt
+<span class="token number">4.</span>删除用户主目录info<span class="token punctuation">.</span>txt文件
+	rm <span class="token operator">~</span><span class="token operator">/</span>info<span class="token punctuation">.</span>txt
+<span class="token number">5.</span>删除CTF文件夹
+	rm <span class="token operator">-</span>r <span class="token operator">~</span><span class="token operator">/</span>CTF<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="复制、移动文件及目录命令"><a href="#复制、移动文件及目录命令" class="headerlink" title="复制、移动文件及目录命令"></a>复制、移动文件及目录命令</h3><p>cp : 拷贝文件、拷贝目录</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#拷贝文件</span>
+cp  源文件 目标路径<span class="token operator">/</span>目标文件名
+	<span class="token number">1.</span>如果不指定目标文件名，使用源文件名
+	<span class="token number">2.</span>如果目标文件存在，覆盖原来文件
+<span class="token comment">#</span>
+拷贝目录
+cp <span class="token operator">-</span>r 源目录 目标目录<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>mv:移动文件、移动目录、重命名，move</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#移动文件</span>
+mv 源文件 目标路径<span class="token operator">/</span>目标文件名
+	<span class="token number">1.</span>如果不指定目标文件名，使用源文件名
+	<span class="token number">2.</span>如果目标文件存在，覆盖原来文件
+<span class="token comment">#移动目录</span>
+mv 源目录 目标目录
+<span class="token comment">#重命名：</span>
+mv 源文件名 目标文件名<span class="token punctuation">(</span>在同一级目录下<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">当前目录为用户主目录
+1.在当前目录创建info.txt文件
+	touch info.txt
+2.在当前目录创建CTF文件夹
+	mkdir CTF
+3.在CTF文件夹下创建a.txt文件
+	touch .&#x2F;CTF&#x2F;a.txt
+4.拷贝info.txt到CTF目录下
+	cp info.txt .&#x2F;CTF
+5.对a.txt文件移动到用户主目录下，且重命名为b.txt
+	mv CTF&#x2F;a.txt &#x2F;home&#x2F;kali&#x2F;b.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="重定向与管道命令"><a href="#重定向与管道命令" class="headerlink" title="重定向与管道命令"></a>重定向与管道命令</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">重定向
+把原本输出到屏幕上的内容，输出到文件中<span class="token punctuation">(</span>文件不存在，则新建<span class="token punctuation">)</span>，这就是重定向重定向命令：
+<span class="token operator">></span><span class="token punctuation">:</span>覆盖模式重定向、
+<span class="token operator">>></span><span class="token punctuation">:</span>追加模式重定向
+管道命令
+<span class="token operator">|</span>：管道的功能是将前一个程序的输出作为后一个程序的输入
+wc：word count：单词统计<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">cat<span class="token punctuation">:</span>查看文件内容
+more：分屏查看文件内容，按空格切换到下一屏<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>练习</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token number">1.</span>把历史命令history输出的内容写入到用户主目录的myfile<span class="token punctuation">.</span>txt文件中
+history <span class="token operator">></span> myfile<span class="token punctuation">.</span>txt
+<span class="token number">2.</span>把<span class="token operator">/</span>根目录下的文件列表追加到用户主目录的myfile<span class="token punctuation">.</span>txt文件中
+ls <span class="token operator">/</span> <span class="token operator">>></span> myfile<span class="token punctuation">.</span>txt
+<span class="token number">3.</span>用ls显示<span class="token operator">/</span>目录的目录和文件，并且分屏显示
+ls <span class="token operator">/</span> <span class="token operator">|</span> more
+ls <span class="token operator">/</span> <span class="token operator">|</span> wc
+<span class="token number">4.</span>分别用cat和more命令查看 <span class="token operator">/</span>etc<span class="token operator">/</span>passwd的内容
+cat <span class="token operator">/</span>etc<span class="token operator">/</span>passwd
+more <span class="token operator">/</span>etc<span class="token operator">/</span>passwd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="Linux常用命令2"><a href="#Linux常用命令2" class="headerlink" title="Linux常用命令2"></a>Linux常用命令2</h1><h3 id="文件打包压缩命令tar"><a href="#文件打包压缩命令tar" class="headerlink" title="文件打包压缩命令tar"></a>文件打包压缩命令tar</h3><p>tar命令可用于压缩解压文件，好比windows的winRAR</p>
+<p>语法格式：</p>
+<p>tar[选项]文件或者目录</p>
+<p>tar选项</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td>创建新的打包文件</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示打包或者解包的文件的详情</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>使用打包文件或者设备,这个选项是必选项，一般放到所有选项后面</td>
+</tr>
+<tr>
+<td>-z</td>
+<td>用gzip格式来压缩或解压缩文件(.gz)</td>
+</tr>
+<tr>
+<td>-j</td>
+<td>用bzip2格式来压缩或解压缩文件(.bz2)</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>解包</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>解压到指定目录</td>
+</tr>
+</tbody></table>
+<p>gz格式压缩和解压:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tar <span class="token operator">-</span>zcvf 压缩后的名字 <span class="token punctuation">.</span>tar<span class="token punctuation">.</span>gz 要压缩的文件和目录
+tar <span class="token operator">-</span>zxvf 压缩包的名字 <span class="token punctuation">.</span>tar<span class="token punctuation">.</span>gz <span class="token operator">-</span>C 要解压到的目录<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>.bz2的压缩和解压缩格式:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tar <span class="token operator">-</span>jcvf 压缩后的名字 <span class="token punctuation">.</span>tar<span class="token punctuation">.</span>bz2 要压缩的文件
+tar <span class="token operator">-</span>jxvf 压缩包的名字<span class="token punctuation">.</span>tar<span class="token punctuation">.</span>bz2 <span class="token operator">-</span>C 要解压到的目录<span class="token punctuation">(</span>目录需要存在<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><h4 id="用户分类"><a href="#用户分类" class="headerlink" title="用户分类"></a>用户分类</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">超级用户<span class="token punctuation">(</span>管理员<span class="token punctuation">)</span>
+	该用户具有所有管理权限，UID<span class="token operator">=</span><span class="token number">0</span>
+系统用户
+针对特定的系统服务而开设的用户，系统用户不能用于登录，UID范围<span class="token number">1</span><span class="token operator">-</span><span class="token number">999</span>
+普通用户
+为了让使用者使用Linux系统资源而建立的户，UID范围<span class="token number">1000</span><span class="token operator">-</span><span class="token operator">-</span><span class="token number">65535</span>
+
+
+查看用户<span class="token builtin">id</span>命令<span class="token punctuation">:</span><span class="token builtin">id</span><span class="token punctuation">[</span>用户名<span class="token punctuation">]</span>
+选项： <span class="token operator">-</span>u<span class="token punctuation">(</span>查看用户uid<span class="token punctuation">)</span> <span class="token operator">-</span>g<span class="token punctuation">(</span>查看用户gid<span class="token punctuation">)</span> <span class="token operator">-</span>G<span class="token punctuation">(</span>查看用户所在所有组的<span class="token builtin">id</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="用户、组相关的配置文件"><a href="#用户、组相关的配置文件" class="headerlink" title="用户、组相关的配置文件"></a>用户、组相关的配置文件</h4><p>配置文件</p>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;etc&#x2F;passwd&#x2F;</td>
+<td>用户信息库</td>
+</tr>
+<tr>
+<td>&#x2F;etc&#x2F;group</td>
+<td>用户组信息库</td>
+</tr>
+<tr>
+<td>&#x2F;etc&#x2F;shadow</td>
+<td>用户认证信息</td>
+</tr>
+<tr>
+<td>&#x2F;etc&#x2F;gshadow</td>
+<td>用户组认证信息</td>
+</tr>
+</tbody></table>
+<h4 id="用户管理-1"><a href="#用户管理-1" class="headerlink" title="用户管理"></a>用户管理</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">添加用户
+useradd <span class="token punctuation">[</span>选项 参数<span class="token punctuation">]</span> 用户名
+选项：
+<span class="token operator">-</span>d ： 指定用户主目录默认的主目录
+<span class="token operator">/</span>home<span class="token operator">/</span>kali
+<span class="token operator">-</span>M ：不创建用户主目录
+useradd CTF
+<span class="token operator">-</span>s ： 指定新用户登录后使用的shell，默认是<span class="token operator">/</span><span class="token builtin">bin</span><span class="token operator">/</span>bash<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">设置用户密码
+passwd 用户名
+修改用户属性
+usermod <span class="token punctuation">[</span>选项 参数<span class="token punctuation">]</span> 用户名
+删除用户
+userdel 用户名
+选项
+<span class="token operator">-</span>r<span class="token punctuation">:</span>同时删除用户主目录<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="sudo命令-super-user-do"><a href="#sudo命令-super-user-do" class="headerlink" title="sudo命令 super user do"></a>sudo命令 super user do</h3><pre class="line-numbers language-none"><code class="language-none">sudo 以超级用户身份执行某条文件命令
+格式：sudo 当前用户要执行某条命令<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="chmod命令"><a href="#chmod命令" class="headerlink" title="chmod命令"></a>chmod命令</h3><p>用于修改文件权限</p>
+<h4 id="文件列表中权限查看"><a href="#文件列表中权限查看" class="headerlink" title="文件列表中权限查看"></a>文件列表中权限查看</h4><pre class="line-numbers language-none"><code class="language-none">-rw-rw-r-- 1 rh rh 6 7月 1908:43 b.txt
+文件的权限分为3组，
+每一组由三个字母组成（rwx-）
+1.rw-
+文件属主用户对文件的权限
+2.rw-
+文件属主用户的同组用户具有的权限
+3.r--
+其他用户具有的权限<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2023/03/22/Linux%E5%9F%BA%E7%A1%80/image-20230322204030351.png" alt="image-20230322204030351"></p>
+<h4 id="字母法"><a href="#字母法" class="headerlink" title="字母法"></a>字母法</h4><p>命令格式：chmod MODE[,MODE]…FILE…</p>
+<pre class="line-numbers language-none"><code class="language-none">chmod u+r a.txt
+针对a.txt文件，属主用户增加读权限
+chmod u&#x3D;rW,g&#x3D;r,o&#x3D;- b.txt
+针对b.txt文件，属主用户设置读和写权限，同组的用户设置读和写的权限,其他用户增加读权限<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>角色说明</p>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>u</td>
+<td>user,表示该文件的所有者</td>
+</tr>
+<tr>
+<td>g</td>
+<td>group,表示用户组</td>
+</tr>
+<tr>
+<td>o</td>
+<td>other,表示其他用户</td>
+</tr>
+<tr>
+<td>a</td>
+<td>all,表示所有用户</td>
+</tr>
+</tbody></table>
+<p>权限设置说明</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>增加权限</td>
+</tr>
+<tr>
+<td>-</td>
+<td>撤销权限</td>
+</tr>
+<tr>
+<td>&#x3D;</td>
+<td>设置权限</td>
+</tr>
+</tbody></table>
+<p>权限说明</p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>可读</td>
+</tr>
+<tr>
+<td>w</td>
+<td>可写</td>
+</tr>
+<tr>
+<td>x</td>
+<td>可执行，假如是目录，表示可打开目录</td>
+</tr>
+<tr>
+<td>-</td>
+<td>无任何权限</td>
+</tr>
+</tbody></table>
+<h4 id="数字化"><a href="#数字化" class="headerlink" title="数字化"></a>数字化</h4><p>就是rwx用数字代替</p>
+<p><img src="/2023/03/22/Linux%E5%9F%BA%E7%A1%80/image-20230322211901985.png" alt="image-20230322211901985"></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">使用数字法对<span class="token operator">/</span>etc<span class="token operator">/</span>sudoers文件的属主用户设置读写权限，同组用户为读写权限，其他用户为无权限
+rw<span class="token operator">-</span>rw<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span>
+chmod <span class="token number">660</span> <span class="token operator">/</span>etc<span class="token operator">/</span>sudoers<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="Vim编辑器"><a href="#Vim编辑器" class="headerlink" title="Vim编辑器"></a>Vim编辑器</h1><h4 id="认识Vim"><a href="#认识Vim" class="headerlink" title="认识Vim"></a>认识Vim</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">VI是Unix家族中极为普遍的文本编辑器，Vim则是它的改进版本Vi IMproved的简称，它的最大特色就是使用命令进行编辑，且完全脱离了鼠标的操作<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="Vim的三种工作模式"><a href="#Vim的三种工作模式" class="headerlink" title="Vim的三种工作模式"></a>Vim的三种工作模式</h4><p>命令模式</p>
+<pre class="line-numbers language-none"><code class="language-none">启动Vim，默认进入命令模式。在该模式下，此时从键盘上输入的任何字符都被当做编辑命令来解释
+常用于对文档进行复制、粘贴、删除、移动光标等操作。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<p>编辑模式</p>
+<pre class="line-numbers language-none"><code class="language-none">在命令模式下输入插入命令i、附加命令a、打开命令o都可以进入编辑模式，一次Insert键:插入字符、两次Insert键:替换字符(REPLACE)在该模式下，主要用于录入文本。
+按ESC键回退到命令模式<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>末行模式</p>
+<pre class="line-numbers language-none"><code class="language-none">在命令模式按shift+；即按:进入末行模式，多数文件管理命令(保存、退出、定位、查找、替换、设置行标等)都是在此模式下执行的
+
+回车执行完命令或按ESC键回退到命令模式<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2023/03/22/Linux%E5%9F%BA%E7%A1%80/image-20230322212409215.png" alt="image-20230322212409215"></p>
+<h4 id="使用Vim编辑文件，文档配置"><a href="#使用Vim编辑文件，文档配置" class="headerlink" title="使用Vim编辑文件，文档配置"></a>使用Vim编辑文件，文档配置</h4><p>示例:使用Vim修改主机名</p>
+<p>主机名配置文件：&#x2F;etc&#x2F;hostname</p>
+<p>切换到root账号:suroot</p>
+<p>使用Vim打开配置文件：vim&#x2F;etc&#x2F;hostname</p>
+<p>按i进入编辑模式</p>
+<p>修改为新的主机名(不要输入中文)</p>
+<p>按ESC键由编辑模式进入命令模式</p>
+<p>按shift+;由命令模式进入末行模式</p>
+<p>输入wq保存退出Vim</p>
+<p>注销用户或者重启系统后查看效果</p>
+<h4 id="Vim常用的命令"><a href="#Vim常用的命令" class="headerlink" title="Vim常用的命令"></a>Vim常用的命令</h4><h5 id="命令模式下的Vim操作"><a href="#命令模式下的Vim操作" class="headerlink" title="命令模式下的Vim操作"></a>命令模式下的Vim操作</h5><pre class="line-numbers language-python" data-language="python"><code class="language-python">准备操作素材vim temp<span class="token punctuation">.</span>txt
+从命令模式按i或者a进入编辑模式
+录入如下图所示文本
+在编辑模式按esc回退到命令模式，再按shift<span class="token operator">+</span><span class="token punctuation">;</span>进入末行模式
+在末行模式中输入wq保存退出
+素材准备完毕<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token number">1.</span>移动光标操作
+方向箭头<span class="token punctuation">(</span>上下左右<span class="token punctuation">)</span>
+<span class="token operator">^</span>移至行首<span class="token punctuation">,</span>$移至行尾
+G和gg<span class="token punctuation">(</span>G移到文档最后一行，gg移到文档首行<span class="token punctuation">)</span>
+<span class="token number">2.</span>删除命令操作
+x删除光标所在字符
+dd剪切删除光标所在的一行
+<span class="token number">3.</span>复制与粘贴命令
+yy与nyy：yy复制当前光标所在行，n yy复制光标行及光标下n<span class="token operator">-</span><span class="token number">1</span>行
+p与np：p粘贴一次<span class="token punctuation">,</span>n p粘贴n次<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="末行模式下的vim操作"><a href="#末行模式下的vim操作" class="headerlink" title="末行模式下的vim操作"></a>末行模式下的vim操作</h5><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token number">1.</span>文件保存退出
+w保存文档
+q退出文档
+wq保存且退出文档
+q!不保存退出文档
+<span class="token number">2.</span>显示或隐藏行号
+setnu显示行号
+setnonu隐藏行号<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">f14g</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/03/22/Linux%E5%9F%BA%E7%A1%80/">http://example.com/2023/03/22/Linux%E5%9F%BA%E7%A1%80/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">f14g</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .waline-card {
+        margin: 1.5rem auto;
+    }
+    .waline-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #waline p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+    #waline blockquote p {
+        text-indent: 0.2rem;
+    }
+    #waline a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+    #waline img {
+        max-width: 100%;
+        cursor: pointer;
+    }
+    #waline ol li {
+        list-style-type: decimal;
+    }
+    #waline ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+    #waline ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+    #waline ul li {
+        list-style-type: disc;
+    }
+    #waline ul ul li {
+        list-style-type: circle;
+    }
+    #waline table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+    #waline table, th, td {
+        border: 0;
+    }
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+    #waline table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+    #waline table td {
+        min-width: 80px;
+    }
+    #waline h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+    #waline h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+    #waline h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+    #waline h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+    #waline h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+    #waline h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+    #waline p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+    #waline hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+    #waline blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+    #waline pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+    #waline code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+    #waline pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+    #waline pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+    #waline code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+    #waline [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+    #waline b,
+    strong {
+        font-weight: bold;
+    }
+    #waline dfn {
+        font-style: italic;
+    }
+    #waline small {
+        font-size: 85%;
+    }
+    #waline cite {
+        font-style: normal;
+    }
+    #waline mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+    #waline table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+    #waline table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+    #waline table td {
+        min-width: 80px;
+    }
+    #waline [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+  </style>
+  
+  <div class="card waline-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="waline" class="card-content" style="display: grid">
+    </div>
+  </div>
+  
+
+  <!-- <script src="//cdn.jsdelivr.net/npm/@waline/client"></script> -->
+  <script src="/libs/waline/Waline.min.js"></script>
+  <script>
+    new Waline({
+        el: '#waline',
+        serverURL: 'https://waline.your-domain.com',
+        avatar: 'mm'    
+    });
+  </script> 
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/04/06/2023-ctfshow%E6%84%9A%E4%BA%BA%E6%9D%AF/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="2023 ctfshow愚人杯">
+                        
+                        <span class="card-title">2023 ctfshow愚人杯</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-06
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/match/" class="post-category">
+                                    match
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/2023ctfshow%E6%84%9A%E4%BA%BA%E6%9D%AF/">
+                        <span class="chip bg-color">2023ctfshow愚人杯</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/03/16/SSTI/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="SSTI">
+                        
+                        <span class="card-title">SSTI</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web/" class="post-category">
+                                    Web
+                                </a>
+                            
+                            <a href="/categories/Web/SSTI/" class="post-category">
+                                    SSTI
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/SSTI/">
+                        <span class="chip bg-color">SSTI</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: f14g<br />'
+            + '文章作者: f14g<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <a href="/about" target="_blank">f14g</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+                <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">59.8k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2023";
+                        var startMonth = "1";
+                        var startDate = "1";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/f14g-orz" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:f14g_orz0823@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=985220675" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 985220675" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        <script type="text/javascript" src="/js/tw_cn.js"></script>
+        <script type="text/javascript">
+          var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+          var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+          var cookieDomain = "http://example.com"; //Cookie地址, 一定要设定, 通常为你的网址
+          var msgToTraditionalChinese = "繁"; //此处可以更改为你想要显示的文字
+          var msgToSimplifiedChinese = "简"; //同上，但两处均不建议更改
+          var translateButtonId = "translateLink"; //默认互换id
+          translateInitilization();
+        </script>
+    
+    
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+            }
+        </script>
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
