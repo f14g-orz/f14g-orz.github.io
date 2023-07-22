@@ -35,7 +35,7 @@
 
 body {
     #background-color: #eaeaea;
-    background-image: url("/medias/banner/0.jpg");
+    background-image: /source/medias/banner/0.jpg;
     margin: 0;
     background-attachment: fixed;
     color: #34495e;
