@@ -2,11 +2,11 @@
 title: typora-vue-theme Theme introduction
 date: 2018-09-07 09:25:00
 author: f14g
-img: /source/images/xxx.jpg
+img: /images/xxx.jpg
+mathjax: true
 top: true
 hide: false
 cover: true
 coverImg: /images/1.jpg
-mathjax: true
 ---
 https://juejin.cn/post/6844904132608786446
