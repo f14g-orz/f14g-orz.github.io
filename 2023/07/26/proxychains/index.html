@@ -4,13 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="N分解三个素数, f14g">
-    <meta name="description" content="出题脚本import libnum
-import gmpy2
-#生成随机素数
-p=libnum.generate_prime(32)
-q=libnum.generate_prime(32)
-r=libnum.generate_prime(5">
+    <meta name="keywords" content="proxychains, f14g">
+    <meta name="description" content="ProxyChains介绍ProxyChains遵循GNU协议的一款适用于linux系统的网络代理设置工具。强制由任一程序发起的TCP连接请求必须通过诸如TOR 或 SOCKS4, SOCKS5 或HTTP(S) 代理。支持的认证方式包括：">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +17,7 @@ r=libnum.generate_prime(5">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>N分解三个素数 | f14g</title>
+    <title>proxychains | f14g</title>
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     
 
@@ -276,12 +271,12 @@ r=libnum.generate_prime(5">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/images/43.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/61.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">N分解三个素数</h1>
+                    <h1 class="description center-align post-title">proxychains</h1>
                 </div>
             </div>
         </div>
@@ -305,8 +300,8 @@ r=libnum.generate_prime(5">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/RSA/">
-                                <span class="chip bg-color">RSA</span>
+                            <a href="/tags/proxychains/">
+                                <span class="chip bg-color">proxychains</span>
                             </a>
                         
                     </div>
@@ -317,12 +312,8 @@ r=libnum.generate_prime(5">
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/crypto/" class="post-category">
-                                crypto
-                            </a>
-                        
-                            <a href="/categories/crypto/RSA/" class="post-category">
-                                RSA
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                渗透
                             </a>
                         
                     </div>
@@ -334,21 +325,21 @@ r=libnum.generate_prime(5">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-01-14
+                    2023-07-26
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-23
+                    2023-07-26
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    127
+                    338
                 </div>
                 
 
@@ -378,47 +369,31 @@ r=libnum.generate_prime(5">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="出题脚本"><a href="#出题脚本" class="headerlink" title="出题脚本"></a>出题脚本</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> libnum
-<span class="token keyword">import</span> gmpy2
-<span class="token comment">#生成随机素数</span>
-p<span class="token operator">=</span>libnum<span class="token punctuation">.</span>generate_prime<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">)</span>
-q<span class="token operator">=</span>libnum<span class="token punctuation">.</span>generate_prime<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">)</span>
-r<span class="token operator">=</span>libnum<span class="token punctuation">.</span>generate_prime<span class="token punctuation">(</span><span class="token number">512</span><span class="token punctuation">)</span>
-e<span class="token operator">=</span><span class="token number">65537</span>
-m<span class="token operator">=</span><span class="token string">"flag&#123;20d6e2da95dcc1fa5f5432a436c4be18&#125;"</span>
-<span class="token comment">#字符串转数字</span>
-m<span class="token operator">=</span>libnum<span class="token punctuation">.</span>s2n<span class="token punctuation">(</span>m<span class="token punctuation">)</span>
-n<span class="token operator">=</span>p<span class="token operator">*</span>q<span class="token operator">*</span>r
-phi_n<span class="token operator">=</span><span class="token punctuation">(</span>p<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span>q<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span>r<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-<span class="token comment">#求逆元</span>
-d<span class="token operator">=</span>libnum<span class="token punctuation">.</span>invmod<span class="token punctuation">(</span>e<span class="token punctuation">,</span>phi_n<span class="token punctuation">)</span>
-c<span class="token operator">=</span><span class="token builtin">pow</span><span class="token punctuation">(</span>m<span class="token punctuation">,</span>e<span class="token punctuation">,</span>n<span class="token punctuation">)</span>
-<span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token string">"n="</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span>
-<span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token string">"e="</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span>
-<span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token string">"c="</span><span class="token punctuation">,</span>c<span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <h2 id="ProxyChains介绍"><a href="#ProxyChains介绍" class="headerlink" title="ProxyChains介绍"></a>ProxyChains介绍</h2><p>ProxyChains遵循GNU协议的一款适用于linux系统的网络代理设置工具。强制由任一程序发起的TCP连接请求必须通过诸如TOR 或 SOCKS4, SOCKS5 或HTTP(S) 代理。支持的认证方式包括：SOCKS4&#x2F;5的用户&#x2F;密码认证，HTTP的基本认证。允许TCP和DNS通过代理隧道，并且可配置多个代理。</p>
+<p>在以下几种场合，你可以考虑使用ProxyChains：需要通过代理上网，或者需要突破诸如设置了端口限制的防火墙；或者要使用telnet，ssh，wget，vnc，apt，ftp，nmap等应用；事实上，甚至可以通过ProxyChains设置反向代理来让你能够从外部访问你的内部局域网。突破防火墙限制访问互联网。</p>
+<h2 id="ProxyChains的安装"><a href="#ProxyChains的安装" class="headerlink" title="ProxyChains的安装"></a>ProxyChains的安装</h2><p>以kali为例</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#编译安装</span>
+<span class="token function">git</span> clone https://github.com/rofl0r/proxychains-ng
+<span class="token builtin class-name">cd</span> proxychains-ng
+./configure
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token operator">&amp;&amp;</span> <span class="token function">make</span> <span class="token function">install</span>
+<span class="token comment">#apt命令安全</span>
+<span class="token function">apt-get</span> <span class="token function">install</span> proxychains <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>配置文件位于 &#x2F;etc&#x2F;proxychains.conf ，打开后你需要在末尾添加你使用的代理 </p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">vim</span> /etc/proxychains.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<p>在下面配置你代理的模式以及端口</p>
+<p><img src="/2023/07/26/proxychains/image-20230726170100523.png" alt="image-20230726170100523"></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用的时候直接在前面加上proxychains就可以</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">proxychains4 <span class="token function">curl</span> cip.cc
+proxychains4 <span class="token function">curl</span> google.com
+proxychains4 <span class="token function">apt-get</span> update<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="解题脚本"><a href="#解题脚本" class="headerlink" title="解题脚本"></a>解题脚本</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> libnum
-<span class="token keyword">import</span> gmpy2
+<p>但是像</p>
+<pre class="line-numbers language-none"><code class="language-none">proxychains ping google.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-
-n<span class="token operator">=</span> <span class="token number">145019079329431335397614962361328380657791588724922798973663969211116220115770245475920263239995612730754707053842643157419631306217775476295468921323722072358718740419891343</span>
-e<span class="token operator">=</span> <span class="token number">65537</span>
-c<span class="token operator">=</span> <span class="token number">140685916068372840188594810951725120856549500572531415145851334100894172238220723655155392437389265779142744297662199397338128573434156637005620163707528325151303620546345193</span>
-
-<span class="token comment">#分解n</span>
-<span class="token comment">#yafu-x64.exe  factor()</span>
-p<span class="token operator">=</span><span class="token number">3744386671</span>
-q <span class="token operator">=</span><span class="token number">3635915567</span>
-r <span class="token operator">=</span><span class="token number">10651987877533772188440205268385723681224651777384121120926977791191426755882566107618206306815183484369276527316840499421776849406225472400639701281788399</span>
-
-phi_n<span class="token operator">=</span><span class="token punctuation">(</span>p<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span>q<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span>r<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-d<span class="token operator">=</span>gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>e<span class="token punctuation">,</span>phi_n<span class="token punctuation">)</span>
-m<span class="token operator">=</span><span class="token builtin">pow</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span>d<span class="token punctuation">,</span>n<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>libnum<span class="token punctuation">.</span>n2s<span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<p>就不太行，因为proxychains只能代理TCP，而ping是ICMP</p>
 
                 
             </div>
@@ -445,7 +420,7 @@ m<span class="token operator">=</span><span class="token builtin">pow</span><spa
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/01/14/N%E5%88%86%E8%A7%A3%E4%B8%89%E4%B8%AA%E7%B4%A0%E6%95%B0/">http://example.com/2023/01/14/N%E5%88%86%E8%A7%A3%E4%B8%89%E4%B8%AA%E7%B4%A0%E6%95%B0/</a>
+                    <a href="http://example.com/2023/07/26/proxychains/">http://example.com/2023/07/26/proxychains/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -483,8 +458,8 @@ m<span class="token operator">=</span><span class="token builtin">pow</span><spa
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/RSA/">
-                                    <span class="chip bg-color">RSA</span>
+                                <a href="/tags/proxychains/">
+                                    <span class="chip bg-color">proxychains</span>
                                 </a>
                             
                         </div>
@@ -774,16 +749,17 @@ m<span class="token operator">=</span><span class="token builtin">pow</span><spa
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/01/14/e%E5%92%8Cphi-n%E4%B8%8D%E4%BA%92%E7%B4%A0/">
+                <a href="/2023/07/26/proxychains/">
                     <div class="card-image">
                         
-                        <img src="/images/42.jpg" class="responsive-img" alt="e和phi_n不互素">
+                        <img src="/images/61.jpg" class="responsive-img" alt="proxychains">
                         
-                        <span class="card-title">e和phi_n不互素</span>
+                        <span class="card-title">proxychains</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -793,30 +769,27 @@ m<span class="token operator">=</span><span class="token builtin">pow</span><spa
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-01-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-26
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/crypto/" class="post-category">
-                                    crypto
-                                </a>
-                            
-                            <a href="/categories/crypto/RSA/" class="post-category">
-                                    RSA
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                    渗透
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/RSA/">
-                        <span class="chip bg-color">RSA</span>
+                    <a href="/tags/proxychains/">
+                        <span class="chip bg-color">proxychains</span>
                     </a>
                     
                 </div>
@@ -830,12 +803,12 @@ m<span class="token operator">=</span><span class="token builtin">pow</span><spa
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/01/14/n%E6%98%AFp%E7%9A%84r%E6%AC%A1%E6%96%B9/">
+                <a href="/2023/07/26/frp/">
                     <div class="card-image">
                         
-                        <img src="/images/44.jpg" class="responsive-img" alt="n是p的r次方">
+                        <img src="/images/60.jpg" class="responsive-img" alt="frp">
                         
-                        <span class="card-title">n是p的r次方</span>
+                        <span class="card-title">frp</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -846,18 +819,14 @@ m<span class="token operator">=</span><span class="token builtin">pow</span><spa
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-26
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/crypto/" class="post-category">
-                                    crypto
-                                </a>
-                            
-                            <a href="/categories/crypto/RSA/" class="post-category">
-                                    RSA
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                    渗透
                                 </a>
                             
                             
@@ -867,8 +836,8 @@ m<span class="token operator">=</span><span class="token builtin">pow</span><spa
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/RSA/">
-                        <span class="chip bg-color">RSA</span>
+                    <a href="/tags/frp/">
+                        <span class="chip bg-color">frp</span>
                     </a>
                     
                 </div>
@@ -1029,13 +998,6 @@ m<span class="token operator">=</span><span class="token builtin">pow</span><spa
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
-    });
-</script>
 
 
 

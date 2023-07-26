@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>proxychains</title>
+      <link href="/2023/07/26/proxychains/"/>
+      <url>/2023/07/26/proxychains/</url>
+      
+        <content type="html"><![CDATA[<h2 id="ProxyChains介绍"><a href="#ProxyChains介绍" class="headerlink" title="ProxyChains介绍"></a>ProxyChains介绍</h2><p>ProxyChains遵循GNU协议的一款适用于linux系统的网络代理设置工具。强制由任一程序发起的TCP连接请求必须通过诸如TOR 或 SOCKS4, SOCKS5 或HTTP(S) 代理。支持的认证方式包括：SOCKS4&#x2F;5的用户&#x2F;密码认证，HTTP的基本认证。允许TCP和DNS通过代理隧道，并且可配置多个代理。</p><p>在以下几种场合，你可以考虑使用ProxyChains：需要通过代理上网，或者需要突破诸如设置了端口限制的防火墙；或者要使用telnet，ssh，wget，vnc，apt，ftp，nmap等应用；事实上，甚至可以通过ProxyChains设置反向代理来让你能够从外部访问你的内部局域网。突破防火墙限制访问互联网。</p><h2 id="ProxyChains的安装"><a href="#ProxyChains的安装" class="headerlink" title="ProxyChains的安装"></a>ProxyChains的安装</h2><p>以kali为例</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#编译安装</span><span class="token function">git</span> clone https://github.com/rofl0r/proxychains-ng<span class="token builtin class-name">cd</span> proxychains-ng./configure<span class="token function">sudo</span> <span class="token function">make</span> <span class="token operator">&amp;&amp;</span> <span class="token function">make</span> <span class="token function">install</span><span class="token comment">#apt命令安全</span><span class="token function">apt-get</span> <span class="token function">install</span> proxychains <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>配置文件位于 &#x2F;etc&#x2F;proxychains.conf ，打开后你需要在末尾添加你使用的代理 </p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">vim</span> /etc/proxychains.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>在下面配置你代理的模式以及端口</p><p><img src="/2023/07/26/proxychains/image-20230726170100523.png" alt="image-20230726170100523"></p><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用的时候直接在前面加上proxychains就可以</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">proxychains4 <span class="token function">curl</span> cip.ccproxychains4 <span class="token function">curl</span> google.comproxychains4 <span class="token function">apt-get</span> update<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>但是像</p><pre class="line-numbers language-none"><code class="language-none">proxychains ping google.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>就不太行，因为proxychains只能代理TCP，而ping是ICMP</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 渗透 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> proxychains </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>frp</title>
       <link href="/2023/07/26/frp/"/>
       <url>/2023/07/26/frp/</url>
