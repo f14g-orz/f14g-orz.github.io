@@ -4,6 +4,106 @@
   
     
     <entry>
+      <title>frp</title>
+      <link href="/2023/07/26/frp/"/>
+      <url>/2023/07/26/frp/</url>
+      
+        <content type="html"><![CDATA[<h2 id="frp初识"><a href="#frp初识" class="headerlink" title="frp初识"></a>frp初识</h2><p>frp 是一个专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS 等多种协议，且支持 P2P 通信。可以将内网服务以安全、便捷的方式通过具有公网 IP 节点的中转暴露到公网。</p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>frp项目地址：<a href="https://github.com/fatedier/frp/">https://github.com/fatedier/frp/</a></p><p>根据自己的系统在releases里下载对应的版本，下载之后解亚就行了。</p><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>官方文档：<a href="https://gofrp.org/docs/">https://gofrp.org/docs/</a></p><p>首先需要一台vps，和一台客户机</p><p>这里vps 192.168.1.129</p><p>目标机  10.168.121.33</p><h3 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h3><h4 id="配置开启frps"><a href="#配置开启frps" class="headerlink" title="配置开启frps"></a>配置开启frps</h4><p>首先配置服务端配置文件 frps.ini</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>common<span class="token punctuation">]</span>bind_port <span class="token operator">=</span> <span class="token number">7000</span><span class="token assign-left variable">token</span><span class="token operator">=</span>shadow<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>然后开启frp服务端</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">./frps <span class="token parameter variable">-c</span> frps.ini<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><img src="/2023/07/26/frp/image-20230726144239518.png" alt="image-20230726144239518"></p><h4 id="配置开启frpc"><a href="#配置开启frpc" class="headerlink" title="配置开启frpc"></a>配置开启frpc</h4><p>首先还是修改配置文件frpc.ini</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>common<span class="token punctuation">]</span><span class="token comment">#vps_ip</span>server_addr <span class="token operator">=</span> <span class="token number">192.168</span>.1.129server_port <span class="token operator">=</span> <span class="token number">7000</span><span class="token assign-left variable">token</span><span class="token operator">=</span>shadow<span class="token punctuation">[</span>ssh<span class="token punctuation">]</span><span class="token builtin class-name">type</span> <span class="token operator">=</span> tcplocal_ip <span class="token operator">=</span> <span class="token number">127.0</span>.0.1local_port <span class="token operator">=</span> <span class="token number">22</span>remote_port <span class="token operator">=</span> <span class="token number">6000</span><span class="token punctuation">[</span>rdp<span class="token punctuation">]</span><span class="token assign-left variable">type</span><span class="token operator">=</span>tcplocal_ip <span class="token operator">=</span> <span class="token number">127.0</span>.0.1local_port <span class="token operator">=</span> <span class="token number">3389</span>remote_port <span class="token operator">=</span> <span class="token number">3389</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>ssh,rdp就相当于把本地的22端口映射到vps的6000，把本地3389映射到vps3389</p><p>开启frp客户端</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">.<span class="token punctuation">\</span>frpc.exe <span class="token parameter variable">-c</span> frpc.ini<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>成功连接之后，就把本地的22端口映射到vps的6000，把本地3389映射到vps3389，在VPS访问3389、6000就能访问到内网机器的3389，22端口</p><h3 id="socks代理"><a href="#socks代理" class="headerlink" title="socks代理"></a>socks代理</h3><h4 id="配置开启frps-1"><a href="#配置开启frps-1" class="headerlink" title="配置开启frps"></a>配置开启frps</h4><p>内网主机可出网，想把要内网主机作为跳板机使用这时就可以使用frp搭建socks代理</p><p>我们可以加一些账号密码验证</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>common<span class="token punctuation">]</span>bind_port <span class="token operator">=</span> <span class="token number">7000</span>token token <span class="token operator">=</span> shadowdashboard_port <span class="token operator">=</span> <span class="token number">8000</span> dashboard_user <span class="token operator">=</span> admin <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>然后启动服务端</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">frps <span class="token parameter variable">-c</span> frps.ini<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="配置开启frpc-1"><a href="#配置开启frpc-1" class="headerlink" title="配置开启frpc"></a>配置开启frpc</h4><p>配置frpc.ini</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>common<span class="token punctuation">]</span>server_addr <span class="token operator">=</span> <span class="token number">192.168</span>.1.129server_port <span class="token operator">=</span> <span class="token number">7000</span><span class="token comment"># 客户端认证 token，需要和服务端 token 保持一致 </span>token <span class="token operator">=</span> shadow<span class="token comment"># 启用加密，防止流量被拦截 </span>use_encryption <span class="token operator">=</span> <span class="token boolean">true</span> <span class="token comment"># 启用压缩，提升流量转发速度 </span>use_compression <span class="token operator">=</span> <span class="token boolean">true</span> <span class="token punctuation">[</span>socks5<span class="token punctuation">]</span> <span class="token builtin class-name">type</span> <span class="token operator">=</span> tcp <span class="token comment"># 连接 vps 的端口 </span>remote_port <span class="token operator">=</span> <span class="token number">1080</span> plugin <span class="token operator">=</span> socks5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>开启客户端</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">./frpc.exe <span class="token parameter variable">-c</span> frpc.ini <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这样socks5代理就配置好了</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 渗透 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> frp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>lcx</title>
+      <link href="/2023/07/26/lcx/"/>
+      <url>/2023/07/26/lcx/</url>
+      
+        <content type="html"><![CDATA[<h2 id="3389端口"><a href="#3389端口" class="headerlink" title="3389端口"></a>3389端口</h2><p>3389端口是指远程桌面协议（RDP）使用的TCP端口。RDP是一种用于远程控制Windows电脑的协议。通过3389端口，用户可以从任何地方使用远程桌面协议连接到目标Windows计算机。这意味着用户可以在不同的设备上远程访问另一个Windows操作系统，就好像在使用本地机器一样。</p><p>3389端口的主要用途是通过RDP实现远程控制。通过该端口，用户可以可视化地访问远程计算机的桌面、文件系统和其他相关功能。</p><p>除了用于RDP外，3389端口还可以用于其他网络通信，例如网络浏览器的HTTP数据流量。</p><h2 id="lcx介绍"><a href="#lcx介绍" class="headerlink" title="lcx介绍"></a>lcx介绍</h2><p>lcx有windows版和linux版两个版本，这两个版本的lcx都具有三个功能：</p><p>监听；转发；端口转向。</p><p>在使用lcx时必须保证两个前提，肉鸡A和攻击机C都能够访问到外网机B；listen监听的端口之前不能被其它程序占用。Linux版的使用与Windows版大同小异，都是先在外网机B进行监听，之后在肉鸡A进行转发，然后在攻击机C进行访问。</p><p>不同的是，在转发过程中，Windows版的转发命令”-slave”命令后紧接的是外网机B的ip和端口号，然后再跟肉鸡A的ip和端口号，形如：lcx -slave IP(B) Port(B) IP(A) port(A)；而linux版的对应的转发命令形如： .&#x2F;portmap -m 3 – h1 IP(A) -p1 port(A) -h2 IP(B) -p2 port(B)。portmap为自己编译源文件生成的文件名。linux版的method 2对应的windows版的listen功能，即监听功能，method 1对应的是tran功能，即端口转向功能。我们常用到的是listen功能和转发功能slave。</p><h2 id="lcx使用"><a href="#lcx使用" class="headerlink" title="lcx使用"></a>lcx使用</h2><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">内网失陷主机lcx.exe <span class="token parameter variable">-slave</span> rhost rport lhost lport公网代理主机lcx.exe <span class="token parameter variable">-listen</span> lport1 lport2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">内网失陷主机 ./portmap <span class="token parameter variable">-m</span> <span class="token number">3</span> <span class="token parameter variable">-h1</span> <span class="token number">127.0</span>.0.1 <span class="token parameter variable">-p1</span> <span class="token number">22</span> <span class="token parameter variable">-h2</span> <span class="token operator">&lt;</span>公网主机 IP<span class="token operator">></span> <span class="token parameter variable">-p2</span> <span class="token number">4444</span> 公网代理主机 ./portmap <span class="token parameter variable">-m</span> <span class="token number">2</span> <span class="token parameter variable">-p1</span> <span class="token number">4444</span> <span class="token parameter variable">-h2</span> <span class="token operator">&lt;</span>公网主机 IP<span class="token operator">></span> <span class="token parameter variable">-p2</span> <span class="token number">5555</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 渗透 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> lcx </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>代理</title>
+      <link href="/2023/07/26/%E4%BB%A3%E7%90%86/"/>
+      <url>/2023/07/26/%E4%BB%A3%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h2 id="初识代理"><a href="#初识代理" class="headerlink" title="初识代理"></a>初识代理</h2><p>​       所谓代理服务器，是一个“中间人”的角色，在你和服务器之间传递数据。相当大比例的代理服务器可以以网站的形式存在，你只需打开代理服务器的网站，然后输入你希望访问的链接，就可以像平时浏览网页一样操作了。代理的工作原理是：由代理服务器自己去访问你的目标网站，并加载它的内容，然后再把这些加载过的内容传递到你的窗口上。这样就相当于你在浏览目标网站了。因此代理经常被叫做“梯子”或者“桥”。使用代理的好处是，你不需要直接链接到目标网站，因此目标网站就无法获取你的IP地址，取而代之获取的是代理服务器的IP地址。这样你就可以隐藏你的位置信息了。 当你访问大多数代理服务的时候，他们通常会要求你选择一个代理服务器所在的国家。你可以通过对应国家的代理服务器访问目标网站，这样目标网站就会认为你是在对应国家进行访问的。 比如，如果你想要访问的网站屏蔽了你所在的国家，那么你可以用代理服务器换上其他国家的IP，只要代理服务器所在的位置不在屏蔽范围之内，你就可以通过代理服务器实现访问了。</p><h2 id="代理的形式"><a href="#代理的形式" class="headerlink" title="代理的形式"></a>代理的形式</h2><p>代理有两种形式，映射和转发，最终的表现形式均为代理</p><p>端口映射：外网主机A想访问内网主机B上的服务</p><p>端口转发：外网主机A已经可以访问内网主机B里的任意端口，但是无法访问内网主机C上的端口，此时可以将C主机的端口转发到主机B端口，那么外网主机A访问了内网主机B就等于访问了内网主机C。</p><h2 id="正向代理和反向代理"><a href="#正向代理和反向代理" class="headerlink" title="正向代理和反向代理"></a>正向代理和反向代理</h2><h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3><p>正向代理是一个位于客户端和目标服务器之间的代理服务器（中间服务器）。为了从目标服务器取得内容，客户端向代理服务器发送一个请求，并且指定目标服务器，之后代理向目标服务器转发请求，将获得的内容返回给客户端。</p><p>正向代理的情况下，客户端必须要进行一些特殊的设置才能使用。</p><p>正向代理需要主动设置代理服务器 ip 或者域名进行访问，由设置的服务器 ip 或者域名去访问内容并返回</p><p>正向代理是代理客户端，为客户端收发请求，使真实客户端对服务器不可见。</p><p><img src="/2023/07/26/%E4%BB%A3%E7%90%86/image-20230721100544035.png" alt="image-20230721100544035"></p><p><img src="/2023/07/26/%E4%BB%A3%E7%90%86/image-20230721100822837.png" alt="image-20230721100822837"></p><p>正向代理的作用</p><p>1.突破访问限制：通过代理服务器，可以突破自身IP访问限制，访问国外网站，教育网等。</p><p>2.提高访问速度：通常代理服务器都设置一个较大的硬盘缓冲区，会将部分请求的响应保存到缓冲区中，当其他用户再访问相同的信息时， 则直接由缓冲区中取出信息，传给用户，以提高访问速度。</p><p>3.隐藏客户端真实IP：上网者也可以通过这种方法隐藏自己的IP，免受攻击。</p><h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>反向代理是指以代理服务器来接收客户端的请求，然后将请求转发给内部网络上的服务器，将从服务器上得到的结果返回给客户端，此时代理服务器对外表现为一个反向代理服务器。</p><p>对于客户端来说，反向代理就相当于目标服务器，只需要将反向代理当作目标服务器一样发送请求就可以了，并且客户端不需要进行任何设置。</p><p>正向代理需要配置代理服务器，而反向代理不需要做任何设置。</p><p>反向代理是代理服务器，为服务器收发请求，使真实服务器对客户端不可见。<br><img src="/2023/07/26/%E4%BB%A3%E7%90%86/image-20230721101701867.png" alt="image-20230721101701867"></p><p><img src="/2023/07/26/%E4%BB%A3%E7%90%86/image-20230721101727123.png" alt="image-20230721101727123"></p><p>反向代理作用</p><p>1.隐藏服务器真实IP：使用反向代理，可以对客户端隐藏服务器的IP地址。</p><p>2.负载均衡：反向代理服务器可以做负载均衡，根据所有真实服务器的负载情况，将客户端请求分发到不同 的真实服务器上。</p><p>3.提高访问速度：反向代理服务器可以对于静态内容及短时间内有大量访问请求的动态内容提供缓存服务， 提高访问速度。</p><p>4.提供安全保障：反向代理服务器可以作为应用层防火墙，为网站提供对基于Web的攻击行为（例如DoS&#x2F;DDoS）的防护，更容易排查恶意软件等。还可以为后端服务器统一提供加密和SSL加速（如SSL终端代理），提供HTTP访问认证等。</p><h2 id="内网渗透中代理的作用"><a href="#内网渗透中代理的作用" class="headerlink" title="内网渗透中代理的作用"></a>内网渗透中代理的作用</h2><p>在内网渗透中，往往是通过拿下Web服务器的权限，再通过Web服务器做一个跳板来做横向渗透。</p><p>我们知道在我们拿下的Web的服务器上做一些横向渗透是有点困难的，因为在Web这台机器上没有我们平常渗透常用的一些渗透工具，故横向渗透非常的困难，假如我们可以直接用我们自己的电脑做攻击机就可以让我们在渗透的过程中得心应手。</p><p>但是我们知道我们想要拿到的服务器在内网之中，我们无法通过互联网去直接访问它，这种时候我们又想控制它，我们就需要借助一些代理技术来辅助我们去完成直接控制内网机器的过程。</p><p>在进行横向移动时，需要依靠的是转发，而不是映射，但是这两个都可以做到内网穿透的作用。</p><p>参考链接：</p><p><a href="https://zhuanlan.zhihu.com/p/451193697">https://zhuanlan.zhihu.com/p/451193697</a></p><p><a href="https://blog.csdn.net/qq_46217803/article/details/125229535">https://blog.csdn.net/qq_46217803/article/details/125229535</a></p><p><a href="https://blog.csdn.net/weixin_52444045/article/details/126365366?ops_request_misc=&request_id=&biz_id=102&utm_term=proxychains%E6%98%AF%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E8%BF%98%E6%98%AF%E6%96%B9%E5%90%91%E4%BB%A3%E7%90%86&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-2-126365366.nonecase&spm=1018.2226.3001.4187">https://blog.csdn.net/weixin_52444045/article/details/126365366?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=proxychains%E6%98%AF%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E8%BF%98%E6%98%AF%E6%96%B9%E5%90%91%E4%BB%A3%E7%90%86&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-2-126365366.nonecase&amp;spm=1018.2226.3001.4187</a></p><h1 id><a href="#" class="headerlink" title></a></h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> 渗透 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 代理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SSH</title>
+      <link href="/2023/07/26/SSH/"/>
+      <url>/2023/07/26/SSH/</url>
+      
+        <content type="html"><![CDATA[<h1 id="使用ssh连接远程主机"><a href="#使用ssh连接远程主机" class="headerlink" title="使用ssh连接远程主机"></a>使用ssh连接远程主机</h1><p>直接ssh 用户名@主机名参数（IPor域名）</p><pre class="line-numbers language-none"><code class="language-none">ssh user@hostname<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h1 id="ssh连接到其他端口"><a href="#ssh连接到其他端口" class="headerlink" title="ssh连接到其他端口"></a>ssh连接到其他端口</h1><p>ssh默认端口是22，我们可以通过-p设置</p><pre class="line-numbers language-none"><code class="language-none">ssh -p 6666 user@hostname<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h1 id="使用ssh在远程主机执行一条命令并显示到本地"><a href="#使用ssh在远程主机执行一条命令并显示到本地" class="headerlink" title="使用ssh在远程主机执行一条命令并显示到本地"></a>使用ssh在远程主机执行一条命令并显示到本地</h1><p>在连接命令的后面加上要执行的命令和 -l即可</p><pre class="line-numbers language-none"><code class="language-none">ssh user@hostname ls -l<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h1 id="在远程主机运行一个图形界面的程序"><a href="#在远程主机运行一个图形界面的程序" class="headerlink" title="在远程主机运行一个图形界面的程序"></a>在远程主机运行一个图形界面的程序</h1><pre class="line-numbers language-none"><code class="language-none">ssh -X user@hostname<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> SSH </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CFS三层靶机</title>
       <link href="/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/"/>
       <url>/2023/07/25/CFS%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA/</url>
@@ -366,8 +466,6 @@
       <categories>
           
           <category> Linux </category>
-          
-          <category> Linux基础 </category>
           
       </categories>
       
