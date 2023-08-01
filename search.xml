@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>nmap</title>
+      <link href="/2023/08/01/nmap/"/>
+      <url>/2023/08/01/nmap/</url>
+      
+        <content type="html"><![CDATA[<h1 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h1><h2 id="开放端口"><a href="#开放端口" class="headerlink" title="开放端口"></a>开放端口</h2><p>扫描主机的「开放端口」，在nmap后面直接跟主机IP（默认扫描1000个端口）</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap <span class="token function">ip</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="指定端口"><a href="#指定端口" class="headerlink" title="指定端口"></a>指定端口</h2><p>扫描「指定端口」，使用 -p 参数，可以一次扫描单个端口、多个端口、或扫描一个范围的端口</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap <span class="token function">ip</span> <span class="token parameter variable">-p</span> <span class="token number">80</span>nmap <span class="token function">ip</span> <span class="token parameter variable">-p</span> <span class="token number">1</span>-80nmap <span class="token function">ip</span> <span class="token parameter variable">-p</span> <span class="token number">80,3389</span>nmap <span class="token function">ip</span> <span class="token parameter variable">-p</span> <span class="token number">1</span>-65535nmap <span class="token function">ip</span> -p-<span class="token comment"># -p- 等价于 -p 1-65535</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="指定扫描方式"><a href="#指定扫描方式" class="headerlink" title="指定扫描方式"></a>指定扫描方式</h2><h3 id="TCP全连接扫描"><a href="#TCP全连接扫描" class="headerlink" title="TCP全连接扫描"></a>TCP全连接扫描</h3><p>使用 -sT 参数进行TCP全连接扫描。</p><p>全连接扫描，使用完整的三次握手建立链接，能够建立链接就判定端口开放，否则判定端口关闭。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap <span class="token function">ip</span> <span class="token parameter variable">-p</span> <span class="token number">80</span> <span class="token parameter variable">-sT</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>如果端口开放，就会进行完整的三次握手，成功建立链接，扫描结果中，STATE字段显示为 open 。</p><p>如果端口关闭，就只能进行一次握手，无法建立链接，扫描结果中，STATE字段显示为 closed。</p><h3 id="SYN半链接扫描"><a href="#SYN半链接扫描" class="headerlink" title="SYN半链接扫描"></a>SYN半链接扫描</h3><p>使用 -sS 参数进行SYN半链接扫描。</p><p>半链接扫描，只进行两次握手，对方返回确认帧（ACK&#x3D;1）就判定端口开放，否则判定端口关闭。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap <span class="token function">ip</span> <span class="token parameter variable">-p</span> <span class="token number">80</span> <span class="token parameter variable">-sS</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>如果端口开放，就会进行两次握手，扫描结果中，STATE字段为 open 。</p><p>如果端口关闭，就只有一次握手，扫描结果中，STATE字段为 closed。</p><h3 id="隐秘扫描"><a href="#隐秘扫描" class="headerlink" title="隐秘扫描"></a>隐秘扫描</h3><p>隐秘扫描，只适用于Linux系统。</p><p>隐秘扫描，向目标主机的端口发送TCP FIN包 或 Xmas tree包 或 Null包，如果收到RST响应包，就判定端口关闭，否则就判定端口开放或被屏蔽（open&#x2F;filtered）</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap <span class="token number">127.0</span>.0.1 <span class="token parameter variable">-p</span> <span class="token number">80</span> <span class="token parameter variable">-sF</span><span class="token comment"># Fin扫描</span>nmap <span class="token number">127.0</span>.0.1 <span class="token parameter variable">-p</span> <span class="token number">80</span> <span class="token parameter variable">-sN</span><span class="token comment"># Null扫描（所有flags都为0的TCP包）</span>nmap <span class="token number">127.0</span>.0.1 <span class="token parameter variable">-p</span> <span class="token number">80</span> <span class="token parameter variable">-sX</span><span class="token comment"># Xmas扫描（flags的FIN、URG、PUSH都为1的包）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h1 id="主机探测"><a href="#主机探测" class="headerlink" title="主机探测"></a>主机探测</h1><p>扫描网段中有哪些主机在线，使用 -sP 参数，不扫描端口，只扫描「存活主机」。</p><p>本质上是Ping扫描，能Ping通有回包，就判定主机在线。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap <span class="token parameter variable">-sP</span> <span class="token number">192.168</span>.31.0/24<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h1 id="服务识别"><a href="#服务识别" class="headerlink" title="服务识别"></a>服务识别</h1><p>扫描端口时，默认显示端口对应的服务，但不显示服务版本。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap <span class="token function">ip</span> <span class="token parameter variable">-p</span> <span class="token number">80</span> <span class="token parameter variable">-sV</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>扫描结果中，VERSION字段显示服务的详细版本。</p><h1 id="系统识别"><a href="#系统识别" class="headerlink" title="系统识别"></a>系统识别</h1><p>想要识别操作系统版本，可以使用 -O 参数。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap <span class="token function">ip</span> <span class="token parameter variable">-p</span> <span class="token number">80</span> <span class="token parameter variable">-O</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 渗透 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nmap </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>VulnStack ATT&amp;CK红队实战一</title>
       <link href="/2023/08/01/VulnStack-ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%B8%80/"/>
       <url>/2023/08/01/VulnStack-ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%B8%80/</url>
