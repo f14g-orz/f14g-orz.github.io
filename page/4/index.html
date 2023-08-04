@@ -324,6 +324,122 @@
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/2023/02/02/union%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/">
+                        <div class="card-image">
+                            
+                            <img src="/images/20.jpg" class="responsive-img" alt="union联合注入">
+                            
+                            <span class="card-title">union联合注入</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.判断是否存在漏洞用单引号或者双引号判断是否报错。若报错则存在sql注入漏洞
+2.判断是字符型的还是数字型漏洞输入    
+1' and 1=2#
+
+如果与原来只输入  1   的结果相同则是数字
+3.判断select几列用  order
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-02
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Web/" class="post-category">
+                                    Web
+                                </a>
+                                
+                                <a href="/categories/Web/Sql/" class="post-category">
+                                    Sql
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/union%E8%81%94%E5%90%88/">
+                            <span class="chip bg-color">union联合</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/02/02/%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7/">
+                        <div class="card-image">
+                            
+                            <img src="/images/20.jpg" class="responsive-img" alt="绕过技巧">
+                            
+                            <span class="card-title">绕过技巧</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.空格被过滤括号绕过
+select(id)from(admin)where(id=1);
+
+注释绕过
+select/**/*/**/from/**/admin;
+
+反引号绕过（数据库默认识别关键字，不用加引号）
+select*from`a
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-02
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Web/" class="post-category">
+                                    Web
+                                </a>
+                                
+                                <a href="/categories/Web/Sql/" class="post-category">
+                                    Sql
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/sql/">
+                            <span class="chip bg-color">sql</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/2023/02/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">
                         <div class="card-image">
                             
@@ -866,119 +982,6 @@ int main()
             </div>
               <!-- 隐藏某个文章 -->
             
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/01/15/%E5%85%AC%E9%92%A5%E8%A7%A3%E6%9E%90/">
-                        <div class="card-image">
-                            
-                            <img src="/images/31.jpg" class="responsive-img" alt="公钥解析">
-                            
-                            <span class="card-title">公钥解析</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                公钥解析（flag.enc是base64）from Crypto.PublicKey import RSA
-from Crypto.Cipher import PKCS1_OAEP
-from base64 import b64decode
-
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-15
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/crypto/" class="post-category">
-                                    crypto
-                                </a>
-                                
-                                <a href="/categories/crypto/RSA/" class="post-category">
-                                    RSA
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/RSA/">
-                            <span class="chip bg-color">RSA</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/01/15/%E6%95%B0%E5%8F%AA%E5%BD%93%E4%BD%9C%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9E%E5%9C%A8%E4%B8%80%E8%B5%B7/">
-                        <div class="card-image">
-                            
-                            <img src="/images/32.jpg" class="responsive-img" alt="数字当作字符串连在一起">
-                            
-                            <span class="card-title">数字当作字符串连在一起</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                例题[MTCTF 2021]hamburgerRSA参考文档
-题目from Crypto.Util.number import *
-
-flag = open('flag.txt').read()
-nbit = 64
-
-while True:
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-15
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/crypto/" class="post-category">
-                                    crypto
-                                </a>
-                                
-                                <a href="/categories/crypto/RSA/" class="post-category">
-                                    RSA
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/RSA/">
-                            <span class="chip bg-color">RSA</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
         </div>
     </article>
 
@@ -1085,7 +1088,7 @@ while True:
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">69.9k</span>
+                        class="white-color">70.9k</span>
             
             
             
