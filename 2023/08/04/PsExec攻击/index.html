@@ -332,14 +332,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-04
+                    2023-08-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    573
+                    620
                 </div>
                 
 
@@ -401,6 +401,7 @@ exploit/windows/smb/psexec_psh ：该模块生成的payload主要是由powershel
 <span class="token builtin class-name">set</span> smbpass <span class="token function">passwd</span>
 run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>注意这里的smbpass选项，其可以为明文密码，也可以为Hash，但Hash必须是完整的，如果不知道前面的LM Hash部分，可以用零代替</p>
 <h2 id="cs中psexec"><a href="#cs中psexec" class="headerlink" title="cs中psexec"></a>cs中psexec</h2><p>首先我们使用 Port Scan模块进行扫描，</p>
 <p><img src="/2023/08/04/PsExec%E6%94%BB%E5%87%BB/image-20230804151832742.png" alt="image-20230804151832742"></p>
 <p>如果有时候红框内为空，可以先试着提权然后在进行portscan</p>
@@ -1090,7 +1091,7 @@ run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">72.1k</span>
+                        class="white-color">74.6k</span>
             
             
             
