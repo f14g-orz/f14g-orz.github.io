@@ -6,7 +6,9 @@
     <meta charset="utf-8">
     <meta name="keywords" content="VulnStackATT&amp;CK红队实战二, f14g">
     <meta name="description" content="环境搭建靶机下载地址：http://vulnstack.qiyuanxuetang.net/vuln/detail/3/
-文件下载下来解压后有三个文件夹，双击各个文件夹中的.vmx文件即可一键创建虚拟机，除了web靶机初始密码都为1qaz@">
+Bypass UAC
+Windows系统NTLM获取（理论知识：Windows认证）
+Access Token利用（M">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -333,14 +335,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-11
+                    2023-08-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    1.6k
                 </div>
                 
 
@@ -371,6 +373,16 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>靶机下载地址：<a target="_blank" rel="noopener" href="http://vulnstack.qiyuanxuetang.net/vuln/detail/3/">http://vulnstack.qiyuanxuetang.net/vuln/detail/3/</a></p>
+<pre class="line-numbers language-none"><code class="language-none">Bypass UAC
+Windows系统NTLM获取（理论知识：Windows认证）
+Access Token利用（MSSQL利用）
+WMI利用
+网页代理，二层代理，特殊协议代理（DNS，ICMP）
+域内信息收集
+域漏洞利用：SMB relay，EWS relay，PTT(PTC)，MS14-068，GPP，SPN利用
+域凭证收集
+后门技术（黄金票据&#x2F;白银票据&#x2F;Sid History&#x2F;MOF）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>文件下载下来解压后有三个文件夹，双击各个文件夹中的.vmx文件即可一键创建虚拟机，除了web靶机初始密码都为1qaz@WSX，WEB靶机需切换用户，用administrator管理员账号登录，没有密码，点击登录会提示更改密码，为了方便也设置成了1qaz@WSX</p>
 <p>官方给的网络拓扑图</p>
 <p><img src="/2023/08/04/ATT-CK%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E4%BA%8C/%E6%8B%93%E6%89%91%E5%9B%BE.jpg" alt="img"></p>
@@ -1265,7 +1277,7 @@ schtasks &#x2F;run &#x2F;tn &quot;sec&quot; &#x2F;S 10.10.10.201 &#x2F;u adminis
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">75.7k</span>
+                        class="white-color">76.4k</span>
             
             
             
