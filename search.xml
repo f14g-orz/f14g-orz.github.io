@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>cobaltstrike</title>
+      <link href="/2023/08/28/cobaltstrike/"/>
+      <url>/2023/08/28/cobaltstrike/</url>
+      
+        <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Cobalt Strike是一款基于java的渗透测试神器，常被业界人称为CS神器。自3.0以后已经不在使用Metasploit框架而作为一个独立的平台使用，分为客户端与服务端，服务端是一个，客户端可以有多个，非常适合团队协同作战，多个攻击者可以同时连接到一个团队服务器上，共享攻击资源与目标信息和sessions，可模拟APT做模拟对抗，进行内网渗透。<br>Cobalt Strike集成了端口转发、服务扫描，自动化溢出，多模式端口监听，win exe木马生成，win dll木马生成，java木马生成，office宏病毒生成，木马捆绑；钓鱼攻击包括：站点克隆，目标信息获取，java执行，浏览器自动攻击等等。</p><h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p><img src="/2023/08/28/cobaltstrike/image-20230828195118700.png" alt="image-20230828195118700"></p><pre class="line-numbers language-none"><code class="language-none">agscript 拓展应用的脚本c2lint 用于检查profile的错误异常teamserver 服务端程序cobaltstrike，cobaltstrike.jar客户端程序(java跨平台) license.pdf 许可证文件logs 目录记录与目标主机的相关信息 update，update.jar用于更新CS third-party 第三方工具<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="安装运行"><a href="#安装运行" class="headerlink" title="安装运行"></a>安装运行</h2><p>直接下载解压就行但是需要有java环境</p><p>启动服务端</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> <span class="token number">777</span> teamserver  <span class="token comment">#赋予执行权限</span>./teamserver <span class="token function">ip</span> <span class="token function">passwd</span> <span class="token comment"># 设置强密码，否则容易被爆破</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p><img src="/2023/08/28/cobaltstrike/image-20230828195619280.png" alt="image-20230828195619280"></p><p>启动客户端</p><pre class="line-numbers language-none"><code class="language-none">chmod 777 cobaltstrike.&#x2F;cobaltstrike   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p><img src="/2023/08/28/cobaltstrike/image-20230828195749393.png" alt="image-20230828195749393"></p><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>因为我之前写的笔记不小心删除了，所以我下面放出几篇参考文章，后续我有时间再补上</p><p><a href="https://blog.csdn.net/weixin_44677409/article/details/102725129">https://blog.csdn.net/weixin_44677409/article/details/102725129</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> cs和msf </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> cobaltstrike </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>VulnStack&amp;ATT红队实战四</title>
       <link href="/2023/08/17/VulnStack-ATT%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E5%9B%9B/"/>
       <url>/2023/08/17/VulnStack-ATT%E7%BA%A2%E9%98%9F%E5%AE%9E%E6%88%98%E5%9B%9B/</url>
