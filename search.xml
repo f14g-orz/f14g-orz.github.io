@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>breach 1.0</title>
+      <link href="/2023/11/01/breach-1-0/"/>
+      <url>/2023/11/01/breach-1-0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>下载地址：<a href="https://download.vulnhub.com/breach/Breach-1.0.zip">https://download.vulnhub.com/breach/Breach-1.0.zip</a></p><p><img src="/2023/11/01/breach-1-0/image-20231029232051192.png" alt="image-20231029232051192"></p><p>设置虚拟机网卡为仅主机模式</p><p><img src="/2023/11/01/breach-1-0/image-20231029232213822.png" alt="image-20231029232213822"></p><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><h3 id="确定主机"><a href="#确定主机" class="headerlink" title="确定主机"></a>确定主机</h3><p>主机IP地址：192.168.110.140</p><h3 id="端口收集"><a href="#端口收集" class="headerlink" title="端口收集"></a>端口收集</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap <span class="token parameter variable">-T4</span> <span class="token parameter variable">-sV</span>  <span class="token number">192.168</span>.110.140 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><img src="/2023/11/01/breach-1-0/image-20231029232634275.png" alt="image-20231029232634275"></p><p>80服务开放</p><h2 id="后台渗透"><a href="#后台渗透" class="headerlink" title="后台渗透"></a>后台渗透</h2><h3 id="寻找利用方式"><a href="#寻找利用方式" class="headerlink" title="寻找利用方式"></a>寻找利用方式</h3><p>访问http服务</p><p><img src="/2023/11/01/breach-1-0/image-20231030095521411.png" alt="image-20231030095521411"></p><p>发现一段base64</p><p><img src="/2023/11/01/breach-1-0/image-20231030095711564.png" alt="image-20231030095711564"></p><p>解码得</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pgibbons:damnitfeel<span class="token variable">$goodtobeagang</span><span class="token variable">$ta</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>发现点击图片会跳转，然后点击Employee portal，会跳转到一个cms页面</p><p><img src="/2023/11/01/breach-1-0/image-20231030100308699.png" alt="image-20231030100308699"></p><p>以上面得base64解码，作为账号密码进行登录</p><p><img src="/2023/11/01/breach-1-0/image-20231030100708364.png" alt="image-20231030100708364"></p><p>下载SSL证书</p><p><img src="/2023/11/01/breach-1-0/image-20231030114804296.png" alt="image-20231030114804296"></p><p>找到流量包</p><p><img src="/2023/11/01/breach-1-0/image-20231030114921857.png" alt="image-20231030114921857"></p><p><img src="/2023/11/01/breach-1-0/image-20231030115016047.png" alt="image-20231030115016047"></p><h3 id="查看导出证书"><a href="#查看导出证书" class="headerlink" title="查看导出证书"></a>查看导出证书</h3><p>口令全为tomcat</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">keytool <span class="token parameter variable">-list</span> <span class="token parameter variable">-keystore</span> keystore<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><img src="/2023/11/01/breach-1-0/image-20231030120620309.png" alt="image-20231030120620309"></p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">keytool <span class="token parameter variable">-importkeystore</span> <span class="token parameter variable">-srckeystore</span> keystore <span class="token parameter variable">-destkeystore</span> cert.p12 <span class="token parameter variable">-deststoretype</span> pkcs12 <span class="token parameter variable">-srcalias</span> tomcat<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><img src="/2023/11/01/breach-1-0/image-20231030121303764.png" alt="image-20231030121303764"></p><p><img src="/2023/11/01/breach-1-0/image-20231030121328157.png" alt="image-20231030121328157"></p><h3 id="分析流量包"><a href="#分析流量包" class="headerlink" title="分析流量包"></a>分析流量包</h3><p>先打开流量包然后导入证书</p><p><img src="/2023/11/01/breach-1-0/image-20231030121806091.png" alt="image-20231030121806091"></p><p>找到后台登陆的后台的账号密码  <a href="https://192.168.110.140:8443/_M@nag3Me/html">https://192.168.110.140:8443/_M@nag3Me/html</a></p><p><img src="/2023/11/01/breach-1-0/image-20231030170521068.png" alt="image-20231030170521068"></p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">tomcat: Tt<span class="token punctuation">\</span>5D8F<span class="token punctuation">(</span><span class="token comment">#!*u=G)4m7zB</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h3><p>发现并不能正常访问</p><p><img src="/2023/11/01/breach-1-0/image-20231030171351473.png" alt="image-20231030171351473"></p><p>利用BP抓包放包</p><p>但是我们访问那个网页(这里访问上边的那个网页需要使用BP代理否则无法登录，要是你使用了BP代理依旧无法访问，那就检查一下自己的网卡设置是否正确，都无误得话那就凉凉)我现在就是这种情况</p><p>正常情况下登录tomcat后台之后，然后找getshell的方式然后通过msf进行渗透</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> vulnhub </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> vulnhub </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>2023 NewStar WEEEK4</title>
       <link href="/2023/10/30/2023-NewStar-WEEEK4/"/>
       <url>/2023/10/30/2023-NewStar-WEEEK4/</url>
